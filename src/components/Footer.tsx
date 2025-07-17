@@ -109,15 +109,15 @@ const Footer = () => {
             <div className="space-y-3 mb-6">
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-background/60" />
-                <span className="text-sm text-background/80">San Francisco, CA</span>
+                <span className="text-sm text-background/80">Bengaluru, India</span>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-background/60" />
-                <span className="text-sm text-background/80">+1 (555) 123-4567</span>
+                <span className="text-sm text-background/80">+919901678665</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-background/60" />
-                <span className="text-sm text-background/80">hello@helllo.ai</span>
+                <span className="text-sm text-background/80">helllo@helllo.ai</span>
               </div>
             </div>
 
@@ -165,7 +165,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-background/60 text-sm">
-            © 2024 Helllo.ai. All rights reserved.
+            © 2025 HellloAI Technologies Pvt Ltd. All rights reserved.
           </p>
           
           <div className="flex items-center gap-6 text-sm text-background/60">

@@ -6,14 +6,14 @@ import { Check, Star, Phone, Users, Headphones, Shield } from "lucide-react";
 const Pricing = () => {
   const plans = [
     {
-      name: "Free",
-      price: "$0",
+      name: "Trial",
+      price: "₹0",
       period: "/month",
       description: "Perfect for trying the platform",
       badge: null,
       icon: Phone,
       features: [
-        "100 minutes of free calls per month",
+        "30 minutes of free calls per month",
         "Basic AI voice features",
         "Email support",
         "2 integrations included",
@@ -31,14 +31,14 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Pro",
-      price: "$99",
+      name: "Start",
+      price: "₹2,999",
       period: "/month",
       description: "Best for growing businesses",
       badge: "Most Popular",
       icon: Users,
       features: [
-        "Unlimited calls",
+        "500 minutes of calls per month",
         "Advanced AI features & LLM models",
         "Full tool integrations (50+ apps)",
         "Multi-language support (25+ languages)",
@@ -49,33 +49,9 @@ const Pricing = () => {
         "API access"
       ],
       excluded: [],
-      buttonText: "Start Pro Trial",
+      buttonText: "Start Now",
       buttonVariant: "hero" as const,
       popular: true
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      period: "",
-      description: "For large organizations",
-      badge: "Premium",
-      icon: Headphones,
-      features: [
-        "Everything in Pro",
-        "Custom minutes/usage limits",
-        "White-label options",
-        "Dedicated account manager",
-        "Custom integrations & APIs",
-        "SLA guarantees (99.9% uptime)",
-        "Advanced security features",
-        "Custom voice training",
-        "24/7 phone support",
-        "Compliance reporting"
-      ],
-      excluded: [],
-      buttonText: "Contact Sales",
-      buttonVariant: "outline" as const,
-      popular: false
     }
   ];
 
@@ -92,20 +68,10 @@ const Pricing = () => {
             Choose the plan that fits your business size and needs.
           </p>
           
-          {/* Pricing Toggle */}
-          <div className="inline-flex items-center gap-3 bg-muted rounded-lg p-1">
-            <button className="px-4 py-2 rounded-md bg-background text-foreground font-medium shadow-sm">
-              Monthly
-            </button>
-            <button className="px-4 py-2 rounded-md text-muted-foreground font-medium">
-              Annual
-            </button>
-            <Badge variant="secondary" className="ml-2">Save 20%</Badge>
-          </div>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {plans.map((plan, index) => (
             <Card 
               key={index} 

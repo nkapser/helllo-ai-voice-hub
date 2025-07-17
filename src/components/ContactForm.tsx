@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Phone, Mail, MapPin } from "lucide-react";
+import { Send, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -128,29 +128,47 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Phone</h3>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                  <p className="text-sm text-muted-foreground">Mon-Fri 9AM-6PM EST</p>
+                  <p className="text-muted-foreground">+919901678665</p>
+                  <p className="text-sm text-muted-foreground">Mon-Fri 9AM-6PM IST</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center">
-                  <Mail className="h-6 w-6 text-secondary-foreground" />
+                  <MessageCircle className="h-6 w-6 text-secondary-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">Email</h3>
-                  <p className="text-muted-foreground">hello@helllo.ai</p>
-                  <p className="text-sm text-muted-foreground">We reply within 24 hours</p>
+                  <h3 className="font-semibold text-foreground">WhatsApp</h3>
+                  <a 
+                    href="https://wa.me/919901678665" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    +919901678665
+                  </a>
+                  <p className="text-sm text-muted-foreground">Quick support</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center">
-                  <MapPin className="h-6 w-6 text-primary-foreground" />
+                  <Mail className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground">Email</h3>
+                  <p className="text-muted-foreground">helllo@helllo.ai</p>
+                  <p className="text-sm text-muted-foreground">We reply within 24 hours</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-secondary rounded-lg flex items-center justify-center">
+                  <MapPin className="h-6 w-6 text-secondary-foreground" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Office</h3>
-                  <p className="text-muted-foreground">San Francisco, CA</p>
+                  <p className="text-muted-foreground">Bengaluru, India</p>
                   <p className="text-sm text-muted-foreground">Available for meetings</p>
                 </div>
               </div>
