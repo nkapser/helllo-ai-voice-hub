@@ -10,7 +10,7 @@ const Hero = () => {
           {/* Content */}
           <div className="text-center lg:text-left animate-fade-in">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Transform Your Business with{" "}
+              Transform Your Business with<br />
               <span className="bg-gradient-primary bg-clip-text text-transparent">
                 AI Voice Agents
               </span>
