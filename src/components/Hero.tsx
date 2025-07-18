@@ -37,7 +37,7 @@ const Hero = () => {
             <div className="mt-8 flex flex-col sm:flex-row items-center gap-6 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-success rounded-full"></div>
-                <span>100 minutes free monthly</span>
+                <span>30 minutes free monthly</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-success rounded-full"></div>

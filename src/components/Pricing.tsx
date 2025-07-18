@@ -166,16 +166,6 @@ const Pricing = () => {
           
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             <div>
-              <h4 className="font-semibold text-foreground mb-2">Can I change plans anytime?</h4>
-              <p className="text-muted-foreground">Yes, upgrade or downgrade your plan at any time. Changes take effect immediately.</p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold text-foreground mb-2">What happens after the free trial?</h4>
-              <p className="text-muted-foreground">Your account converts to the Free plan automatically. No credit card required to start.</p>
-            </div>
-            
-            <div>
               <h4 className="font-semibold text-foreground mb-2">Do you offer custom integrations?</h4>
               <p className="text-muted-foreground">Yes, Enterprise plans include custom integrations and dedicated technical support.</p>
             </div>
@@ -183,6 +173,11 @@ const Pricing = () => {
             <div>
               <h4 className="font-semibold text-foreground mb-2">Is my data secure?</h4>
               <p className="text-muted-foreground">Absolutely. We are GDPR & DPDP compliant with SOC 2 certification and end-to-end encryption.</p>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold text-foreground mb-2">What happens after the minutes get exhausted?</h4>
+              <p className="text-muted-foreground">You will need to repurchase additional minutes / purchase 500 minutes whichever you choose to and they will be valid for a month.</p>
             </div>
           </div>
         </div>

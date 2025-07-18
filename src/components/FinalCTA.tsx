@@ -5,7 +5,7 @@ const FinalCTA = () => {
   const benefits = [
     {
       icon: CheckCircle,
-      text: "100 minutes free monthly"
+      text: "30 minutes free monthly"
     },
     {
       icon: CreditCard,

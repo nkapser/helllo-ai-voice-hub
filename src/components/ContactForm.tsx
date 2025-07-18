@@ -16,15 +16,8 @@ const ContactForm = () => {
     contactName: "",
     email: "",
     phone: "",
-    companySize: "",
-    industry: "",
-    customerVolume: "",
-    useCases: [] as string[],
-    currentTools: [] as string[],
-    biggestChallenge: "",
-    timeline: "",
-    budget: "",
-    additionalRequirements: ""
+    primaryUseCase: "",
+    additionalInfo: ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -54,54 +47,11 @@ const ContactForm = () => {
       contactName: "",
       email: "",
       phone: "",
-      companySize: "",
-      industry: "",
-      customerVolume: "",
-      useCases: [],
-      currentTools: [],
-      biggestChallenge: "",
-      timeline: "",
-      budget: "",
-      additionalRequirements: ""
+      primaryUseCase: "",
+      additionalInfo: ""
     });
   };
 
-  const handleUseCaseChange = (useCase: string, checked: boolean) => {
-    setFormData(prev => ({
-      ...prev,
-      useCases: checked 
-        ? [...prev.useCases, useCase]
-        : prev.useCases.filter(item => item !== useCase)
-    }));
-  };
-
-  const handleToolChange = (tool: string, checked: boolean) => {
-    setFormData(prev => ({
-      ...prev,
-      currentTools: checked 
-        ? [...prev.currentTools, tool]
-        : prev.currentTools.filter(item => item !== tool)
-    }));
-  };
-
-  const useCaseOptions = [
-    "Customer Support & Help Desk",
-    "Sales & Lead Qualification", 
-    "Appointment Scheduling",
-    "Order Taking & Processing",
-    "Survey & Feedback Collection",
-    "Multilingual Customer Service",
-    "After-hours Support",
-    "Internal Communications"
-  ];
-
-  const toolOptions = [
-    "CRM (Salesforce, HubSpot, etc.)",
-    "Help Desk Software",
-    "Appointment Scheduling Tools",
-    "E-commerce Platform", 
-    "Phone Systems"
-  ];
 
   return (
     <section id="contact" className="py-20 bg-muted/30">
@@ -247,153 +197,36 @@ const ContactForm = () => {
                     </div>
                   </div>
 
-                  {/* Company Details */}
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="companySize">Company Size</Label>
-                      <Select value={formData.companySize} onValueChange={(value) => setFormData(prev => ({ ...prev, companySize: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select company size" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1-10">1-10 employees</SelectItem>
-                          <SelectItem value="11-50">11-50 employees</SelectItem>
-                          <SelectItem value="51-200">51-200 employees</SelectItem>
-                          <SelectItem value="201-500">201-500 employees</SelectItem>
-                          <SelectItem value="500+">500+ employees</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="industry">Industry</Label>
-                      <Select value={formData.industry} onValueChange={(value) => setFormData(prev => ({ ...prev, industry: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select your industry" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="retail">Retail</SelectItem>
-                          <SelectItem value="healthcare">Healthcare</SelectItem>
-                          <SelectItem value="real-estate">Real Estate</SelectItem>
-                          <SelectItem value="financial">Financial Services</SelectItem>
-                          <SelectItem value="ecommerce">E-commerce</SelectItem>
-                          <SelectItem value="hospitality">Hospitality</SelectItem>
-                          <SelectItem value="education">Education</SelectItem>
-                          <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                          <SelectItem value="professional">Professional Services</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  {/* Customer Volume */}
+                  {/* Primary Use Case */}
                   <div>
-                    <Label htmlFor="customerVolume">Current Customer Service Volume</Label>
-                    <Select value={formData.customerVolume} onValueChange={(value) => setFormData(prev => ({ ...prev, customerVolume: value }))}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select monthly call volume" />
+                    <Label htmlFor="primaryUseCase" className="text-sm font-medium text-foreground">
+                      Primary Use Case *
+                    </Label>
+                    <Select value={formData.primaryUseCase} onValueChange={(value) => setFormData(prev => ({ ...prev, primaryUseCase: value }))}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select your primary use case" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="<100">&lt;100 calls/month</SelectItem>
-                        <SelectItem value="100-500">100-500 calls/month</SelectItem>
-                        <SelectItem value="500-1000">500-1000 calls/month</SelectItem>
-                        <SelectItem value="1000-5000">1000-5000 calls/month</SelectItem>
-                        <SelectItem value="5000+">5000+ calls/month</SelectItem>
+                        <SelectItem value="order-taking">Order taking & processing</SelectItem>
+                        <SelectItem value="customer-support">Customer support & helpdesk</SelectItem>
+                        <SelectItem value="sales-lead-qualification">Sales & Lead Qualification</SelectItem>
+                        <SelectItem value="after-hours-support">After-hours Support</SelectItem>
+                        <SelectItem value="other">Others</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
-                  {/* Use Cases */}
+                  {/* Additional Information for "Others" */}
                   <div>
-                    <Label className="text-base font-medium">Primary Use Cases (select all that apply)</Label>
-                    <div className="grid md:grid-cols-2 gap-3 mt-3">
-                      {useCaseOptions.map((useCase) => (
-                        <div key={useCase} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={useCase}
-                            checked={formData.useCases.includes(useCase)}
-                            onCheckedChange={(checked) => handleUseCaseChange(useCase, !!checked)}
-                          />
-                          <Label htmlFor={useCase} className="text-sm">{useCase}</Label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Current Tools */}
-                  <div>
-                    <Label className="text-base font-medium">Current Tools/Systems (select all that apply)</Label>
-                    <div className="grid md:grid-cols-2 gap-3 mt-3">
-                      {toolOptions.map((tool) => (
-                        <div key={tool} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={tool}
-                            checked={formData.currentTools.includes(tool)}
-                            onCheckedChange={(checked) => handleToolChange(tool, !!checked)}
-                          />
-                          <Label htmlFor={tool} className="text-sm">{tool}</Label>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Challenge & Timeline */}
-                  <div>
-                    <Label htmlFor="biggestChallenge">What's your biggest challenge with current customer communication?</Label>
-                    <Textarea
-                      id="biggestChallenge"
-                      placeholder="Tell us about your current pain points..."
-                      value={formData.biggestChallenge}
-                      onChange={(e) => setFormData(prev => ({ ...prev, biggestChallenge: e.target.value }))}
-                      rows={3}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="timeline">Expected Timeline</Label>
-                      <Select value={formData.timeline} onValueChange={(value) => setFormData(prev => ({ ...prev, timeline: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="When do you need this?" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="immediate">Immediate</SelectItem>
-                          <SelectItem value="1-month">Within 1 month</SelectItem>
-                          <SelectItem value="1-3-months">1-3 months</SelectItem>
-                          <SelectItem value="3-6-months">3-6 months</SelectItem>
-                          <SelectItem value="exploring">Just exploring</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    
-                    <div>
-                      <Label htmlFor="budget">Budget Range</Label>
-                      <Select value={formData.budget} onValueChange={(value) => setFormData(prev => ({ ...prev, budget: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select budget range" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="<500">&lt;$500/month</SelectItem>
-                          <SelectItem value="500-1000">$500-$1,000/month</SelectItem>
-                          <SelectItem value="1000-2500">$1,000-$2,500/month</SelectItem>
-                          <SelectItem value="2500-5000">$2,500-$5,000/month</SelectItem>
-                          <SelectItem value="5000+">$5,000+/month</SelectItem>
-                          <SelectItem value="enterprise">Enterprise/Custom</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  {/* Additional Requirements */}
-                  <div>
-                    <Label htmlFor="additionalRequirements">Additional Requirements or Questions</Label>
-                    <Textarea
-                      id="additionalRequirements"
-                      placeholder="Tell us about any specific needs, integration requirements, or questions you have..."
-                      value={formData.additionalRequirements}
-                      onChange={(e) => setFormData(prev => ({ ...prev, additionalRequirements: e.target.value }))}
-                      rows={3}
+                    <Label htmlFor="additionalInfo" className="text-sm font-medium text-foreground">
+                      Additional Information (for "Others" option)
+                    </Label>
+                    <Textarea 
+                      id="additionalInfo"
+                      placeholder="Please describe your specific use case or requirements..."
+                      value={formData.additionalInfo}
+                      onChange={(e) => setFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
+                      className="min-h-[100px] resize-none"
                     />
                   </div>
 
@@ -405,17 +238,10 @@ const ContactForm = () => {
                     </p>
                   </div>
 
-                  {/* Submit Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button type="submit" variant="hero" size="lg" className="flex-1 group">
-                      Get Custom Solution
-                      <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                    
-                    <Button type="button" variant="outline" size="lg" className="flex-1">
-                      Start Free Trial
-                    </Button>
-                  </div>
+                  <Button type="submit" className="w-full" size="lg">
+                    <Send className="mr-2 h-5 w-5" />
+                    Submit
+                  </Button>
                 </form>
               </CardContent>
             </Card>
