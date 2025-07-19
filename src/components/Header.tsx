@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, loading } = useAuth();
 
   const navItems = [
     { name: "Home", href: "#home" },
@@ -11,6 +13,16 @@ const Header = () => {
     { name: "Pricing", href: "#pricing" },
     { name: "Contact", href: "#contact" },
   ];
+
+  const handleAuthAction = () => {
+    if (user) {
+      // Redirect to console
+      window.location.href = '/console';
+    } else {
+      // Redirect to sign in
+      window.location.href = '/auth/signin';
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -39,8 +51,13 @@ const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              Sign In
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={handleAuthAction}
+              disabled={loading}
+            >
+              {loading ? "Loading..." : user ? "Console" : "Sign In"}
             </Button>
             <Button variant="hero" size="sm">
               Start Free Trial
@@ -75,8 +92,13 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col space-y-2 pt-4">
-                <Button variant="outline" size="sm">
-                  Sign In
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handleAuthAction}
+                  disabled={loading}
+                >
+                  {loading ? "Loading..." : user ? "Console" : "Sign In"}
                 </Button>
                 <Button variant="hero" size="sm">
                   Start Free Trial
