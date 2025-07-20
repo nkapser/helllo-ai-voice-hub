@@ -1,14 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.NEXT_PUBLIC_SUPABASE_URL || 'https://ykpilprbhhbtvnknarmb.supabase.co'
+const supabaseAnonKey = import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrcGlscHJiaGhidHZua25hcm1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg2Nzc1OTYsImV4cCI6MjA2NDI1MzU5Nn0.mvbtq6jkMf-A9vMpHoyYzGF4Wb71Sn-ZhINntsodXFg'
 
-if (!supabaseUrl) {
-  throw new Error('Missing VITE_SUPABASE_URL environment variable')
-}
-
-if (!supabaseAnonKey) {
-  throw new Error('Missing VITE_SUPABASE_ANON_KEY environment variable')
-}
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey) 
+// Only create the client if we have valid credentials
+export const supabase = supabaseUrl && supabaseAnonKey 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null 
