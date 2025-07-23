@@ -1,3 +1,30 @@
+# Robots.txt for Helllo.ai
+# Following Google SEO best practices
+
+# Allow all crawlers access to the site
+User-agent: *
+Allow: /
+Crawl-delay: 1
+
+# Block access to admin, private, and temporary directories
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /.env
+Disallow: /api/
+
+# Block access to unnecessary files
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /package*.json
+Disallow: /tsconfig*.json
+
+# Allow important files for SEO
+Allow: /sitemap.xml
+Allow: /favicon.ico
+Allow: /robots.txt
+
+# Specific rules for major search engines
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +37,8 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+
+# Sitemap location
+Sitemap: https://helllo.ai/sitemap.xml

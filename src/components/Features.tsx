@@ -48,96 +48,91 @@ const Features = () => {
     {
       icon: Shield,
       title: "Enterprise-Grade Security",
-      description: "GDPR and DPDP compliant. SOC 2 certified with end-to-end encryption. Your customer data is protected with bank-level security.",
+      description: "SOC 2 Type II compliant with end-to-end encryption, GDPR compliance, and data residency options. Your customer data is always protected.",
       color: "text-secondary"
     }
   ];
 
   const stats = [
-    { number: "5min", label: "Average Setup Time" },
-    { number: "50+", label: "Integrations Available" },
-    { number: "25+", label: "Languages Supported" },
-    { number: "99.9%", label: "Uptime Guarantee" }
+    { label: "Setup Time", value: "5 min", icon: Clock },
+    { label: "Supported Languages", value: "25+", icon: Globe },
+    { label: "Integrations", value: "50+", icon: Puzzle },
+    { label: "Uptime", value: "99.9%", icon: TrendingUp }
   ];
 
   return (
-    <section id="features" className="py-20 bg-muted/30">
+    <section id="features" className="py-20 bg-background" role="main">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <header className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Everything Your Business Needs
+            Why Choose <span className="bg-gradient-primary bg-clip-text text-transparent">Helllo.ai</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            From easy setup to enterprise-grade security, Helllo.ai provides all the tools and features 
-            you need to transform your customer communication with AI.
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Built specifically for small and medium businesses, our AI voice agents combine cutting-edge technology 
+            with practical business solutions that work from day one.
           </p>
-        </div>
+        </header>
 
-        {/* Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl lg:text-4xl font-bold text-primary mb-2">
-                {stat.number}
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16" role="region" aria-labelledby="stats-heading">
+          <h3 id="stats-heading" className="sr-only">Platform Statistics</h3>
+          {stats.map((stat, index) => {
+            const IconComponent = stat.icon;
+            return (
+              <div key={index} className="text-center p-6 bg-card rounded-xl border border-border hover:shadow-medium transition-shadow">
+                <IconComponent className="h-8 w-8 mx-auto mb-3 text-primary" aria-hidden="true" />
+                <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
               </div>
-              <div className="text-sm text-muted-foreground font-medium">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {features.map((feature, index) => (
-            <Card key={index} className="relative group hover:shadow-medium transition-all duration-300 hover:-translate-y-2 border-0 bg-card">
-              <CardHeader>
-                <div className={`w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-                  <feature.icon className="h-6 w-6 text-primary-foreground" />
-                </div>
-                <CardTitle className="text-xl font-semibold text-foreground">
-                  {feature.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-muted-foreground leading-relaxed">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16" role="region" aria-labelledby="features-heading">
+          <h3 id="features-heading" className="sr-only">Platform Features</h3>
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <Card key={index} className="p-6 hover:shadow-strong transition-all duration-300 hover:-translate-y-1 border border-border bg-card">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className={`p-3 rounded-lg bg-background border border-border`}>
+                      <IconComponent className={`h-6 w-6 ${feature.color}`} aria-hidden="true" />
+                    </div>
+                  </div>
+                  <CardTitle className="text-xl font-semibold text-foreground">
+                    {feature.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <CardDescription className="text-muted-foreground leading-relaxed">
+                    {feature.description}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
-        {/* SMB Focus Section */}
-        <div className="bg-gradient-hero rounded-2xl p-8 lg:p-12 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
-              Built Specifically for Small & Medium Businesses
-            </h3>
-            <p className="text-lg text-muted-foreground mb-8">
-              Unlike enterprise-focused solutions, Helllo.ai is designed for businesses like yours. 
-              Affordable pricing, simple setup, and features that actually matter for growing companies.
-            </p>
-            
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="flex items-center justify-center md:justify-start gap-3">
-                <Users className="h-5 w-5 text-primary" />
-                <span className="text-foreground font-medium">1-500 employees</span>
-              </div>
-              <div className="flex items-center justify-center md:justify-start gap-3">
-                <Phone className="h-5 w-5 text-secondary" />
-                <span className="text-foreground font-medium">10-10,000+ calls/month</span>
-              </div>
-              <div className="flex items-center justify-center md:justify-start gap-3">
-                <TrendingUp className="h-5 w-5 text-primary" />
-                <span className="text-foreground font-medium">Growing businesses</span>
-              </div>
-            </div>
-
-            <Button variant="cta" size="lg" className="group">
-              See How It Works
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+        {/* Call to Action */}
+        <div className="text-center bg-gradient-secondary rounded-2xl p-8 md:p-12" role="region" aria-labelledby="cta-heading">
+          <h3 id="cta-heading" className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            Ready to Transform Your Business?
+          </h3>
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Join thousands of businesses already using AI voice agents to improve customer service, 
+            reduce costs, and scale their operations effortlessly.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button variant="hero" size="lg" className="group" aria-label="Start your free trial now">
+              Start Free Trial
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </Button>
+            <Button variant="outline" size="lg" aria-label="Schedule a demo call">
+              <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
+              Schedule Demo
             </Button>
           </div>
         </div>
