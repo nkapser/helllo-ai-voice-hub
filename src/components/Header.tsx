@@ -31,8 +31,13 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-2">
             <a href="#home" className="flex items-center space-x-2" aria-label="Helllo.ai homepage">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg" aria-hidden="true">H</span>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                <img 
+                  src="/small-logo.png" 
+                  alt="Helllo.ai logo" 
+                  className="w-8 h-8 rounded-lg"
+                  aria-hidden="true"
+                />
               </div>
               <span className="text-xl font-bold text-foreground">Helllo.ai</span>
             </a>

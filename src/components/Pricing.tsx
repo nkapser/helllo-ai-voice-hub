@@ -44,14 +44,44 @@ const Pricing = () => {
         "Multi-language support (25+ languages)",
         "Priority support",
         "Advanced analytics dashboard",
+        "Basic AI voice features",
+        "Email support",
+
+      ],
+      excluded: [
         "Custom voice personas",
         "GDPR & DPDP compliance",
         "API access"
       ],
-      excluded: [],
       buttonText: "Start Now",
       buttonVariant: "hero" as const,
       popular: true
+    },
+    {
+      name: "Pro",
+      price: "₹9,999",
+      period: "/month",
+      description: "Perfect for enterprise teams",
+      badge: "Best Value",
+      icon: Headphones,
+      features: [
+        "2000 minutes of calls per month",
+        "All Advanced AI features & LLM models",
+        "Unlimited tool integrations",
+        "Multi-language support (50+ languages)",
+        "24/7 Priority support",
+        "Advanced analytics dashboard with custom reports",
+        "Custom voice personas & training",
+        "GDPR & DPDP compliance",
+        "Full API access with higher rate limits",
+        "Dedicated account manager",
+        "Custom integrations & white-labeling",
+        "Advanced security features"
+      ],
+      excluded: [],
+      buttonText: "Get Pro",
+      buttonVariant: "default" as const,
+      popular: false
     }
   ];
 
@@ -71,7 +101,7 @@ const Pricing = () => {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <Card 
               key={index} 
