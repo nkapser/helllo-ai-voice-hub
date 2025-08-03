@@ -86,18 +86,19 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="py-20 bg-background">
+    <section id="pricing" className="pt-12 pb-20 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Simple, Transparent Pricing
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            Start free, scale as you grow. No hidden fees, no long-term contracts. 
-            Choose the plan that fits your business size and needs.
-          </p>
-          
+          <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-3xl p-8 lg:p-12 mb-8 border border-primary/10">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Start free, scale as you grow. No hidden fees, no long-term contracts. 
+              Choose the plan that fits your business size and needs.
+            </p>
+          </div>
         </div>
 
         {/* Pricing Cards */}
@@ -174,40 +175,47 @@ const Pricing = () => {
 
         {/* Trust Section */}
         <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-6">
-            Trusted by 500+ businesses worldwide
-          </p>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center max-w-4xl mx-auto">
-            {['GDPR Compliant', 'DPDP Certified', '99.9% Uptime', 'SOC 2 Type II'].map((cert, index) => (
-              <div key={index} className="flex items-center justify-center gap-2">
-                <Shield className="h-5 w-5 text-success" />
-                <span className="text-sm font-medium text-foreground">{cert}</span>
-              </div>
-            ))}
+          <div className="bg-gradient-to-r from-success/5 to-primary/5 rounded-2xl p-8 border border-success/10">
+            <p className="text-muted-foreground mb-8 text-lg">
+              Trusted by 500+ businesses worldwide
+            </p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center max-w-4xl mx-auto">
+              {['GDPR Compliant', 'DPDP Certified', '99.9% Uptime', 'SOC 2 Type II'].map((cert, index) => (
+                <div key={index} className="flex items-center justify-center gap-3 bg-background/50 rounded-lg p-4 border border-muted/20 hover:border-success/20 transition-colors">
+                  <Shield className="h-5 w-5 text-success" />
+                  <span className="text-sm font-medium text-foreground">{cert}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* FAQ Preview */}
-        <div className="mt-16 bg-muted/30 rounded-2xl p-8 lg:p-12">
-          <h3 className="text-2xl font-bold text-foreground mb-6 text-center">
-            Frequently Asked Questions
-          </h3>
+        <div className="mt-16 bg-gradient-to-br from-muted/40 to-muted/20 rounded-3xl p-8 lg:p-12 border border-muted/30 shadow-lg">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-foreground mb-4">
+              Frequently Asked Questions
+            </h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Get answers to the most common questions about our AI voice assistant platform
+            </p>
+          </div>
           
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <div>
-              <h4 className="font-semibold text-foreground mb-2">Do you offer custom integrations?</h4>
-              <p className="text-muted-foreground">Yes, Enterprise plans include custom integrations and dedicated technical support.</p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-background/50 rounded-xl p-6 border border-muted/20 hover:border-primary/20 transition-colors">
+              <h4 className="font-semibold text-foreground mb-3 text-lg">Do you offer custom integrations?</h4>
+              <p className="text-muted-foreground leading-relaxed">Yes, Enterprise plans include custom integrations and dedicated technical support.</p>
             </div>
             
-            <div>
-              <h4 className="font-semibold text-foreground mb-2">Is my data secure?</h4>
-              <p className="text-muted-foreground">Absolutely. We are GDPR & DPDP compliant with SOC 2 certification and end-to-end encryption.</p>
+            <div className="bg-background/50 rounded-xl p-6 border border-muted/20 hover:border-primary/20 transition-colors">
+              <h4 className="font-semibold text-foreground mb-3 text-lg">Is my data secure?</h4>
+              <p className="text-muted-foreground leading-relaxed">Absolutely. We are GDPR & DPDP compliant with SOC 2 certification and end-to-end encryption.</p>
             </div>
             
-            <div>
-              <h4 className="font-semibold text-foreground mb-2">What happens after the minutes get exhausted?</h4>
-              <p className="text-muted-foreground">You will need to repurchase additional minutes / purchase 500 minutes whichever you choose to and they will be valid for a month.</p>
+            <div className="bg-background/50 rounded-xl p-6 border border-muted/20 hover:border-primary/20 transition-colors md:col-span-2">
+              <h4 className="font-semibold text-foreground mb-3 text-lg">What happens after the minutes get exhausted?</h4>
+              <p className="text-muted-foreground leading-relaxed">You will need to repurchase additional minutes / purchase 500 minutes whichever you choose to and they will be valid for a month.</p>
             </div>
           </div>
         </div>
