@@ -11,7 +11,9 @@
     "build:cache-bust": "./scripts/build.sh",
     "manifest": "node scripts/inject-assets.js",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy:staging": "npx wrangler pages deploy --project-name=hellloai-staging",
+    "deploy:production": "npx wrangler pages deploy --project-name=hellloai"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
