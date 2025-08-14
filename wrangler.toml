@@ -1,0 +1,4 @@
+# Cloudflare Pages configuration for Next.js SSR deployment
+name = "helllo-landing-staging"
+compatibility_date = "2025-08-14"
+pages_build_output_dir = ".dist"

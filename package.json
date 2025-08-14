@@ -12,7 +12,7 @@
     "manifest": "node scripts/inject-assets.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy:staging": "npx wrangler pages deploy --project-name=hellloai-staging",
+    "deploy:staging": "npx wrangler pages deploy --project-name=helllo-landing-staging",
     "deploy:production": "npx wrangler pages deploy --project-name=hellloai"
   },
   "dependencies": {
