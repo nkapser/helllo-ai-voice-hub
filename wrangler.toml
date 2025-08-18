@@ -1,4 +1,7 @@
-# Cloudflare Pages configuration for Next.js SSR deployment
-name = "helllo-landing-staging"
+# Cloudflare Worker configuration for static site deployment
+name = "helllo-landing-page-staging"
 compatibility_date = "2025-08-14"
-pages_build_output_dir = "dist"
+main = "src/worker.ts"
+
+[site]
+bucket = "./dist"

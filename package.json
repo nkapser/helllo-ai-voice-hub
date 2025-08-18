@@ -12,8 +12,10 @@
     "manifest": "node scripts/inject-assets.js",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy:staging": "npx wrangler pages deploy --project-name=helllo-landing-staging",
-    "deploy:production": "npx wrangler pages deploy --project-name=hellloai"
+    "deploy:staging": "npm run build && npx wrangler pages deploy dist --project-name=helllo-landing-staging",
+    "deploy:production": "npm run build && npx wrangler pages deploy dist --project-name=hellloai",
+    "deploy:worker:staging": "npm run build && npx wrangler deploy --compatibility-date=2025-08-15",
+    "deploy:worker:production": "npm run build && npx wrangler deploy --compatibility-date=2025-08-15"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
