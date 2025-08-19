@@ -3,17 +3,24 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // Handle root path
-    if (path === '/') {
-      return env.ASSETS.fetch('/index.html');
+    // Get the assets binding - try different possible names
+    const assets = env.ASSETS || env.__STATIC_CONTENT_MANIFEST || env.SITE || env.ASSETS_BINDING;
+
+    if (!assets) {
+      return new Response('Assets binding not found', { status: 500 });
+    }
+
+    // For SPA routing, serve index.html for all routes that don't have a file extension
+    if (!path.includes('.')) {
+      return assets.fetch('/index.html');
     }
 
     // Try to serve the requested file
     try {
-      return await env.ASSETS.fetch(request);
+      return await assets.fetch(request);
     } catch (error) {
       // If file not found, serve index.html for SPA routing
-      return env.ASSETS.fetch('/index.html');
+      return assets.fetch('/index.html');
     }
   },
 };

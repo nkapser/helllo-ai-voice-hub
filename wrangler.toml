@@ -3,5 +3,7 @@ name = "helllo-ai-staging-homepage"
 compatibility_date = "2025-08-14"
 main = "src/worker.ts"
 
-[site]
-bucket = "./dist"
+# Static assets configuration
+[assets]
+binding = "ASSETS"
+directory = "./dist"
