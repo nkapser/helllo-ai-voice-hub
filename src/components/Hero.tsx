@@ -59,7 +59,7 @@ const Hero = () => {
                 width="600"
                 height="400"
                 loading="eager"
-                fetchPriority="high"
+                fetchpriority="high"
               />
               
               {/* Floating Elements */}
