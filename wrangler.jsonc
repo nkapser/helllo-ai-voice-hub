@@ -1,0 +1,19 @@
+{
+    "main": ".open-next/worker.js",
+    "name": "hellloai-landing-page",
+    "compatibility_date": "2025-03-25",
+    "assets": {
+      "directory": "dist",
+      "binding": "ASSETS"
+    },
+    "env": {
+        "staging": {
+            "name": "hellloai-landing-staging",
+            "route": "staging.helllo.ai"
+        },
+        "production": {
+          "name": "hellloai-landing-production",
+          "route": "helllo.ai"
+      }
+    }
+  }
