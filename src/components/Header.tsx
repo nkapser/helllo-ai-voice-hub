@@ -24,23 +24,23 @@ const Header = () => {
   const { user, loading } = useAuth();
 
   const handleAuthAction = () => {
-    // Detect environment based on hostname
-    const isStaging = window.location.hostname === 'staging.helllo.ai';
+    // Detect environment based on hostname - more robust detection
+    const hostname = window.location.hostname;
+    const isStaging = hostname === 'staging.helllo.ai' || hostname.includes('staging');
     
-    if (user) {
-      // Redirect to console based on environment
-      if (isStaging) {
-        window.location.href = 'https://dash-staging.helllo.ai/console';
-      } else {
-        window.location.href = 'https://dash.helllo.ai/console';
-      }
+    // Debug logging
+    console.log('Current hostname:', hostname);
+    console.log('Is staging:', isStaging);
+    console.log('User state:', user);
+    console.log('Full URL:', window.location.href);
+    
+    // Force redirect to external dashboard URLs
+    if (isStaging) {
+      console.log('Redirecting to: https://dash-staging.helllo.ai/console');
+      window.location.replace('https://dash-staging.helllo.ai/console');
     } else {
-      // Redirect to sign in based on environment
-      if (isStaging) {
-        window.location.href = 'https://dash-staging.helllo.ai/console';
-      } else {
-        window.location.href = 'https://dash.helllo.ai/console';
-      }
+      console.log('Redirecting to: https://dash.helllo.ai/console');
+      window.location.replace('https://dash.helllo.ai/console');
     }
   };
 
