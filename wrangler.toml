@@ -1,5 +1,5 @@
 # Cloudflare Worker configuration for static site deployment
-name = "helllo-landing-page-staging"
+name = "helllo-ai-staging-homepage"
 compatibility_date = "2025-08-14"
 main = "src/worker.ts"
 
