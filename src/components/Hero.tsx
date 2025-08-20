@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import heroImage from "@/assets/hero-ai-voice.jpg";
 
 const Hero = () => {
   return (
@@ -54,13 +53,13 @@ const Hero = () => {
           <div className="relative animate-slide-up">
             <figure className="relative rounded-2xl overflow-hidden shadow-strong">
               <img
-                src={heroImage}
+                src="https://ik.imagekit.io/ise7sbyg9/hero-ai-voice-DHFzmG8k.jpg"
                 alt="AI Voice Technology dashboard showing real-time call analytics, agent performance metrics, and customer interaction data for small business automation"
                 className="w-full h-auto object-cover"
                 width="600"
                 height="400"
                 loading="eager"
-                fetchPriority="high"
+                fetchpriority="high"
               />
               
               {/* Floating Elements */}

@@ -3,8 +3,8 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
-    // Get the assets binding
-    const assets = env.ASSETS;
+    // Get the assets binding - try different possible names
+    const assets = env.ASSETS || env.__STATIC_CONTENT_MANIFEST || env.SITE || env.ASSETS_BINDING;
 
     if (!assets) {
       return new Response('Assets binding not found', { status: 500 });
