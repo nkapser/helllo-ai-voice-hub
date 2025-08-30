@@ -12,7 +12,8 @@ export default {
 
     // For SPA routing, serve index.html for all routes that don't have a file extension
     if (!path.includes('.')) {
-      return assets.fetch('/index.html');
+      const indexUrl = new URL('/index.html', url.origin);
+      return assets.fetch(indexUrl);
     }
 
     // Try to serve the requested file
@@ -20,7 +21,8 @@ export default {
       return await assets.fetch(request);
     } catch (error) {
       // If file not found, serve index.html for SPA routing
-      return assets.fetch('/index.html');
+      const indexUrl = new URL('/index.html', url.origin);
+      return assets.fetch(indexUrl);
     }
   },
 };
