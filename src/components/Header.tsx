@@ -140,7 +140,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <a href="#home" className="flex items-center space-x-2" aria-label="Helllo.ai homepage">
+            <a href="/" className="flex items-center space-x-2" aria-label="Helllo.ai homepage">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center">
                 <img 
                   src="/small-logo.png" 

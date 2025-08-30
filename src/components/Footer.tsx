@@ -33,10 +33,10 @@ const Footer = () => {
     {
       title: "Legal",
       links: [
-        { name: "Terms of Service", href: "#terms" },
-        { name: "Privacy Policy", href: "#privacy" },
-        { name: "Cookie Policy", href: "#cookies" },
-        { name: "GDPR Compliance", href: "#gdpr" }
+        { name: "Terms of Service", href: "/terms" },
+        { name: "Privacy Policy", href: "/privacy" },
+        { name: "Cookie Policy", href: "/privacy#cookies" },
+        { name: "GDPR Compliance", href: "/privacy#gdpr" }
       ]
     },
     {
@@ -74,6 +74,7 @@ const Footer = () => {
                 type="email"
                 placeholder="Enter your email"
                 className="flex-1 bg-background/10 border-background/20 text-background placeholder:text-background/60"
+                required
               />
               <Button variant="secondary" className="whitespace-nowrap">
                 Subscribe
@@ -81,7 +82,7 @@ const Footer = () => {
             </div>
             
             <p className="text-sm text-background/60 mt-4">
-              No spam. Unsubscribe at any time. Read our Privacy Policy.
+              No spam. Unsubscribe at any time. Read our <a href="/privacy" className="text-background hover:underline">Privacy Policy</a>.
             </p>
           </div>
         </div>

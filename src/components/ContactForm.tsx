@@ -17,7 +17,9 @@ const ContactForm = () => {
     email: "",
     phone: "",
     primaryUseCase: "",
-    additionalInfo: ""
+    additionalInfo: "",
+    consentToContact: false,
+    consentToMarketing: false
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -28,6 +30,16 @@ const ContactForm = () => {
       toast({
         title: "Please fill in required fields",
         description: "Business name, contact name, and email are required.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Consent validation
+    if (!formData.consentToContact) {
+      toast({
+        title: "Consent required",
+        description: "Please agree to our privacy policy to continue.",
         variant: "destructive"
       });
       return;
@@ -48,7 +60,9 @@ const ContactForm = () => {
       email: "",
       phone: "",
       primaryUseCase: "",
-      additionalInfo: ""
+      additionalInfo: "",
+      consentToContact: false,
+      consentToMarketing: false
     });
   };
 
@@ -230,12 +244,46 @@ const ContactForm = () => {
                     />
                   </div>
 
-                  {/* Privacy Statement */}
-                  <div className="bg-muted/50 rounded-lg p-4">
-                    <p className="text-sm text-muted-foreground">
-                      <strong>Privacy Commitment:</strong> We respect your privacy and will only use this information 
-                      to contact you about Helllo.ai services. Your data is protected under GDPR and DPDP regulations.
-                    </p>
+                  {/* Consent Checkboxes */}
+                  <div className="space-y-4">
+                    <div className="flex items-start space-x-3">
+                      <Checkbox 
+                        id="consentToContact"
+                        checked={formData.consentToContact}
+                        onCheckedChange={(checked) => setFormData(prev => ({ ...prev, consentToContact: checked as boolean }))}
+                        required
+                      />
+                      <div className="grid gap-1.5 leading-none">
+                        <label
+                          htmlFor="consentToContact"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Terms of Service</a> and <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Privacy Policy</a> *
+                        </label>
+                        <p className="text-xs text-muted-foreground">
+                          By checking this box, you consent to us processing your personal data to contact you about our services.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start space-x-3">
+                      <Checkbox 
+                        id="consentToMarketing"
+                        checked={formData.consentToMarketing}
+                        onCheckedChange={(checked) => setFormData(prev => ({ ...prev, consentToMarketing: checked as boolean }))}
+                      />
+                      <div className="grid gap-1.5 leading-none">
+                        <label
+                          htmlFor="consentToMarketing"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          I would like to receive marketing communications about Helllo.ai products and services
+                        </label>
+                        <p className="text-xs text-muted-foreground">
+                          You can unsubscribe at any time. This is optional and not required to submit your inquiry.
+                        </p>
+                      </div>
+                    </div>
                   </div>
 
                   <Button type="submit" className="w-full" size="lg">
