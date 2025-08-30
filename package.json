@@ -12,8 +12,8 @@
     "manifest": "node scripts/inject-assets.js",
     "lint": "eslint .",
     "preview": "npm run build && vite preview",
-    "deploy:staging": "npx wrangler pages deploy --project-name=helllo-landing-staging",
-    "deploy:production": "npx wrangler pages deploy --project-name=hellloai",
+    "deploy:staging": "npx wrangler deploy --env staging",
+    "deploy:production": "npx wrangler deploy --env production",
     "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
