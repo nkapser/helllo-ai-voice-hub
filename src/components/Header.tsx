@@ -338,17 +338,17 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div id="mobile-menu" className="lg:hidden py-4 border-t border-border" role="navigation" aria-label="Mobile navigation">
-            <nav className="flex flex-col space-y-4">
-              {/* Mobile Features */}
-              <div className="space-y-2">
+          <div id="mobile-menu" className="lg:hidden py-4 border-t border-border max-h-[80vh] overflow-y-auto" role="navigation" aria-label="Mobile navigation">
+            <nav className="flex flex-col space-y-3">
+              {/* Mobile Features - Compact */}
+              <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Features</h3>
-                <div className="space-y-1">
-                  {featuresMenu.flatMap(section => section.items).map((item, index) => (
+                <div className="grid grid-cols-2 gap-1 px-4">
+                  {featuresMenu.flatMap(section => section.items).slice(0, 4).map((item, index) => (
                     <a
                       key={index}
                       href={item.href}
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                      className="block py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded px-2"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -357,15 +357,15 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Mobile Industries */}
-              <div className="space-y-2">
+              {/* Mobile Industries - Compact */}
+              <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Industries</h3>
-                <div className="space-y-1">
-                  {industriesMenu.flatMap(section => section.items).map((item, index) => (
+                <div className="grid grid-cols-2 gap-1 px-4">
+                  {industriesMenu.flatMap(section => section.items).slice(0, 4).map((item, index) => (
                     <a
                       key={index}
                       href={item.href}
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                      className="block py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded px-2"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -374,15 +374,15 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Mobile Solutions */}
-              <div className="space-y-2">
+              {/* Mobile Solutions - Compact */}
+              <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Solutions</h3>
-                <div className="space-y-1">
-                  {solutionsMenu.flatMap(section => section.items).map((item, index) => (
+                <div className="grid grid-cols-2 gap-1 px-4">
+                  {solutionsMenu.flatMap(section => section.items).slice(0, 4).map((item, index) => (
                     <a
                       key={index}
                       href={item.href}
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                      className="block py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded px-2"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -391,15 +391,15 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Mobile Resources */}
-              <div className="space-y-2">
+              {/* Mobile Resources - Compact */}
+              <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Resources</h3>
-                <div className="space-y-1">
-                  {resourcesMenu.flatMap(section => section.items).map((item, index) => (
+                <div className="grid grid-cols-2 gap-1 px-4">
+                  {resourcesMenu.flatMap(section => section.items).slice(0, 4).map((item, index) => (
                     <a
                       key={index}
                       href={item.href}
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                      className="block py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded px-2"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -419,7 +419,8 @@ const Header = () => {
                 </a>
               </div>
 
-              <div className="flex flex-col space-y-2 pt-4 px-4" role="group" aria-label="User actions">
+              {/* User Actions - Always visible at bottom */}
+              <div className="flex flex-col space-y-2 pt-2 px-4 border-t border-border/50" role="group" aria-label="User actions">
                 <Button 
                   variant="outline" 
                   size="sm"
