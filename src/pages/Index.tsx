@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   // Update page title and meta description for better SEO
   useEffect(() => {
-    document.title = "AI Voice Agents for Small Business | Helllo.ai - Automate Customer Calls";
+    document.title = "AI Voice Agents for Small, Medium and Enterprise Business | Helllo.ai - Automate Customer Calls";
     
     // Update meta description
     const metaDescription = document.querySelector('meta[name="description"]');
