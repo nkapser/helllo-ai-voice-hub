@@ -1,84 +1,107 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section id="home" className="pt-24 pb-12 lg:pt-32 lg:pb-20 bg-gradient-hero" role="banner">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="text-center lg:text-left animate-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Transform Your Business with<br />
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                AI Voice Agents
-              </span>
-            </h1>
+    <section id="home" className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 bg-background overflow-hidden" role="banner">
+      {/* Wave Graphic Overlay - Flowing across the middle */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0" aria-hidden="true" style={{ overflow: 'hidden' }}>
+        <svg
+          width="100%"
+          height="400"
+          viewBox="0 0 1440 200"
+          preserveAspectRatio="none"
+          className="absolute top-1/2 left-0 -translate-y-1/2"
+          style={{ 
+            height: '400px',
+            width: '100%',
+            opacity: 0.7
+          }}
+        >
+          <defs>
+            <linearGradient id="heroWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#8B5CF6" />
+              <stop offset="30%" stopColor="#6366F1" />
+              <stop offset="50%" stopColor="#3B82F6" />
+              <stop offset="70%" stopColor="#6366F1" />
+              <stop offset="100%" stopColor="#8B5CF6" />
+            </linearGradient>
+            <filter id="blurFilter">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="40" />
+            </filter>
+          </defs>
+          <path
+            d="M0,120 Q360,60 720,100 T1440,120 L1440,200 L0,200 Z"
+            fill="url(#heroWaveGradient)"
+            filter="url(#blurFilter)"
+          />
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto text-center">
+          {/* Main Headline */}
+          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight relative z-20">
+            <span className="text-foreground">Supercharge your </span>
+            <span className="relative inline-block">
+              <span className="relative z-20">Call Operations</span>
+              {/* Wave overlay effect on "Call Operations" - creates the translucent blue/purple overlay */}
+              <svg
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+                viewBox="0 0 500 120"
+                preserveAspectRatio="none"
+                width="120%"
+                height="120"
+                style={{ 
+                  zIndex: 15,
+                  opacity: 0.65
+                }}
+              >
+                <defs>
+                  <linearGradient id="heroTextWaveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#8B5CF6" />
+                    <stop offset="50%" stopColor="#3B82F6" />
+                    <stop offset="100%" stopColor="#8B5CF6" />
+                  </linearGradient>
+                  <filter id="textBlurFilter">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+                  </filter>
+                </defs>
+                <path
+                  d="M0,60 Q125,30 250,60 T500,60 L500,120 L0,120 Z"
+                  fill="url(#heroTextWaveGradient)"
+                  filter="url(#textBlurFilter)"
+                />
+              </svg>
+            </span>
+            <span className="text-foreground"> with Voice AI Agents</span>
+          </h1>
+
+          {/* Sub-headline */}
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-4xl mx-auto relative z-20" role="text">
+            Discover the new way to build, test, deploy, and monitor
+            <br className="hidden md:block" />
+            production-ready AI voice agents at scale.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center relative z-20" role="group" aria-label="Call to action buttons">
+            <Button
+              variant="default"
+              size="lg"
+              className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-transform duration-200 rounded-lg px-8 py-6 text-lg font-semibold shadow-lg"
+              aria-label="Try for free"
+            >
+              Try for Free
+            </Button>
             
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-xl" role="text">
-              Empower your Small or Medium Business with intelligent AI voice technology. 
-              Easy setup, seamless integration, and multi-language support designed for growing businesses.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start" role="group" aria-label="Call to action buttons">
-              <Button variant="hero" size="lg" className="group" aria-label="Start your free trial">
-                Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-              </Button>
-              
-              <Button variant="outline" size="lg" className="group" aria-label="Watch product demo video">
-                <Play className="mr-2 h-5 w-5" aria-hidden="true" />
-                Watch Demo
-              </Button>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="mt-8 flex flex-col sm:flex-row items-center gap-6 text-sm text-muted-foreground" role="list" aria-label="Key benefits">
-              <div className="flex items-center gap-2" role="listitem">
-                <div className="w-2 h-2 bg-success rounded-full" aria-hidden="true"></div>
-                <span>30 minutes free monthly</span>
-              </div>
-              <div className="flex items-center gap-2" role="listitem">
-                <div className="w-2 h-2 bg-success rounded-full" aria-hidden="true"></div>
-                <span>No credit card required</span>
-              </div>
-              <div className="flex items-center gap-2" role="listitem">
-                <div className="w-2 h-2 bg-success rounded-full" aria-hidden="true"></div>
-                <span>Setup in 5 minutes</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Image */}
-          <div className="relative animate-slide-up">
-            <figure className="relative rounded-2xl overflow-hidden shadow-strong">
-              <img
-                src="https://ik.imagekit.io/ise7sbyg9/hero-ai-voice-DHFzmG8k.jpg"
-                alt="AI Voice Technology dashboard showing real-time call analytics, agent performance metrics, and customer interaction data for small business automation"
-                className="w-full h-auto object-cover"
-                width="600"
-                height="400"
-                loading="eager"
-                fetchpriority="high"
-              />
-              
-              {/* Floating Elements */}
-              <div className="absolute top-6 right-6 bg-background/90 backdrop-blur-sm rounded-lg p-3 shadow-medium animate-float" role="status" aria-label="Live AI agent indicator">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-success rounded-full animate-pulse" aria-hidden="true"></div>
-                  <span className="text-sm font-medium text-foreground">Live AI Agent</span>
-                </div>
-              </div>
-
-              <div className="absolute bottom-6 left-6 bg-background/90 backdrop-blur-sm rounded-lg p-4 shadow-medium" role="status" aria-label="Daily call statistics">
-                <div className="text-sm text-muted-foreground">Active Calls Today</div>
-                <div className="text-2xl font-bold text-primary">2,847</div>
-              </div>
-            </figure>
-
-            {/* Background Decoration */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-secondary opacity-20 rounded-full blur-xl" aria-hidden="true"></div>
-            <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-primary opacity-20 rounded-full blur-xl" aria-hidden="true"></div>
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-2 border-foreground/20 bg-background text-foreground hover:bg-foreground/5 hover:border-foreground/30 rounded-lg px-8 py-6 text-lg font-semibold"
+              aria-label="Contact sales"
+            >
+              Contact Sales
+            </Button>
           </div>
         </div>
       </div>
