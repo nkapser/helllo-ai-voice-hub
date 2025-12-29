@@ -16,7 +16,12 @@ interface WavePoint {
 }
 
 const Hero = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+  // Ribbon viewport dimensions
+  const width = 2000; // Optimal viewport width
+  const extension = 500; // Extension beyond viewport for smooth wave movement
+  const extendedWidth = width + extension; // Extended width for points (2500)
+  const height = 400;
+  
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const backPathRef = useRef<SVGPathElement>(null);
@@ -24,7 +29,6 @@ const Hero = () => {
   const pointsRef = useRef<WavePoint[]>([]);
   const timeRef = useRef(0);
   const animationRef = useRef<number>(0);
-  const mouseRef = useRef({ x: 0, y: 0, active: false });
 
   // Build smooth quadratic bezier path with dynamic thickness
   const buildPath = useCallback((yOffset: number = 0, baseThickness: number = 35, thicknessVariation?: number[]): string => {
@@ -101,17 +105,18 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
-    const width = 2000;
-    const height = 400;
-    const pointCount = 4; // More points for more waves
+    const pointCount = 3; // More points for more waves
     
     // Initialize control points with unique characteristics
     // Position ribbon higher (baseY around 140-180 instead of 260) so 10-15% is above center
     const points: WavePoint[] = [];
     for (let i = 0; i <= pointCount; i++) {
       // Create natural initial wave pattern for side-view ribbon
+      // Extend points beyond viewport width to ensure full coverage (no white gaps)
       const xPos = (width / pointCount) * i - 100;
-      const normalizedX = (xPos + 100) / (width + 200);
+      // Extend last point to extendedWidth for smooth wave movement
+      const finalXPos = i === pointCount ? extendedWidth : xPos;
+      const normalizedX = (finalXPos + 100) / (extendedWidth + 200);
       
       // Initial wave pattern - creates visible crests and troughs
       const initialWave = Math.sin(normalizedX * Math.PI * 4) * 40; // 2-3 waves across
@@ -119,7 +124,7 @@ const Hero = () => {
       const baseY = height / 2 - 30 + initialWave + baseVariation; // Higher position with waves
       
       points.push({
-        x: xPos,
+        x: finalXPos,
         baseY: baseY,
         y: baseY,
         amp: 45 + Math.random() * 50, // Amplitude 45-95 for visible but smooth waves
@@ -134,7 +139,6 @@ const Hero = () => {
     // Animate ribbon with requestAnimationFrame
     const animateRibbon = () => {
       timeRef.current += 0.5; // Slower time increment for smoother motion
-      const mouse = mouseRef.current;
       
       // Global floating motion - makes the whole ribbon feel alive and buoyant (more prominent)
       const globalFloat = Math.sin(timeRef.current * 0.0006) * 22; // More prominent float
@@ -146,7 +150,7 @@ const Hero = () => {
       // Update each point's Y position with traveling wave
       pointsRef.current.forEach((p, index) => {
         // Create a traveling wave by offsetting phase based on X position
-        const normalizedX = (p.x + 100) / (width + 200); // Normalize X position (0 to 1)
+        const normalizedX = (p.x + 100) / (extendedWidth + 200); // Normalize X position (accounts for extended points)
         const xPhase = normalizedX * Math.PI * 4; // Phase offset for 2-3 visible waves
         const timePhase = timeRef.current * waveSpeed; // Time-based phase shift
         
@@ -161,44 +165,6 @@ const Hero = () => {
         
         // Target Y from wave motion + prominent global float
         p.targetY = waveY + globalFloat + breathe;
-        
-        // Mouse interaction - push ribbon when cursor is near (smoother, gentler)
-        if (mouse.active) {
-          const svgRect = svgRef.current?.getBoundingClientRect();
-          if (svgRect) {
-            // Convert mouse position to SVG coordinates
-            const svgMouseX = ((mouse.x - svgRect.left) / svgRect.width) * width;
-            const svgMouseY = ((mouse.y - svgRect.top) / svgRect.height) * 400;
-            
-            // Calculate distance from mouse to this point
-            const dx = p.x - svgMouseX;
-            const dy = p.y - svgMouseY;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            // Influence radius
-            const radius = 350;
-            
-            if (distance < radius) {
-              // Smooth falloff using ease-out curve (more gradual, less jerky)
-              const normalizedDist = distance / radius;
-              const easeOut = 1 - Math.pow(1 - normalizedDist, 3); // Cubic ease-out
-              const strength = (1 - easeOut) * 35; // Reduced max strength from 80 to 35
-              
-              // Push away from cursor
-              const angle = Math.atan2(dy, dx);
-              p.targetY += Math.sin(angle) * strength;
-              
-              // Gentler horizontal influence to nearby points (reduced)
-              const neighborInfluence = strength * 0.15; // Reduced from 0.3
-              if (index > 0) {
-                pointsRef.current[index - 1].targetY += neighborInfluence * 0.3; // Reduced from 0.5
-              }
-              if (index < pointsRef.current.length - 1) {
-                pointsRef.current[index + 1].targetY += neighborInfluence * 0.3; // Reduced from 0.5
-              }
-            }
-          }
-        }
         
         // Smooth interpolation with direct physics for continuous wave flow
         const springStrength = 0.12; // Increased for more direct response, less interference
@@ -271,52 +237,6 @@ const Hero = () => {
     };
   }, [buildPath]);
 
-  // Mouse interaction handler
-  useEffect(() => {
-    const section = sectionRef.current;
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = {
-        x: e.clientX,
-        y: e.clientY,
-        active: true
-      };
-    };
-    
-    const handleMouseLeave = () => {
-      mouseRef.current.active = false;
-    };
-    
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        mouseRef.current = {
-          x: e.touches[0].clientX,
-          y: e.touches[0].clientY,
-          active: true
-        };
-      }
-    };
-    
-    const handleTouchEnd = () => {
-      mouseRef.current.active = false;
-    };
-
-    if (section) {
-      section.addEventListener("mousemove", handleMouseMove);
-      section.addEventListener("mouseleave", handleMouseLeave);
-      section.addEventListener("touchmove", handleTouchMove, { passive: true });
-      section.addEventListener("touchend", handleTouchEnd);
-    }
-
-    return () => {
-      if (section) {
-        section.removeEventListener("mousemove", handleMouseMove);
-        section.removeEventListener("mouseleave", handleMouseLeave);
-        section.removeEventListener("touchmove", handleTouchMove);
-        section.removeEventListener("touchend", handleTouchEnd);
-      }
-    };
-  }, []);
 
   // Scroll parallax effect
   useEffect(() => {
@@ -325,7 +245,7 @@ const Hero = () => {
       if (svg) {
         gsap.to(svg, {
           y: window.scrollY * 0.05,
-          duration: 0.3,
+          duration: 0.1,
           overwrite: "auto"
         });
       }
@@ -337,7 +257,6 @@ const Hero = () => {
 
   return (
     <section 
-      ref={sectionRef}
       id="home" 
       className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 bg-white overflow-hidden min-h-[90vh] flex items-center" 
       role="banner"
@@ -346,8 +265,8 @@ const Hero = () => {
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden" aria-hidden="true">
         <svg 
           ref={svgRef}
-          className="absolute left-[-10%] top-[8%] w-[120%] h-[500px] opacity-95 pointer-events-auto"
-          viewBox="0 0 2000 400"
+          className="absolute left-[-10%] top-[8%] w-[130%] h-[500px] opacity-95 pointer-events-auto"
+          viewBox={`0 0 ${extendedWidth} ${height}`}
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           style={{ filter: "blur(0.2px)" }}
@@ -430,7 +349,18 @@ const Hero = () => {
               Call Operations
             </span>
             <span className="text-foreground"> with</span> <br />
-            <span className="text-foreground"><i>AI Voice Agents</i></span>
+            <span 
+              className="bg-clip-text italic"
+              style={{
+                color: '#3f3f3f',
+                // backgroundImage: 'radial-gradient(circle at center, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 5%, rgb(192, 192, 192) 12%, rgb(192, 192, 192) 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                textShadow: 'rgba(255, 255, 255, 0.7) 0px 0px 15px',
+              }}
+            >
+              AI Voice Agents
+            </span>
           </h1>
 
           {/* Sub-headline */}
