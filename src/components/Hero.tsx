@@ -1,73 +1,337 @@
 import { Button } from "@/components/ui/button";
+import { useEffect, useRef, useCallback } from "react";
+import gsap from "gsap";
+
+// Point interface for wave animation
+interface WavePoint {
+  x: number;
+  baseY: number;
+  y: number;
+  amp: number;
+  speed: number;
+  phase: number;
+  // Mouse interaction
+  targetY: number;
+  velocityY: number;
+}
 
 const Hero = () => {
-  return (
-    <section id="home" className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 bg-white overflow-hidden min-h-[90vh] flex items-center" role="banner">
-      {/* Animated 3D Wave Ribbon - Natural flowing wave */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden" aria-hidden="true">
-        {/* CSS for natural wave animation - 4 second cycle */}
-        <style>{`
-          @keyframes ribbonFlow {
-            0% {
-              transform: translateX(0%) translateY(0px);
-            }
-            25% {
-              transform: translateX(2%) translateY(-8px);
-            }
-            50% {
-              transform: translateX(4%) translateY(0px);
-            }
-            75% {
-              transform: translateX(2%) translateY(8px);
-            }
-            100% {
-              transform: translateX(0%) translateY(0px);
-            }
-          }
-          
-          .ribbon-container {
-            animation: ribbonFlow 4s ease-in-out infinite;
-          }
-        `}</style>
+  const sectionRef = useRef<HTMLElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const backPathRef = useRef<SVGPathElement>(null);
+  const highlightPathRef = useRef<SVGPathElement>(null);
+  const pointsRef = useRef<WavePoint[]>([]);
+  const timeRef = useRef(0);
+  const animationRef = useRef<number>(0);
+  const mouseRef = useRef({ x: 0, y: 0, active: false });
+
+  // Build smooth quadratic bezier path
+  const buildPath = useCallback((yOffset: number = 0, thickness: number = 50): string => {
+    const pts = pointsRef.current;
+    if (pts.length === 0) return "";
+    
+    // Top edge of ribbon
+    let d = `M ${pts[0].x},${pts[0].y + yOffset}`;
+    for (let i = 1; i < pts.length; i++) {
+      const prev = pts[i - 1];
+      const curr = pts[i];
+      const cx = (prev.x + curr.x) / 2;
+      const cy = (prev.y + curr.y) / 2 + yOffset;
+      d += ` Q ${prev.x},${prev.y + yOffset} ${cx},${cy}`;
+    }
+    
+    // Close at the last point with thickness
+    const last = pts[pts.length - 1];
+    d += ` L ${last.x},${last.y + yOffset + thickness}`;
+    
+    // Bottom edge of ribbon (reverse)
+    for (let i = pts.length - 2; i >= 0; i--) {
+      const next = pts[i + 1];
+      const curr = pts[i];
+      const cx = (next.x + curr.x) / 2;
+      const cy = (next.y + curr.y) / 2 + yOffset + thickness;
+      d += ` Q ${next.x},${next.y + yOffset + thickness} ${cx},${cy}`;
+    }
+    
+    d += ` L ${pts[0].x},${pts[0].y + yOffset} Z`;
+    return d;
+  }, []);
+
+  useEffect(() => {
+    const width = 1800;
+    const height = 400;
+    const pointCount = 14; // More points for more waves
+    
+    // Initialize control points with unique characteristics
+    // Position ribbon higher (baseY around 140-180 instead of 260) so 10-15% is above center
+    const points: WavePoint[] = [];
+    for (let i = 0; i <= pointCount; i++) {
+      // Varying baseY creates a natural undulation in resting position
+      const baseVariation = Math.sin((i / pointCount) * Math.PI * 2) * 30;
+      const baseY = height / 2 - 40 + baseVariation; // Higher position (around 160)
+      points.push({
+        x: (width / pointCount) * i - 100,
+        baseY: baseY,
+        y: baseY,
+        amp: 55 + Math.random() * 65, // Amplitude 55-120
+        speed: 0.0012 + Math.random() * 0.0018, // Wave speed
+        phase: Math.random() * Math.PI * 2,
+        targetY: baseY,
+        velocityY: 0
+      });
+    }
+    pointsRef.current = points;
+
+    // Animate ribbon with requestAnimationFrame
+    const animateRibbon = () => {
+      timeRef.current += 1;
+      const mouse = mouseRef.current;
+      
+      // Global floating motion - makes the whole ribbon feel alive and buoyant
+      const globalFloat = Math.sin(timeRef.current * 0.0008) * 25; // Slow gentle float
+      const breathe = Math.sin(timeRef.current * 0.0015) * 15; // Subtle breathing
+
+      // Update each point's Y position
+      pointsRef.current.forEach((p, index) => {
+        // Base wave motion (sine wave) with upward bias for floating feel
+        const waveY = p.baseY + Math.sin(timeRef.current * p.speed + p.phase) * p.amp;
         
-        {/* SVG with wavy ribbon - starts from lower middle */}
+        // Add secondary wave for more complexity
+        const secondaryWave = Math.sin(timeRef.current * p.speed * 1.5 + p.phase * 0.7) * (p.amp * 0.3);
+        
+        // Third wave for even more organic feel
+        const tertiaryWave = Math.sin(timeRef.current * p.speed * 0.5 + index * 0.4) * (p.amp * 0.15);
+        
+        // Target Y from wave motion + global float (negative = upward)
+        p.targetY = waveY + secondaryWave + tertiaryWave + globalFloat + breathe;
+        
+        // Mouse interaction - push ribbon when cursor is near
+        if (mouse.active) {
+          const svgRect = svgRef.current?.getBoundingClientRect();
+          if (svgRect) {
+            // Convert mouse position to SVG coordinates
+            const svgMouseX = ((mouse.x - svgRect.left) / svgRect.width) * 1800;
+            const svgMouseY = ((mouse.y - svgRect.top) / svgRect.height) * 400;
+            
+            // Calculate distance from mouse to this point
+            const dx = p.x - svgMouseX;
+            const dy = p.y - svgMouseY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Influence radius
+            const radius = 300;
+            
+            if (distance < radius) {
+              // Push strength based on distance (closer = stronger)
+              const strength = (1 - distance / radius) * 80;
+              
+              // Push away from cursor
+              const angle = Math.atan2(dy, dx);
+              p.targetY += Math.sin(angle) * strength;
+              
+              // Add some horizontal influence to nearby points
+              const neighborInfluence = strength * 0.3;
+              if (index > 0) {
+                pointsRef.current[index - 1].targetY += neighborInfluence * 0.5;
+              }
+              if (index < pointsRef.current.length - 1) {
+                pointsRef.current[index + 1].targetY += neighborInfluence * 0.5;
+              }
+            }
+          }
+        }
+        
+        // Smooth interpolation with spring physics
+        const springStrength = 0.08;
+        const damping = 0.85;
+        
+        p.velocityY += (p.targetY - p.y) * springStrength;
+        p.velocityY *= damping;
+        p.y += p.velocityY;
+      });
+
+      // Update all three paths
+      if (pathRef.current) {
+        pathRef.current.setAttribute("d", buildPath(0, 55));
+      }
+      if (backPathRef.current) {
+        backPathRef.current.setAttribute("d", buildPath(28, 60));
+      }
+      if (highlightPathRef.current) {
+        highlightPathRef.current.setAttribute("d", buildPath(0, 24));
+      }
+
+      animationRef.current = requestAnimationFrame(animateRibbon);
+    };
+
+    // Start animation
+    animateRibbon();
+
+    // GSAP animations for drift, floating, and breathing
+    const svg = svgRef.current;
+    if (svg) {
+      // Horizontal air flow drift
+      gsap.to(svg, {
+        x: -50,
+        duration: 12,
+        ease: "sine.inOut",
+        yoyo: true,
+        repeat: -1
+      });
+
+      // Subtle breathing/scale effect - expands upward
+      gsap.to(svg, {
+        scaleY: 1.05,
+        scaleX: 1.02,
+        transformOrigin: "center bottom", // Expand upward
+        duration: 7,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut"
+      });
+
+      // Primary floating motion - moves UP and down naturally
+      gsap.to(svg, {
+        y: -30, // Float upward primarily
+        duration: 4,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut"
+      });
+
+      // Secondary slower float for organic layered motion
+      gsap.to(svg, {
+        y: "+=15",
+        duration: 8,
+        yoyo: true,
+        repeat: -1,
+        ease: "power1.inOut"
+      });
+    }
+
+    // Cleanup
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      if (svg) {
+        gsap.killTweensOf(svg);
+      }
+    };
+  }, [buildPath]);
+
+  // Mouse interaction handler
+  useEffect(() => {
+    const section = sectionRef.current;
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = {
+        x: e.clientX,
+        y: e.clientY,
+        active: true
+      };
+    };
+    
+    const handleMouseLeave = () => {
+      mouseRef.current.active = false;
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        mouseRef.current = {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY,
+          active: true
+        };
+      }
+    };
+    
+    const handleTouchEnd = () => {
+      mouseRef.current.active = false;
+    };
+
+    if (section) {
+      section.addEventListener("mousemove", handleMouseMove);
+      section.addEventListener("mouseleave", handleMouseLeave);
+      section.addEventListener("touchmove", handleTouchMove, { passive: true });
+      section.addEventListener("touchend", handleTouchEnd);
+    }
+
+    return () => {
+      if (section) {
+        section.removeEventListener("mousemove", handleMouseMove);
+        section.removeEventListener("mouseleave", handleMouseLeave);
+        section.removeEventListener("touchmove", handleTouchMove);
+        section.removeEventListener("touchend", handleTouchEnd);
+      }
+    };
+  }, []);
+
+  // Scroll parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const svg = svgRef.current;
+      if (svg) {
+        gsap.to(svg, {
+          y: window.scrollY * 0.05,
+          duration: 0.3,
+          overwrite: "auto"
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <section 
+      ref={sectionRef}
+      id="home" 
+      className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 bg-white overflow-hidden min-h-[90vh] flex items-center" 
+      role="banner"
+    >
+      {/* GSAP Animated Wave Ribbon - Interactive & Floating */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden" aria-hidden="true">
         <svg 
-          className="ribbon-container absolute w-[140%] h-full left-[-20%] top-[5%]"
-          viewBox="0 0 2000 800"
-          preserveAspectRatio="xMidYMid slice"
+          ref={svgRef}
+          className="absolute left-[-10%] top-[8%] w-[120%] h-[500px] opacity-95 pointer-events-auto"
+          viewBox="0 0 1800 400"
+          preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
+          style={{ filter: "blur(0.2px)" }}
         >
           <defs>
             {/* Main ribbon gradient - cyan to blue to purple */}
-            <linearGradient id="ribbonMain" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id="ribbonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#06b6d4" />
-              <stop offset="20%" stopColor="#22d3ee" />
-              <stop offset="40%" stopColor="#3b82f6" />
-              <stop offset="60%" stopColor="#818cf8" />
-              <stop offset="80%" stopColor="#a78bfa" />
+              <stop offset="12%" stopColor="#22d3ee" />
+              <stop offset="30%" stopColor="#3b82f6" />
+              <stop offset="50%" stopColor="#6366f1" />
+              <stop offset="70%" stopColor="#8b5cf6" />
+              <stop offset="85%" stopColor="#a855f7" />
               <stop offset="100%" stopColor="#c084fc" />
             </linearGradient>
             
             {/* Back/shadow layer - darker */}
-            <linearGradient id="ribbonBack" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id="ribbonBackGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="#0891b2" />
-              <stop offset="35%" stopColor="#4f46e5" />
-              <stop offset="70%" stopColor="#7c3aed" />
+              <stop offset="25%" stopColor="#4f46e5" />
+              <stop offset="55%" stopColor="#7c3aed" />
               <stop offset="100%" stopColor="#9333ea" />
             </linearGradient>
             
             {/* Top highlight for 3D shine */}
-            <linearGradient id="ribbonHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.75" />
+            <linearGradient id="ribbonHighlightGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.85" />
               <stop offset="50%" stopColor="#e0f2fe" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="transparent" />
+              <stop offset="100%" stopColor="transparent" stopOpacity="0" />
             </linearGradient>
             
-            {/* Soft shadow filter */}
-            <filter id="ribbonShadow" x="-10%" y="-10%" width="120%" height="130%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
-              <feOffset dx="0" dy="8" result="shadow" />
-              <feFlood floodColor="#6366f1" floodOpacity="0.25" />
+            {/* Soft glow filter */}
+            <filter id="ribbonGlow" x="-15%" y="-15%" width="130%" height="140%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="4" />
+              <feOffset dx="0" dy="5" result="shadow" />
+              <feFlood floodColor="#6366f1" floodOpacity="0.18" />
               <feComposite in2="shadow" operator="in" />
               <feMerge>
                 <feMergeNode />
@@ -76,118 +340,25 @@ const Hero = () => {
             </filter>
           </defs>
           
-          <g filter="url(#ribbonShadow)">
-            {/* Back layer - starts from lower middle (Y=550) */}
+          <g filter="url(#ribbonGlow)">
+            {/* Back shadow layer */}
             <path
-              d="M-100,580 
-                 Q50,520 200,460
-                 Q350,400 500,350
-                 Q650,300 800,340
-                 Q950,380 1100,320
-                 Q1250,260 1400,300
-                 Q1550,340 1700,280
-                 Q1850,220 2000,260
-                 Q2150,300 2200,240
-                 L2200,290
-                 Q2150,350 2000,310
-                 Q1850,270 1700,330
-                 Q1550,390 1400,350
-                 Q1250,310 1100,370
-                 Q950,430 800,390
-                 Q650,350 500,400
-                 Q350,450 200,510
-                 Q50,570 -100,630
-                 Z"
-              fill="url(#ribbonBack)"
-              opacity="0.85"
-            >
-              <animate
-                attributeName="d"
-                dur="4s"
-                repeatCount="indefinite"
-                values="
-                  M-100,580 Q50,520 200,460 Q350,400 500,350 Q650,300 800,340 Q950,380 1100,320 Q1250,260 1400,300 Q1550,340 1700,280 Q1850,220 2000,260 Q2150,300 2200,240 L2200,290 Q2150,350 2000,310 Q1850,270 1700,330 Q1550,390 1400,350 Q1250,310 1100,370 Q950,430 800,390 Q650,350 500,400 Q350,450 200,510 Q50,570 -100,630 Z;
-                  M-100,560 Q50,500 200,440 Q350,380 500,370 Q650,360 800,400 Q950,440 1100,360 Q1250,280 1400,320 Q1550,360 1700,300 Q1850,240 2000,280 Q2150,320 2200,260 L2200,310 Q2150,370 2000,330 Q1850,290 1700,350 Q1550,410 1400,370 Q1250,330 1100,390 Q950,450 800,410 Q650,370 500,420 Q350,470 200,530 Q50,590 -100,650 Z;
-                  M-100,600 Q50,540 200,480 Q350,420 500,330 Q650,240 800,300 Q950,360 1100,280 Q1250,200 1400,260 Q1550,320 1700,240 Q1850,160 2000,220 Q2150,280 2200,200 L2200,250 Q2150,330 2000,270 Q1850,210 1700,290 Q1550,370 1400,310 Q1250,250 1100,330 Q950,410 800,350 Q650,290 500,360 Q350,430 200,490 Q50,550 -100,610 Z;
-                  M-100,580 Q50,520 200,460 Q350,400 500,350 Q650,300 800,340 Q950,380 1100,320 Q1250,260 1400,300 Q1550,340 1700,280 Q1850,220 2000,260 Q2150,300 2200,240 L2200,290 Q2150,350 2000,310 Q1850,270 1700,330 Q1550,390 1400,350 Q1250,310 1100,370 Q950,430 800,390 Q650,350 500,400 Q350,450 200,510 Q50,570 -100,630 Z"
-                calcMode="spline"
-                keySplines="0.25 0.1 0.25 1; 0.25 0.1 0.25 1; 0.25 0.1 0.25 1"
-              />
-            </path>
+              ref={backPathRef}
+              fill="url(#ribbonBackGradient)"
+              opacity="0.65"
+            />
             
-            {/* Main ribbon surface - starts from lower middle */}
+            {/* Main ribbon surface */}
             <path
-              d="M-100,550 
-                 Q50,490 200,430
-                 Q350,370 500,320
-                 Q650,270 800,310
-                 Q950,350 1100,290
-                 Q1250,230 1400,270
-                 Q1550,310 1700,250
-                 Q1850,190 2000,230
-                 Q2150,270 2200,210
-                 L2200,260
-                 Q2150,320 2000,280
-                 Q1850,240 1700,300
-                 Q1550,360 1400,320
-                 Q1250,280 1100,340
-                 Q950,400 800,360
-                 Q650,320 500,370
-                 Q350,420 200,480
-                 Q50,540 -100,600
-                 Z"
-              fill="url(#ribbonMain)"
-            >
-              <animate
-                attributeName="d"
-                dur="4s"
-                repeatCount="indefinite"
-                values="
-                  M-100,550 Q50,490 200,430 Q350,370 500,320 Q650,270 800,310 Q950,350 1100,290 Q1250,230 1400,270 Q1550,310 1700,250 Q1850,190 2000,230 Q2150,270 2200,210 L2200,260 Q2150,320 2000,280 Q1850,240 1700,300 Q1550,360 1400,320 Q1250,280 1100,340 Q950,400 800,360 Q650,320 500,370 Q350,420 200,480 Q50,540 -100,600 Z;
-                  M-100,530 Q50,470 200,410 Q350,350 500,340 Q650,330 800,370 Q950,410 1100,330 Q1250,250 1400,290 Q1550,330 1700,270 Q1850,210 2000,250 Q2150,290 2200,230 L2200,280 Q2150,340 2000,300 Q1850,260 1700,320 Q1550,380 1400,340 Q1250,300 1100,360 Q950,420 800,380 Q650,340 500,390 Q350,440 200,500 Q50,560 -100,620 Z;
-                  M-100,570 Q50,510 200,450 Q350,390 500,300 Q650,210 800,270 Q950,330 1100,250 Q1250,170 1400,230 Q1550,290 1700,210 Q1850,130 2000,190 Q2150,250 2200,170 L2200,220 Q2150,300 2000,240 Q1850,180 1700,260 Q1550,340 1400,280 Q1250,220 1100,300 Q950,380 800,320 Q650,260 500,330 Q350,400 200,460 Q50,520 -100,580 Z;
-                  M-100,550 Q50,490 200,430 Q350,370 500,320 Q650,270 800,310 Q950,350 1100,290 Q1250,230 1400,270 Q1550,310 1700,250 Q1850,190 2000,230 Q2150,270 2200,210 L2200,260 Q2150,320 2000,280 Q1850,240 1700,300 Q1550,360 1400,320 Q1250,280 1100,340 Q950,400 800,360 Q650,320 500,370 Q350,420 200,480 Q50,540 -100,600 Z"
-                calcMode="spline"
-                keySplines="0.25 0.1 0.25 1; 0.25 0.1 0.25 1; 0.25 0.1 0.25 1"
-              />
-            </path>
+              ref={pathRef}
+              fill="url(#ribbonGradient)"
+            />
             
-            {/* Top highlight strip */}
+            {/* Top highlight strip for 3D effect */}
             <path
-              d="M-100,550 
-                 Q50,490 200,430
-                 Q350,370 500,320
-                 Q650,270 800,310
-                 Q950,350 1100,290
-                 Q1250,230 1400,270
-                 Q1550,310 1700,250
-                 Q1850,190 2000,230
-                 Q2150,270 2200,210
-                 L2200,235
-                 Q2150,295 2000,255
-                 Q1850,215 1700,275
-                 Q1550,335 1400,295
-                 Q1250,255 1100,315
-                 Q950,375 800,335
-                 Q650,295 500,345
-                 Q350,395 200,455
-                 Q50,515 -100,575
-                 Z"
-              fill="url(#ribbonHighlight)"
-            >
-              <animate
-                attributeName="d"
-                dur="4s"
-                repeatCount="indefinite"
-                values="
-                  M-100,550 Q50,490 200,430 Q350,370 500,320 Q650,270 800,310 Q950,350 1100,290 Q1250,230 1400,270 Q1550,310 1700,250 Q1850,190 2000,230 Q2150,270 2200,210 L2200,235 Q2150,295 2000,255 Q1850,215 1700,275 Q1550,335 1400,295 Q1250,255 1100,315 Q950,375 800,335 Q650,295 500,345 Q350,395 200,455 Q50,515 -100,575 Z;
-                  M-100,530 Q50,470 200,410 Q350,350 500,340 Q650,330 800,370 Q950,410 1100,330 Q1250,250 1400,290 Q1550,330 1700,270 Q1850,210 2000,250 Q2150,290 2200,230 L2200,255 Q2150,315 2000,275 Q1850,235 1700,295 Q1550,355 1400,315 Q1250,275 1100,335 Q950,395 800,355 Q650,315 500,365 Q350,415 200,475 Q50,535 -100,595 Z;
-                  M-100,570 Q50,510 200,450 Q350,390 500,300 Q650,210 800,270 Q950,330 1100,250 Q1250,170 1400,230 Q1550,290 1700,210 Q1850,130 2000,190 Q2150,250 2200,170 L2200,195 Q2150,275 2000,215 Q1850,155 1700,235 Q1550,315 1400,255 Q1250,195 1100,275 Q950,355 800,295 Q650,235 500,305 Q350,375 200,435 Q50,495 -100,555 Z;
-                  M-100,550 Q50,490 200,430 Q350,370 500,320 Q650,270 800,310 Q950,350 1100,290 Q1250,230 1400,270 Q1550,310 1700,250 Q1850,190 2000,230 Q2150,270 2200,210 L2200,235 Q2150,295 2000,255 Q1850,215 1700,275 Q1550,335 1400,295 Q1250,255 1100,315 Q950,375 800,335 Q650,295 500,345 Q350,395 200,455 Q50,515 -100,575 Z"
-                calcMode="spline"
-                keySplines="0.25 0.1 0.25 1; 0.25 0.1 0.25 1; 0.25 0.1 0.25 1"
-              />
-            </path>
+              ref={highlightPathRef}
+              fill="url(#ribbonHighlightGradient)"
+            />
           </g>
         </svg>
       </div>
