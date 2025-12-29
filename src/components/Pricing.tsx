@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Check, Star, Phone, Users, Headphones, Shield } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Pricing = () => {
+  const navigate = useNavigate();
   const plans = [
     {
       name: "Trial",
@@ -146,6 +148,11 @@ const Pricing = () => {
                   variant={plan.buttonVariant} 
                   className="w-full mb-6" 
                   size="lg"
+                  onClick={() => {
+                    if (plan.buttonText === "Start Free Trial") {
+                      navigate("/console");
+                    }
+                  }}
                 >
                   {plan.buttonText}
                 </Button>

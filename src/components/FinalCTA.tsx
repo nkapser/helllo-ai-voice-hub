@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Clock, CreditCard } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const FinalCTA = () => {
+  const navigate = useNavigate();
   const benefits = [
     {
       icon: CheckCircle,
@@ -49,6 +51,7 @@ const FinalCTA = () => {
               variant="secondary" 
               size="lg" 
               className="group text-lg px-8 py-4 h-auto"
+              onClick={() => navigate("/console")}
             >
               Start Free Trial Now
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -58,6 +61,12 @@ const FinalCTA = () => {
               variant="outline" 
               size="lg" 
               className="group text-lg px-8 py-4 h-auto border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
             >
               Schedule Demo
             </Button>

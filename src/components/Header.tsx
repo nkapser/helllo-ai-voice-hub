@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import {
   NavigationMenu,
@@ -20,6 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, loading } = useAuth();
 
@@ -315,7 +317,12 @@ const Header = () => {
             >
               {loading ? "Loading..." : user ? "Console" : "Sign In"}
             </Button>
-            <Button variant="hero" size="sm" aria-label="Start your free trial">
+            <Button 
+              variant="hero" 
+              size="sm" 
+              aria-label="Start your free trial"
+              onClick={() => navigate("/console")}
+            >
               Start Free Trial
             </Button>
           </div>
@@ -430,7 +437,12 @@ const Header = () => {
                 >
                   {loading ? "Loading..." : user ? "Console" : "Sign In"}
                 </Button>
-                <Button variant="hero" size="sm" aria-label="Start your free trial">
+                <Button 
+                  variant="hero" 
+                  size="sm" 
+                  aria-label="Start your free trial"
+                  onClick={() => navigate("/console")}
+                >
                   Start Free Trial
                 </Button>
               </div>

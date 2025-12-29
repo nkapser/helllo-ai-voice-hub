@@ -12,8 +12,10 @@ import {
   Users,
   Phone
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Features = () => {
+  const navigate = useNavigate();
   const features = [
     {
       icon: Clock,
@@ -126,11 +128,27 @@ const Features = () => {
             reduce costs, and scale their operations effortlessly.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg" className="group" aria-label="Start your free trial now">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="group" 
+              aria-label="Start your free trial now"
+              onClick={() => navigate("/console")}
+            >
               Start Free Trial
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
             </Button>
-            <Button variant="outline" size="lg" aria-label="Schedule a demo call">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              aria-label="Schedule a demo call"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
               <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
               Schedule Demo
             </Button>
