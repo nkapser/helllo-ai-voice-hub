@@ -26,10 +26,45 @@ const Hero = () => {
   const animationRef = useRef<number>(0);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
 
-  // Build smooth quadratic bezier path
-  const buildPath = useCallback((yOffset: number = 0, thickness: number = 50): string => {
+  // Build smooth quadratic bezier path with dynamic thickness
+  const buildPath = useCallback((yOffset: number = 0, baseThickness: number = 35, thicknessVariation?: number[]): string => {
     const pts = pointsRef.current;
     if (pts.length === 0) return "";
+    
+    // Calculate dynamic thickness for each point based on wave curvature
+    const thicknesses: number[] = [];
+    if (thicknessVariation && thicknessVariation.length === pts.length) {
+      // Use provided thickness variation (for perspective effect)
+      for (let i = 0; i < pts.length; i++) {
+        thicknesses.push(baseThickness * (1 + thicknessVariation[i]));
+      }
+    } else {
+      // Calculate thickness based on local wave amplitude (crests appear thinner, troughs thicker in side view)
+      for (let i = 0; i < pts.length; i++) {
+        let thicknessMultiplier = 1;
+        if (i > 0 && i < pts.length - 1) {
+          // Calculate local wave position relative to neighbors
+          const prev = pts[i - 1];
+          const curr = pts[i];
+          const next = pts[i + 1];
+          const avgY = (prev.y + next.y) / 2;
+          const deviation = curr.y - avgY; // How much this point deviates from average
+          
+          // At crests (high points), ribbon appears thicker from side view (more profile visible)
+          // At troughs (low points), ribbon appears thinner from side view (less profile visible)
+          // Normalize deviation (typically -60 to +60)
+          const normalizedDev = deviation / 60;
+          // Direct relationship: higher Y = thicker, lower Y = thinner
+          thicknessMultiplier = 1 + normalizedDev * 0.12; // 12% variation
+        }
+        thicknesses.push(baseThickness * Math.max(0.75, Math.min(1.25, thicknessMultiplier)));
+      }
+      // Ensure first and last points have same thickness as neighbors
+      if (pts.length > 1) {
+        thicknesses[0] = thicknesses[1];
+        thicknesses[thicknesses.length - 1] = thicknesses[thicknesses.length - 2];
+      }
+    }
     
     // Top edge of ribbon
     let d = `M ${pts[0].x},${pts[0].y + yOffset}`;
@@ -41,42 +76,55 @@ const Hero = () => {
       d += ` Q ${prev.x},${prev.y + yOffset} ${cx},${cy}`;
     }
     
-    // Close at the last point with thickness
+    // Close at the last point with dynamic thickness
     const last = pts[pts.length - 1];
-    d += ` L ${last.x},${last.y + yOffset + thickness}`;
+    const lastThickness = thicknesses[thicknesses.length - 1];
+    d += ` L ${last.x},${last.y + yOffset + lastThickness}`;
     
-    // Bottom edge of ribbon (reverse)
+    // Bottom edge of ribbon (reverse) with matching thickness
     for (let i = pts.length - 2; i >= 0; i--) {
       const next = pts[i + 1];
       const curr = pts[i];
+      const currThickness = thicknesses[i];
+      const nextThickness = thicknesses[i + 1];
       const cx = (next.x + curr.x) / 2;
-      const cy = (next.y + curr.y) / 2 + yOffset + thickness;
-      d += ` Q ${next.x},${next.y + yOffset + thickness} ${cx},${cy}`;
+      // Use average thickness for control point, but actual thickness at each point
+      const avgThickness = (currThickness + nextThickness) / 2;
+      const cy = (next.y + curr.y) / 2 + yOffset + avgThickness;
+      d += ` Q ${next.x},${next.y + yOffset + nextThickness} ${cx},${cy}`;
     }
     
-    d += ` L ${pts[0].x},${pts[0].y + yOffset} Z`;
+    // Close the path
+    const firstThickness = thicknesses[0];
+    d += ` L ${pts[0].x},${pts[0].y + yOffset + firstThickness} L ${pts[0].x},${pts[0].y + yOffset} Z`;
     return d;
   }, []);
 
   useEffect(() => {
-    const width = 1800;
+    const width = 2000;
     const height = 400;
-    const pointCount = 14; // More points for more waves
+    const pointCount = 4; // More points for more waves
     
     // Initialize control points with unique characteristics
     // Position ribbon higher (baseY around 140-180 instead of 260) so 10-15% is above center
     const points: WavePoint[] = [];
     for (let i = 0; i <= pointCount; i++) {
-      // Varying baseY creates a natural undulation in resting position
-      const baseVariation = Math.sin((i / pointCount) * Math.PI * 2) * 30;
-      const baseY = height / 2 - 40 + baseVariation; // Higher position (around 160)
+      // Create natural initial wave pattern for side-view ribbon
+      const xPos = (width / pointCount) * i - 100;
+      const normalizedX = (xPos + 100) / (width + 200);
+      
+      // Initial wave pattern - creates visible crests and troughs
+      const initialWave = Math.sin(normalizedX * Math.PI * 4) * 40; // 2-3 waves across
+      const baseVariation = Math.sin(normalizedX * Math.PI * 6) * 15; // Finer detail
+      const baseY = height / 2 - 30 + initialWave + baseVariation; // Higher position with waves
+      
       points.push({
-        x: (width / pointCount) * i - 100,
+        x: xPos,
         baseY: baseY,
         y: baseY,
-        amp: 55 + Math.random() * 65, // Amplitude 55-120
-        speed: 0.0012 + Math.random() * 0.0018, // Wave speed
-        phase: Math.random() * Math.PI * 2,
+        amp: 45 + Math.random() * 50, // Amplitude 45-95 for visible but smooth waves
+        speed: 0.0025 + Math.random() * 0.0038, // Slightly faster, more consistent
+        phase: normalizedX * Math.PI * 3 + (Math.random() - 0.5) * 0.3, // Aligned phases for continuity
         targetY: baseY,
         velocityY: 0
       });
@@ -85,33 +133,41 @@ const Hero = () => {
 
     // Animate ribbon with requestAnimationFrame
     const animateRibbon = () => {
-      timeRef.current += 1;
+      timeRef.current += 0.5; // Slower time increment for smoother motion
       const mouse = mouseRef.current;
       
-      // Global floating motion - makes the whole ribbon feel alive and buoyant
-      const globalFloat = Math.sin(timeRef.current * 0.0008) * 25; // Slow gentle float
-      const breathe = Math.sin(timeRef.current * 0.0015) * 15; // Subtle breathing
+      // Global floating motion - makes the whole ribbon feel alive and buoyant (more prominent)
+      const globalFloat = Math.sin(timeRef.current * 0.0006) * 22; // More prominent float
+      const breathe = Math.sin(timeRef.current * 0.0009) * 12; // Breathing motion
+      
+      // Wave propagation speed - creates smooth left-to-right traveling wave (continuous flow)
+      const waveSpeed = 0.006; // Increased for faster continuous flow without bounce-back
 
-      // Update each point's Y position
+      // Update each point's Y position with traveling wave
       pointsRef.current.forEach((p, index) => {
-        // Base wave motion (sine wave) with upward bias for floating feel
-        const waveY = p.baseY + Math.sin(timeRef.current * p.speed + p.phase) * p.amp;
+        // Create a traveling wave by offsetting phase based on X position
+        const normalizedX = (p.x + 100) / (width + 200); // Normalize X position (0 to 1)
+        const xPhase = normalizedX * Math.PI * 4; // Phase offset for 2-3 visible waves
+        const timePhase = timeRef.current * waveSpeed; // Time-based phase shift
         
-        // Add secondary wave for more complexity
-        const secondaryWave = Math.sin(timeRef.current * p.speed * 1.5 + p.phase * 0.7) * (p.amp * 0.3);
+        // Primary traveling wave - smooth flow from left to right
+        const travelingWave = Math.sin(timePhase - xPhase + p.phase) * p.amp;
         
-        // Third wave for even more organic feel
-        const tertiaryWave = Math.sin(timeRef.current * p.speed * 0.5 + index * 0.4) * (p.amp * 0.15);
+        // Secondary wave for subtle depth and organic feel
+        const secondaryWave = Math.sin(timePhase * 0.7 - xPhase * 0.8 + p.phase * 1.1) * (p.amp * 0.3);
         
-        // Target Y from wave motion + global float (negative = upward)
-        p.targetY = waveY + secondaryWave + tertiaryWave + globalFloat + breathe;
+        // Combine waves - simpler, more natural
+        const waveY = p.baseY + travelingWave + secondaryWave;
         
-        // Mouse interaction - push ribbon when cursor is near
+        // Target Y from wave motion + prominent global float
+        p.targetY = waveY + globalFloat + breathe;
+        
+        // Mouse interaction - push ribbon when cursor is near (smoother, gentler)
         if (mouse.active) {
           const svgRect = svgRef.current?.getBoundingClientRect();
           if (svgRect) {
             // Convert mouse position to SVG coordinates
-            const svgMouseX = ((mouse.x - svgRect.left) / svgRect.width) * 1800;
+            const svgMouseX = ((mouse.x - svgRect.left) / svgRect.width) * width;
             const svgMouseY = ((mouse.y - svgRect.top) / svgRect.height) * 400;
             
             // Calculate distance from mouse to this point
@@ -120,46 +176,51 @@ const Hero = () => {
             const distance = Math.sqrt(dx * dx + dy * dy);
             
             // Influence radius
-            const radius = 300;
+            const radius = 350;
             
             if (distance < radius) {
-              // Push strength based on distance (closer = stronger)
-              const strength = (1 - distance / radius) * 80;
+              // Smooth falloff using ease-out curve (more gradual, less jerky)
+              const normalizedDist = distance / radius;
+              const easeOut = 1 - Math.pow(1 - normalizedDist, 3); // Cubic ease-out
+              const strength = (1 - easeOut) * 35; // Reduced max strength from 80 to 35
               
               // Push away from cursor
               const angle = Math.atan2(dy, dx);
               p.targetY += Math.sin(angle) * strength;
               
-              // Add some horizontal influence to nearby points
-              const neighborInfluence = strength * 0.3;
+              // Gentler horizontal influence to nearby points (reduced)
+              const neighborInfluence = strength * 0.15; // Reduced from 0.3
               if (index > 0) {
-                pointsRef.current[index - 1].targetY += neighborInfluence * 0.5;
+                pointsRef.current[index - 1].targetY += neighborInfluence * 0.3; // Reduced from 0.5
               }
               if (index < pointsRef.current.length - 1) {
-                pointsRef.current[index + 1].targetY += neighborInfluence * 0.5;
+                pointsRef.current[index + 1].targetY += neighborInfluence * 0.3; // Reduced from 0.5
               }
             }
           }
         }
         
-        // Smooth interpolation with spring physics
-        const springStrength = 0.08;
-        const damping = 0.85;
+        // Smooth interpolation with direct physics for continuous wave flow
+        const springStrength = 0.12; // Increased for more direct response, less interference
+        const damping = 0.92; // Reduced slightly to allow smoother wave propagation
         
         p.velocityY += (p.targetY - p.y) * springStrength;
         p.velocityY *= damping;
         p.y += p.velocityY;
       });
 
-      // Update all three paths
+      // Update all three paths with thinner, more natural ribbon appearance
+      // Main ribbon - thinner base (35px instead of 55px) with dynamic thickness variation
       if (pathRef.current) {
-        pathRef.current.setAttribute("d", buildPath(0, 55));
+        pathRef.current.setAttribute("d", buildPath(0, 35));
       }
+      // Back shadow layer - minimal offset (4px) to create subtle depth, not separate layer
       if (backPathRef.current) {
-        backPathRef.current.setAttribute("d", buildPath(28, 60));
+        backPathRef.current.setAttribute("d", buildPath(4, 36)); // Very close to main, just for depth
       }
+      // Highlight layer - thin top strip for 3D shine effect
       if (highlightPathRef.current) {
-        highlightPathRef.current.setAttribute("d", buildPath(0, 24));
+        highlightPathRef.current.setAttribute("d", buildPath(0, 16)); // Thin highlight strip
       }
 
       animationRef.current = requestAnimationFrame(animateRibbon);
@@ -168,45 +229,36 @@ const Hero = () => {
     // Start animation
     animateRibbon();
 
-    // GSAP animations for drift, floating, and breathing
+    // GSAP animations for natural floating - prominent side-view ribbon motion
     const svg = svgRef.current;
     if (svg) {
-      // Horizontal air flow drift
+      // Continuous horizontal drift - waves flow naturally left to right without bounce-back
       gsap.to(svg, {
-        x: -50,
-        duration: 12,
-        ease: "sine.inOut",
-        yoyo: true,
+        x: -200,
+        duration: 30,
+        ease: "none", // Linear motion for continuous flow
         repeat: -1
+        // No yoyo - waves flow continuously forward
       });
 
-      // Subtle breathing/scale effect - expands upward
+      // Subtle breathing/scale effect - very gentle for natural feel
       gsap.to(svg, {
-        scaleY: 1.05,
-        scaleX: 1.02,
-        transformOrigin: "center bottom", // Expand upward
-        duration: 7,
+        scaleY: 1.02,
+        scaleX: 1.01,
+        transformOrigin: "center center",
+        duration: 9,
         yoyo: true,
         repeat: -1,
         ease: "sine.inOut"
       });
 
-      // Primary floating motion - moves UP and down naturally
+      // Prominent floating motion - smooth up and down like a floating ribbon
       gsap.to(svg, {
-        y: -30, // Float upward primarily
-        duration: 4,
+        y: -30,
+        duration: 4.5,
         yoyo: true,
         repeat: -1,
         ease: "sine.inOut"
-      });
-
-      // Secondary slower float for organic layered motion
-      gsap.to(svg, {
-        y: "+=15",
-        duration: 8,
-        yoyo: true,
-        repeat: -1,
-        ease: "power1.inOut"
       });
     }
 
@@ -295,7 +347,7 @@ const Hero = () => {
         <svg 
           ref={svgRef}
           className="absolute left-[-10%] top-[8%] w-[120%] h-[500px] opacity-95 pointer-events-auto"
-          viewBox="0 0 1800 400"
+          viewBox="0 0 2000 400"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
           style={{ filter: "blur(0.2px)" }}
@@ -341,11 +393,11 @@ const Hero = () => {
           </defs>
           
           <g filter="url(#ribbonGlow)">
-            {/* Back shadow layer */}
+            {/* Back shadow layer - very subtle depth shading, not separate layer */}
             <path
               ref={backPathRef}
               fill="url(#ribbonBackGradient)"
-              opacity="0.65"
+              opacity="0.3"
             />
             
             {/* Main ribbon surface */}
@@ -354,7 +406,7 @@ const Hero = () => {
               fill="url(#ribbonGradient)"
             />
             
-            {/* Top highlight strip for 3D effect */}
+            {/* Top highlight strip for 3D shine effect */}
             <path
               ref={highlightPathRef}
               fill="url(#ribbonHighlightGradient)"
@@ -378,7 +430,7 @@ const Hero = () => {
               Call Operations
             </span>
             <span className="text-foreground"> with</span> <br />
-            <span className="text-foreground">AI Voice Agents</span>
+            <span className="text-foreground"><i>AI Voice Agents</i></span>
           </h1>
 
           {/* Sub-headline */}
