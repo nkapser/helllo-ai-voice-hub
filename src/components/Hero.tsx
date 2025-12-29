@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
 // Point interface for wave animation
@@ -16,6 +17,8 @@ interface WavePoint {
 }
 
 const Hero = () => {
+  const navigate = useNavigate();
+  
   // Ribbon viewport dimensions
   const width = 2000; // Optimal viewport width
   const extension = 500; // Extension beyond viewport for smooth wave movement
@@ -337,7 +340,9 @@ const Hero = () => {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto text-center">
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.1] tracking-tight">
+          <h1 
+            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.1] tracking-tight"
+          >
             <span className="text-foreground">Supercharge your</span>
             <br />
             <span 
@@ -364,7 +369,12 @@ const Hero = () => {
           </h1>
 
           {/* Sub-headline */}
-          <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto">
+          <p 
+            className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto"
+            style={{
+              textShadow: 'rgba(255, 255, 255, 0.7) 0px 0px 15px',
+            }}
+          >
             Discover the new way to build, test, deploy, and monitor
             <br className="hidden md:block" />
             production-ready AI voice agents at scale.
@@ -376,6 +386,7 @@ const Hero = () => {
               size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-8 py-6 text-base font-semibold uppercase tracking-wider shadow-lg"
               aria-label="Try for free"
+              onClick={() => navigate("/console")}
             >
               Try for Free
             </Button>
