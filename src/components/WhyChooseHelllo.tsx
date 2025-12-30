@@ -56,7 +56,7 @@ const WhyChooseHelllo = () => {
   ];
 
   return (
-    <section id="features" className="pt-20 pb-12 bg-muted/20" role="main">
+    <section id="why-choose-helllo" className="pt-20 pb-12 bg-muted/20" role="main">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <header className="text-center mb-16">

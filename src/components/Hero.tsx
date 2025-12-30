@@ -326,7 +326,7 @@ const Hero = () => {
       `}</style>
       <section 
         id="home" 
-        className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 bg-background overflow-hidden min-h-[90vh] flex flex-col" 
+        className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 bg-background overflow-hidden min-h-[90vh] flex flex-col" 
         role="banner"
       >
       {/* GSAP Animated Wave Ribbon - Interactive & Floating */}
@@ -446,7 +446,7 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16" role="group" aria-label="Call to action buttons">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8" role="group" aria-label="Call to action buttons">
             <Button
               size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-8 py-6 text-base font-semibold uppercase tracking-wider shadow-lg"
@@ -473,8 +473,8 @@ const Hero = () => {
           </div>
 
           {/* Trusted Partners */}
-          <div className="mt-16 pt-8 border-t border-border/30">
-            <p className="text-sm text-muted-foreground mb-6 text-center font-medium uppercase tracking-wider">
+          <div className="mt-8 pt-6 pb-6 border-t border-border/30 bg-muted/30 rounded-2xl backdrop-blur-sm">
+            <p className="text-sm text-muted-foreground mb-5 text-center font-medium uppercase tracking-wider">
               Trusted by Industry Leaders
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
