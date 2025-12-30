@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const Features = () => {
+const WhyChooseHelllo = () => {
   const navigate = useNavigate();
   const features = [
     {
@@ -159,4 +159,5 @@ const Features = () => {
   );
 };
 
-export default Features;
+export default WhyChooseHelllo;
+
