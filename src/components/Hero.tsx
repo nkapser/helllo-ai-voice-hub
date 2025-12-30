@@ -32,6 +32,7 @@ const Hero = () => {
   const pointsRef = useRef<WavePoint[]>([]);
   const timeRef = useRef(0);
   const animationRef = useRef<number>(0);
+  const isFirstFrameRef = useRef(true);
 
   // Build smooth quadratic bezier path with dynamic thickness
   const buildPath = useCallback((yOffset: number = 0, baseThickness: number = 35, thicknessVariation?: number[]): string => {
@@ -108,6 +109,10 @@ const Hero = () => {
   }, []);
 
   useEffect(() => {
+    // Reset first frame flag
+    isFirstFrameRef.current = true;
+    timeRef.current = 0;
+    
     const pointCount = 3; // More points for more waves
     
     // Initialize control points with unique characteristics
@@ -139,6 +144,17 @@ const Hero = () => {
     }
     pointsRef.current = points;
 
+    // Initialize paths immediately with initial positions to prevent bounce
+    if (pathRef.current) {
+      pathRef.current.setAttribute("d", buildPath(0, 35));
+    }
+    if (backPathRef.current) {
+      backPathRef.current.setAttribute("d", buildPath(4, 36));
+    }
+    if (highlightPathRef.current) {
+      highlightPathRef.current.setAttribute("d", buildPath(0, 16));
+    }
+
     // Animate ribbon with requestAnimationFrame
     const animateRibbon = () => {
       timeRef.current += 0.5; // Slower time increment for smoother motion
@@ -169,13 +185,19 @@ const Hero = () => {
         // Target Y from wave motion + prominent global float
         p.targetY = waveY + globalFloat + breathe;
         
-        // Smooth interpolation with direct physics for continuous wave flow
-        const springStrength = 0.12; // Increased for more direct response, less interference
-        const damping = 0.92; // Reduced slightly to allow smoother wave propagation
-        
+      // Smooth interpolation with direct physics for continuous wave flow
+      const springStrength = 0.12; // Increased for more direct response, less interference
+      const damping = 0.92; // Reduced slightly to allow smoother wave propagation
+      
+      // On first frame, set position directly to target to avoid initial bounce
+      if (isFirstFrameRef.current) {
+        p.y = p.targetY;
+        p.velocityY = 0;
+      } else {
         p.velocityY += (p.targetY - p.y) * springStrength;
         p.velocityY *= damping;
         p.y += p.velocityY;
+      }
       });
 
       // Update all three paths with thinner, more natural ribbon appearance
@@ -192,6 +214,11 @@ const Hero = () => {
         highlightPathRef.current.setAttribute("d", buildPath(0, 16)); // Thin highlight strip
       }
 
+      // Mark first frame as complete
+      if (isFirstFrameRef.current) {
+        isFirstFrameRef.current = false;
+      }
+
       animationRef.current = requestAnimationFrame(animateRibbon);
     };
 
@@ -201,33 +228,45 @@ const Hero = () => {
     // GSAP animations for natural floating - prominent side-view ribbon motion
     const svg = svgRef.current;
     if (svg) {
-      // Continuous horizontal drift - waves flow naturally left to right without bounce-back
-      gsap.to(svg, {
-        x: -200,
-        duration: 30,
-        ease: "none", // Linear motion for continuous flow
-        repeat: -1
-        // No yoyo - waves flow continuously forward
+      // Set initial transform values to prevent bounce on load
+      gsap.set(svg, {
+        x: 0,
+        y: 0,
+        scaleX: 1,
+        scaleY: 1,
+        transformOrigin: "center center"
       });
 
-      // Subtle breathing/scale effect - very gentle for natural feel
-      gsap.to(svg, {
-        scaleY: 1.02,
-        scaleX: 1.01,
-        transformOrigin: "center center",
-        duration: 9,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut"
-      });
+      // Wait a frame to ensure initial render is complete before starting animations
+      requestAnimationFrame(() => {
+        // Continuous horizontal drift - waves flow naturally left to right without bounce-back
+        gsap.to(svg, {
+          x: -200,
+          duration: 30,
+          ease: "none", // Linear motion for continuous flow
+          repeat: -1
+          // No yoyo - waves flow continuously forward
+        });
 
-      // Prominent floating motion - smooth up and down like a floating ribbon
-      gsap.to(svg, {
-        y: -30,
-        duration: 4.5,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut"
+        // Subtle breathing/scale effect - very gentle for natural feel
+        gsap.to(svg, {
+          scaleY: 1.02,
+          scaleX: 1.01,
+          transformOrigin: "center center",
+          duration: 9,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut"
+        });
+
+        // Prominent floating motion - smooth up and down like a floating ribbon
+        gsap.to(svg, {
+          y: -30,
+          duration: 4.5,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut"
+        });
       });
     }
 
@@ -259,11 +298,37 @@ const Hero = () => {
   }, []);
 
   return (
-    <section 
-      id="home" 
-      className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 bg-white overflow-hidden min-h-[90vh] flex items-center" 
-      role="banner"
-    >
+    <>
+      <style>{`
+        .partner-logo-container {
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0.6;
+          transition: opacity 0.3s ease;
+        }
+        .partner-logo-container:hover {
+          opacity: 1;
+        }
+        .partner-logo {
+          max-height: 60px;
+          max-width: 150px;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+          filter: grayscale(100%) brightness(0.8);
+          transition: filter 0.3s ease;
+        }
+        .partner-logo-container:hover .partner-logo {
+          filter: grayscale(0%) brightness(1);
+        }
+      `}</style>
+      <section 
+        id="home" 
+        className="relative pt-24 pb-20 lg:pt-32 lg:pb-32 bg-background overflow-hidden min-h-[90vh] flex flex-col" 
+        role="banner"
+      >
       {/* GSAP Animated Wave Ribbon - Interactive & Floating */}
       <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden" aria-hidden="true">
         <svg 
@@ -337,8 +402,8 @@ const Hero = () => {
         </svg>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-5xl mx-auto text-center">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 flex-1 flex flex-col justify-center">
+        <div className="max-w-5xl mx-auto text-center flex-1 flex flex-col justify-center">
           {/* Main Headline */}
           <h1 
             className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-[1.1] tracking-tight"
@@ -381,7 +446,7 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center" role="group" aria-label="Call to action buttons">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16" role="group" aria-label="Call to action buttons">
             <Button
               size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-8 py-6 text-base font-semibold uppercase tracking-wider shadow-lg"
@@ -406,9 +471,54 @@ const Hero = () => {
               Contact Sales
             </Button>
           </div>
+
+          {/* Trusted Partners */}
+          <div className="mt-16 pt-8 border-t border-border/30">
+            <p className="text-sm text-muted-foreground mb-6 text-center font-medium uppercase tracking-wider">
+              Trusted by Industry Leaders
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
+              <div className="partner-logo-container">
+                <img 
+                  src="/partner-logos/cropped-logo-2.webp" 
+                  alt="Partner logo" 
+                  className="partner-logo"
+                />
+              </div>
+              <div className="partner-logo-container">
+                <img 
+                  src="/partner-logos/essem18-logo.png" 
+                  alt="Essem18 logo" 
+                  className="partner-logo"
+                />
+              </div>
+              <div className="partner-logo-container">
+                <img 
+                  src="/partner-logos/images.jpeg" 
+                  alt="Partner logo" 
+                  className="partner-logo"
+                />
+              </div>
+              <div className="partner-logo-container">
+                <img 
+                  src="/partner-logos/Screenshot 2025-12-30 at 10.23.42.png" 
+                  alt="Partner logo" 
+                  className="partner-logo"
+                />
+              </div>
+              <div className="partner-logo-container">
+                <img 
+                  src="/partner-logos/TheCascadesLogo.png" 
+                  alt="The Cascades logo" 
+                  className="partner-logo"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+    </>
   );
 };
 

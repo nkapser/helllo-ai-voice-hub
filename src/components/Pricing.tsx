@@ -88,7 +88,7 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="pt-12 pb-20 bg-gradient-to-b from-background to-muted/20">
+    <section id="pricing" className="pt-12 pb-20 bg-muted/20">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
