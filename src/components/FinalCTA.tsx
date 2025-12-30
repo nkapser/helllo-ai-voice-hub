@@ -60,7 +60,7 @@ const FinalCTA = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="group text-lg px-8 py-4 h-auto border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              className="group text-lg px-8 py-4 h-auto border-primary-foreground/20 bg-background !text-primary hover:bg-primary-foreground hover:!text-primary"
               onClick={() => {
                 const contactSection = document.getElementById('contact');
                 if (contactSection) {
