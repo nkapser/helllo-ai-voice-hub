@@ -1,7 +1,19 @@
 # Robots.txt for Helllo.ai
-# Following Google SEO best practices
+# Following Google and Bing SEO best practices (2025)
+# Updated: 2025-01-15
+#
+# IMPORTANT: For staging domains (staging.helllo.ai, dash-staging.helllo.ai),
+# ensure they serve a robots.txt with: User-agent: * Disallow: /
+# This prevents staging environments from being indexed by search engines.
 
-# Allow all crawlers access to the site
+# Block staging domains from being crawled
+# If this robots.txt is served from staging.helllo.ai or dash-staging.helllo.ai,
+# the following rules will prevent all crawling
+# NOTE: Each domain serves its own robots.txt, so staging domains should have:
+# User-agent: *
+# Disallow: /
+
+# Default rules for all crawlers (PRODUCTION ONLY)
 User-agent: *
 Allow: /
 Crawl-delay: 1
@@ -12,33 +24,93 @@ Disallow: /private/
 Disallow: /tmp/
 Disallow: /.env
 Disallow: /api/
+Disallow: /console/
+Disallow: /_next/
+Disallow: /node_modules/
 
-# Block access to unnecessary files
+# Block access to unnecessary files (but allow important SEO files)
 Disallow: /*.json$
-Disallow: /*.xml$
-Disallow: /package*.json
+Allow: /manifest.json
+Allow: /package*.json
 Disallow: /tsconfig*.json
 
-# Allow important files for SEO
+# Block XML files except sitemap
+Disallow: /*.xml$
 Allow: /sitemap.xml
-Allow: /favicon.ico
 Allow: /robots.txt
 
-# Specific rules for major search engines
+# Allow important files for SEO
+Allow: /favicon.ico
+Allow: /robots.txt
+Allow: /sitemap.xml
+Allow: /*.css$
+Allow: /*.js$
+
+# Specific rules for Google
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 0
+# Allow Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+# Allow Google Mobile Bot
+User-agent: Googlebot-Mobile
+Allow: /
 
+# Specific rules for Bing
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 0
+# Allow Bing Image Bot
+User-agent: msnbot-media
+Allow: /
 
+# Social media crawlers
 User-agent: Twitterbot
 Allow: /
+Crawl-delay: 0
 
 User-agent: facebookexternalhit
 Allow: /
+Crawl-delay: 0
 
 User-agent: LinkedInBot
 Allow: /
+Crawl-delay: 0
 
-# Sitemap location
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Applebot
+Allow: /
+Crawl-delay: 0
+
+# Other important crawlers
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots (common spam bots)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: DotBot
+Crawl-delay: 10
+
+# Sitemap locations
 Sitemap: https://helllo.ai/sitemap.xml

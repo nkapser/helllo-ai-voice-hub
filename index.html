@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Search Engine Verification -->
     <meta name="google-site-verification" content="fZbffrjNSMyE-aAHgJmmxQpt6zPQppbgjfCeQ4omSzY" />
+    <!-- Bing Webmaster Tools verification - Add your verification code here -->
+    <!-- <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> -->
     
     <!-- Primary Meta Tags -->
     <title>AI Voice Agents for Small Business | Helllo.ai - Automate Customer Calls</title>
@@ -12,9 +15,22 @@
     <meta name="keywords" content="AI voice agents, small business automation, customer service AI, voice bots, business phone automation, CRM integration, multi-language support, SMB AI solutions" />
     <meta name="author" content="Helllo.ai" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <!-- Language and Region -->
+    <meta http-equiv="content-language" content="en" />
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="IN" />
+    <meta name="geo.placename" content="Bengaluru" />
+    <meta name="geo.position" content="12.9716;77.5946" />
+    <meta name="ICBM" content="12.9716, 77.5946" />
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://helllo.ai/" />
+    <!-- Hreflang tags for international SEO - add more as needed -->
+    <link rel="alternate" hreflang="en" href="https://helllo.ai/" />
+    <link rel="alternate" hreflang="x-default" href="https://helllo.ai/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -27,6 +43,8 @@
     <meta property="og:image:alt" content="AI Voice Technology for Business" />
     <meta property="og:site_name" content="Helllo.ai" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="en_IN" />
+    <meta property="og:updated_time" content="2025-01-15T10:00:00+00:00" />
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
@@ -44,6 +62,29 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Helllo.ai" />
     
+    <!-- Additional Meta Tags for Better Crawling -->
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="rating" content="general" />
+    <meta name="distribution" content="global" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="expires" content="never" />
+    <meta name="coverage" content="worldwide" />
+    <meta name="target" content="all" />
+    <meta name="audience" content="all" />
+    
+    <!-- Business Information -->
+    <meta name="contact" content="helllo@helllo.ai" />
+    <meta name="copyright" content="HellloAI Technologies Pvt Ltd" />
+    <meta name="reply-to" content="helllo@helllo.ai" />
+    <meta name="owner" content="HellloAI Technologies Pvt Ltd" />
+    <meta name="url" content="https://helllo.ai" />
+    <meta name="identifier-URL" content="https://helllo.ai" />
+    <meta name="directory" content="submission" />
+    <meta name="category" content="Business, Technology, AI, Voice Agents" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="rating" content="General" />
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -56,10 +97,18 @@
     <!-- Preload critical resources -->
     <link rel="preload" href="https://ik.imagekit.io/ise7sbyg9/hero-ai-voice-DHFzmG8k.jpg" as="image" />
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//ik.imagekit.io" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://ik.imagekit.io" crossorigin />
     
     <!-- Critical CSS hint -->
     <meta name="color-scheme" content="light dark" />
+    
+    <!-- Security Headers (should also be set in server config) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -76,12 +125,31 @@
       "description": "AI voice agents platform for small and medium businesses",
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "US"
+        "streetAddress": "Bengaluru",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "postalCode": "560001",
+        "addressCountry": "IN"
       },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "email": "support@helllo.ai"
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "support@helllo.ai",
+          "telephone": "+91-99016-78665",
+          "availableLanguage": ["English", "Hindi"]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "sales@helllo.ai",
+          "telephone": "+91-99016-78665"
+        }
+      ],
+      "foundingDate": "2023",
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": "10-50"
       }
     }
     </script>
@@ -129,6 +197,111 @@
         "Enterprise-grade security",
         "Real-time analytics"
       ]
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://helllo.ai/"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Service Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "AI Voice Agent Platform",
+      "provider": {
+        "@type": "Organization",
+        "name": "Helllo.ai",
+        "url": "https://helllo.ai"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Worldwide"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Voice Agent Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Voice Assistant",
+              "description": "Natural conversation handling with advanced AI"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "CRM Integration",
+              "description": "Seamless integration with popular CRM systems"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Multi-language Support",
+              "description": "Support for 25+ languages"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+    
+    <!-- LocalBusiness Schema (if applicable) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://helllo.ai/#organization",
+      "name": "HellloAI Technologies Pvt Ltd",
+      "image": "https://helllo.ai/assets/logo-wide.svg",
+      "url": "https://helllo.ai",
+      "telephone": "+91-99016-78665",
+      "email": "helllo@helllo.ai",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bengaluru",
+        "addressLocality": "Bengaluru",
+        "addressRegion": "Karnataka",
+        "postalCode": "560001",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "12.9716",
+        "longitude": "77.5946"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
+      "priceRange": "$$",
+      "currenciesAccepted": "INR, USD"
     }
     </script>
   </head>

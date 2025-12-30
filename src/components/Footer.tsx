@@ -100,6 +100,8 @@ const Footer = () => {
                   src="/small-logo.png" 
                   alt="helllo.ai logo" 
                   className="w-8 h-8 rounded-lg"
+                  width="32"
+                  height="32"
                   aria-hidden="true"
                 />
               </div>

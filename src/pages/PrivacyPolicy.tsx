@@ -3,17 +3,27 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { setSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 const PrivacyPolicy = () => {
   useEffect(() => {
-    document.title = "Privacy Policy | helllo.ai";
-    
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 
-        'Privacy Policy for helllo.ai - Learn how we collect, use, and protect your personal information in compliance with GDPR and DPDP.'
-      );
-    }
+    setSEO({
+      title: "Privacy Policy | helllo.ai - GDPR & DPDP Compliant",
+      description: "Privacy Policy for helllo.ai - Learn how we collect, use, and protect your personal information in compliance with GDPR and DPDP. Your privacy is our priority.",
+      keywords: "privacy policy, GDPR compliance, DPDP, data protection, helllo.ai privacy",
+      canonical: "https://helllo.ai/privacy",
+      ogUrl: "https://helllo.ai/privacy",
+      ogTitle: "Privacy Policy | helllo.ai",
+      ogDescription: "Learn how helllo.ai protects your personal information in compliance with GDPR and DPDP regulations.",
+      twitterTitle: "Privacy Policy | helllo.ai",
+      twitterDescription: "Learn how helllo.ai protects your personal information in compliance with GDPR and DPDP regulations.",
+      structuredData: [
+        generateBreadcrumbSchema([
+          { name: "Home", url: "https://helllo.ai/" },
+          { name: "Privacy Policy", url: "https://helllo.ai/privacy" },
+        ]),
+      ],
+    });
   }, []);
 
   return (

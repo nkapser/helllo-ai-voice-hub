@@ -1,0 +1,40 @@
+# Robots.txt for Staging Environments
+# This file blocks all crawlers from indexing staging.helllo.ai and dash-staging.helllo.ai
+# Updated: 2025-01-15
+
+# Block ALL crawlers from staging domains
+User-agent: *
+Disallow: /
+
+# Explicitly block major search engines
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+# Block social media crawlers
+User-agent: Twitterbot
+Disallow: /
+
+User-agent: facebookexternalhit
+Disallow: /
+
+User-agent: LinkedInBot
+Disallow: /
+
+# No sitemap for staging
+# Sitemap: (intentionally omitted)
+

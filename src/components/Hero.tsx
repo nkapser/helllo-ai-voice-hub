@@ -481,47 +481,65 @@ const Hero = () => {
             <p className="text-sm text-muted-foreground mb-5 text-center font-medium uppercase tracking-wider">
               Trusted by Industry Leaders
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
-              <div className="partner-logo-container">
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16" role="list" aria-label="Trusted partner companies">
+              <div className="partner-logo-container" role="listitem">
                 <img 
                   src="/partner-logos/1-essem18-logo.png" 
-                  alt="ESSEM 18 logo" 
+                  alt="ESSEM 18 logo - Trusted partner of helllo.ai" 
                   className="partner-logo"
+                  loading="lazy"
+                  width="120"
+                  height="60"
                 />
               </div>
-              <div className="partner-logo-container">
+              <div className="partner-logo-container" role="listitem">
                 <img 
                   src="/partner-logos/2-cascade-neopolis.png" 
-                  alt="The Cascades Neopolis logo" 
+                  alt="The Cascades Neopolis logo - Trusted partner of helllo.ai" 
                   className="partner-logo"
+                  loading="lazy"
+                  width="120"
+                  height="60"
                 />
               </div>
-              <div className="partner-logo-container">
+              <div className="partner-logo-container" role="listitem">
                 <img 
                   src="/partner-logos/3-clean-fanatics-.webp" 
-                  alt="Clean Fanatics logo" 
+                  alt="Clean Fanatics logo - Trusted partner of helllo.ai" 
                   className="partner-logo"
+                  loading="lazy"
+                  width="120"
+                  height="60"
                 />
               </div>
-              <div className="partner-logo-container">
+              <div className="partner-logo-container" role="listitem">
                 <img 
                   src="/partner-logos/4-mednetLabs_logo.png" 
-                  alt="MedNet Labs logo" 
+                  alt="MedNet Labs logo - Trusted partner of helllo.ai" 
                   className="partner-logo"
+                  loading="lazy"
+                  width="120"
+                  height="60"
                 />
               </div>
-              <div className="partner-logo-container">
+              <div className="partner-logo-container" role="listitem">
                 <img 
                   src="/partner-logos/5-delta-images.jpeg" 
-                  alt="Delta Hospitals logo" 
+                  alt="Delta Hospitals logo - Trusted partner of helllo.ai" 
                   className="partner-logo"
+                  loading="lazy"
+                  width="120"
+                  height="60"
                 />
               </div>
-              <div className="partner-logo-container">
+              <div className="partner-logo-container" role="listitem">
                 <img 
                   src="/partner-logos/6-gsl-college.png" 
-                  alt="GSL College logo" 
+                  alt="GSL College logo - Trusted partner of helllo.ai" 
                   className="partner-logo"
+                  loading="lazy"
+                  width="120"
+                  height="60"
                 />
               </div>
             </div>
