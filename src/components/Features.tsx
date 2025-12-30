@@ -348,8 +348,6 @@ const Features = () => {
                       const globalIndex = filteredFeatures.findIndex(f => f.id === feature.id);
                       const IconComponent = feature.icon;
                       const isExpanded = expandedFeature === feature.id;
-                      // Show partial card for every 4th feature in the row
-                      const isPartial = (localIndex + 1) % 4 === 0;
 
                       return (
                         <div
@@ -357,7 +355,7 @@ const Features = () => {
                           ref={(el) => {
                             cardsRef.current[globalIndex] = el;
                           }}
-                          className={`flex-shrink-0 ${isPartial ? "w-64 opacity-60" : "w-80"}`}
+                          className="flex-shrink-0 w-80"
                         >
                           <Card
                             className={`relative h-full cursor-pointer transition-all duration-300 border border-border bg-card hover:shadow-strong ${
