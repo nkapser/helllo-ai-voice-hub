@@ -17,7 +17,9 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Workflow,
+  Settings
 } from "lucide-react";
 import gsap from "gsap";
 
@@ -100,6 +102,33 @@ const Features = () => {
       shortDescription: "Sync leads with Salesforce, HubSpot, and 50+ CRM platforms.",
       fullDescription: "Automatically capture, qualify, and sync leads to your CRM system. Works seamlessly with Salesforce, HubSpot, Pipedrive, Zoho, and 50+ other platforms. Custom field mapping, duplicate detection, and real-time sync ensure your sales team always has the latest information.",
       icon: Database,
+      category: "Integrations",
+      color: "text-secondary"
+    },
+    {
+      id: "zapier-integration",
+      title: "Zapier Integration",
+      shortDescription: "Connect with 5,000+ apps and automate workflows without coding.",
+      fullDescription: "Integrate Helllo.ai with thousands of apps through Zapier. Automate workflows between your AI voice agents and tools like Slack, Google Sheets, Airtable, Trello, and more. Create custom Zaps to trigger actions based on call outcomes, lead captures, or sentiment analysis. No coding required - set up powerful automations in minutes.",
+      icon: Zap,
+      category: "Integrations",
+      color: "text-secondary"
+    },
+    {
+      id: "hubspot-integration",
+      title: "HubSpot Integration",
+      shortDescription: "Native integration with HubSpot CRM, Marketing, and Sales Hubs.",
+      fullDescription: "Seamlessly sync all customer interactions with HubSpot. Automatically create contacts, update deal stages, log activities, and trigger marketing workflows based on call data. Two-way sync ensures your HubSpot data is always up-to-date, and your AI agents have access to complete customer history for personalized conversations.",
+      icon: Workflow,
+      category: "Integrations",
+      color: "text-secondary"
+    },
+    {
+      id: "custom-crm-integration",
+      title: "Custom CRM Integration",
+      shortDescription: "Build custom integrations with any CRM or business tool via API.",
+      fullDescription: "Connect Helllo.ai with your existing business tools through our robust REST API. Whether you use a custom CRM, proprietary systems, or niche tools, our flexible API allows you to sync data, trigger actions, and build custom workflows. Comprehensive documentation and developer support make integration straightforward.",
+      icon: Settings,
       category: "Integrations",
       color: "text-secondary"
     },
