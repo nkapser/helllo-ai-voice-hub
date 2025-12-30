@@ -1,14 +1,21 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
+  Zap, 
   Puzzle, 
   Brain, 
   Globe, 
   TrendingUp, 
   Shield,
-  Clock
+  ArrowRight,
+  Clock,
+  Users,
+  Phone
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const WhyChooseHelllo = () => {
+  const navigate = useNavigate();
   const features = [
     {
       icon: Clock,
@@ -109,6 +116,43 @@ const WhyChooseHelllo = () => {
               </Card>
             );
           })}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center bg-gradient-secondary rounded-2xl p-8 md:p-12" role="region" aria-labelledby="cta-heading">
+          <h3 id="cta-heading" className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            Ready to Transform Your Business?
+          </h3>
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Join thousands of businesses already using AI voice agents to improve customer service, 
+            reduce costs, and scale their operations effortlessly.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              variant="hero" 
+              size="lg" 
+              className="group" 
+              aria-label="Start your free trial now"
+              onClick={() => navigate("/console")}
+            >
+              Start Free Trial
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              aria-label="Schedule a demo call"
+              onClick={() => {
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
+            >
+              <Phone className="mr-2 h-5 w-5" aria-hidden="true" />
+              Schedule Demo
+            </Button>
+          </div>
         </div>
       </div>
     </section>

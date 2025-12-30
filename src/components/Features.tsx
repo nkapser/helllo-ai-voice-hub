@@ -241,6 +241,7 @@ const Features = () => {
     );
   }, [filteredFeatures]);
 
+
   // Scroll functions
   const scrollLeft = () => {
     if (containerRef.current) {
@@ -294,7 +295,7 @@ const Features = () => {
           ))}
         </div>
 
-        {/* Scroll Container with Navigation */}
+        {/* Scroll Container with Navigation - 2 rows layout */}
         <div className="relative">
           {/* Left Scroll Button */}
           <Button
@@ -318,88 +319,111 @@ const Features = () => {
             <ChevronRight className="h-5 w-5" />
           </Button>
 
-          {/* Horizontal Scroll Container */}
+          {/* Horizontal Scroll Container with 2 rows */}
           <div
             ref={containerRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide pb-6 px-12 scroll-smooth"
+            className="overflow-x-auto scrollbar-hide pb-6 px-12 scroll-smooth"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
               WebkitOverflowScrolling: "touch"
             }}
           >
-            {filteredFeatures.map((feature, index) => {
-              const IconComponent = feature.icon;
-              const isExpanded = expandedFeature === feature.id;
+            <div className="inline-flex flex-col gap-6" style={{ width: "max-content" }}>
+              {/* Split features into 2 rows: 3 full + 1 partial per row */}
+              {[0, 1].map((rowIndex) => {
+                // Row 1: features 0, 1, 2 (full) + 3 (partial)
+                // Row 2: features 4, 5, 6 (full) + 7 (partial)
+                // Then continue: Row 1: 8, 9, 10 (full) + 11 (partial), etc.
+                const rowFeatures: typeof filteredFeatures = [];
+                for (let i = rowIndex * 4; i < filteredFeatures.length; i += 8) {
+                  // Take 4 features at a time (3 full + 1 partial)
+                  for (let j = 0; j < 4 && i + j < filteredFeatures.length; j++) {
+                    rowFeatures.push(filteredFeatures[i + j]);
+                  }
+                }
+                
+                return (
+                  <div key={rowIndex} className="flex gap-6">
+                    {rowFeatures.map((feature, localIndex) => {
+                      const globalIndex = filteredFeatures.findIndex(f => f.id === feature.id);
+                      const IconComponent = feature.icon;
+                      const isExpanded = expandedFeature === feature.id;
+                      // Show partial card for every 4th feature in the row
+                      const isPartial = (localIndex + 1) % 4 === 0;
 
-              return (
-                <div
-                  key={feature.id}
-                  ref={(el) => {
-                    cardsRef.current[index] = el;
-                  }}
-                  className="flex-shrink-0 w-80"
-                >
-                  <Card
-                    className={`relative h-full cursor-pointer transition-all duration-300 border border-border bg-card hover:shadow-strong ${
-                      isExpanded ? "shadow-strong scale-105 z-20" : "hover:-translate-y-2"
-                    }`}
-                    onClick={() => handleCardClick(feature.id)}
-                  >
-                    {/* Image Placeholder */}
-                    <div className="relative h-48 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/5 overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl" />
-                          <IconComponent className={`relative h-16 w-16 ${feature.color}`} />
-                        </div>
-                      </div>
-                      {/* Placeholder Badge */}
-                      <div className="absolute bottom-2 right-2 bg-background/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-muted-foreground flex items-center gap-1">
-                        <ImageIcon className="h-3 w-3" />
-                        <span>Image Placeholder</span>
-                      </div>
-                      {/* Category Badge */}
-                      <div className="absolute top-3 left-3 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-foreground border border-border">
-                        {feature.category}
-                      </div>
-                    </div>
-
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start justify-between">
-                        <CardTitle className="text-xl font-semibold text-foreground pr-8">
-                          {feature.title}
-                        </CardTitle>
-                        {isExpanded && (
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-6 w-6 absolute top-4 right-4"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setExpandedFeature(null);
-                            }}
+                      return (
+                        <div
+                          key={feature.id}
+                          ref={(el) => {
+                            cardsRef.current[globalIndex] = el;
+                          }}
+                          className={`flex-shrink-0 ${isPartial ? "w-64 opacity-60" : "w-80"}`}
+                        >
+                          <Card
+                            className={`relative h-full cursor-pointer transition-all duration-300 border border-border bg-card hover:shadow-strong ${
+                              isExpanded ? "shadow-strong scale-105 z-20" : "hover:-translate-y-2"
+                            }`}
+                            onClick={() => handleCardClick(feature.id)}
                           >
-                            <X className="h-4 w-4" />
-                          </Button>
-                        )}
-                      </div>
-                    </CardHeader>
+                            {/* Image Placeholder */}
+                            <div className="relative h-48 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/5 overflow-hidden">
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="relative">
+                                  <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl" />
+                                  <IconComponent className={`relative h-16 w-16 ${feature.color}`} />
+                                </div>
+                              </div>
+                              {/* Placeholder Badge */}
+                              <div className="absolute bottom-2 right-2 bg-background/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-muted-foreground flex items-center gap-1">
+                                <ImageIcon className="h-3 w-3" />
+                                <span>Image Placeholder</span>
+                              </div>
+                              {/* Category Badge */}
+                              <div className="absolute top-3 left-3 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-foreground border border-border">
+                                {feature.category}
+                              </div>
+                            </div>
 
-                    <CardContent className="pt-0">
-                      <CardDescription className="text-muted-foreground leading-relaxed">
-                        {isExpanded ? feature.fullDescription : feature.shortDescription}
-                      </CardDescription>
-                      {!isExpanded && (
-                        <div className="mt-4 text-sm text-primary font-medium">
-                          Click to learn more →
+                            <CardHeader className="pb-3">
+                              <div className="flex items-start justify-between">
+                                <CardTitle className="text-xl font-semibold text-foreground pr-8">
+                                  {feature.title}
+                                </CardTitle>
+                                {isExpanded && (
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-6 w-6 absolute top-4 right-4"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setExpandedFeature(null);
+                                    }}
+                                  >
+                                    <X className="h-4 w-4" />
+                                  </Button>
+                                )}
+                              </div>
+                            </CardHeader>
+
+                            <CardContent className="pt-0">
+                              <CardDescription className="text-muted-foreground leading-relaxed">
+                                {isExpanded ? feature.fullDescription : feature.shortDescription}
+                              </CardDescription>
+                              {!isExpanded && (
+                                <div className="mt-4 text-sm text-primary font-medium">
+                                  Click to learn more →
+                                </div>
+                              )}
+                            </CardContent>
+                          </Card>
                         </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
-              );
-            })}
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
