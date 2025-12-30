@@ -471,45 +471,56 @@ const Hero = () => {
               Contact Sales
             </Button>
           </div>
+        </div>
+      </div>
 
-          {/* Trusted Partners */}
-          <div className="mt-8 pt-6 pb-6 border-t border-border/30 bg-muted/30 rounded-2xl backdrop-blur-sm">
+      {/* Trusted Partners - Full Width */}
+      <div className="w-full relative z-10 mt-8">
+        <div className="w-full pt-6 pb-6 border-t border-border/30 bg-muted/30 backdrop-blur-sm">
+          <div className="container mx-auto px-4 lg:px-8">
             <p className="text-sm text-muted-foreground mb-5 text-center font-medium uppercase tracking-wider">
               Trusted by Industry Leaders
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
               <div className="partner-logo-container">
                 <img 
-                  src="/partner-logos/cropped-logo-2.webp" 
-                  alt="Partner logo" 
+                  src="/partner-logos/1-essem18-logo.png" 
+                  alt="ESSEM 18 logo" 
                   className="partner-logo"
                 />
               </div>
               <div className="partner-logo-container">
                 <img 
-                  src="/partner-logos/essem18-logo.png" 
-                  alt="Essem18 logo" 
+                  src="/partner-logos/2-cascade-neopolis.png" 
+                  alt="The Cascades Neopolis logo" 
                   className="partner-logo"
                 />
               </div>
               <div className="partner-logo-container">
                 <img 
-                  src="/partner-logos/images.jpeg" 
-                  alt="Partner logo" 
+                  src="/partner-logos/3-clean-fanatics-.webp" 
+                  alt="Clean Fanatics logo" 
                   className="partner-logo"
                 />
               </div>
               <div className="partner-logo-container">
                 <img 
-                  src="/partner-logos/Screenshot 2025-12-30 at 10.23.42.png" 
-                  alt="Partner logo" 
+                  src="/partner-logos/4-mednetLabs_logo.png" 
+                  alt="MedNet Labs logo" 
                   className="partner-logo"
                 />
               </div>
               <div className="partner-logo-container">
                 <img 
-                  src="/partner-logos/TheCascadesLogo.png" 
-                  alt="The Cascades logo" 
+                  src="/partner-logos/5-delta-images.jpeg" 
+                  alt="Delta Hospitals logo" 
+                  className="partner-logo"
+                />
+              </div>
+              <div className="partner-logo-container">
+                <img 
+                  src="/partner-logos/6-gsl-college.png" 
+                  alt="GSL College logo" 
                   className="partner-logo"
                 />
               </div>
