@@ -95,10 +95,15 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">H</span>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                <img 
+                  src="/small-logo.png" 
+                  alt="helllo.ai logo" 
+                  className="w-8 h-8 rounded-lg"
+                  aria-hidden="true"
+                />
               </div>
-              <span className="text-xl font-bold">Helllo.ai</span>
+              <span className="text-xl font-bold">helllo.ai</span>
             </div>
             
             <p className="text-background/80 mb-6 leading-relaxed">

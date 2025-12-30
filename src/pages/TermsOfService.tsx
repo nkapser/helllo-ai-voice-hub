@@ -6,12 +6,12 @@ import { Separator } from "@/components/ui/separator";
 
 const TermsOfService = () => {
   useEffect(() => {
-    document.title = "Terms of Service | Helllo.ai";
+    document.title = "Terms of Service | helllo.ai";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 
-        'Terms of Service for Helllo.ai - AI Voice Agent Platform. Read our terms and conditions for using our services.'
+        'Terms of Service for helllo.ai - AI Voice Agent Platform. Read our terms and conditions for using our services.'
       );
     }
   }, []);
@@ -39,7 +39,7 @@ const TermsOfService = () => {
                   <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-foreground mb-4">1. Acceptance of Terms</h2>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      By accessing and using Helllo.ai ("Service"), operated by HellloAI Technologies Pvt Ltd ("Company", "we", "us", or "our"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                      By accessing and using helllo.ai ("Service"), operated by HellloAI Technologies Pvt Ltd ("Company", "we", "us", or "our"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
                     </p>
                   </section>
 
@@ -48,7 +48,7 @@ const TermsOfService = () => {
                   <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-foreground mb-4">2. Description of Service</h2>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      Helllo.ai provides AI-powered voice agent services for businesses, including but not limited to:
+                      helllo.ai provides AI-powered voice agent services for businesses, including but not limited to:
                     </p>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-4">
                       <li>AI voice assistants for customer service and lead generation</li>

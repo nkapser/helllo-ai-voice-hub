@@ -140,7 +140,7 @@ const ContactForm = () => {
 
             {/* Trust Indicators */}
             <div className="mt-8 p-6 bg-background rounded-lg border border-border">
-              <h4 className="font-semibold text-foreground mb-3">Why Choose Helllo.ai?</h4>
+              <h4 className="font-semibold text-foreground mb-3">Why Choose helllo.ai?</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>✓ 5-minute setup process</li>
                 <li>✓ 50+ business tool integrations</li>
@@ -277,7 +277,7 @@ const ContactForm = () => {
                           htmlFor="consentToMarketing"
                           className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                          I would like to receive marketing communications about Helllo.ai products and services
+                          I would like to receive marketing communications about helllo.ai products and services
                         </label>
                         <p className="text-xs text-muted-foreground">
                           You can unsubscribe at any time. This is optional and not required to submit your inquiry.

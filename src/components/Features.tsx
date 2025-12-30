@@ -17,7 +17,6 @@ import {
   ChevronLeft,
   ChevronRight,
   X,
-  Image as ImageIcon,
   Workflow,
   Settings
 } from "lucide-react";
@@ -109,7 +108,7 @@ const Features = () => {
       id: "zapier-integration",
       title: "Zapier Integration",
       shortDescription: "Connect with 5,000+ apps and automate workflows without coding.",
-      fullDescription: "Integrate Helllo.ai with thousands of apps through Zapier. Automate workflows between your AI voice agents and tools like Slack, Google Sheets, Airtable, Trello, and more. Create custom Zaps to trigger actions based on call outcomes, lead captures, or sentiment analysis. No coding required - set up powerful automations in minutes.",
+      fullDescription: "Integrate helllo.ai with thousands of apps through Zapier. Automate workflows between your AI voice agents and tools like Slack, Google Sheets, Airtable, Trello, and more. Create custom Zaps to trigger actions based on call outcomes, lead captures, or sentiment analysis. No coding required - set up powerful automations in minutes.",
       icon: Zap,
       category: "Integrations",
       color: "text-secondary"
@@ -127,7 +126,7 @@ const Features = () => {
       id: "custom-crm-integration",
       title: "Custom CRM Integration",
       shortDescription: "Build custom integrations with any CRM or business tool via API.",
-      fullDescription: "Connect Helllo.ai with your existing business tools through our robust REST API. Whether you use a custom CRM, proprietary systems, or niche tools, our flexible API allows you to sync data, trigger actions, and build custom workflows. Comprehensive documentation and developer support make integration straightforward.",
+      fullDescription: "Connect helllo.ai with your existing business tools through our robust REST API. Whether you use a custom CRM, proprietary systems, or niche tools, our flexible API allows you to sync data, trigger actions, and build custom workflows. Comprehensive documentation and developer support make integration straightforward.",
       icon: Settings,
       category: "Integrations",
       color: "text-secondary"
@@ -373,11 +372,6 @@ const Features = () => {
                                   <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-3xl" />
                                   <IconComponent className={`relative h-16 w-16 ${feature.color}`} />
                                 </div>
-                              </div>
-                              {/* Placeholder Badge */}
-                              <div className="absolute bottom-2 right-2 bg-background/80 backdrop-blur-sm px-2 py-1 rounded text-xs text-muted-foreground flex items-center gap-1">
-                                <ImageIcon className="h-3 w-3" />
-                                <span>Image Placeholder</span>
                               </div>
                               {/* Category Badge */}
                               <div className="absolute top-3 left-3 bg-background/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-foreground border border-border">

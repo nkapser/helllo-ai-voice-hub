@@ -120,7 +120,7 @@ const Header = () => {
     {
       title: "Customer Stories",
       items: [
-        { name: "Success Stories", description: "See how businesses use Helllo.ai", href: "#resources", icon: Star },
+        { name: "Success Stories", description: "See how businesses use helllo.ai", href: "#resources", icon: Star },
         { name: "Case Studies", description: "Detailed implementation examples", href: "#resources", icon: BookOpen },
         { name: "Testimonials", description: "What our customers say", href: "#resources", icon: Users },
       ]
@@ -142,16 +142,16 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <a href="/" className="flex items-center space-x-2" aria-label="Helllo.ai homepage">
+            <a href="/" className="flex items-center space-x-2" aria-label="helllo.ai homepage">
               <div className="w-8 h-8 rounded-lg flex items-center justify-center">
                 <img 
                   src="/small-logo.png" 
-                  alt="Helllo.ai logo" 
+                  alt="helllo.ai logo" 
                   className="w-8 h-8 rounded-lg"
                   aria-hidden="true"
                 />
               </div>
-              <span className="text-xl font-bold text-foreground">Helllo.ai</span>
+              <span className="text-xl font-bold text-foreground">helllo.ai</span>
             </a>
           </div>
 

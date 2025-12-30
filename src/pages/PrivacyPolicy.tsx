@@ -6,12 +6,12 @@ import { Separator } from "@/components/ui/separator";
 
 const PrivacyPolicy = () => {
   useEffect(() => {
-    document.title = "Privacy Policy | Helllo.ai";
+    document.title = "Privacy Policy | helllo.ai";
     
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 
-        'Privacy Policy for Helllo.ai - Learn how we collect, use, and protect your personal information in compliance with GDPR and DPDP.'
+        'Privacy Policy for helllo.ai - Learn how we collect, use, and protect your personal information in compliance with GDPR and DPDP.'
       );
     }
   }, []);
@@ -39,7 +39,7 @@ const PrivacyPolicy = () => {
                   <section className="mb-8">
                     <h2 className="text-2xl font-semibold text-foreground mb-4">1. Introduction</h2>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      HellloAI Technologies Pvt Ltd ("we", "our", or "us") operates the Helllo.ai platform ("Service"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Service. We are committed to protecting your privacy and ensuring compliance with applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Digital Personal Data Protection Act (DPDP) of India.
+                      HellloAI Technologies Pvt Ltd ("we", "our", or "us") operates the helllo.ai platform ("Service"). This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Service. We are committed to protecting your privacy and ensuring compliance with applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Digital Personal Data Protection Act (DPDP) of India.
                     </p>
                   </section>
 

@@ -29,7 +29,7 @@ const FinalCTA = () => {
           </h2>
           
           <p className="text-xl text-primary-foreground/90 mb-8 leading-relaxed">
-            Join hundreds of growing businesses that trust Helllo.ai to handle their customer communications. 
+            Join hundreds of growing businesses that trust helllo.ai to handle their customer communications. 
             Start your free trial today and see the difference AI can make.
           </p>
 
