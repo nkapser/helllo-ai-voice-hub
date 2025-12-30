@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WhyChooseHelllo from "@/components/WhyChooseHelllo";
+import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
 import ContactForm from "@/components/ContactForm";
 import FinalCTA from "@/components/FinalCTA";
@@ -39,6 +40,7 @@ const Index = () => {
       <main role="main" id="main-content">
         <Hero />
         <WhyChooseHelllo />
+        <Features />
         <Pricing />
         <ContactForm />
         <FinalCTA />
