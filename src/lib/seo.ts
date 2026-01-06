@@ -28,13 +28,13 @@ const defaultSEO: SEOData = {
   canonical: "https://helllo.ai/",
   ogTitle: "AI Voice Agents for Small Business | Helllo.ai",
   ogDescription: "Transform your business with intelligent AI voice agents. Easy 5-minute setup, seamless CRM integration, and multi-language support. Start your free trial today.",
-  ogImage: "https://ik.imagekit.io/ise7sbyg9/hero-ai-voice-DHFzmG8k.jpg",
+  ogImage: "https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto",
   ogType: "website",
   ogUrl: "https://helllo.ai/",
   twitterCard: "summary_large_image",
   twitterTitle: "AI Voice Agents for Small Business | Helllo.ai",
   twitterDescription: "Transform your business with intelligent AI voice agents. Easy 5-minute setup, seamless CRM integration, and multi-language support.",
-  twitterImage: "https://ik.imagekit.io/ise7sbyg9/hero-ai-voice-DHFzmG8k.jpg",
+  twitterImage: "https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto",
   noindex: false,
 };
 
