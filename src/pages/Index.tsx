@@ -13,10 +13,10 @@ const Index = () => {
   // Update SEO meta tags for better search engine optimization
   useEffect(() => {
     setSEO({
-      title: "AI Voice Agents for Small, Medium and Enterprise Business | helllo.ai - Automate Customer Calls",
-      description: "Transform your business with intelligent AI voice agents. Easy 5-minute setup, seamless CRM integration, and multi-language support. Start your free trial today - no credit card required.",
-      canonical: "https://helllo.ai/",
-      ogUrl: "https://helllo.ai/",
+      title: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
+      description: "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge your customer experience with intelligent voice automation. Easy setup, CRM integration, and multi-language support. Start your free trial today.",
+      canonical: "https://www.helllo.ai/",
+      ogUrl: "https://www.helllo.ai/",
     });
     
     // Ensure lang attribute is set

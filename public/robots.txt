@@ -113,4 +113,4 @@ User-agent: DotBot
 Crawl-delay: 10
 
 # Sitemap locations
-Sitemap: https://helllo.ai/sitemap.xml
+Sitemap: https://www.helllo.ai/sitemap.xml

@@ -7,34 +7,34 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://helllo.ai/</loc>
+    <loc>https://www.helllo.ai/</loc>
     <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto</image:loc>
-      <image:title>AI Voice Technology for Business</image:title>
-      <image:caption>Transform your business with intelligent AI voice agents</image:caption>
+      <image:title>Supercharge Customer Experience with AI Voice Agents + Agentic Flows</image:title>
+      <image:caption>Deploy and scale production-ready AI voice agents powered by agentic orchestration</image:caption>
     </image:image>
   </url>
   
   <!-- Main sections with anchors -->
   <url>
-    <loc>https://helllo.ai/#features</loc>
+    <loc>https://www.helllo.ai/#features</loc>
     <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://helllo.ai/#pricing</loc>
+    <loc>https://www.helllo.ai/#pricing</loc>
     <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://helllo.ai/#contact</loc>
+    <loc>https://www.helllo.ai/#contact</loc>
     <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -42,14 +42,14 @@
   
   <!-- Legal pages -->
   <url>
-    <loc>https://helllo.ai/terms</loc>
+    <loc>https://www.helllo.ai/terms</loc>
     <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://helllo.ai/privacy</loc>
+    <loc>https://www.helllo.ai/privacy</loc>
     <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -22,18 +22,18 @@ export interface SEOData {
 }
 
 const defaultSEO: SEOData = {
-  title: "AI Voice Agents for Small Business | Helllo.ai - Automate Customer Calls",
-  description: "Transform your business with intelligent AI voice agents. Easy 5-minute setup, seamless CRM integration, and multi-language support. Start your free trial today - no credit card required.",
-  keywords: "AI voice agents, small business automation, customer service AI, voice bots, business phone automation, CRM integration, multi-language support, SMB AI solutions",
-  canonical: "https://helllo.ai/",
-  ogTitle: "AI Voice Agents for Small Business | Helllo.ai",
-  ogDescription: "Transform your business with intelligent AI voice agents. Easy 5-minute setup, seamless CRM integration, and multi-language support. Start your free trial today.",
+  title: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
+  description: "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge your customer experience with intelligent voice automation. Easy setup, CRM integration, and multi-language support. Start your free trial today.",
+  keywords: "AI voice agents, agentic flows, customer experience automation, voice AI orchestration, production-ready AI agents, intelligent voice automation, CRM integration, multi-language support, agentic AI, voice agent platform",
+  canonical: "https://www.helllo.ai/",
+  ogTitle: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
+  ogDescription: "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge your customer experience with intelligent voice automation. Start your free trial today.",
   ogImage: "https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto",
   ogType: "website",
-  ogUrl: "https://helllo.ai/",
+  ogUrl: "https://www.helllo.ai/",
   twitterCard: "summary_large_image",
-  twitterTitle: "AI Voice Agents for Small Business | Helllo.ai",
-  twitterDescription: "Transform your business with intelligent AI voice agents. Easy 5-minute setup, seamless CRM integration, and multi-language support.",
+  twitterTitle: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
+  twitterDescription: "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge your customer experience with intelligent voice automation.",
   twitterImage: "https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto",
   noindex: false,
 };
@@ -224,7 +224,7 @@ export function generateArticleSchema(data: {
       name: "Helllo.ai",
       logo: {
         "@type": "ImageObject",
-        url: "https://helllo.ai/assets/logo-wide.svg",
+        url: "https://www.helllo.ai/assets/logo-wide.svg",
       },
     },
   };

@@ -11,16 +11,16 @@ const TermsOfService = () => {
       title: "Terms of Service | helllo.ai - AI Voice Agent Platform",
       description: "Terms of Service for helllo.ai - AI Voice Agent Platform. Read our terms and conditions for using our services. Updated January 2025.",
       keywords: "terms of service, terms and conditions, helllo.ai terms, user agreement",
-      canonical: "https://helllo.ai/terms",
-      ogUrl: "https://helllo.ai/terms",
+      canonical: "https://www.helllo.ai/terms",
+      ogUrl: "https://www.helllo.ai/terms",
       ogTitle: "Terms of Service | helllo.ai",
       ogDescription: "Read the terms and conditions for using helllo.ai AI Voice Agent Platform services.",
       twitterTitle: "Terms of Service | helllo.ai",
       twitterDescription: "Read the terms and conditions for using helllo.ai AI Voice Agent Platform services.",
       structuredData: [
         generateBreadcrumbSchema([
-          { name: "Home", url: "https://helllo.ai/" },
-          { name: "Terms of Service", url: "https://helllo.ai/terms" },
+          { name: "Home", url: "https://www.helllo.ai/" },
+          { name: "Terms of Service", url: "https://www.helllo.ai/terms" },
         ]),
       ],
     });

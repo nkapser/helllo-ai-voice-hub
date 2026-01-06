@@ -11,16 +11,16 @@ const PrivacyPolicy = () => {
       title: "Privacy Policy | helllo.ai - GDPR & DPDP Compliant",
       description: "Privacy Policy for helllo.ai - Learn how we collect, use, and protect your personal information in compliance with GDPR and DPDP. Your privacy is our priority.",
       keywords: "privacy policy, GDPR compliance, DPDP, data protection, helllo.ai privacy",
-      canonical: "https://helllo.ai/privacy",
-      ogUrl: "https://helllo.ai/privacy",
+      canonical: "https://www.helllo.ai/privacy",
+      ogUrl: "https://www.helllo.ai/privacy",
       ogTitle: "Privacy Policy | helllo.ai",
       ogDescription: "Learn how helllo.ai protects your personal information in compliance with GDPR and DPDP regulations.",
       twitterTitle: "Privacy Policy | helllo.ai",
       twitterDescription: "Learn how helllo.ai protects your personal information in compliance with GDPR and DPDP regulations.",
       structuredData: [
         generateBreadcrumbSchema([
-          { name: "Home", url: "https://helllo.ai/" },
-          { name: "Privacy Policy", url: "https://helllo.ai/privacy" },
+          { name: "Home", url: "https://www.helllo.ai/" },
+          { name: "Privacy Policy", url: "https://www.helllo.ai/privacy" },
         ]),
       ],
     });
