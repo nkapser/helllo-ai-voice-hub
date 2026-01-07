@@ -446,11 +446,20 @@ const ContactForm = () => {
                         <SelectValue placeholder="Select your primary use case" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="order-taking">Order taking & processing</SelectItem>
-                        <SelectItem value="customer-support">Customer support & helpdesk</SelectItem>
-                        <SelectItem value="sales-lead-qualification">Sales & Lead Qualification</SelectItem>
-                        <SelectItem value="after-hours-support">After-hours Support</SelectItem>
-                        <SelectItem value="other">Others</SelectItem>
+                        <SelectItem value="appointment-scheduling">Appointment Scheduling & Booking</SelectItem>
+                        <SelectItem value="lead-qualification">Lead Qualification & Management</SelectItem>
+                        <SelectItem value="customer-support">24/7 Customer Support & Helpdesk</SelectItem>
+                        <SelectItem value="agentic-orchestration">Agentic Orchestration & Workflows</SelectItem>
+                        <SelectItem value="third-party-integration">3rd Party Integration & CRM Sync</SelectItem>
+                        <SelectItem value="order-processing">Order Taking & Processing</SelectItem>
+                        <SelectItem value="call-screening-routing">Call Screening & Smart Routing</SelectItem>
+                        <SelectItem value="overflow-reception">Overflow Reception & Queue Management</SelectItem>
+                        <SelectItem value="customer-intake">Customer Intake & Onboarding</SelectItem>
+                        <SelectItem value="follow-up-automation">Follow-up Automation & Nurturing</SelectItem>
+                        <SelectItem value="quote-inquiry">Quote Requests & Inquiry Handling</SelectItem>
+                        <SelectItem value="multi-channel">Multi-channel Support (WhatsApp, WebChat, Voice)</SelectItem>
+                        <SelectItem value="enterprise-features">Enterprise Features & Custom Solutions</SelectItem>
+                        <SelectItem value="other">Other - Please specify below</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -458,7 +467,7 @@ const ContactForm = () => {
                   {/* Additional Information for "Others" */}
                   <div>
                     <Label htmlFor="additionalInfo" className="text-sm font-medium text-foreground">
-                      Additional Information (for "Others" option)
+                      Additional Information {formData.primaryUseCase === "other" && "(Required for 'Other' option)"}
                     </Label>
                     <Textarea 
                       id="additionalInfo"
