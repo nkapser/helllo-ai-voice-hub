@@ -127,7 +127,7 @@ const Hero = () => {
       `}</style>
       <section 
         id="home" 
-        className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 bg-background overflow-hidden min-h-[90vh] flex flex-col" 
+        className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 bg-background overflow-hidden min-h-screen flex flex-col snap-start" 
         role="banner"
       >
       <div className="container mx-auto px-4 lg:px-8 relative z-10 flex-1 flex flex-col justify-center">

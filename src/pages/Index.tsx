@@ -21,6 +21,23 @@ const Index = () => {
     
     // Ensure lang attribute is set
     document.documentElement.lang = 'en';
+    
+    // Enable smooth scroll snapping
+    document.documentElement.style.scrollSnapType = 'y mandatory';
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Respect reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.documentElement.style.scrollSnapType = 'none';
+      document.documentElement.style.scrollBehavior = 'auto';
+    }
+    
+    return () => {
+      // Cleanup on unmount
+      document.documentElement.style.scrollSnapType = '';
+      document.documentElement.style.scrollBehavior = '';
+    };
   }, []);
 
   return (

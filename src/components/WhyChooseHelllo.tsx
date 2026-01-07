@@ -72,7 +72,7 @@ const WhyChooseHelllo = () => {
   return (
     <section 
       id="why-choose-helllo" 
-      className="relative pt-16 pb-12 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden" 
+      className="relative pt-16 pb-12 bg-gradient-to-b from-background via-muted/5 to-background overflow-hidden min-h-[80vh] snap-start" 
       role="main"
     >
       <div className="container mx-auto px-4 lg:px-8 relative z-10">

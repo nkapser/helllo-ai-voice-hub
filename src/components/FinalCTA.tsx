@@ -20,7 +20,7 @@ const FinalCTA = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-primary text-primary-foreground">
+    <section className="py-20 bg-gradient-primary text-primary-foreground min-h-[80vh] snap-start">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           {/* Main Headline */}

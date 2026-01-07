@@ -301,7 +301,7 @@ const Features = () => {
   };
 
   return (
-    <section id="features" className="pt-20 pb-12 bg-muted/10" role="main">
+    <section id="features" className="pt-20 pb-12 bg-muted/10 min-h-[80vh] snap-start" role="main">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <header className="text-center mb-12">
