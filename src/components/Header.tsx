@@ -334,7 +334,10 @@ const Header = () => {
                 {/* Simple nav items */}
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <a href="#pricing" className="text-foreground hover:text-primary transition-colors font-medium">
+                    <a 
+                      href="#pricing" 
+                      className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none"
+                    >
                       Pricing
                     </a>
                   </NavigationMenuLink>
@@ -486,7 +489,7 @@ const Header = () => {
               <div className="space-y-1">
                 <a
                   href="#pricing"
-                  className="block px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-lg mx-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Pricing
