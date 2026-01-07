@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock, Home, Heart, Briefcase, Landmark } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -69,25 +69,28 @@ const Header = () => {
 
   const industriesMenu = [
     {
-      title: "Popular Industries",
+      title: "Industries",
       items: [
-        { name: "Real Estate", description: "Capture leads and client calls", href: "#industries" },
-        { name: "Law Firms", description: "Screen calls and qualify leads", href: "#industries" },
-        { name: "Property Management", description: "Handle tenant calls 24/7", href: "#industries" },
-        { name: "Healthcare", description: "Appointment booking and patient care", href: "#industries" },
-      ]
-    },
-    {
-      title: "All Industries",
-      items: [
-        { name: "Contractors", href: "#industries" },
-        { name: "HVAC", href: "#industries" },
-        { name: "Financial Services", href: "#industries" },
-        { name: "Restaurants", href: "#industries" },
-        { name: "Insurance", href: "#industries" },
-        { name: "Salons", href: "#industries" },
-        { name: "Towing", href: "#industries" },
-        { name: "Veterinary", href: "#industries" },
+        { 
+          name: "Real Estate", 
+          description: "Capture leads and schedule property viewings 24/7. Handle inquiries instantly and never miss a potential client.",
+          icon: Home 
+        },
+        { 
+          name: "Health Care", 
+          description: "Streamline appointment scheduling and patient communication. Provide round-the-clock support for healthcare inquiries.",
+          icon: Heart 
+        },
+        { 
+          name: "Professional Services", 
+          description: "Qualify leads and manage client inquiries efficiently. Enhance customer service with intelligent call handling.",
+          icon: Briefcase 
+        },
+        { 
+          name: "BFSI", 
+          description: "Secure customer support for banking and financial services. Handle account inquiries with compliance and trust.",
+          icon: Landmark 
+        },
       ]
     }
   ];
@@ -199,27 +202,26 @@ const Header = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Industries</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[600px] grid-cols-2 gap-6 p-6">
+                    <div className="w-[700px] p-6">
                       {industriesMenu.map((section, sectionIndex) => (
-                        <div key={sectionIndex} className="space-y-3">
+                        <div key={sectionIndex} className="space-y-4">
                           <h3 className="font-semibold text-sm text-foreground">{section.title}</h3>
-                          <div className="space-y-2">
+                          <div className="grid grid-cols-2 gap-4">
                             {section.items.map((item, itemIndex) => (
-                              <NavigationMenuLink asChild key={itemIndex}>
-                                <a
-                                  href={item.href}
-                                  className="block p-3 rounded-lg hover:bg-accent transition-colors"
-                                >
-                                  <div className="flex items-start">
-                                    <div className="flex-1">
-                                      <div className="font-medium text-sm">{item.name}</div>
-                                      {item.description && (
-                                        <div className="text-xs text-muted-foreground mt-1">{item.description}</div>
-                                      )}
-                                    </div>
+                              <div
+                                key={itemIndex}
+                                className="block p-3 rounded-lg hover:bg-accent transition-colors cursor-default"
+                              >
+                                <div className="flex items-start gap-3">
+                                  {item.icon && <item.icon className="h-5 w-5 text-muted-foreground mt-0.5 flex-shrink-0" />}
+                                  <div className="flex-1">
+                                    <div className="font-medium text-sm text-foreground">{item.name}</div>
+                                    {item.description && (
+                                      <div className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{item.description}</div>
+                                    )}
                                   </div>
-                                </a>
-                              </NavigationMenuLink>
+                                </div>
+                              </div>
                             ))}
                           </div>
                         </div>
@@ -369,16 +371,23 @@ const Header = () => {
               {/* Mobile Industries - Compact */}
               <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Industries</h3>
-                <div className="grid grid-cols-2 gap-1 px-4">
-                  {industriesMenu.flatMap(section => section.items).slice(0, 4).map((item, index) => (
-                    <a
+                <div className="space-y-2 px-4">
+                  {industriesMenu.flatMap(section => section.items).map((item, index) => (
+                    <div
                       key={index}
-                      href={item.href}
-                      className="block py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded px-2"
+                      className="block py-2 px-3 rounded-lg hover:bg-accent transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {item.name}
-                    </a>
+                      <div className="flex items-start gap-3">
+                        {item.icon && <item.icon className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />}
+                        <div className="flex-1">
+                          <div className="font-medium text-sm text-foreground">{item.name}</div>
+                          {item.description && (
+                            <div className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.description}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
