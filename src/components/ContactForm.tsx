@@ -7,10 +7,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Send, Phone, Mail, MapPin, MessageCircle, Loader2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const ContactForm = () => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     businessName: "",
     contactName: "",
@@ -22,7 +24,12 @@ const ContactForm = () => {
     consentToMarketing: false
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // EmailJS configuration
+  const EMAILJS_SERVICE_ID = "service_5l1n25h";
+  const EMAILJS_TEMPLATE_ID = "template_v44xlmb";
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -30,6 +37,17 @@ const ContactForm = () => {
       toast({
         title: "Please fill in required fields",
         description: "Business name, contact name, and email are required.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Invalid email address",
+        description: "Please enter a valid email address.",
         variant: "destructive"
       });
       return;
@@ -45,25 +63,68 @@ const ContactForm = () => {
       return;
     }
 
-    // Simulate form submission
-    console.log("Form submitted:", formData);
-    
-    toast({
-      title: "Thank you for your interest!",
-      description: "We'll analyze your needs and get back to you within 24 hours with a customized solution.",
-    });
+    // Check if EmailJS Public Key is configured
+    if (!EMAILJS_PUBLIC_KEY) {
+      toast({
+        title: "Configuration error",
+        description: "Email service is not properly configured. Please contact support.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-    // Reset form
-    setFormData({
-      businessName: "",
-      contactName: "",
-      email: "",
-      phone: "",
-      primaryUseCase: "",
-      additionalInfo: "",
-      consentToContact: false,
-      consentToMarketing: false
-    });
+    setIsSubmitting(true);
+
+    try {
+      // Initialize EmailJS with public key
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+
+      // Prepare template parameters
+      const templateParams = {
+        businessName: formData.businessName,
+        contactName: formData.contactName,
+        email: formData.email,
+        phone: formData.phone || "Not provided",
+        primaryUseCase: formData.primaryUseCase || "Not specified",
+        additionalInfo: formData.additionalInfo || "None",
+        consentToContact: formData.consentToContact ? "Yes" : "No",
+        consentToMarketing: formData.consentToMarketing ? "Yes" : "No",
+        submittedAt: new Date().toLocaleString(),
+      };
+
+      // Send email via EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
+
+      toast({
+        title: "Thank you for your interest!",
+        description: "We'll analyze your needs and get back to you within 24 hours with a customized solution.",
+      });
+
+      // Reset form
+      setFormData({
+        businessName: "",
+        contactName: "",
+        email: "",
+        phone: "",
+        primaryUseCase: "",
+        additionalInfo: "",
+        consentToContact: false,
+        consentToMarketing: false
+      });
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast({
+        title: "Failed to send message",
+        description: "There was an error sending your message. Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
 
@@ -286,9 +347,18 @@ const ContactForm = () => {
                     </div>
                   </div>
 
-                  <Button type="submit" className="w-full" size="lg">
-                    <Send className="mr-2 h-5 w-5" />
-                    Submit
+                  <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-5 w-5" />
+                        Submit
+                      </>
+                    )}
                   </Button>
                 </form>
               </CardContent>
