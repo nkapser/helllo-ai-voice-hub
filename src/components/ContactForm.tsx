@@ -15,6 +15,9 @@ const ContactForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [lastSubmissionTime, setLastSubmissionTime] = useState<number | null>(null);
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [countdown, setCountdown] = useState(0);
   const [formData, setFormData] = useState({
     businessName: "",
     contactName: "",
@@ -23,8 +26,29 @@ const ContactForm = () => {
     primaryUseCase: "",
     additionalInfo: "",
     consentToContact: false,
-    consentToMarketing: false
+    consentToMarketing: false,
+    // Honeypot field - hidden from users, bots might fill it
+    website: ""
   });
+
+  // Rate limiting: 30 seconds between submissions
+  const RATE_LIMIT_SECONDS = 30;
+  // Maximum submissions per session (stored in sessionStorage)
+  const MAX_SUBMISSIONS_PER_SESSION = 3;
+
+  // Calculate if form should be disabled due to rate limiting
+  const getRemainingWaitTime = (): number => {
+    if (!lastSubmissionTime) return 0;
+    const now = Date.now();
+    const timeSinceLastSubmission = (now - lastSubmissionTime) / 1000;
+    const remaining = RATE_LIMIT_SECONDS - timeSinceLastSubmission;
+    return remaining > 0 ? Math.ceil(remaining) : 0;
+  };
+
+  const remainingWaitTime = getRemainingWaitTime();
+  const isRateLimited = remainingWaitTime > 0;
+  const isSubmissionLimitReached = submissionCount >= MAX_SUBMISSIONS_PER_SESSION;
+  const isFormDisabled = isSubmitting || isRateLimited || isSubmissionLimitReached;
 
   // EmailJS configuration
   const EMAILJS_SERVICE_ID = "service_5l1n25h";
@@ -37,10 +61,83 @@ const ContactForm = () => {
       console.log("EmailJS Public Key loaded:", EMAILJS_PUBLIC_KEY ? "✓ Present" : "✗ Missing");
       console.log("All VITE_ env vars:", Object.keys(import.meta.env).filter(key => key.startsWith("VITE_")));
     }
+
+    // Load submission count from sessionStorage
+    const storedCount = sessionStorage.getItem('contactFormSubmissionCount');
+    if (storedCount) {
+      setSubmissionCount(parseInt(storedCount, 10));
+    }
+
+    // Load last submission time from sessionStorage
+    const storedTime = sessionStorage.getItem('contactFormLastSubmission');
+    if (storedTime) {
+      setLastSubmissionTime(parseInt(storedTime, 10));
+    }
   }, []);
+
+  // Update rate limit countdown in real-time
+  useEffect(() => {
+    if (!isRateLimited || !lastSubmissionTime) {
+      setCountdown(0);
+      return;
+    }
+
+    const calculateRemaining = () => {
+      const now = Date.now();
+      const timeSinceLastSubmission = (now - lastSubmissionTime) / 1000;
+      const remaining = RATE_LIMIT_SECONDS - timeSinceLastSubmission;
+      return remaining > 0 ? Math.ceil(remaining) : 0;
+    };
+
+    // Set initial countdown
+    setCountdown(calculateRemaining());
+
+    const interval = setInterval(() => {
+      const remaining = calculateRemaining();
+      setCountdown(remaining);
+      if (remaining <= 0) {
+        clearInterval(interval);
+        setCountdown(0);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isRateLimited, lastSubmissionTime]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Honeypot check - if this field is filled, it's likely a bot
+    if (formData.website) {
+      console.warn("Honeypot field detected - potential bot submission");
+      // Silently fail - don't show error to bot
+      return;
+    }
+
+    // Rate limiting check
+    const now = Date.now();
+    if (lastSubmissionTime) {
+      const timeSinceLastSubmission = (now - lastSubmissionTime) / 1000; // in seconds
+      if (timeSinceLastSubmission < RATE_LIMIT_SECONDS) {
+        const remainingSeconds = Math.ceil(RATE_LIMIT_SECONDS - timeSinceLastSubmission);
+        toast({
+          title: "Please wait",
+          description: `You can only submit once every ${RATE_LIMIT_SECONDS} seconds. Please try again in ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''}.`,
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+
+    // Check submission count limit
+    if (submissionCount >= MAX_SUBMISSIONS_PER_SESSION) {
+      toast({
+        title: "Submission limit reached",
+        description: `You have reached the maximum of ${MAX_SUBMISSIONS_PER_SESSION} submissions per session. Please refresh the page or try again later.`,
+        variant: "destructive"
+      });
+      return;
+    }
     
     // Basic validation
     if (!formData.businessName || !formData.contactName || !formData.email) {
@@ -112,6 +209,15 @@ const ContactForm = () => {
         templateParams
       );
 
+      // Update rate limiting and submission tracking
+      const submissionTime = Date.now();
+      setLastSubmissionTime(submissionTime);
+      sessionStorage.setItem('contactFormLastSubmission', submissionTime.toString());
+      
+      const newCount = submissionCount + 1;
+      setSubmissionCount(newCount);
+      sessionStorage.setItem('contactFormSubmissionCount', newCount.toString());
+
       // Show success message
       setShowSuccess(true);
       
@@ -121,7 +227,7 @@ const ContactForm = () => {
         formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
-      // Reset form
+      // Reset form (but keep honeypot empty)
       setFormData({
         businessName: "",
         contactName: "",
@@ -130,7 +236,8 @@ const ContactForm = () => {
         primaryUseCase: "",
         additionalInfo: "",
         consentToContact: false,
-        consentToMarketing: false
+        consentToMarketing: false,
+        website: ""
       });
     } catch (error) {
       console.error("EmailJS error:", error);
@@ -266,6 +373,20 @@ const ContactForm = () => {
                 )}
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot field - hidden from users, visible to bots */}
+                  <div className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden" aria-hidden="true">
+                    <Label htmlFor="website">Website (do not fill)</Label>
+                    <Input
+                      id="website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formData.website}
+                      onChange={(e) => setFormData(prev => ({ ...prev, website: e.target.value }))}
+                    />
+                  </div>
+
                   {/* Basic Information */}
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
@@ -390,19 +511,50 @@ const ContactForm = () => {
                     </div>
                   </div>
 
-                  <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-5 w-5" />
-                        Submit
-                      </>
+                  <div className="space-y-2">
+                    {(isRateLimited || isSubmissionLimitReached) && (
+                      <p className="text-sm text-muted-foreground text-center">
+                        {isRateLimited && (
+                          <span className="text-amber-600 dark:text-amber-400">
+                            Please wait {countdown || remainingWaitTime} second{(countdown || remainingWaitTime) !== 1 ? 's' : ''} before submitting again.
+                          </span>
+                        )}
+                        {isSubmissionLimitReached && (
+                          <span className="text-red-600 dark:text-red-400">
+                            Maximum submissions reached. Please refresh the page to submit again.
+                          </span>
+                        )}
+                      </p>
                     )}
-                  </Button>
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      size="lg" 
+                      disabled={isFormDisabled}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Sending...
+                        </>
+                      ) : isRateLimited ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5" />
+                          Please wait ({(countdown || remainingWaitTime)}s)
+                        </>
+                      ) : isSubmissionLimitReached ? (
+                        <>
+                          <X className="mr-2 h-5 w-5" />
+                          Submission limit reached
+                        </>
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-5 w-5" />
+                          Submit
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </form>
               </CardContent>
             </Card>
