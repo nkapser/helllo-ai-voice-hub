@@ -57,7 +57,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-foreground text-background">
+    <footer className="bg-foreground text-background snap-start">
       {/* Newsletter Section */}
       <div className="border-b border-background/10">
         <div className="container mx-auto px-4 lg:px-8 py-12">

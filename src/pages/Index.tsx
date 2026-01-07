@@ -22,8 +22,9 @@ const Index = () => {
     // Ensure lang attribute is set
     document.documentElement.lang = 'en';
     
-    // Enable smooth scroll snapping
-    document.documentElement.style.scrollSnapType = 'y mandatory';
+    // Enable smooth scroll snapping with proximity (less strict than mandatory)
+    // This allows scrolling to footer while still providing snap behavior
+    document.documentElement.style.scrollSnapType = 'y proximity';
     document.documentElement.style.scrollBehavior = 'smooth';
     
     // Respect reduced motion preference
