@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock, Home, Heart, Briefcase, Landmark } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock, Home, Heart, Briefcase, Landmark, MessageSquare, CheckCircle2, GitBranch, ClipboardList, RotateCcw, DollarSign } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -97,24 +97,53 @@ const Header = () => {
 
   const solutionsMenu = [
     {
-      title: "Included with all plans",
+      title: "Core Solutions",
       items: [
-        { name: "AI Voice Assistant", description: "Natural conversation handling", href: "#solutions", icon: Phone },
-        { name: "Call Routing", description: "Send calls to the right place", href: "#solutions", icon: Users },
-        { name: "Appointment Scheduling", description: "Book appointments automatically", href: "#solutions", icon: Calendar },
-        { name: "Message Taking", description: "Capture all the details", href: "#solutions", icon: FileText },
-        { name: "After Hours Calls", description: "Pick up calls 24/7", href: "#solutions", icon: Clock },
+        { 
+          name: "Appointment Scheduling", 
+          description: "Automatically book property viewings, patient appointments, and consultations. Never miss a booking opportunity.",
+          icon: Calendar 
+        },
+        { 
+          name: "Lead Qualification", 
+          description: "Identify and prioritize high-value leads in real-time. Capture key information and route qualified leads instantly.",
+          icon: CheckCircle2 
+        },
+        { 
+          name: "24/7 After Hours Support", 
+          description: "Handle customer inquiries around the clock. Provide support even when your team is unavailable.",
+          icon: Clock 
+        },
+        { 
+          name: "Customer Intake & Onboarding", 
+          description: "Streamline patient registration, client onboarding, and inquiry collection. Capture essential information automatically.",
+          icon: ClipboardList 
+        },
       ]
     },
     {
-      title: "Additional Solutions",
+      title: "Advanced Solutions",
       items: [
-        { name: "Lead Qualification", href: "#solutions" },
-        { name: "Order Taking", href: "#solutions" },
-        { name: "Overflow Reception", href: "#solutions" },
-        { name: "Voicemail Assistant", href: "#solutions" },
-        { name: "Call Recording", href: "#solutions" },
-        { name: "Call Screening", href: "#solutions" },
+        { 
+          name: "Smart Routing", 
+          description: "Intelligently route calls to the right department, specialist, or agent based on inquiry type and urgency. Ensure customers reach the best resource immediately.",
+          icon: GitBranch 
+        },
+        { 
+          name: "Overflow Reception", 
+          description: "Handle peak call volumes seamlessly. Ensure every customer gets attention even during busy periods.",
+          icon: Users 
+        },
+        { 
+          name: "Follow-up Automation", 
+          description: "Automatically follow up with leads, patients, and clients. Nurture relationships with intelligent follow-up sequences.",
+          icon: RotateCcw 
+        },
+        { 
+          name: "Quote & Inquiry Handling", 
+          description: "Process quote requests, service inquiries, and product information requests. Provide instant responses with accurate details.",
+          icon: DollarSign 
+        },
       ]
     }
   ];
@@ -240,22 +269,20 @@ const Header = () => {
                           <h3 className="font-semibold text-sm text-foreground">{section.title}</h3>
                           <div className="space-y-2">
                             {section.items.map((item, itemIndex) => (
-                              <NavigationMenuLink asChild key={itemIndex}>
-                                <a
-                                  href={item.href}
-                                  className="block p-3 rounded-lg hover:bg-accent transition-colors"
-                                >
-                                  <div className={`flex items-start ${item.icon ? 'gap-3' : ''}`}>
-                                    {item.icon && <item.icon className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />}
-                                    <div className="flex-1">
-                                      <div className="font-medium text-sm">{item.name}</div>
-                                      {item.description && (
-                                        <div className="text-xs text-muted-foreground mt-1">{item.description}</div>
-                                      )}
-                                    </div>
+                              <div
+                                key={itemIndex}
+                                className="block p-3 rounded-lg hover:bg-accent transition-colors cursor-default"
+                              >
+                                <div className="flex items-start gap-3">
+                                  {item.icon && <item.icon className="h-5 w-5 text-muted-foreground mt-0.5 flex-shrink-0" />}
+                                  <div className="flex-1">
+                                    <div className="font-medium text-sm text-foreground">{item.name}</div>
+                                    {item.description && (
+                                      <div className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{item.description}</div>
+                                    )}
                                   </div>
-                                </a>
-                              </NavigationMenuLink>
+                                </div>
+                              </div>
                             ))}
                           </div>
                         </div>
@@ -395,16 +422,23 @@ const Header = () => {
               {/* Mobile Solutions - Compact */}
               <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Solutions</h3>
-                <div className="grid grid-cols-2 gap-1 px-4">
-                  {solutionsMenu.flatMap(section => section.items).slice(0, 4).map((item, index) => (
-                    <a
+                <div className="space-y-2 px-4">
+                  {solutionsMenu.flatMap(section => section.items).map((item, index) => (
+                    <div
                       key={index}
-                      href={item.href}
-                      className="block py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded px-2"
+                      className="block py-2 px-3 rounded-lg hover:bg-accent transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {item.name}
-                    </a>
+                      <div className="flex items-start gap-3">
+                        {item.icon && <item.icon className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />}
+                        <div className="flex-1">
+                          <div className="font-medium text-sm text-foreground">{item.name}</div>
+                          {item.description && (
+                            <div className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.description}</div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
