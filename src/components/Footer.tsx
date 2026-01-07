@@ -1,16 +1,128 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Twitter, 
   Linkedin, 
   Github, 
   Mail,
   MapPin,
-  Phone
+  Phone,
+  Loader2,
+  CheckCircle2,
+  X
 } from "lucide-react";
 
 const Footer = () => {
+  const { toast } = useToast();
+  const [email, setEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [lastSubscribeTime, setLastSubscribeTime] = useState<number | null>(null);
+  
+  // Rate limiting: 10 seconds between subscription attempts
+  const SUBSCRIBE_RATE_LIMIT_SECONDS = 10;
+
+  // Brevo API configuration
+  const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY || "";
+  const BREVO_LIST_ID = import.meta.env.VITE_BREVO_LIST_ID || "";
+  const BREVO_API_URL = "https://api.brevo.com/v3/contacts";
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Rate limiting check
+    const now = Date.now();
+    if (lastSubscribeTime) {
+      const timeSinceLastSubscribe = (now - lastSubscribeTime) / 1000;
+      if (timeSinceLastSubscribe < SUBSCRIBE_RATE_LIMIT_SECONDS) {
+        const remainingSeconds = Math.ceil(SUBSCRIBE_RATE_LIMIT_SECONDS - timeSinceLastSubscribe);
+        toast({
+          title: "Please wait",
+          description: `Please wait ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''} before subscribing again.`,
+          variant: "destructive"
+        });
+        return;
+      }
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Invalid email address",
+        description: "Please enter a valid email address.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Check if API is configured
+    if (!BREVO_API_KEY || !BREVO_LIST_ID) {
+      toast({
+        title: "Subscription service not configured",
+        description: import.meta.env.DEV 
+          ? "Please configure VITE_BREVO_API_KEY and VITE_BREVO_LIST_ID in .env.local"
+          : "Subscription service is temporarily unavailable. Please try again later.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubscribing(true);
+
+    try {
+      // Add contact to Brevo list
+      const response = await fetch(BREVO_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": BREVO_API_KEY,
+        },
+        body: JSON.stringify({
+          email: email,
+          listIds: [parseInt(BREVO_LIST_ID)],
+          updateEnabled: true, // Update if contact already exists
+        }),
+      });
+
+      if (response.ok || response.status === 204) {
+        setLastSubscribeTime(Date.now());
+        setShowSuccess(true);
+        setEmail("");
+        toast({
+          title: "Successfully subscribed!",
+          description: "Thank you for subscribing to our newsletter.",
+        });
+      } else if (response.status === 400) {
+        const error = await response.json();
+        // Handle duplicate email (already subscribed)
+        if (error.message?.includes("already exists") || error.code === "duplicate_parameter") {
+          toast({
+            title: "Already subscribed",
+            description: "This email is already on our mailing list.",
+          });
+        } else {
+          throw new Error(error.message || "Failed to subscribe");
+        }
+      } else {
+        throw new Error("Failed to subscribe");
+      }
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      toast({
+        title: "Subscription failed",
+        description: "There was an error subscribing. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
+
   const footerSections = [
     {
       title: "Company",
@@ -69,17 +181,60 @@ const Footer = () => {
               Get the latest insights, product updates, and best practices for AI voice agents in your inbox.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 bg-background/10 border-background/20 text-background placeholder:text-background/60"
-                required
-              />
-              <Button variant="secondary" className="whitespace-nowrap">
-                Subscribe
-              </Button>
-            </div>
+            {/* Success Message */}
+            {showSuccess && (
+              <Alert className="mb-6 max-w-md mx-auto border-green-500/50 bg-green-50 dark:bg-green-950/20">
+                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <AlertTitle className="text-green-800 dark:text-green-200 font-semibold">
+                      Successfully subscribed!
+                    </AlertTitle>
+                    <AlertDescription className="text-green-700 dark:text-green-300 mt-1">
+                      Thank you for subscribing. Check your inbox for a confirmation email.
+                    </AlertDescription>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6 text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200 hover:bg-green-100 dark:hover:bg-green-900/30 flex-shrink-0"
+                    onClick={() => setShowSuccess(false)}
+                    aria-label="Close success message"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              </Alert>
+            )}
+
+            <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 bg-background/10 border-background/20 text-background placeholder:text-background/60"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={isSubscribing}
+                />
+                <Button 
+                  type="submit" 
+                  variant="secondary" 
+                  className="whitespace-nowrap"
+                  disabled={isSubscribing}
+                >
+                  {isSubscribing ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Subscribing...
+                    </>
+                  ) : (
+                    "Subscribe"
+                  )}
+                </Button>
+              </div>
+            </form>
             
             <p className="text-sm text-background/60 mt-4">
               No spam. Unsubscribe at any time. Read our <a href="/privacy" className="text-background hover:underline">Privacy Policy</a>.
