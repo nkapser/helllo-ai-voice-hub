@@ -5,14 +5,16 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Phone, Mail, MapPin, MessageCircle, Loader2 } from "lucide-react";
+import { Send, Phone, Mail, MapPin, MessageCircle, Loader2, CheckCircle2, X } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
 const ContactForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [formData, setFormData] = useState({
     businessName: "",
     contactName: "",
@@ -28,6 +30,14 @@ const ContactForm = () => {
   const EMAILJS_SERVICE_ID = "service_5l1n25h";
   const EMAILJS_TEMPLATE_ID = "template_v44xlmb";
   const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "";
+
+  // Debug: Log environment variable on mount (only in development)
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      console.log("EmailJS Public Key loaded:", EMAILJS_PUBLIC_KEY ? "✓ Present" : "✗ Missing");
+      console.log("All VITE_ env vars:", Object.keys(import.meta.env).filter(key => key.startsWith("VITE_")));
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,9 +75,12 @@ const ContactForm = () => {
 
     // Check if EmailJS Public Key is configured
     if (!EMAILJS_PUBLIC_KEY) {
+      console.error("EmailJS Public Key is missing. Make sure VITE_EMAILJS_PUBLIC_KEY is set in .env.local and the dev server has been restarted.");
       toast({
         title: "Configuration error",
-        description: "Email service is not properly configured. Please contact support.",
+        description: import.meta.env.DEV 
+          ? "EmailJS Public Key not found. Please check .env.local and restart the dev server."
+          : "Email service is not properly configured. Please contact support.",
         variant: "destructive"
       });
       return;
@@ -99,10 +112,14 @@ const ContactForm = () => {
         templateParams
       );
 
-      toast({
-        title: "Thank you for your interest!",
-        description: "We'll analyze your needs and get back to you within 24 hours with a customized solution.",
-      });
+      // Show success message
+      setShowSuccess(true);
+      
+      // Scroll to top of form to show success message
+      const formCard = document.getElementById('contact-form-card');
+      if (formCard) {
+        formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
 
       // Reset form
       setFormData({
@@ -213,7 +230,7 @@ const ContactForm = () => {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <Card className="border-0 shadow-medium">
+            <Card id="contact-form-card" className="border-0 shadow-medium">
               <CardHeader>
                 <CardTitle className="text-2xl">Get Your Custom Solution</CardTitle>
                 <CardDescription>
@@ -222,6 +239,32 @@ const ContactForm = () => {
               </CardHeader>
               
               <CardContent>
+                {/* Success Message Alert */}
+                {showSuccess && (
+                  <Alert className="mb-6 border-green-500/50 bg-green-50 dark:bg-green-950/20">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1">
+                        <AlertTitle className="text-green-800 dark:text-green-200 font-semibold">
+                          Thank you for reaching out to HellloAI!
+                        </AlertTitle>
+                        <AlertDescription className="text-green-700 dark:text-green-300 mt-1">
+                          We have received your request. Our team will reach out to you within 24 hours.
+                        </AlertDescription>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200 hover:bg-green-100 dark:hover:bg-green-900/30 flex-shrink-0"
+                        onClick={() => setShowSuccess(false)}
+                        aria-label="Close success message"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </Alert>
+                )}
+                
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Basic Information */}
                   <div className="grid md:grid-cols-2 gap-4">
