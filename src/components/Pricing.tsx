@@ -41,6 +41,9 @@ const Pricing = () => {
     setExpandedPlans(newExpanded);
   };
 
+  // Premium has additional features beyond Standard
+  const premiumFeatures = [...features, 'Advanced workflow automation', 'Priority queue management', 'Custom AI model training'];
+
   const plans = [
     {
       name: "Standard",
@@ -66,8 +69,8 @@ const Pricing = () => {
       icon: Headphones,
       minutes: "12,000 minutes",
       minutesDescription: "of calls per month",
-      features: features,
-      highlightedFeatures: ["2,000 additional minutes", "Dedicated support", "Custom integrations"],
+      features: premiumFeatures,
+      highlightedFeatures: ["2,000 additional minutes", "Dedicated support", "Agentic Flows", "Custom integrations"],
       buttonText: "Get Premium",
       buttonVariant: "default" as const,
       popular: true
@@ -144,7 +147,7 @@ const Pricing = () => {
                   {plan.buttonText}
                 </Button>
 
-                <div className="space-y-3">
+                <div>
                   <h4 className="font-semibold text-gray-900 mb-4">All Features Included:</h4>
                   
                   {/* Highlighted features for Premium */}
@@ -159,40 +162,50 @@ const Pricing = () => {
                     </div>
                   )}
                   
-                  {/* Regular features - show first 10, rest on expand */}
-                  {plan.features.slice(0, 10).map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-start space-x-3">
-                      <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm text-gray-600">{feature}</span>
-                    </div>
-                  ))}
-                  
-                  {/* Expandable remaining features */}
-                  {plan.features.length > 10 && (
-                    <>
-                      {expandedPlans.has(index) && (
-                        <>
-                          {plan.features.slice(10).map((feature, featureIndex) => (
-                            <div key={featureIndex + 10} className="flex items-start space-x-3">
-                              <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-sm text-gray-600">{feature}</span>
-                            </div>
-                          ))}
-                        </>
-                      )}
-                      <button
-                        onClick={() => toggleExpand(index)}
-                        className="flex items-center space-x-2 text-sm text-primary hover:text-primary/80 font-medium mt-2"
-                      >
-                        <span>{expandedPlans.has(index) ? 'Show less' : `Show ${plan.features.length - 10} more features`}</span>
-                        {expandedPlans.has(index) ? (
-                          <ChevronUp className="h-4 w-4" />
-                        ) : (
-                          <ChevronDown className="h-4 w-4" />
+                  {/* Regular features - adjust initial count based on highlighted features to align with Standard */}
+                  {(() => {
+                    const highlightedCount = plan.highlightedFeatures?.length || 0;
+                    const initialRegularCount = 10 - highlightedCount; // Keep total visible items at 10
+                    const hasMoreFeatures = plan.features.length > initialRegularCount;
+                    
+                    return (
+                      <div className="space-y-3">
+                        {plan.features.slice(0, initialRegularCount).map((feature, featureIndex) => (
+                          <div key={featureIndex} className="flex items-start space-x-3">
+                            <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-sm text-gray-600">{feature}</span>
+                          </div>
+                        ))}
+                        
+                        {/* Expandable remaining features */}
+                        {hasMoreFeatures && expandedPlans.has(index) && (
+                          <>
+                            {plan.features.slice(initialRegularCount).map((feature, featureIndex) => (
+                              <div key={featureIndex + initialRegularCount} className="flex items-start space-x-3">
+                                <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
+                                <span className="text-sm text-gray-600">{feature}</span>
+                              </div>
+                            ))}
+                          </>
                         )}
-                      </button>
-                    </>
-                  )}
+                        
+                        {/* Show more/less button - aligned with features */}
+                        {hasMoreFeatures && (
+                          <button
+                            onClick={() => toggleExpand(index)}
+                            className="flex items-center space-x-2 text-sm text-primary hover:text-primary/80 font-medium mt-1"
+                          >
+                            <span>{expandedPlans.has(index) ? 'Show less' : `Show ${plan.features.length - initialRegularCount} more features`}</span>
+                            {expandedPlans.has(index) ? (
+                              <ChevronUp className="h-4 w-4" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4" />
+                            )}
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
               </CardContent>
             </Card>
