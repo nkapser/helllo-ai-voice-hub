@@ -18,22 +18,40 @@ const Hero = () => {
   const [isSlotResetting, setIsSlotResetting] = useState(false);
   
   useEffect(() => {
-    const stepSize = rotatingPhrases.length + 1;
-    const intervalId = window.setInterval(() => {
+    const stepSize = 1; // Flip one phrase at a time
+    let intervalId: number | undefined;
+    
+    // Initial delay before first animation
+    const initialDelay = setTimeout(() => {
       setSlotIndex((prev) => prev + stepSize);
-    }, 2500);
+      
+      // Then continue with regular interval
+      intervalId = window.setInterval(() => {
+        setSlotIndex((prev) => {
+          const next = prev + stepSize;
+          // Reset when we've gone through all phrases
+          if (next >= slotItems.length) {
+            return 0;
+          }
+          return next;
+        });
+      }, 2500); // Interval between phrase flips
+    }, 800); // Initial delay before first animation
 
     return () => {
-      window.clearInterval(intervalId);
+      clearTimeout(initialDelay);
+      if (intervalId) {
+        window.clearInterval(intervalId);
+      }
     };
-  }, [rotatingPhrases.length]);
+  }, [rotatingPhrases.length, slotItems.length]);
 
   useEffect(() => {
     if (isSlotResetting) return;
     setIsPhraseSpinning(true);
     const timeoutId = window.setTimeout(() => {
       setIsPhraseSpinning(false);
-    }, 950);
+    }, 700); // Match the transition duration
 
     return () => {
       window.clearTimeout(timeoutId);
@@ -41,23 +59,24 @@ const Hero = () => {
   }, [isSlotResetting, slotIndex]);
 
   useEffect(() => {
-    const stepSize = rotatingPhrases.length + 1;
+    // Reset when we've shown all unique phrases (after showing the 3rd one)
+    // We reset after showing all 3 phrases to loop back to the first
+    if (slotIndex >= rotatingPhrases.length) {
+      const timeoutId = window.setTimeout(() => {
+        setIsSlotResetting(true);
+        // Reset to start of the cycle
+        setSlotIndex(0);
 
-    if (slotIndex < slotItems.length - stepSize) return;
+        window.requestAnimationFrame(() => {
+          setIsSlotResetting(false);
+        });
+      }, 700); // Match the transition duration
 
-    const timeoutId = window.setTimeout(() => {
-      setIsSlotResetting(true);
-      setSlotIndex(slotIndex % rotatingPhrases.length);
-
-      window.requestAnimationFrame(() => {
-        setIsSlotResetting(false);
-      });
-    }, 950);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-    };
-  }, [slotIndex, slotItems.length, rotatingPhrases.length]);
+      return () => {
+        window.clearTimeout(timeoutId);
+      };
+    }
+  }, [slotIndex, rotatingPhrases.length]);
 
 
   return (
@@ -102,7 +121,11 @@ const Hero = () => {
           display: block;
           text-align: right;
           will-change: transform;
-          transition: transform 950ms cubic-bezier(0.12, 1.02, 0.2, 1), filter 950ms ease;
+          transition: transform 700ms cubic-bezier(0.25, 0.1, 0.25, 1), filter 700ms ease;
+          background: linear-gradient(to bottom, #7c5dff 0%, #7c5dff 75%, #9d7aff 75%, #b894ff 85%, #7c5dff 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .hero-slot-track.no-transition {
@@ -119,6 +142,8 @@ const Hero = () => {
         @media (prefers-reduced-motion: reduce) {
           .hero-slot-track {
             transition: none;
+            background: #7c5dff;
+            -webkit-text-fill-color: #7c5dff;
           }
           .hero-slot-track.is-spinning {
             filter: none;
@@ -147,7 +172,6 @@ const Hero = () => {
                     className={`hero-slot-track ${isPhraseSpinning ? "is-spinning" : ""} ${isSlotResetting ? "no-transition" : ""}`}
                     style={{
                       transform: `translateY(-${slotIndex * phraseHeightEm}em)`,
-                      color: "#7c5dff",
                     }}
                   >
                     {slotItems.map((phrase, index) => (

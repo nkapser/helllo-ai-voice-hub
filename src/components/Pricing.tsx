@@ -197,35 +197,6 @@ const Pricing = () => {
             </div>
           </div>
         </div>
-
-        {/* FAQ Preview */}
-        <div className="mt-16 bg-gradient-to-br from-muted/40 to-muted/20 rounded-3xl p-8 lg:p-12 border border-muted/30 shadow-lg">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-foreground mb-4">
-              Frequently Asked Questions
-            </h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Get answers to the most common questions about our AI voice assistant platform
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="bg-background/50 rounded-xl p-6 border border-muted/20 hover:border-primary/20 transition-colors">
-              <h4 className="font-semibold text-foreground mb-3 text-lg">Do you offer custom integrations?</h4>
-              <p className="text-muted-foreground leading-relaxed">Yes, Enterprise plans include custom integrations and dedicated technical support.</p>
-            </div>
-            
-            <div className="bg-background/50 rounded-xl p-6 border border-muted/20 hover:border-primary/20 transition-colors">
-              <h4 className="font-semibold text-foreground mb-3 text-lg">Is my data secure?</h4>
-              <p className="text-muted-foreground leading-relaxed">Absolutely. We are GDPR & DPDP compliant with SOC 2 certification and end-to-end encryption.</p>
-            </div>
-            
-            <div className="bg-background/50 rounded-xl p-6 border border-muted/20 hover:border-primary/20 transition-colors md:col-span-2">
-              <h4 className="font-semibold text-foreground mb-3 text-lg">What happens after the minutes get exhausted?</h4>
-              <p className="text-muted-foreground leading-relaxed">You will need to repurchase additional minutes / purchase 500 minutes whichever you choose to and they will be valid for a month.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
