@@ -37,6 +37,8 @@ const Features = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const hasAnimatedRef = useRef<boolean>(false);
+  const previousCategoryRef = useRef<string>("all");
 
   const features: Feature[] = [
     // Call Management
@@ -214,31 +216,67 @@ const Features = () => {
     ? features 
     : features.filter(f => f.category === selectedCategory);
 
-  // GSAP animations on mount and filter change
+  // GSAP animations on mount and filter change only
   useEffect(() => {
+    // Only animate if category changed, not on card expansion
+    const categoryChanged = previousCategoryRef.current !== selectedCategory;
+    
+    if (!categoryChanged && hasAnimatedRef.current) {
+      return;
+    }
+
     const cards = cardsRef.current.filter(Boolean);
     
     if (cards.length === 0) return;
 
+    // Kill any existing animations on these cards
+    cards.forEach(card => {
+      if (card) gsap.killTweensOf(card);
+    });
+
+    // Reset cards to initial state before animating
+    gsap.set(cards, { opacity: 0, y: 50, scale: 0.9 });
+
     // Animate cards with stagger effect
-    gsap.fromTo(
-      cards,
-      {
-        opacity: 0,
-        y: 50,
-        scale: 0.9
-      },
-      {
-        opacity: 1,
-        y: 0,
+    gsap.to(cards, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power3.out",
+      delay: 0.2
+    });
+
+    hasAnimatedRef.current = true;
+    previousCategoryRef.current = selectedCategory;
+  }, [selectedCategory, filteredFeatures]);
+
+  // Animate only the expanded card when it changes
+  useEffect(() => {
+    const expandedCardIndex = filteredFeatures.findIndex(f => f.id === expandedFeature);
+    const expandedCard = expandedCardIndex >= 0 ? cardsRef.current[expandedCardIndex] : null;
+
+    if (expandedFeature && expandedCard) {
+      // Kill any existing animations on this card
+      gsap.killTweensOf(expandedCard);
+      
+      // Smoothly animate the expanded card
+      gsap.to(expandedCard, {
+        scale: 1.05,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    } else if (!expandedFeature && expandedCard) {
+      // Reset scale when collapsing
+      gsap.killTweensOf(expandedCard);
+      gsap.to(expandedCard, {
         scale: 1,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.2
-      }
-    );
-  }, [filteredFeatures]);
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    }
+  }, [expandedFeature, filteredFeatures]);
 
 
   // Scroll functions
@@ -359,7 +397,7 @@ const Features = () => {
                         >
                           <Card
                             className={`relative h-full cursor-pointer transition-all duration-300 border border-border bg-card hover:shadow-strong ${
-                              isExpanded ? "shadow-strong scale-105 z-20" : "hover:-translate-y-2"
+                              isExpanded ? "shadow-strong z-20" : "hover:-translate-y-2"
                             }`}
                             onClick={() => handleCardClick(feature.id)}
                           >
@@ -427,7 +465,7 @@ const Features = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
         }
