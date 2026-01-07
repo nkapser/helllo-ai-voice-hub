@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock, Home, Heart, Briefcase, Landmark, MessageSquare, CheckCircle2, GitBranch, ClipboardList, RotateCcw, DollarSign } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock, Home, Heart, Briefcase, Landmark, MessageSquare, CheckCircle2, GitBranch, ClipboardList, RotateCcw, DollarSign, TrendingUp, Handshake, Search, RefreshCw, Database, Workflow, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -48,21 +48,16 @@ const Header = () => {
 
   const featuresMenu = [
     {
-      title: "Core Features",
-      items: [
-        { name: "AI Voice Assistant", description: "Natural conversation with advanced AI", href: "#features", icon: Phone },
-        { name: "Multi-language Support", description: "25+ languages supported", href: "#features", icon: Users },
-        { name: "Call Recording", description: "Record and analyze conversations", href: "#features", icon: Headphones },
-        { name: "Analytics Dashboard", description: "Detailed insights and reports", href: "#features", icon: Shield },
-      ]
-    },
-    {
       title: "Advanced Features",
       items: [
-        { name: "Custom Voice Personas", description: "Train AI with your brand voice", href: "#features", icon: Settings },
-        { name: "Integration Hub", description: "Connect with 50+ tools", href: "#features", icon: Building2 },
-        { name: "Smart Routing", description: "Route calls intelligently", href: "#features", icon: Lightbulb },
-        { name: "Real-time Transcription", description: "Live conversation transcription", href: "#features", icon: FileText },
+        { name: "Call Summary", description: "AI-powered summaries of key points and action items from each call.", href: "#features", icon: MessageSquare },
+        { name: "Sentiment Analysis", description: "Understand customer emotions and satisfaction in real-time.", href: "#features", icon: TrendingUp },
+        { name: "Human Handoff", description: "Seamlessly transfer complex conversations to human agents when needed.", href: "#features", icon: Handshake },
+        { name: "Conversation Continuity", description: "Maintain context across multiple conversations and channels.", href: "#features", icon: RefreshCw },
+        { name: "Google Search", description: "AI agents can search the web for real-time information during calls.", href: "#features", icon: Search },
+        { name: "Call Transcriptions", description: "Real-time transcription of all conversations with high accuracy.", href: "#features", icon: FileText },
+        { name: "HubSpot Integration", description: "Native integration with HubSpot CRM, Marketing, and Sales Hubs.", href: "#features", icon: Workflow },
+        { name: "Custom CRM Integration", description: "Build custom integrations with any CRM or business tool via API.", href: "#features", icon: Database },
       ]
     }
   ];
@@ -197,11 +192,11 @@ const Header = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Features</NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="grid w-[800px] grid-cols-2 gap-6 p-6">
+                    <div className="w-[800px] p-6">
                       {featuresMenu.map((section, sectionIndex) => (
-                        <div key={sectionIndex} className="space-y-3">
+                        <div key={sectionIndex} className="space-y-4">
                           <h3 className="font-semibold text-sm text-foreground">{section.title}</h3>
-                          <div className="space-y-2">
+                          <div className="grid grid-cols-2 gap-4">
                             {section.items.map((item, itemIndex) => (
                               <NavigationMenuLink asChild key={itemIndex}>
                                 <a
@@ -209,17 +204,28 @@ const Header = () => {
                                   className="block p-3 rounded-lg hover:bg-accent transition-colors"
                                 >
                                   <div className="flex items-start gap-3">
-                                    {item.icon && <item.icon className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />}
+                                    {item.icon && <item.icon className="h-5 w-5 text-muted-foreground mt-0.5 flex-shrink-0" />}
                                     <div className="flex-1">
-                                      <div className="font-medium text-sm">{item.name}</div>
+                                      <div className="font-medium text-sm text-foreground">{item.name}</div>
                                       {item.description && (
-                                        <div className="text-xs text-muted-foreground mt-1">{item.description}</div>
+                                        <div className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{item.description}</div>
                                       )}
                                     </div>
                                   </div>
                                 </a>
                               </NavigationMenuLink>
                             ))}
+                          </div>
+                          <div className="pt-2 border-t border-border">
+                            <NavigationMenuLink asChild>
+                              <a
+                                href="#features"
+                                className="flex items-center justify-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors py-2"
+                              >
+                                View all features
+                                <ArrowRight className="h-4 w-4" />
+                              </a>
+                            </NavigationMenuLink>
                           </div>
                         </div>
                       ))}
@@ -381,17 +387,33 @@ const Header = () => {
               {/* Mobile Features - Compact */}
               <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Features</h3>
-                <div className="grid grid-cols-2 gap-1 px-4">
-                  {featuresMenu.flatMap(section => section.items).slice(0, 4).map((item, index) => (
+                <div className="space-y-2 px-4">
+                  {featuresMenu.flatMap(section => section.items).map((item, index) => (
                     <a
                       key={index}
                       href={item.href}
-                      className="block py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded px-2"
+                      className="block py-2 px-3 rounded-lg hover:bg-accent transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {item.name}
+                      <div className="flex items-start gap-3">
+                        {item.icon && <item.icon className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />}
+                        <div className="flex-1">
+                          <div className="font-medium text-sm text-foreground">{item.name}</div>
+                          {item.description && (
+                            <div className="text-xs text-muted-foreground mt-1 leading-relaxed">{item.description}</div>
+                          )}
+                        </div>
+                      </div>
                     </a>
                   ))}
+                  <a
+                    href="#features"
+                    className="flex items-center justify-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors py-2 px-3 rounded-lg border border-border"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    View all features
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
                 </div>
               </div>
 
