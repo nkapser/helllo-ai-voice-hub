@@ -264,7 +264,7 @@ const Footer = () => {
             </div>
             
             <p className="text-background/80 mb-6 leading-relaxed">
-              Empowering Small and Medium Businesses with intelligent AI voice technology. 
+              Enterprise-grade AI voice agents built for businesses of all sizes. 
               Easy setup, seamless integration, and enterprise-grade security.
             </p>
 
