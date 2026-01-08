@@ -52,7 +52,7 @@ const Pricing = () => {
       description: "Perfect for growing businesses",
       badge: null,
       icon: Phone,
-      minutes: "10,000 minutes",
+      minutes: "2,000 minutes",
       minutesDescription: "included per month",
       features: features,
       highlightedFeatures: [],
