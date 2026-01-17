@@ -1,6 +1,43 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Phone } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+
+const countries = [
+  { code: "+1", flag: "🇺🇸", name: "United States" },
+  { code: "+44", flag: "🇬🇧", name: "United Kingdom" },
+  { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+61", flag: "🇦🇺", name: "Australia" },
+  { code: "+86", flag: "🇨🇳", name: "China" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+49", flag: "🇩🇪", name: "Germany" },
+  { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+34", flag: "🇪🇸", name: "Spain" },
+  { code: "+39", flag: "🇮🇹", name: "Italy" },
+  { code: "+971", flag: "🇦🇪", name: "UAE" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+66", flag: "🇹🇭", name: "Thailand" },
+];
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -13,9 +50,95 @@ const Hero = () => {
     [rotatingPhrases.length]
   );
 
+  const { session } = useAuth();
   const [slotIndex, setSlotIndex] = useState(0);
   const [isPhraseSpinning, setIsPhraseSpinning] = useState(false);
   const [isSlotResetting, setIsSlotResetting] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [countryCode, setCountryCode] = useState("+91");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const selectedCountry = countries.find((c) => c.code === countryCode) || countries[2];
+
+  const handleSayHellloClick = () => {
+    if (!phoneNumber.trim()) {
+      alert("Please enter a phone number");
+      return;
+    }
+    setIsDialogOpen(true);
+  };
+
+  const handleSubmitCall = async () => {
+    if (!userName.trim()) {
+      alert("Please enter your name");
+      return;
+    }
+
+    if (!acceptedTerms) {
+      alert("Please accept the terms and conditions");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const fullPhoneNumber = `${countryCode}${phoneNumber.replace(/\D/g, "")}`;
+      
+      // Determine API base URL based on hostname
+      const hostname = window.location.hostname;
+      let apiBaseUrl: string;
+      
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        apiBaseUrl = 'http://localhost:8000';
+      } else if (hostname === 'staging.helllo.ai' || hostname.includes('staging')) {
+        apiBaseUrl = 'https://api-staging.helllo.ai';
+      } else {
+        // Production (helllo.ai)
+        apiBaseUrl = 'https://api-prod.helllo.ai';
+      }
+      
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+
+      if (session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.access_token}`;
+      }
+      
+      const response = await fetch(`${apiBaseUrl}/api/v1/demo-trigger-outbound-call`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+          agent_id: 'a29a27c6-ccd2-4e40-abf2-6d90dbaedf99',
+          to_number: fullPhoneNumber,
+          from_number: '+911234567890', // Optional
+          data_variables: {
+            callee_name: userName.trim()
+          }
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to initiate call');
+      }
+
+      alert(`Call initiated successfully! We'll call you at ${fullPhoneNumber} soon.`);
+      setIsDialogOpen(false);
+      setUserName("");
+      setAcceptedTerms(false);
+      setPhoneNumber("");
+    } catch (error) {
+      console.error('Error initiating call:', error);
+      alert(`Error: ${error instanceof Error ? error.message : 'Failed to initiate call. Please try again.'}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   
   useEffect(() => {
     const stepSize = 1; // Flip one phrase at a time
@@ -227,6 +350,120 @@ const Hero = () => {
               Contact Sales
             </Button>
           </div>
+
+          {/* Experience Call Widget */}
+          <div className="mb-12 mt-8">
+            <p className="text-lg md:text-xl text-muted-foreground mb-6 text-center">
+              Experience our call now!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-xl mx-auto">
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <Select value={countryCode} onValueChange={setCountryCode}>
+                  <SelectTrigger className="w-[90px] h-12 border-border/30 px-2 justify-center">
+                    <span className="text-xl leading-none flex items-center justify-center">
+                      {selectedCountry.flag}
+                    </span>
+                    <SelectValue className="sr-only">{selectedCountry.code}</SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {countries.map((country) => (
+                      <SelectItem key={country.code} value={country.code}>
+                        <span className="flex items-center gap-2">
+                          <span className="text-xl">{country.flag}</span>
+                          <span>{country.name}</span>
+                        </span>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
+                  type="tel"
+                  placeholder="Enter number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="min-w-[220px] sm:min-w-[280px] h-12 border-border/30 focus:border-foreground/50 text-base px-4"
+                  aria-label="Phone number"
+                />
+              </div>
+              <Button
+                size="lg"
+                className="h-12 bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-6 sm:px-8 font-semibold uppercase tracking-wider shadow-lg flex items-center gap-2 whitespace-nowrap"
+                aria-label="Say Helllo - Start call"
+                onClick={handleSayHellloClick}
+              >
+                <Phone className="h-4 w-4" />
+                Say Helllo
+              </Button>
+            </div>
+          </div>
+
+          {/* Call Initiation Dialog */}
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Initiate Call</DialogTitle>
+                <DialogDescription>
+                  Enter your name and accept the terms and conditions to initiate the call.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <Label htmlFor="name">Your Name</Label>
+                  <Input
+                    id="name"
+                    placeholder="Enter your name"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    disabled={isSubmitting}
+                    className="w-full"
+                  />
+                </div>
+                <div className="flex items-start space-x-2">
+                  <Checkbox
+                    id="terms"
+                    checked={acceptedTerms}
+                    onCheckedChange={(checked) => setAcceptedTerms(checked === true)}
+                    disabled={isSubmitting}
+                  />
+                  <Label
+                    htmlFor="terms"
+                    className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                  >
+                    I accept the{" "}
+                    <a
+                      href="/terms"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary underline hover:text-primary/80"
+                    >
+                      terms and conditions
+                    </a>
+                  </Label>
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsDialogOpen(false)}
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleSubmitCall}
+                  disabled={isSubmitting || !userName.trim() || !acceptedTerms}
+                  className="bg-foreground text-background hover:bg-foreground/90"
+                >
+                  {isSubmitting ? "Initiating..." : (
+                    <>
+                      <Phone className="h-4 w-4 mr-2" />
+                      Say Helllo
+                    </>
+                  )}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
