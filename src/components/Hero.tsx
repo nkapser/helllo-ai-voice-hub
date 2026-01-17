@@ -60,15 +60,28 @@ const Hero = () => {
   const [userName, setUserName] = useState("");
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [phoneError, setPhoneError] = useState("");
+  const [callSuccess, setCallSuccess] = useState(false);
+  const [successPhoneNumber, setSuccessPhoneNumber] = useState("");
 
   const selectedCountry = countries.find((c) => c.code === countryCode) || countries[2];
 
   const handleSayHellloClick = () => {
     if (!phoneNumber.trim()) {
-      alert("Please enter a phone number");
+      setPhoneError("Please enter a phone number");
       return;
     }
+    setPhoneError("");
+    setCallSuccess(false);
+    setSuccessPhoneNumber("");
     setIsDialogOpen(true);
+  };
+
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhoneNumber(e.target.value);
+    if (phoneError) {
+      setPhoneError("");
+    }
   };
 
   const handleSubmitCall = async () => {
@@ -127,17 +140,23 @@ const Hero = () => {
         throw new Error(data.message || 'Failed to initiate call');
       }
 
-      alert(`Call initiated successfully! We'll call you at ${fullPhoneNumber} soon.`);
-      setIsDialogOpen(false);
-      setUserName("");
-      setAcceptedTerms(false);
-      setPhoneNumber("");
+      setSuccessPhoneNumber(fullPhoneNumber);
+      setCallSuccess(true);
+      setIsSubmitting(false);
     } catch (error) {
       console.error('Error initiating call:', error);
       alert(`Error: ${error instanceof Error ? error.message : 'Failed to initiate call. Please try again.'}`);
-    } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleCloseSuccess = () => {
+    setIsDialogOpen(false);
+    setCallSuccess(false);
+    setSuccessPhoneNumber("");
+    setUserName("");
+    setAcceptedTerms(false);
+    setPhoneNumber("");
   };
   
   useEffect(() => {
@@ -356,34 +375,41 @@ const Hero = () => {
             <p className="text-lg md:text-xl text-muted-foreground mb-6 text-center">
               Experience our call now!
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-xl mx-auto">
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <Select value={countryCode} onValueChange={setCountryCode}>
-                  <SelectTrigger className="w-[90px] h-12 border-border/30 px-2 justify-center">
-                    <span className="text-xl leading-none flex items-center justify-center">
-                      {selectedCountry.flag}
-                    </span>
-                    <SelectValue className="sr-only">{selectedCountry.code}</SelectValue>
-                  </SelectTrigger>
-                  <SelectContent>
-                    {countries.map((country) => (
-                      <SelectItem key={country.code} value={country.code}>
-                        <span className="flex items-center gap-2">
-                          <span className="text-xl">{country.flag}</span>
-                          <span>{country.name}</span>
-                        </span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Input
-                  type="tel"
-                  placeholder="Enter number"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  className="min-w-[220px] sm:min-w-[280px] h-12 border-border/30 focus:border-foreground/50 text-base px-4"
-                  aria-label="Phone number"
-                />
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-start sm:items-center max-w-xl mx-auto">
+              <div className="flex flex-col gap-1 w-full sm:w-auto">
+                <div className="flex items-start gap-2">
+                  <Select value={countryCode} onValueChange={setCountryCode}>
+                    <SelectTrigger className="w-[90px] h-12 border-border/30 px-2 justify-center">
+                      <span className="text-xl leading-none flex items-center justify-center">
+                        {selectedCountry.flag}
+                      </span>
+                      <SelectValue className="sr-only">{selectedCountry.code}</SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {countries.map((country) => (
+                        <SelectItem key={country.code} value={country.code}>
+                          <span className="flex items-center gap-2">
+                            <span className="text-xl">{country.flag}</span>
+                            <span>{country.name}</span>
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <div className="flex flex-col gap-1 flex-1">
+                    <Input
+                      type="tel"
+                      placeholder="Enter number"
+                      value={phoneNumber}
+                      onChange={handlePhoneNumberChange}
+                      className={`min-w-[220px] sm:min-w-[280px] h-12 border-2 ${phoneError ? 'border-red-500' : 'border-foreground/40 focus:border-foreground/70'} text-base px-4 transition-colors`}
+                      aria-label="Phone number"
+                    />
+                    {phoneError && (
+                      <p className="text-sm text-red-500">{phoneError}</p>
+                    )}
+                  </div>
+                </div>
               </div>
               <Button
                 size="lg"
@@ -398,70 +424,96 @@ const Hero = () => {
           </div>
 
           {/* Call Initiation Dialog */}
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <Dialog open={isDialogOpen} onOpenChange={(open) => {
+            setIsDialogOpen(open);
+            if (!open) {
+              handleCloseSuccess();
+            }
+          }}>
             <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Initiate Call</DialogTitle>
-                <DialogDescription>
-                  Enter your name and accept the terms and conditions to initiate the call.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="name">Your Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="Enter your name"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    disabled={isSubmitting}
-                    className="w-full"
-                  />
-                </div>
-                <div className="flex items-start space-x-2">
-                  <Checkbox
-                    id="terms"
-                    checked={acceptedTerms}
-                    onCheckedChange={(checked) => setAcceptedTerms(checked === true)}
-                    disabled={isSubmitting}
-                  />
-                  <Label
-                    htmlFor="terms"
-                    className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-                  >
-                    I accept the{" "}
-                    <a
-                      href="/terms"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary underline hover:text-primary/80"
+              {callSuccess ? (
+                <>
+                  <DialogHeader>
+                    <DialogTitle>Call Initiated Successfully!</DialogTitle>
+                    <DialogDescription>
+                      We'll call you at {successPhoneNumber} soon.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <Button
+                      onClick={handleCloseSuccess}
+                      className="bg-foreground text-background hover:bg-foreground/90 w-full"
                     >
-                      terms and conditions
-                    </a>
-                  </Label>
-                </div>
-              </div>
-              <DialogFooter>
-                <Button
-                  variant="outline"
-                  onClick={() => setIsDialogOpen(false)}
-                  disabled={isSubmitting}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  onClick={handleSubmitCall}
-                  disabled={isSubmitting || !userName.trim() || !acceptedTerms}
-                  className="bg-foreground text-background hover:bg-foreground/90"
-                >
-                  {isSubmitting ? "Initiating..." : (
-                    <>
-                      <Phone className="h-4 w-4 mr-2" />
-                      Say Helllo
-                    </>
-                  )}
-                </Button>
-              </DialogFooter>
+                      Close
+                    </Button>
+                  </DialogFooter>
+                </>
+              ) : (
+                <>
+                  <DialogHeader>
+                    <DialogTitle>Initiate Call</DialogTitle>
+                    <DialogDescription>
+                      Enter your name and accept the terms and conditions to initiate the call.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="name">Your Name</Label>
+                      <Input
+                        id="name"
+                        placeholder="Enter your name"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                        disabled={isSubmitting}
+                        className="w-full"
+                      />
+                    </div>
+                    <div className="flex items-start space-x-2">
+                      <Checkbox
+                        id="terms"
+                        checked={acceptedTerms}
+                        onCheckedChange={(checked) => setAcceptedTerms(checked === true)}
+                        disabled={isSubmitting}
+                      />
+                      <Label
+                        htmlFor="terms"
+                        className="text-sm font-normal leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                      >
+                        I accept the{" "}
+                        <a
+                          href="/terms"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary underline hover:text-primary/80"
+                        >
+                          terms and conditions
+                        </a>
+                      </Label>
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button
+                      variant="outline"
+                      onClick={() => setIsDialogOpen(false)}
+                      disabled={isSubmitting}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={handleSubmitCall}
+                      disabled={isSubmitting || !userName.trim() || !acceptedTerms}
+                      className="bg-foreground text-background hover:bg-foreground/90"
+                    >
+                      {isSubmitting ? "Initiating..." : (
+                        <>
+                          <Phone className="h-4 w-4 mr-2" />
+                          Say Helllo
+                        </>
+                      )}
+                    </Button>
+                  </DialogFooter>
+                </>
+              )}
             </DialogContent>
           </Dialog>
         </div>
