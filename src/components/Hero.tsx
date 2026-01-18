@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -371,56 +372,71 @@ const Hero = () => {
           </div>
 
           {/* Experience Call Widget */}
-          <div className="mb-12 mt-8">
-            <p className="text-lg md:text-xl text-muted-foreground mb-6 text-center">
-              Experience our call now!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-start sm:items-center max-w-xl mx-auto">
-              <div className="flex flex-col gap-1 w-full sm:w-auto">
-                <div className="flex items-start gap-2">
-                  <Select value={countryCode} onValueChange={setCountryCode}>
-                    <SelectTrigger className="w-[90px] h-12 border-border/30 px-2 justify-center">
-                      <span className="text-xl leading-none flex items-center justify-center">
-                        {selectedCountry.flag}
-                      </span>
-                      <SelectValue className="sr-only">{selectedCountry.code}</SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      {countries.map((country) => (
-                        <SelectItem key={country.code} value={country.code}>
+          <div className="">
+            <Card className="border border-purple-300/60 bg-blue-50/80 shadow-sm rounded-lg overflow-hidden w-full">
+              <CardHeader className="text-center pb-5 pt-6 px-4 sm:px-8 md:px-12 lg:px-16">
+                <CardTitle className="text-2xl md:text-3xl font-bold text-foreground mb-2 tracking-tight">
+                  Experience AI Voice in 30 Seconds
+                </CardTitle>
+                <CardDescription className="text-base md:text-lg text-muted-foreground mt-1 leading-relaxed">
+                  Get an instant demo call and hear our AI voice agent in action.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="px-4 sm:px-8 md:px-12 lg:px-16 pb-4">
+                <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                  <div className="flex flex-col gap-1 w-full sm:flex-1">
+                    <div className="flex items-center gap-2 w-full">
+                      <Select value={countryCode} onValueChange={setCountryCode}>
+                        <SelectTrigger className="w-auto min-w-[110px] sm:min-w-[130px] h-12 border border-gray-300 bg-white px-3 rounded-md hover:border-gray-400 transition-colors [&>span:first-child]:hidden">
+                          <SelectValue className="sr-only" />
                           <span className="flex items-center gap-2">
-                            <span className="text-xl">{country.flag}</span>
-                            <span>{country.name}</span>
+                            <span className="text-xl leading-none">{selectedCountry.flag}</span>
+                            <span className="text-base font-medium text-foreground">{selectedCountry.code}</span>
                           </span>
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <div className="flex flex-col gap-1 flex-1">
-                    <Input
-                      type="tel"
-                      placeholder="Enter number"
-                      value={phoneNumber}
-                      onChange={handlePhoneNumberChange}
-                      className={`min-w-[220px] sm:min-w-[280px] h-12 border-2 ${phoneError ? 'border-red-500' : 'border-foreground/40 focus:border-foreground/70'} text-base px-4 transition-colors`}
-                      aria-label="Phone number"
-                    />
-                    {phoneError && (
-                      <p className="text-sm text-red-500">{phoneError}</p>
-                    )}
+                        </SelectTrigger>
+                        <SelectContent>
+                          {countries.map((country) => (
+                            <SelectItem key={country.code} value={country.code}>
+                              <span className="flex items-center gap-2">
+                                <span className="text-xl">{country.flag}</span>
+                                <span>{country.name}</span>
+                              </span>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <div className="flex flex-col gap-1 flex-1">
+                        <Input
+                          type="tel"
+                          placeholder="Enter your phone number"
+                          value={phoneNumber}
+                          onChange={handlePhoneNumberChange}
+                          className={`w-full h-12 border border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 text-base px-4 rounded-md transition-colors text-foreground placeholder:text-muted-foreground bg-white ${phoneError ? 'border-red-500' : ''}`}
+                          aria-label="Phone number"
+                        />
+                        {phoneError && (
+                          <p className="text-sm text-red-500 mt-1">{phoneError}</p>
+                        )}
+                      </div>
+                    </div>
                   </div>
+                  <Button
+                    size="lg"
+                    className="h-12 bg-black text-white hover:bg-gray-900 active:bg-gray-800 transition-all duration-200 rounded-md px-6 sm:px-8 font-semibold uppercase tracking-wider flex items-center justify-center gap-2 w-full sm:w-auto whitespace-nowrap shadow-sm"
+                    aria-label="Call me - Start call"
+                    onClick={handleSayHellloClick}
+                  >
+                    <Phone className="h-4 w-4" />
+                    CALL ME
+                  </Button>
                 </div>
-              </div>
-              <Button
-                size="lg"
-                className="h-12 bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-6 sm:px-8 font-semibold uppercase tracking-wider shadow-lg flex items-center gap-2 whitespace-nowrap"
-                aria-label="Say Helllo - Start call"
-                onClick={handleSayHellloClick}
-              >
-                <Phone className="h-4 w-4" />
-                Say Helllo
-              </Button>
-            </div>
+              </CardContent>
+              <CardFooter className="pt-2 pb-6 justify-center px-4 sm:px-8 md:px-12 lg:px-16">
+                <p className="text-sm text-muted-foreground text-center">
+                  No signup required • Instant demo • Available 24/7
+                </p>
+              </CardFooter>
+            </Card>
           </div>
 
           {/* Call Initiation Dialog */}
