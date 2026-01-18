@@ -383,15 +383,15 @@ const Hero = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="px-4 sm:px-8 md:px-12 lg:px-16 pb-4">
-                <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                <div className="flex flex-col sm:flex-row gap-3 items-start">
                   <div className="flex flex-col gap-1 w-full sm:flex-1">
                     <div className="flex items-center gap-2 w-full">
                       <Select value={countryCode} onValueChange={setCountryCode}>
-                        <SelectTrigger className="w-auto min-w-[110px] sm:min-w-[130px] h-12 border border-gray-300 bg-white px-3 rounded-md hover:border-gray-400 transition-colors [&>span:first-child]:hidden">
+                        <SelectTrigger className="w-auto h-12 border border-gray-300 bg-white pl-3 pr-2 rounded-md hover:border-gray-400 transition-colors [&>span:first-child]:hidden self-start">
                           <SelectValue className="sr-only" />
-                          <span className="flex items-center gap-2">
-                            <span className="text-xl leading-none">{selectedCountry.flag}</span>
-                            <span className="text-base font-medium text-foreground">{selectedCountry.code}</span>
+                          <span className="flex items-center">
+                            <span className="text-xl leading-none">{selectedCountry.flag}&nbsp;</span>
+                            <span className="text-base font-medium text-foreground whitespace-nowrap">&nbsp;{selectedCountry.code}&nbsp;</span>
                           </span>
                         </SelectTrigger>
                         <SelectContent>
@@ -414,9 +414,11 @@ const Hero = () => {
                           className={`w-full h-12 border border-gray-300 focus:border-gray-400 focus:ring-1 focus:ring-gray-400 text-base px-4 rounded-md transition-colors text-foreground placeholder:text-muted-foreground bg-white ${phoneError ? 'border-red-500' : ''}`}
                           aria-label="Phone number"
                         />
-                        {phoneError && (
-                          <p className="text-sm text-red-500 mt-1">{phoneError}</p>
-                        )}
+                        <div className="h-5 min-h-[20px]">
+                          {phoneError && (
+                            <p className="text-sm text-red-500">{phoneError}</p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
