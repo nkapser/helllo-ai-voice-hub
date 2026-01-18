@@ -295,15 +295,15 @@ const Hero = () => {
       `}</style>
       <section 
         id="home" 
-        className="relative pt-24 pb-12 lg:pt-32 lg:pb-16 bg-background overflow-hidden min-h-screen flex flex-col snap-start" 
+        className="relative pt-16 pb-8 lg:pt-20 lg:pb-10 bg-background overflow-hidden min-h-screen flex flex-col snap-start" 
         role="banner"
       >
       <div className="container mx-auto px-4 lg:px-8 relative z-10 flex-1 flex flex-col justify-center">
         <div className="max-w-5xl mx-auto text-center flex-1 flex flex-col justify-center">
           {/* Main Headline */}
           <h1 
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 tracking-tight flex flex-col items-center text-center"
-            style={{ rowGap: "0.65rem" }}
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 tracking-tight flex flex-col items-center text-center"
+            style={{ rowGap: "0.5rem" }}
           >
             <span className="block leading-tight text-foreground">
               Supercharge your
@@ -336,7 +336,7 @@ const Hero = () => {
 
           {/* Sub-headline */}
           <p 
-            className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto"
+            className="text-base md:text-lg lg:text-xl text-muted-foreground mb-6 leading-relaxed max-w-3xl mx-auto"
             style={{
               textShadow: 'rgba(255, 255, 255, 0.7) 0px 0px 15px',
             }}
@@ -345,7 +345,7 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8" role="group" aria-label="Call to action buttons">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6" role="group" aria-label="Call to action buttons">
             <Button
               size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-8 py-6 text-base font-semibold uppercase tracking-wider shadow-lg"
@@ -374,15 +374,15 @@ const Hero = () => {
           {/* Experience Call Widget */}
           <div className="">
             <Card className="border border-purple-300/60 bg-blue-50/80 shadow-sm rounded-lg overflow-hidden w-full">
-              <CardHeader className="text-center pb-5 pt-6 px-4 sm:px-8 md:px-12 lg:px-16">
-                <CardTitle className="text-2xl md:text-3xl font-bold text-foreground mb-2 tracking-tight">
+              <CardHeader className="text-center pb-4 pt-5 px-4 sm:px-8 md:px-12 lg:px-16">
+                <CardTitle className="text-xl md:text-2xl font-bold text-foreground mb-1.5 tracking-tight">
                   Experience AI Voice in 30 Seconds
                 </CardTitle>
-                <CardDescription className="text-base md:text-lg text-muted-foreground mt-1 leading-relaxed">
+                <CardDescription className="text-sm md:text-base text-muted-foreground leading-relaxed">
                   Get an instant demo call and hear our AI voice agent in action.
                 </CardDescription>
               </CardHeader>
-              <CardContent className="px-4 sm:px-8 md:px-12 lg:px-16 pb-4">
+              <CardContent className="px-4 sm:px-8 md:px-12 lg:px-16 pb-3">
                 <div className="flex flex-col sm:flex-row gap-3 items-start">
                   <div className="flex flex-col gap-1 w-full sm:flex-1">
                     <div className="flex items-center gap-2 w-full">
@@ -433,7 +433,7 @@ const Hero = () => {
                   </Button>
                 </div>
               </CardContent>
-              <CardFooter className="pt-2 pb-6 justify-center px-4 sm:px-8 md:px-12 lg:px-16">
+              <CardFooter className="pt-1 pb-4 justify-center px-4 sm:px-8 md:px-12 lg:px-16">
                 <p className="text-sm text-muted-foreground text-center">
                   No signup required • Instant demo • Available 24/7
                 </p>
@@ -538,7 +538,7 @@ const Hero = () => {
       </div>
 
       {/* Trusted Partners - Full Width */}
-      <div className="w-full relative z-10 mt-8">
+      <div className="w-full relative z-10 mt-4">
         <div className="w-full pt-6 pb-6 border-t border-border/30 bg-muted/30 backdrop-blur-sm">
           <div className="container mx-auto px-4 lg:px-8">
             <p className="text-sm text-muted-foreground mb-5 text-center font-medium uppercase tracking-wider">
