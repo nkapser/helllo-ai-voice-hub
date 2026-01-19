@@ -344,48 +344,12 @@ const Hero = () => {
             Deploy and scale production-ready AI voice agents, powered by agentic orchestration, to deliver business outcomes.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6" role="group" aria-label="Call to action buttons">
-            <Button
-              size="lg"
-              className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-8 py-6 text-base font-semibold uppercase tracking-wider shadow-lg"
-              aria-label="Schedule a demo"
-              onClick={() => {
-                const calendlySection = document.getElementById('schedule-demo');
-                if (calendlySection) {
-                  calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              Schedule a Demo
-            </Button>
-            
-            <Button
-              variant="outline"
-              size="lg"
-              className="border border-foreground/20 bg-white text-foreground hover:bg-foreground/5 rounded-full px-8 py-6 text-base font-semibold uppercase tracking-wider"
-              aria-label="Contact sales"
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              Contact Sales
-            </Button>
-          </div>
+          
 
           {/* Experience Call Widget */}
           <div className="">
             <Card className="border border-purple-300/60 bg-blue-50/80 shadow-sm rounded-lg overflow-hidden w-full">
               <CardHeader className="text-center pb-4 pt-5 px-4 sm:px-8 md:px-12 lg:px-16">
-                <CardTitle className="text-xl md:text-2xl font-bold text-foreground mb-1.5 tracking-tight">
-                  Experience Helllo AI Voice Now!
-                </CardTitle>
-                <CardDescription className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  Get an instant demo call and hear our AI voice agent in action.
-                </CardDescription>
               </CardHeader>
               <CardContent className="px-4 sm:px-8 md:px-12 lg:px-16 pb-3">
                 <div className="flex flex-col sm:flex-row gap-3 items-start">
@@ -437,12 +401,12 @@ const Hero = () => {
                     CALL ME
                   </Button>
                 </div>
+                <CardFooter className="pt-1 pb-4 justify-center px-4 sm:px-8 md:px-12 lg:px-16">
+                  <p className="text-sm text-muted-foreground text-center">
+                  Experience helllo AI voice now!
+                  </p>
+                </CardFooter>
               </CardContent>
-              <CardFooter className="pt-1 pb-4 justify-center px-4 sm:px-8 md:px-12 lg:px-16">
-                <p className="text-sm text-muted-foreground text-center">
-                  No signup required • Instant demo • Available 24/7
-                </p>
-              </CardFooter>
             </Card>
           </div>
 
