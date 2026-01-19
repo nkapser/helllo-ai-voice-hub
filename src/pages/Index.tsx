@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import WhyChooseHelllo from "@/components/WhyChooseHelllo";
 import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
+import CalendlyWidget from "@/components/CalendlyWidget";
 import ContactForm from "@/components/ContactForm";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
@@ -49,6 +50,7 @@ const Index = () => {
         <WhyChooseHelllo />
         <Features />
         <Pricing />
+        <CalendlyWidget />
         <ContactForm />
         <FinalCTA />
       </main>

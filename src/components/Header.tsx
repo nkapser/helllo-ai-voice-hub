@@ -360,10 +360,15 @@ const Header = () => {
             <Button 
               variant="hero" 
               size="sm" 
-              aria-label="Start your free trial"
-              onClick={() => navigate("/console")}
+              aria-label="Schedule a demo"
+              onClick={() => {
+                const calendlySection = document.getElementById('schedule-demo');
+                if (calendlySection) {
+                  calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
             >
-              Start Free Trial
+              Schedule a Demo
             </Button>
           </div>
 
@@ -510,10 +515,16 @@ const Header = () => {
                 <Button 
                   variant="hero" 
                   size="sm" 
-                  aria-label="Start your free trial"
-                  onClick={() => navigate("/console")}
+                  aria-label="Schedule a demo"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    const calendlySection = document.getElementById('schedule-demo');
+                    if (calendlySection) {
+                      calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
                 >
-                  Start Free Trial
+                  Schedule a Demo
                 </Button>
               </div>
             </nav>

@@ -51,9 +51,14 @@ const FinalCTA = () => {
               variant="secondary" 
               size="lg" 
               className="group text-lg px-8 py-4 h-auto"
-              onClick={() => navigate("/console")}
+              onClick={() => {
+                const calendlySection = document.getElementById('schedule-demo');
+                if (calendlySection) {
+                  calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
             >
-              Start Free Trial Now
+              Schedule a Demo
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             
@@ -62,9 +67,9 @@ const FinalCTA = () => {
               size="lg" 
               className="group text-lg px-8 py-4 h-auto border-primary-foreground/20 bg-background !text-primary hover:bg-primary-foreground hover:!text-primary"
               onClick={() => {
-                const contactSection = document.getElementById('contact');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const calendlySection = document.getElementById('schedule-demo');
+                if (calendlySection) {
+                  calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
               }}
             >

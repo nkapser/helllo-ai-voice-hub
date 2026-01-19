@@ -349,10 +349,15 @@ const Hero = () => {
             <Button
               size="lg"
               className="bg-foreground text-background hover:bg-foreground/90 hover:scale-105 transition-all duration-200 rounded-full px-8 py-6 text-base font-semibold uppercase tracking-wider shadow-lg"
-              aria-label="Try for free"
-              onClick={() => navigate("/console")}
+              aria-label="Schedule a demo"
+              onClick={() => {
+                const calendlySection = document.getElementById('schedule-demo');
+                if (calendlySection) {
+                  calendlySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
             >
-              Try for Free
+              Schedule a Demo
             </Button>
             
             <Button
