@@ -1,6 +1,6 @@
 {
     "main": "./src/index.ts",
-    "name": "hellloai-landing",
+    "name": "hellloai-landing-production",
     "compatibility_date": "2025-04-03",
     "assets": {
       "directory": "dist/client",
