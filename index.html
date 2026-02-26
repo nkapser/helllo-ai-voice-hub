@@ -311,5 +311,21 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- Helllo AI Agent Chat Widget - available across all pages -->
+    <script src="https://unpkg.com/@helllo-ai/agent-chat-widget@latest/agent-chat.prod.js"></script>
+    <script>
+      window.AgentChatWidget.init({
+        agentId: '5a62e595-4360-424f-8784-4804a5ae7baf',
+        embedKey: '46GeX5j3GG4d31vF9wrQ517Pw9imEy50H5i-Bq9UVPo',
+        position: 'bottom-right',
+        captureCustomerInfo: true,
+        allowSkipCustomerInfo: false,
+        primaryColor: '#2664eb',
+        backgroundColor: '#ffffff',
+        title: 'Chat with us',
+        showIcon: true,
+        launcherText: 'Chat with us',
+      });
+    </script>
   </body>
 </html>
