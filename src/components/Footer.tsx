@@ -327,9 +327,22 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="container mx-auto px-4 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-background/60 text-sm">
-            © 2025 HellloAI Technologies Pvt Ltd. All rights reserved.
-          </p>
+          <div className="text-center md:text-left">
+            <p className="text-background/60 text-sm">
+              © 2025 HellloAI Technologies Pvt Ltd. All rights reserved.
+            </p>
+            <p className="text-background/50 text-xs mt-1">
+              Parent company:{" "}
+              <a
+                href="https://perceptorylabs.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-background/70 hover:text-background underline-offset-2 hover:underline"
+              >
+                Perceptory AI Labs Private Limited
+              </a>
+            </p>
+          </div>
           
           <div className="flex items-center gap-6 text-sm text-background/60">
             <span>GDPR Compliant</span>
