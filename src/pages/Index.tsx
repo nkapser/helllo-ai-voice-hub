@@ -8,6 +8,7 @@ import CalendlyWidget from "@/components/CalendlyWidget";
 import ContactForm from "@/components/ContactForm";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import AgentChatWidget from "@/components/AgentChatWidget";
 import { setSEO } from "@/lib/seo";
 
 const Index = () => {
@@ -55,6 +56,7 @@ const Index = () => {
         <FinalCTA />
       </main>
       <Footer />
+      <AgentChatWidget />
     </div>
   );
 };
