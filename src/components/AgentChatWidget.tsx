@@ -14,7 +14,8 @@ const WIDGET_CONFIG = {
   title: "Aarohi",
   launcherText: "Chat with us",
   enableWhatsApp: true,
-  whatsappPhone: '+919901678665'
+  whatsappPhone: '+919901678665',
+  whatsapp_message: "Hi, We want to supercharge our business using helllo.ai"
 };
 
 /**
