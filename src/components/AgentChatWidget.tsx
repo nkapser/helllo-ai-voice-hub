@@ -13,6 +13,8 @@ const WIDGET_CONFIG = {
   showIcon: true,
   title: "Aarohi",
   launcherText: "Chat with us",
+  enableWhatsApp: true,
+  whatsappPhone: '+919901678665'
 };
 
 /**
