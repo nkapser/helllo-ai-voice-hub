@@ -40,6 +40,9 @@ const countries = [
   { code: "+66", flag: "🇹🇭", name: "Thailand" },
 ];
 
+const DEMO_OUTBOUND_AGENT_ID_PRODUCTION = "73ff84c6-f4dd-4c9b-8e71-f8d08c150a6e";
+const DEMO_OUTBOUND_AGENT_ID_STAGING = "a29a27c6-ccd2-4e40-abf2-6d90dbaedf99";
+
 const Hero = () => {
   const navigate = useNavigate();
   const rotatingPhrases = ["Front Desk Services", "Customer Experience", "Revenue Operations"];
@@ -113,6 +116,11 @@ const Hero = () => {
         // Production (helllo.ai)
         apiBaseUrl = 'https://api-prod.helllo.ai';
       }
+
+      const agentId =
+        hostname === "staging.helllo.ai" || hostname.includes("staging")
+          ? DEMO_OUTBOUND_AGENT_ID_STAGING
+          : DEMO_OUTBOUND_AGENT_ID_PRODUCTION;
       
       const headers: Record<string, string> = {
         'Content-Type': 'application/json',
@@ -126,7 +134,7 @@ const Hero = () => {
         method: 'POST',
         headers,
         body: JSON.stringify({
-          agent_id: '73ff84c6-f4dd-4c9b-8e71-f8d08c150a6e',
+          agent_id: agentId,
           to_number: fullPhoneNumber,
           from_number: '+911234567890', // Optional
           data_variables: {
