@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WhyChooseHelllo from "@/components/WhyChooseHelllo";
+import DeepIntegrations from "@/components/DeepIntegrations";
 import Features from "@/components/Features";
 import Pricing from "@/components/Pricing";
 import CalendlyWidget from "@/components/CalendlyWidget";
@@ -49,6 +50,7 @@ const Index = () => {
       <main role="main" id="main-content">
         <Hero />
         <WhyChooseHelllo />
+        <DeepIntegrations />
         <Features />
         <Pricing />
         <CalendlyWidget />
