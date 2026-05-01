@@ -280,7 +280,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-background/60" />
-                <span className="text-sm text-background/80">helllo@helllo.ai</span>
+                <span className="text-sm text-background/80">hi@helllo.ai</span>
               </div>
             </div>
 

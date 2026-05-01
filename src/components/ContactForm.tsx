@@ -306,7 +306,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-foreground">Email</h3>
-                  <p className="text-muted-foreground">helllo@helllo.ai</p>
+                  <p className="text-muted-foreground">hi@helllo.ai</p>
                   <p className="text-sm text-muted-foreground">We reply within 24 hours</p>
                 </div>
               </div>
