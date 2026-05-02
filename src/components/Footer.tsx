@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   X
 } from "lucide-react";
+import { DpiitFooterMark } from "@/components/DpiitRecognition";
 
 const Footer = () => {
   const { toast } = useToast();
@@ -344,7 +345,8 @@ const Footer = () => {
             </p>
           </div>
           
-          <div className="flex items-center gap-6 text-sm text-background/60">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-background/60">
+            <DpiitFooterMark />
             <span>GDPR Compliant</span>
             <span>DPDP Certified</span>
             <span>SOC 2 Type II</span>
