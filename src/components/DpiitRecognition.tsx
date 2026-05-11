@@ -22,17 +22,3 @@ export function DpiitRibbon() {
     </a>
   );
 }
-
-/** Inline trust line for dark footer backgrounds. */
-export function DpiitFooterMark() {
-  return (
-    <a
-      href={STARTUP_INDIA_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-background/60 transition-colors hover:text-background/85"
-    >
-      DPIIT Recognised
-    </a>
-  );
-}

@@ -9,6 +9,7 @@ import CalendlyWidget from "@/components/CalendlyWidget";
 import ContactForm from "@/components/ContactForm";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import RecognitionShowcase from "@/components/RecognitionShowcase";
 import AgentChatWidget from "@/components/AgentChatWidget";
 import { setSEO } from "@/lib/seo";
 
@@ -49,6 +50,7 @@ const Index = () => {
       <Header />
       <main role="main" id="main-content">
         <Hero />
+        <RecognitionShowcase />
         <WhyChooseHelllo />
         <DeepIntegrations />
         <Features />

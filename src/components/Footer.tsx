@@ -15,7 +15,7 @@ import {
   CheckCircle2,
   X
 } from "lucide-react";
-import { DpiitFooterMark } from "@/components/DpiitRecognition";
+import { RecognitionLogoStrip } from "@/components/RecognitionShowcase";
 
 const Footer = () => {
   const { toast } = useToast();
@@ -325,6 +325,10 @@ const Footer = () => {
 
       <Separator className="bg-background/10" />
 
+      <div className="container mx-auto px-4 lg:px-8 pb-2 pt-2">
+        <RecognitionLogoStrip />
+      </div>
+
       {/* Bottom Bar */}
       <div className="container mx-auto px-4 lg:px-8 py-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -346,7 +350,6 @@ const Footer = () => {
           </div>
           
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-background/60">
-            <DpiitFooterMark />
             <span>GDPR Compliant</span>
             <span>DPDP Certified</span>
             <span>SOC 2 Type II</span>
