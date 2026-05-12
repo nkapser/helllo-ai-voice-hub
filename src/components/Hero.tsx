@@ -352,8 +352,6 @@ const Hero = () => {
             Deploy and scale production-ready AI voice agents, powered by agentic orchestration, to deliver business outcomes.
           </p>
 
-          
-
           {/* Experience Call Widget */}
           <div className="">
             <Card className="border border-purple-300/60 bg-blue-50/80 shadow-sm rounded-lg overflow-hidden w-full">

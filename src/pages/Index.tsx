@@ -11,6 +11,7 @@ import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import RecognitionShowcase from "@/components/RecognitionShowcase";
 import AgentChatWidget from "@/components/AgentChatWidget";
+import StartupRecognitionWidget from "@/components/StartupRecognitionWidget";
 import { setSEO } from "@/lib/seo";
 
 const Index = () => {
@@ -60,6 +61,7 @@ const Index = () => {
         <FinalCTA />
       </main>
       <Footer />
+      <StartupRecognitionWidget />
       <AgentChatWidget />
     </div>
   );

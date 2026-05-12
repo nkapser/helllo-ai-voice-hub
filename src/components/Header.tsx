@@ -19,7 +19,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
-import { DpiitRibbon } from "@/components/DpiitRecognition";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -532,7 +531,6 @@ const Header = () => {
           </div>
         )}
       </div>
-      <DpiitRibbon />
     </header>
   );
 };

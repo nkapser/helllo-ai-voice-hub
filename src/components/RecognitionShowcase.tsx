@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
-
-const STARTUP_INDIA_URL =
-  "https://www.startupindia.gov.in/content/sih/en/government-schemes.html";
-const SAP_STARTUP_URL = "https://sap.io/startup-programs/";
-const GOOGLE_CLOUD_STARTUP_URL = "https://startup.google.com/cloud/";
+import {
+  GOOGLE_CLOUD_STARTUP_URL,
+  SAP_STARTUP_URL,
+  STARTUP_INDIA_URL,
+} from "@/lib/recognition-programmes";
 
 type RecognitionCardProps = {
   href: string;
