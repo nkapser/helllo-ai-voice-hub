@@ -148,6 +148,7 @@ const Footer = () => {
       links: [
         { name: "Terms of Service", href: "/terms" },
         { name: "Privacy Policy", href: "/privacy" },
+        { name: "Cancellation & Refund Policy", href: "/cancellation-refund" },
         { name: "Cookie Policy", href: "/privacy#cookies" },
         { name: "GDPR Compliance", href: "/privacy#gdpr" }
       ]

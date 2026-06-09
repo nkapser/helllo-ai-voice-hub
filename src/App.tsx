@@ -7,6 +7,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Index from "./pages/Index";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import CancellationRefundPolicy from "./pages/CancellationRefundPolicy";
 import Console from "./pages/Console";
 import NotFound from "./pages/NotFound";
 
@@ -23,6 +24,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/cancellation-refund" element={<CancellationRefundPolicy />} />
             <Route path="/console" element={<Console />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
