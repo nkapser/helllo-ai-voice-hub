@@ -253,7 +253,7 @@ const ContactForm = () => {
 
 
   return (
-    <section id="contact" className="py-20 bg-muted/10 min-h-[80vh] snap-start">
+    <section id="contact" className="scroll-mt-20 py-20 bg-muted/10 min-h-[80vh] snap-start">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
           

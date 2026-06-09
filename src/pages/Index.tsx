@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import WhyChooseHelllo from "@/components/WhyChooseHelllo";
@@ -13,8 +14,11 @@ import RecognitionShowcase from "@/components/RecognitionShowcase";
 import AgentChatWidget from "@/components/AgentChatWidget";
 import StartupRecognitionWidget from "@/components/StartupRecognitionWidget";
 import { setSEO } from "@/lib/seo";
+import { scrollToHash } from "@/lib/scroll";
 
 const Index = () => {
+  const location = useLocation();
+
   // Update SEO meta tags for better search engine optimization
   useEffect(() => {
     setSEO({
@@ -27,16 +31,16 @@ const Index = () => {
     // Ensure lang attribute is set
     document.documentElement.lang = 'en';
     
-    // Enable smooth scroll snapping with proximity (less strict than mandatory)
-    // This allows scrolling to footer while still providing snap behavior
-    document.documentElement.style.scrollSnapType = 'y proximity';
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Respect reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
+    const hasHashNavigation = Boolean(location.hash);
+
+    // Scroll snap fights anchor links such as /#contact.
+    if (!hasHashNavigation && !prefersReducedMotion) {
+      document.documentElement.style.scrollSnapType = 'y proximity';
+      document.documentElement.style.scrollBehavior = 'smooth';
+    } else {
       document.documentElement.style.scrollSnapType = 'none';
-      document.documentElement.style.scrollBehavior = 'auto';
+      document.documentElement.style.scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
     }
     
     return () => {
@@ -44,7 +48,38 @@ const Index = () => {
       document.documentElement.style.scrollSnapType = '';
       document.documentElement.style.scrollBehavior = '';
     };
-  }, []);
+  }, [location.hash]);
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const scrollToHashTarget = () => {
+      scrollToHash(window.location.hash);
+    };
+
+    const runAfterLayout = () => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(scrollToHashTarget);
+      });
+    };
+
+    runAfterLayout();
+
+    if (document.readyState !== "complete") {
+      window.addEventListener("load", scrollToHashTarget, { once: true });
+    }
+
+    // Images and embeds can shift section positions after the first paint.
+    const retryTimeout = window.setTimeout(scrollToHashTarget, 400);
+
+    window.addEventListener("hashchange", scrollToHashTarget);
+
+    return () => {
+      window.clearTimeout(retryTimeout);
+      window.removeEventListener("load", scrollToHashTarget);
+      window.removeEventListener("hashchange", scrollToHashTarget);
+    };
+  }, [location.hash]);
 
   return (
     <div className="min-h-screen">

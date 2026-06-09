@@ -130,7 +130,7 @@ const Footer = () => {
       links: [
         { name: "About", href: "#about" },
         { name: "Careers", href: "#careers" },
-        { name: "Contact", href: "#contact" },
+        { name: "Contact", href: "/#contact" },
         { name: "Blog", href: "#blog" }
       ]
     },
