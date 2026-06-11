@@ -335,7 +335,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left">
             <p className="text-background/60 text-sm">
-              © 2025 HellloAI Technologies Pvt Ltd. All rights reserved.
+              © 2026 HellloAI Technologies Pvt Ltd. All rights reserved.
             </p>
             <p className="text-background/50 text-xs mt-1">
               Parent company:{" "}

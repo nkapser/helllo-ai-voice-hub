@@ -1,6 +1,6 @@
 # Robots.txt for Helllo.ai
-# Following Google and Bing SEO best practices (2025)
-# Updated: 2025-01-15
+# Following Google and Bing SEO best practices (2026)
+# Updated: 2026-06-11
 #
 # IMPORTANT: For staging domains (staging.helllo.ai, dash-staging.helllo.ai),
 # ensure they serve a robots.txt with: User-agent: * Disallow: /

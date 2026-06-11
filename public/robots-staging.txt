@@ -1,6 +1,6 @@
 # Robots.txt for Staging Environments
 # This file blocks all crawlers from indexing staging.helllo.ai and dash-staging.helllo.ai
-# Updated: 2025-01-15
+# Updated: 2026-06-11
 
 # Block ALL crawlers from staging domains
 User-agent: *

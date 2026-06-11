@@ -9,7 +9,7 @@ const TermsOfService = () => {
   useEffect(() => {
     setSEO({
       title: "Terms of Service | helllo.ai - AI Voice Agent Platform",
-      description: "Terms of Service for helllo.ai - AI Voice Agent Platform. Read our terms and conditions for using our services. Updated January 2025.",
+      description: "Terms of Service for helllo.ai - AI Voice Agent Platform. Read our terms and conditions for using our services. Updated June, 2026.",
       keywords: "terms of service, terms and conditions, helllo.ai terms, user agreement",
       canonical: "https://www.helllo.ai/terms",
       ogUrl: "https://www.helllo.ai/terms",
@@ -38,7 +38,7 @@ const TermsOfService = () => {
                 Terms of Service
               </h1>
               <p className="text-lg text-muted-foreground">
-                Last updated: January 15, 2025
+                Last updated: June, 2026
               </p>
             </div>
 
