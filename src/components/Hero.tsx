@@ -43,6 +43,20 @@ const countries = [
 const DEMO_OUTBOUND_AGENT_ID_PRODUCTION = "73ff84c6-f4dd-4c9b-8e71-f8d08c150a6e";
 const DEMO_OUTBOUND_AGENT_ID_STAGING = "a29a27c6-ccd2-4e40-abf2-6d90dbaedf99";
 
+const partnerLogos = [
+  { src: "/partner-logos/1-essem18-logo.png", alt: "ESSEM 18 logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/2-cascade-neopolis.png", alt: "The Cascades Neopolis logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/3-clean-fanatics-.webp", alt: "Clean Fanatics logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/4-mednetLabs_logo.png", alt: "MedNet Labs logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/5-delta-images.jpeg", alt: "Delta Hospitals logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/6-gsl-college.png", alt: "GSL College logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/7-voltran.svg", alt: "Voltran logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/8-nambiar-logo-color.svg", alt: "Nambiar logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/9-dsrinfra.png", alt: "DSR Infra logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/10-distacart.png", alt: "Distacart logo - Trusted partner of helllo.ai" },
+  { src: "/partner-logos/12-iamhere.svg", alt: "I Am Here logo - Trusted partner of helllo.ai" },
+];
+
 const Hero = () => {
   const navigate = useNavigate();
   const rotatingPhrases = ["Front Desk Services", "Customer Experience", "Revenue Operations"];
@@ -257,6 +271,47 @@ const Hero = () => {
           filter: grayscale(0%) brightness(1);
         }
 
+        .partner-marquee {
+          overflow: hidden;
+          width: 100%;
+          -webkit-mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 8%,
+            black 92%,
+            transparent
+          );
+          mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 8%,
+            black 92%,
+            transparent
+          );
+        }
+
+        .partner-marquee-track {
+          display: flex;
+          align-items: center;
+          width: max-content;
+          gap: 4rem;
+          animation: partner-marquee-scroll 45s linear infinite;
+          will-change: transform;
+        }
+
+        .partner-marquee:hover .partner-marquee-track {
+          animation-play-state: paused;
+        }
+
+        @keyframes partner-marquee-scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+
         .hero-slot {
           display: inline-flex;
           align-items: baseline;
@@ -298,6 +353,12 @@ const Hero = () => {
           }
           .hero-slot-track.is-spinning {
             filter: none;
+          }
+          .partner-marquee-track {
+            animation: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
           }
         }
       `}</style>
@@ -512,74 +573,35 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Trusted Partners - Full Width */}
+      {/* Trusted Partners - Scrolling Ribbon */}
       <div className="w-full relative z-10 mt-4">
         <div className="w-full pt-6 pb-6 border-t border-border/30 bg-muted/30 backdrop-blur-sm">
-          <div className="container mx-auto px-4 lg:px-8">
-            <p className="text-sm text-muted-foreground mb-5 text-center font-medium uppercase tracking-wider">
-              Trusted by Industry Leaders
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16" role="list" aria-label="Trusted partner companies">
-              <div className="partner-logo-container" role="listitem">
-                <img 
-                  src="/partner-logos/1-essem18-logo.png" 
-                  alt="ESSEM 18 logo - Trusted partner of helllo.ai" 
-                  className="partner-logo"
-                  loading="lazy"
-                  width="120"
-                  height="60"
-                />
-              </div>
-              <div className="partner-logo-container" role="listitem">
-                <img 
-                  src="/partner-logos/2-cascade-neopolis.png" 
-                  alt="The Cascades Neopolis logo - Trusted partner of helllo.ai" 
-                  className="partner-logo"
-                  loading="lazy"
-                  width="120"
-                  height="60"
-                />
-              </div>
-              <div className="partner-logo-container" role="listitem">
-                <img 
-                  src="/partner-logos/3-clean-fanatics-.webp" 
-                  alt="Clean Fanatics logo - Trusted partner of helllo.ai" 
-                  className="partner-logo"
-                  loading="lazy"
-                  width="120"
-                  height="60"
-                />
-              </div>
-              <div className="partner-logo-container" role="listitem">
-                <img 
-                  src="/partner-logos/4-mednetLabs_logo.png" 
-                  alt="MedNet Labs logo - Trusted partner of helllo.ai" 
-                  className="partner-logo"
-                  loading="lazy"
-                  width="120"
-                  height="60"
-                />
-              </div>
-              <div className="partner-logo-container" role="listitem">
-                <img 
-                  src="/partner-logos/5-delta-images.jpeg" 
-                  alt="Delta Hospitals logo - Trusted partner of helllo.ai" 
-                  className="partner-logo"
-                  loading="lazy"
-                  width="120"
-                  height="60"
-                />
-              </div>
-              <div className="partner-logo-container" role="listitem">
-                <img 
-                  src="/partner-logos/6-gsl-college.png" 
-                  alt="GSL College logo - Trusted partner of helllo.ai" 
-                  className="partner-logo"
-                  loading="lazy"
-                  width="120"
-                  height="60"
-                />
-              </div>
+          <p className="text-sm text-muted-foreground mb-5 text-center font-medium uppercase tracking-wider px-4">
+            Trusted by Industry Leaders
+          </p>
+          <div
+            className="partner-marquee"
+            role="region"
+            aria-label="Trusted partner companies"
+          >
+            <div className="partner-marquee-track" role="list">
+              {[...partnerLogos, ...partnerLogos].map((partner, index) => (
+                <div
+                  key={`${partner.src}-${index}`}
+                  className="partner-logo-container shrink-0 px-2"
+                  role="listitem"
+                  aria-hidden={index >= partnerLogos.length ? true : undefined}
+                >
+                  <img
+                    src={partner.src}
+                    alt={partner.alt}
+                    className="partner-logo"
+                    loading="lazy"
+                    width="120"
+                    height="60"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
