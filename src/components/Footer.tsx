@@ -16,6 +16,7 @@ import {
   X
 } from "lucide-react";
 import { RecognitionLogoStrip } from "@/components/RecognitionShowcase";
+import { openCookiePreferences } from "@/lib/cookiebot";
 
 const Footer = () => {
   const { toast } = useToast();
@@ -150,6 +151,7 @@ const Footer = () => {
         { name: "Privacy Policy", href: "/privacy" },
         { name: "Cancellation & Refund Policy", href: "/cancellation-refund" },
         { name: "Cookie Policy", href: "/privacy#cookies" },
+        { name: "Cookie Settings", href: "#", onClick: openCookiePreferences },
         { name: "GDPR Compliance", href: "/privacy#gdpr" }
       ]
     },
@@ -313,6 +315,14 @@ const Footer = () => {
                     <a
                       href={link.href}
                       className="text-background/80 hover:text-background transition-colors"
+                      onClick={
+                        "onClick" in link && link.onClick
+                          ? (event) => {
+                              event.preventDefault();
+                              link.onClick?.();
+                            }
+                          : undefined
+                      }
                     >
                       {link.name}
                     </a>

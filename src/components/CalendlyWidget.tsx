@@ -2,11 +2,10 @@ import { useEffect } from "react";
 
 const CalendlyWidget = () => {
   useEffect(() => {
-    // Load Calendly script if not already loaded
     if (!document.querySelector('script[src="https://assets.calendly.com/assets/external/widget.js"]')) {
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
       script.async = true;
       document.body.appendChild(script);
     }
@@ -24,12 +23,11 @@ const CalendlyWidget = () => {
               Book a time that works for you and see how AI Voice Agents can transform your business.
             </p>
           </div>
-          
-          {/* Calendly inline widget */}
-          <div 
-            className="calendly-inline-widget" 
-            data-url="https://calendly.com/karsandilya/30min?hide_event_type_details=1&hide_gdpr_banner=1" 
-            style={{ minWidth: '320px', height: '700px' }}
+
+          <div
+            className="calendly-inline-widget"
+            data-url="https://calendly.com/karsandilya/30min?hide_event_type_details=1&hide_gdpr_banner=1"
+            style={{ minWidth: "320px", height: "700px" }}
           />
         </div>
       </div>
