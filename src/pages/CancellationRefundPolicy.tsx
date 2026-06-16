@@ -10,17 +10,17 @@ const CancellationRefundPolicy = () => {
     setSEO({
       title: "Cancellation & Refund Policy | helllo.ai",
       description:
-        "Learn how subscriptions and cancellations work for Helllo AI paid plans. Monthly billing in USD via Stripe, cancel anytime, no refunds — credits remain for 2-month carry-forward.",
+        "Learn how subscriptions and cancellations work for Helllo AI paid plans. Monthly billing via Stripe (USD) or Razorpay (INR for India), cancel anytime, no refunds — credits remain for 2-month carry-forward.",
       keywords:
-        "cancellation policy, refund policy, helllo.ai billing, subscription cancellation, Stripe billing",
+        "cancellation policy, refund policy, helllo.ai billing, subscription cancellation, Stripe billing, Razorpay billing",
       canonical: "https://www.helllo.ai/cancellation-refund",
       ogUrl: "https://www.helllo.ai/cancellation-refund",
       ogTitle: "Cancellation & Refund Policy | helllo.ai",
       ogDescription:
-        "How subscriptions and cancellations work for Helllo AI paid plans billed in USD through Stripe. No refunds — use credits during the 2-month carry-forward period.",
+        "How subscriptions and cancellations work for Helllo AI paid plans billed through Stripe (USD) or Razorpay (INR for India). No refunds — use credits during the 2-month carry-forward period.",
       twitterTitle: "Cancellation & Refund Policy | helllo.ai",
       twitterDescription:
-        "How subscriptions and cancellations work for Helllo AI paid plans billed in USD through Stripe. No refunds — use credits during the 2-month carry-forward period.",
+        "How subscriptions and cancellations work for Helllo AI paid plans billed through Stripe (USD) or Razorpay (INR for India). No refunds — use credits during the 2-month carry-forward period.",
       structuredData: [
         generateBreadcrumbSchema([
           { name: "Home", url: "https://www.helllo.ai/" },
@@ -69,15 +69,20 @@ const CancellationRefundPolicy = () => {
                     </h2>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-4">
                       <li>
-                        Paid plans are <strong>monthly subscriptions</strong> billed in{" "}
-                        <strong>United States Dollars (USD)</strong> through{" "}
-                        <strong>Stripe</strong>.
+                        Paid plans are <strong>monthly subscriptions</strong>. Billing currency and
+                        payment processor depend on your account billing country.
                       </li>
                       <li>
-                        All self-serve subscription transactions processed through Stripe are
-                        charged in <strong>USD</strong>. Your bank or card issuer may apply
-                        currency conversion or foreign transaction fees depending on your
-                        payment method and country.
+                        <strong>International accounts:</strong> payments are processed through{" "}
+                        <strong>Stripe</strong> in <strong>United States Dollars (USD)</strong>.
+                        Your bank or card issuer may apply currency conversion or foreign
+                        transaction fees depending on your payment method and country.
+                      </li>
+                      <li>
+                        <strong>Accounts in India:</strong> payments are processed through{" "}
+                        <strong>Razorpay</strong> in <strong>Indian Rupees (INR)</strong>. Self-serve
+                        checkout is available for accounts with <strong>India</strong> as the billing
+                        country.
                       </li>
                       <li>
                         Each successful payment grants <strong>plan credits</strong>{" "}
@@ -204,7 +209,8 @@ const CancellationRefundPolicy = () => {
                       </li>
                       <li>
                         Your previous subscription will not renew and is retired
-                        according to our billing integration with Stripe.
+                        according to our billing integration with Stripe or Razorpay, depending on
+                        your payment processor.
                       </li>
                     </ul>
 
@@ -230,10 +236,9 @@ const CancellationRefundPolicy = () => {
                         successful checkout.
                       </li>
                       <li>
-                        On successful payment for the new plan, the previous
-                        subscription is cancelled in Stripe (this is an immediate
-                        cancellation of the old subscription, not end-of-period
-                        cancellation).
+                        On successful payment for the new plan, the previous subscription is
+                        cancelled in Stripe or Razorpay (this is an immediate cancellation of the
+                        old subscription, not end-of-period cancellation).
                       </li>
                     </ul>
                   </section>
@@ -286,8 +291,9 @@ const CancellationRefundPolicy = () => {
                       Refunds
                     </h2>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      <strong>No refund will be made</strong> for self-serve subscription
-                      payments billed through Stripe in USD. All subscription charges are{" "}
+                      <strong>No refund will be made</strong> for self-serve subscription payments,
+                      whether billed through <strong>Stripe (USD)</strong> or{" "}
+                      <strong>Razorpay (INR)</strong>. All subscription charges are{" "}
                       <strong>final and non-refundable</strong>.
                     </p>
 
@@ -306,8 +312,8 @@ const CancellationRefundPolicy = () => {
                       Console → Profile → Billing → Current subscription → Cancel subscription
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      For billing questions only (invoices, payment status, Stripe receipt access,
-                      or account access), contact{" "}
+                      For billing questions only (invoices, payment status, receipt access through
+                      Stripe or Razorpay, or account access), contact{" "}
                       <a href="mailto:support@helllo.ai" className="text-primary hover:underline">
                         support@helllo.ai
                       </a>
@@ -319,12 +325,14 @@ const CancellationRefundPolicy = () => {
                     </h3>
                     <p className="text-muted-foreground leading-relaxed mb-4">
                       <strong>No monetary refunds are offered</strong> under any condition for
-                      self-serve Stripe subscriptions, including voluntary cancellation, change of
-                      mind, partial use of a billing period, or unused credits.
+                      self-serve subscriptions (Stripe or Razorpay), including voluntary
+                      cancellation, change of mind, partial use of a billing period, or unused
+                      credits.
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      In place of a refund, each successful USD payment grants{" "}
-                      <strong>plan credits</strong> to your account. You are expected to{" "}
+                      In place of a refund, each successful payment grants{" "}
+                      <strong>plan credits</strong> to your account, whether you paid in USD through
+                      Stripe or INR through Razorpay. You are expected to{" "}
                       <strong>use those credits</strong> during the{" "}
                       <strong>2-month carry-forward period</strong> described in{" "}
                       <a href="#credit-expiry" className="text-primary hover:underline">
@@ -344,7 +352,7 @@ const CancellationRefundPolicy = () => {
                       </li>
                       <li>
                         Unused credits expire automatically after the carry-forward window; they
-                        are not converted to cash or refunded in USD or any other currency
+                        are not converted to cash or refunded in USD, INR, or any other currency
                       </li>
                     </ul>
                     <p className="text-muted-foreground leading-relaxed mb-4">
@@ -360,8 +368,8 @@ const CancellationRefundPolicy = () => {
                     </h3>
                     <p className="text-muted-foreground leading-relaxed mb-4">
                       Because we do <strong>not</strong> issue monetary refunds, there is{" "}
-                      <strong>no refund processing timeline</strong> for self-serve Stripe
-                      subscriptions.
+                      <strong>no refund processing timeline</strong> for self-serve subscriptions,
+                      whether processed through Stripe or Razorpay.
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-4">
                       The value of your payment is applied <strong>immediately</strong> upon
@@ -378,9 +386,9 @@ const CancellationRefundPolicy = () => {
                       Failed payments
                     </h2>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      If a <strong>renewal payment fails</strong>, your subscription
-                      may enter a <strong>past due</strong> state while Stripe
-                      retries collection according to its rules.
+                      If a <strong>renewal payment fails</strong>, your subscription may enter a{" "}
+                      <strong>past due</strong> state while Stripe or Razorpay retries collection
+                      according to its rules.
                     </p>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-4">
                       <li>
@@ -406,18 +414,25 @@ const CancellationRefundPolicy = () => {
                     </h2>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-4">
                       <li>
-                        Complete <strong>Billing & invoicing details</strong> (legal
-                        name, address, email, phone) before subscribing so Stripe receipts and
-                        invoices reflect your business information.
+                        Complete <strong>Billing & invoicing details</strong> (legal name, address,
+                        email, phone, and GSTIN where applicable for India) before subscribing so
+                        receipts and invoices reflect your business information.
                       </li>
                       <li>
-                        Updates to billing details apply to <strong>future</strong>{" "}
-                        invoices and charges, not invoices already issued.
+                        Updates to billing details apply to <strong>future</strong> invoices and
+                        charges, not invoices already issued.
                       </li>
                       <li>
-                        Payment receipts and invoices are provided through Stripe. Charges appear
-                        in <strong>USD</strong> on your Stripe receipt and billing history in the
-                        app.
+                        <strong>Stripe (international):</strong> payment receipts and invoices are
+                        provided through Stripe. Charges appear in <strong>USD</strong>.
+                      </li>
+                      <li>
+                        <strong>Razorpay (India):</strong> hosted invoices and PDFs are provided
+                        through Razorpay. Charges appear in <strong>INR</strong>.
+                      </li>
+                      <li>
+                        Your billing history and invoice links are available in the app under
+                        Billing → Invoices.
                       </li>
                     </ul>
                   </section>
@@ -542,7 +557,8 @@ const CancellationRefundPolicy = () => {
                     </h2>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-4">
                       <li>
-                        <strong>Monthly billing</strong> in USD via Stripe.
+                        <strong>Monthly billing</strong> — Stripe (USD) for international accounts;
+                        Razorpay (INR) for accounts in India.
                       </li>
                       <li>
                         <strong>Cancel anytime</strong> — access continues until the
