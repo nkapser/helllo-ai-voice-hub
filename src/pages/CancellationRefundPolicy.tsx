@@ -10,17 +10,17 @@ const CancellationRefundPolicy = () => {
     setSEO({
       title: "Cancellation & Refund Policy | helllo.ai",
       description:
-        "Learn how subscriptions, cancellations, and refunds work for Helllo AI paid plans. Monthly billing via Razorpay, cancel anytime, and credit carry-forward rules explained.",
+        "Learn how subscriptions and cancellations work for Helllo AI paid plans. Monthly billing via Razorpay, cancel anytime, no refunds — credits remain for 2-month carry-forward.",
       keywords:
         "cancellation policy, refund policy, helllo.ai billing, subscription cancellation, Razorpay billing",
       canonical: "https://www.helllo.ai/cancellation-refund",
       ogUrl: "https://www.helllo.ai/cancellation-refund",
       ogTitle: "Cancellation & Refund Policy | helllo.ai",
       ogDescription:
-        "How subscriptions, cancellations, and refunds work for Helllo AI paid plans billed through Razorpay.",
+        "How subscriptions and cancellations work for Helllo AI paid plans billed through Razorpay. No refunds — use credits during the 2-month carry-forward period.",
       twitterTitle: "Cancellation & Refund Policy | helllo.ai",
       twitterDescription:
-        "How subscriptions, cancellations, and refunds work for Helllo AI paid plans billed through Razorpay.",
+        "How subscriptions and cancellations work for Helllo AI paid plans billed through Razorpay. No refunds — use credits during the 2-month carry-forward period.",
       structuredData: [
         generateBreadcrumbSchema([
           { name: "Home", url: "https://www.helllo.ai/" },
@@ -45,7 +45,7 @@ const CancellationRefundPolicy = () => {
                 Cancellation & Refund Policy
               </h1>
               <p className="text-lg text-muted-foreground">
-                Last updated: May 2026
+                Last updated: June 15, 2026
               </p>
             </div>
 
@@ -54,9 +54,10 @@ const CancellationRefundPolicy = () => {
                 <div className="prose prose-lg max-w-none">
                   <section className="mb-8">
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      This policy describes how subscriptions, cancellations, and
-                      refunds work for Helllo AI ("we", "us", "our") when you
-                      purchase a paid plan through our application.
+                      This policy describes how subscriptions and cancellations work for
+                      Helllo AI ("we", "us", "our") when you purchase a paid plan through our
+                      application. <strong>No monetary refunds are offered</strong> for
+                      self-serve subscription payments.
                     </p>
                   </section>
 
@@ -284,41 +285,58 @@ const CancellationRefundPolicy = () => {
                       Refunds
                     </h2>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      <strong>Subscription payments are generally non-refundable.</strong>
+                      <strong>No refund will be made</strong> for self-serve subscription
+                      payments billed through Razorpay. All subscription charges are{" "}
+                      <strong>final and non-refundable</strong>.
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      The application does <strong>not</strong> process automatic
-                      refunds. Refunds are not initiated through the Billing UI or
-                      self-serve APIs.
+                      The application does <strong>not</strong> process refunds. Refunds are not
+                      available through the Billing UI, self-serve APIs, or by email request.
                     </p>
+
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      Credits instead of refunds
+                    </h3>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      If you believe a charge was made in error (for example,
-                      duplicate charge, unauthorized payment, or a clear billing
-                      mistake), contact us at{" "}
-                      <a
-                        href="mailto:support@helllo.ai"
-                        className="text-primary hover:underline"
-                      >
-                        support@helllo.ai
-                      </a>{" "}
-                      within <strong>7 days</strong> of the charge with:
+                      When you pay for a plan, the corresponding <strong>plan credits</strong> are
+                      added to your account. Instead of a refund, you are expected to{" "}
+                      <strong>use those credits</strong> during the{" "}
+                      <strong>2-month carry-forward period</strong> described in{" "}
+                      <a href="#credit-expiry" className="text-primary hover:underline">
+                        Credit expiry
+                      </a>
+                      .
                     </p>
                     <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-4">
-                      <li>Your account email</li>
                       <li>
-                        Razorpay payment ID or invoice reference (from Billing →
-                        Invoices)
+                        Credits from each successful payment remain available until they expire
+                        (default: <strong>2 months</strong> from the grant date)
+                      </li>
+                      <li>
+                        Cancelling your subscription does <strong>not</strong> remove credits
+                        already granted — you may continue using them until they expire or are
+                        consumed
+                      </li>
+                      <li>
+                        Unused credits expire automatically after the carry-forward window; they
+                        are not converted to cash or refunded
                       </li>
                     </ul>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      We will review requests <strong>case by case</strong>.
-                      Approved refunds, if any, are processed <strong>manually</strong>{" "}
-                      through Razorpay. Timing depends on your bank or card issuer.
+                      This applies regardless of whether you cancel, change plans, or stop using
+                      the service before credits are fully consumed. Enterprise and custom
+                      contracts may follow separate agreement terms via{" "}
+                      <a href="mailto:sales@helllo.ai" className="text-primary hover:underline">
+                        sales@helllo.ai
+                      </a>
+                      .
                     </p>
                     <p className="text-muted-foreground leading-relaxed mb-4">
-                      <strong>Tax invoices</strong> already issued are not
-                      automatically voided. Corrections under Indian GST or other
-                      tax rules may require a credit note or revised documentation.
+                      For billing questions (invoices, payment status, or account access), contact{" "}
+                      <a href="mailto:support@helllo.ai" className="text-primary hover:underline">
+                        support@helllo.ai
+                      </a>
+                      . Billing support does <strong>not</strong> include refund processing.
                     </p>
                   </section>
 
@@ -458,9 +476,7 @@ const CancellationRefundPolicy = () => {
                         </thead>
                         <tbody>
                           <tr className="border-b border-border">
-                            <td className="py-2 pr-4">
-                              Billing support & refund requests
-                            </td>
+                            <td className="py-2 pr-4">Billing support</td>
                             <td className="py-2">
                               <a
                                 href="mailto:support@helllo.ai"
@@ -505,8 +521,8 @@ const CancellationRefundPolicy = () => {
                         expire under carry-forward rules (default: 2 months).
                       </li>
                       <li>
-                        <strong>No automatic refunds</strong> — contact support for
-                        billing errors.
+                        <strong>No refunds</strong> — use plan credits during the 2-month
+                        carry-forward period; unused credits expire and are not refunded.
                       </li>
                       <li>
                         <strong>Enterprise</strong> — custom terms via sales.
