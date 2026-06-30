@@ -49,10 +49,11 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  opacity: 0.45;
   background:
-    radial-gradient(80% 50% at 50% -20%, rgba(147, 197, 253, 0.45), transparent),
-    radial-gradient(60% 40% at 100% 100%, rgba(96, 165, 250, 0.2), transparent),
-    radial-gradient(50% 35% at 0% 80%, rgba(224, 242, 254, 0.6), transparent);
+    radial-gradient(80% 50% at 50% -20%, rgba(147, 197, 253, 0.35), transparent),
+    radial-gradient(60% 40% at 100% 100%, rgba(96, 165, 250, 0.12), transparent),
+    radial-gradient(50% 35% at 0% 80%, rgba(224, 242, 254, 0.4), transparent);
 }
 
 .spark-grid {
@@ -63,7 +64,7 @@
   background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
   background-size: 28px 28px;
   mask-image: radial-gradient(80% 60% at 50% 40%, black 30%, transparent 75%);
-  opacity: 0.5;
+  opacity: 0.35;
 }
 
 .spark-content {
@@ -305,6 +306,239 @@
   animation: widget-pulse 2.6s ease-in-out infinite;
 }
 
+/* ── Hero voice field (ambient background) ───────────────────── */
+.hero-voice-stage {
+  position: relative;
+}
+
+.hero-voice-field {
+  position: absolute;
+  inset: -4rem 50% 0;
+  width: 100vw;
+  margin-left: -50vw;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 72%,
+    transparent 100%
+  );
+}
+
+.hero-voice-aurora {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-voice-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.hero-voice-orb-1 {
+  width: 420px;
+  height: 420px;
+  top: -8%;
+  left: 18%;
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.55) 0%, transparent 70%);
+  animation: hero-orb-drift-1 38s ease-in-out infinite;
+}
+
+.hero-voice-orb-2 {
+  width: 360px;
+  height: 360px;
+  top: 8%;
+  right: 12%;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.4) 0%, transparent 70%);
+  animation: hero-orb-drift-2 44s ease-in-out infinite;
+}
+
+.hero-voice-orb-3 {
+  width: 280px;
+  height: 280px;
+  bottom: 18%;
+  left: 42%;
+  background: radial-gradient(circle, rgba(224, 242, 254, 0.85) 0%, transparent 70%);
+  animation: hero-orb-drift-3 52s ease-in-out infinite reverse;
+}
+
+@keyframes hero-orb-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, 6%) scale(1.06); }
+  66% { transform: translate(-3%, 3%) scale(0.96); }
+}
+
+@keyframes hero-orb-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40% { transform: translate(-6%, 4%) scale(1.08); }
+  70% { transform: translate(3%, -2%) scale(0.94); }
+}
+
+@keyframes hero-orb-drift-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(5%, -4%); }
+}
+
+.hero-voice-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(70% 55% at 50% 48%, black 25%, transparent 78%);
+  opacity: 0.55;
+}
+
+.hero-voice-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 120px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(96, 165, 250, 0.07),
+    rgba(147, 197, 253, 0.14),
+    transparent
+  );
+  animation: hero-scan-once 2.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s 1 forwards;
+  opacity: 0;
+}
+
+@keyframes hero-scan-once {
+  0% { transform: translateY(-40%); opacity: 0; }
+  12% { opacity: 1; }
+  100% { transform: translateY(420px); opacity: 0; }
+}
+
+.hero-voice-core {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  width: min(760px, 92vw);
+  height: 340px;
+  transform: translate(-50%, -50%);
+}
+
+.hero-voice-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid rgba(96, 165, 250, 0.22);
+  transform: translate(-50%, -50%) scale(0.35);
+  opacity: 0;
+  animation: hero-voice-ripple 5.5s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.hero-voice-ring-1 { animation-delay: 0s; }
+.hero-voice-ring-2 { animation-delay: 1.1s; }
+.hero-voice-ring-3 { animation-delay: 2.2s; }
+.hero-voice-ring-4 { animation-delay: 3.3s; }
+.hero-voice-ring-5 { animation-delay: 4.4s; }
+
+@keyframes hero-voice-ripple {
+  0% {
+    width: 80px;
+    height: 80px;
+    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  100% {
+    width: 80px;
+    height: 80px;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(3.2);
+  }
+}
+
+.hero-voice-wave {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 72px;
+  transform: translate(-50%, -50%);
+  opacity: 0.45;
+}
+
+.hero-voice-wave-path {
+  fill: none;
+  stroke: url(#hero-wave-gradient);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 12 8;
+  animation: hero-wave-flow 4s linear infinite;
+}
+
+.hero-voice-wave-path-alt {
+  stroke: rgba(59, 130, 246, 0.25);
+  stroke-width: 1;
+  stroke-dasharray: 6 14;
+  animation: hero-wave-flow 6s linear infinite reverse;
+  opacity: 0.7;
+}
+
+@keyframes hero-wave-flow {
+  to { stroke-dashoffset: -120; }
+}
+
+.hero-voice-sparks {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-voice-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--spark);
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.6);
+  opacity: 0;
+  animation: hero-spark-twinkle 4s ease-in-out infinite;
+}
+
+.hero-voice-spark-1 { top: 28%; left: 22%; animation-delay: 0.5s; }
+.hero-voice-spark-2 { top: 62%; left: 74%; animation-delay: 1.8s; }
+.hero-voice-spark-3 { top: 44%; left: 48%; animation-delay: 3.1s; }
+
+@keyframes hero-spark-twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  45% { opacity: 0.85; transform: scale(1); }
+  55% { opacity: 0.85; transform: scale(1.15); }
+}
+
+/* Input focus — field “listens” harder */
+.hero-voice-stage:has(#hero-input:focus-within) .hero-voice-ring {
+  border-color: rgba(59, 130, 246, 0.38);
+  animation-duration: 3.2s;
+}
+
+.hero-voice-stage:has(#hero-input:focus-within) .hero-voice-wave-path {
+  opacity: 0.65;
+  animation-duration: 2s;
+}
+
+.hero-voice-stage:has(#hero-input:focus-within) .hero-voice-wave-path-alt {
+  animation-duration: 2.8s;
+}
+
+.hero-voice-stage:has(#hero-input:focus-within) .hero-voice-orb-2 {
+  opacity: 0.72;
+}
+
+.hero-voice-content {
+  position: relative;
+  z-index: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -317,5 +551,24 @@
   .animate-spark-rise {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-voice-ring,
+  .hero-voice-wave-path,
+  .hero-voice-orb,
+  .hero-voice-scan,
+  .hero-voice-spark {
+    animation: none !important;
+  }
+
+  .hero-voice-ring-3 {
+    opacity: 0.12;
+    width: 280px;
+    height: 280px;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .hero-voice-scan {
+    display: none;
   }
 }
