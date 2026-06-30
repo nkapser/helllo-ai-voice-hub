@@ -2,8 +2,6 @@ import { Globe, Mic, Code2 } from 'lucide-react'
 import URLInput from './URLInput'
 import HeroVoiceField from './HeroVoiceField'
 
-const LOGO_NAMES = ['acme.dev', 'northwind', 'lumen', 'studio·6', 'kraft.io', 'halcyon']
-
 const FEATURE_CARDS = [
   {
     icon: Globe,
@@ -52,14 +50,23 @@ export default function Hero() {
         </div>
 
         <div className="animate-spark-rise d4 mt-14 w-full">
-          <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.14em] spark-text-muted">
-            Trusted by indie builders shipping today
+          <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] spark-text-muted">
+            Built by
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-sm spark-text-subtle">
-            {LOGO_NAMES.map((name) => (
-              <span key={name}>{name}</span>
-            ))}
-          </div>
+          <a
+            href="https://perceptorylabs.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--spark-border))] bg-[var(--spark-surface-elevated)] px-5 py-2.5 text-sm font-medium spark-text-primary transition hover:border-[var(--spark)] hover:shadow-spark"
+          >
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-spark text-[10px] text-white">
+              PL
+            </span>
+            perceptorylabs.ai
+          </a>
+          <p className="mt-3 text-[12.5px] spark-text-subtle max-w-sm mx-auto">
+            Production AI from the team behind Helllo.ai
+          </p>
         </div>
 
         <div className="animate-spark-rise d5 mt-16 grid w-full max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">

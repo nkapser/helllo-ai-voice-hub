@@ -5,7 +5,7 @@ export function sparkAppUrl(rawUrl: string): string {
   const withProtocol = /^https?:\/\//i.test(trimmed)
     ? trimmed
     : `https://${trimmed}`
-  return `https://app.helllo.ai/console/spark?url=${encodeURIComponent(withProtocol)}`
+  return `https://dash.helllo.ai/console/spark?url=${encodeURIComponent(withProtocol)}`
 }
 
 /** Lightweight cx / classnames helper */

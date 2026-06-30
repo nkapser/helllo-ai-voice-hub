@@ -74,7 +74,7 @@ export default function SiteDiscovery() {
                 </div>
               </div>
               <a
-                href="https://app.helllo.ai/console/profile/billing"
+                href="https://dash.helllo.ai/console/profile/billing"
                 className="btn-spark flex-shrink-0 flex items-center gap-1.5 text-[12.5px] font-medium px-4 py-2 rounded-lg text-white transition-all duration-150"
               >
                 See plans <ArrowRight className="w-3.5 h-3.5" />

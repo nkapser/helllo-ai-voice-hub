@@ -11,6 +11,7 @@ import Pricing from "@/pages/spark/components/Pricing";
 import FAQ from "@/pages/spark/components/FAQ";
 import FinalCTA from "@/pages/spark/components/FinalCTA";
 import Footer from "@/pages/spark/components/Footer";
+import DataPrivacyStrip from "@/pages/spark/components/DataPrivacyStrip";
 import RevealInit from "@/pages/spark/components/RevealInit";
 import { setSEO } from "@/lib/seo";
 import { scrollToHash } from "@/lib/scroll";
@@ -86,6 +87,7 @@ const Spark = () => {
         <Nav />
         <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
           <Hero />
+          <DataPrivacyStrip />
           <MagicMoment />
           <HowItWorks />
           <Superpowers />

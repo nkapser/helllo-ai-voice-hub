@@ -26,7 +26,7 @@ export default function Nav() {
             Helllo.ai
           </a>
           <a
-            href="https://app.helllo.ai/auth/signin?redirect=/console/spark"
+            href="https://dash.helllo.ai/auth/signin?redirect=/console/spark"
             className="spark-btn-secondary inline-flex h-9 items-center rounded-lg px-4 text-sm font-medium"
           >
             Sign in

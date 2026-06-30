@@ -49,6 +49,17 @@ export default function Footer() {
             <p className="text-[13px] leading-relaxed spark-text-muted">
               Give your website a voice. Paste your URL, train on your content, embed one script tag.
             </p>
+            <p className="mt-3 text-[12px] spark-text-subtle">
+              Built by{' '}
+              <a
+                href="https://perceptorylabs.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--spark-ember)] hover:underline"
+              >
+                Perceptory Labs
+              </a>
+            </p>
           </div>
 
           {/* Link groups */}

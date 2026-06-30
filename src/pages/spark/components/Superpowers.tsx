@@ -20,7 +20,7 @@ const CARDS = [
           </div>
           <div className="self-start flex flex-col gap-1.5" style={{ maxWidth: '90%' }}>
             <div className="rounded-xl rounded-bl-sm px-3 py-1.5 text-[11px] spark-text-primary" style={{ background: 'rgba(96,165,250,0.12)', border: '1px solid rgba(96,165,250,0.2)' }}>
-              We offer plans from free to $499/mo. Want me to open your Pricing page?
+              We offer plans from $49/mo. Want me to open your Pricing page?
             </div>
             <div className="flex gap-1.5">
               <div
