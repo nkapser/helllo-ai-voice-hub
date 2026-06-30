@@ -24,24 +24,24 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="hero-voice-stage mx-auto flex w-full max-w-6xl flex-col items-center overflow-hidden px-2 pb-16 pt-10 text-center sm:pt-14 lg:pt-16"
+      className="hero-voice-stage mx-auto flex w-full max-w-6xl flex-col items-center overflow-hidden px-2 pb-10 pt-6 text-center sm:pt-8 lg:pt-10"
     >
       <HeroVoiceField />
 
       <div className="hero-voice-content flex w-full flex-col items-center">
-        <div className="spark-badge-pill animate-spark-rise d0 mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
+        <div className="spark-badge-pill animate-spark-rise d0 mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--spark)]" />
           Launching on Product Hunt — be first to embed Spark
         </div>
 
-        <h1 className="animate-spark-rise d1 mb-6 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight spark-text-primary sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
+        <h1 className="animate-spark-rise d1 mb-5 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight spark-text-primary sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
           <span className="block max-[360px]:whitespace-normal sm:whitespace-nowrap">
             Give your website
           </span>
           <span className="gradient-text block italic">a voice.</span>
         </h1>
 
-        <p className="animate-spark-rise d2 mx-auto mb-10 max-w-xl text-base spark-text-muted sm:text-lg">
+        <p className="animate-spark-rise d2 mx-auto mb-8 max-w-xl text-base spark-text-muted sm:text-lg">
           Paste your URL. In 30 seconds, talk to an AI assistant trained on your site — then embed it in one line of code.
         </p>
 
@@ -49,7 +49,7 @@ export default function Hero() {
           <URLInput id="hero-input" showTrustRow showExamples />
         </div>
 
-        <div className="animate-spark-rise d4 mt-14 w-full">
+        <div className="animate-spark-rise d4 mt-10 w-full">
           <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.14em] spark-text-muted">
             Built by
           </p>
@@ -69,7 +69,7 @@ export default function Hero() {
           </p>
         </div>
 
-        <div className="animate-spark-rise d5 mt-16 grid w-full max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="animate-spark-rise d5 mt-10 grid w-full max-w-4xl grid-cols-1 gap-3 sm:grid-cols-3">
           {FEATURE_CARDS.map(({ icon: Icon, title, body }) => (
             <div key={title} className="glass rounded-2xl p-6 text-left">
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-spark text-white shadow-spark">

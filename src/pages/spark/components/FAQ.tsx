@@ -40,13 +40,11 @@ export default function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="relative py-24">
+    <section id="faq" className="spark-section relative">
       <div className="glow-divider" />
 
-      <div className="max-w-3xl mx-auto px-5 sm:px-8 mt-24">
-
-        {/* Header */}
-        <div className="text-center mb-14 reveal">
+      <div className="max-w-3xl mx-auto px-5 sm:px-8">
+        <div className="text-center mb-8 reveal">
           <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'var(--spark-ember)' }}>
             FAQ
           </span>

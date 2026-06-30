@@ -45,11 +45,11 @@ const STEPS = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="relative py-24">
-      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+    <section id="how-it-works" className="spark-section relative">
+      <div className="glow-divider" />
 
-        {/* Header */}
-        <div className="text-center mb-16 reveal">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+        <div className="text-center mb-8 reveal">
           <span
             className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium"
             style={{ color: 'var(--spark-ember)' }}
@@ -115,7 +115,7 @@ export default function HowItWorks() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-14 reveal">
+        <div className="text-center mt-8 reveal">
           <a
             href="/spark#hero-input"
             className="btn-spark inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium text-white text-sm"

@@ -73,7 +73,7 @@ const PLANS: Plan[] = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="relative py-24">
+    <section id="pricing" className="spark-section relative">
       <div className="glow-divider" />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -91,8 +91,8 @@ export default function Pricing() {
         />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-2 sm:px-0 mt-24">
-        <div className="text-center mb-14 reveal">
+      <div className="relative z-10 max-w-6xl mx-auto px-2 sm:px-0">
+        <div className="text-center mb-8 reveal">
           <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium text-[var(--spark-ember)]">
             Pricing
           </span>
@@ -172,11 +172,11 @@ export default function Pricing() {
           ))}
         </div>
 
-        <p className="reveal text-center mt-8 text-[13px] spark-text-muted">
+        <p className="reveal text-center mt-6 text-[13px] spark-text-muted">
           All plans include a free trial — paste your URL to get started. No credit card required.
         </p>
 
-        <div className="text-center mt-10 reveal">
+        <div className="text-center mt-8 reveal">
           <a
             href="/spark#hero-input"
             className="btn-spark inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-medium text-white text-sm"

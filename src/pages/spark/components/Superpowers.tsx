@@ -113,7 +113,7 @@ const CARDS = [
 
 export default function Superpowers() {
   return (
-    <section id="superpowers" className="relative py-24">
+    <section id="superpowers" className="spark-section relative">
       <div className="glow-divider" />
 
       {/* Subtle aurora */}
@@ -129,19 +129,19 @@ export default function Superpowers() {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 mt-24">
-        <div className="text-center mb-4 reveal">
-          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'var(--spark-ember)' }}>
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8">
+        <div className="text-center mb-6 reveal">
+          <span className="inline-block text-[12px] uppercase tracking-widest mb-2 font-medium" style={{ color: 'var(--spark-ember)' }}>
             Superpowers
           </span>
           <h2
-            className="mb-3"
+            className="mb-2"
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em' }}
           >
             Not just a chatbot.
           </h2>
           <h2
-            className="mb-5"
+            className="mb-4"
             style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em' }}
           >
             <em className="gradient-text not-italic">An assistant that moves your business forward.</em>
@@ -151,7 +151,7 @@ export default function Superpowers() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-5 mt-14">
+        <div className="grid lg:grid-cols-3 gap-4 mt-8">
           {CARDS.map(({ icon: Icon, badge, badgeColor, badgeBorder, badgeText, accentBg, accentBorder, iconColor, title, body, demo }, i) => (
             <div
               key={title}
@@ -182,7 +182,7 @@ export default function Superpowers() {
           ))}
         </div>
 
-        <p className="text-center mt-8 text-[13px] spark-text-subtle">
+        <p className="text-center mt-6 text-[13px] spark-text-subtle">
           All optional. Skip anything and still go live.
         </p>
       </div>

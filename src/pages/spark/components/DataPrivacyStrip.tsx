@@ -25,17 +25,17 @@ const PRIVACY_POINTS = [
 
 export default function DataPrivacyStrip() {
   return (
-    <section className="relative py-16 sm:py-20" aria-labelledby="privacy-strip-heading">
-      <div className="glow-divider mb-16 sm:mb-20" />
+    <section className="spark-section relative" aria-labelledby="privacy-strip-heading">
+      <div className="glow-divider" />
 
       <div className="max-w-6xl mx-auto px-2 sm:px-0">
-        <div className="text-center mb-10 reveal">
-          <span className="inline-block text-[12px] uppercase tracking-widest mb-3 font-medium text-[var(--spark-ember)]">
+        <div className="text-center mb-8 reveal">
+          <span className="inline-block text-[12px] uppercase tracking-widest mb-2 font-medium text-[var(--spark-ember)]">
             Trust & privacy
           </span>
           <h2
             id="privacy-strip-heading"
-            className="font-display text-2xl sm:text-3xl tracking-tight spark-text-primary mb-3"
+            className="font-display text-2xl sm:text-3xl tracking-tight spark-text-primary mb-2"
           >
             Safe for your site. Safe for your visitors.
           </h2>
@@ -53,13 +53,13 @@ export default function DataPrivacyStrip() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 reveal rd1">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 reveal rd1">
           {PRIVACY_POINTS.map(({ icon: Icon, title, body }) => (
-            <div key={title} className="glass rounded-2xl p-5 text-left">
-              <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-[hsl(var(--spark-accent))]">
+            <div key={title} className="glass rounded-2xl p-4 text-left">
+              <div className="mb-2.5 flex h-9 w-9 items-center justify-center rounded-full bg-[hsl(var(--spark-accent))]">
                 <Icon className="h-4 w-4 text-[var(--spark-ember)]" strokeWidth={2} />
               </div>
-              <h3 className="font-display text-sm font-semibold spark-text-primary mb-1.5">
+              <h3 className="font-display text-sm font-semibold spark-text-primary mb-1">
                 {title}
               </h3>
               <p className="text-[13px] leading-relaxed spark-text-muted">{body}</p>
@@ -67,7 +67,7 @@ export default function DataPrivacyStrip() {
           ))}
         </div>
 
-        <p className="reveal rd2 mt-8 text-center text-[12.5px] spark-text-subtle">
+        <p className="reveal rd2 mt-6 text-center text-[12.5px] spark-text-subtle">
           Read our{' '}
           <a href="/privacy" className="text-[var(--spark-ember)] hover:underline">
             Privacy Policy

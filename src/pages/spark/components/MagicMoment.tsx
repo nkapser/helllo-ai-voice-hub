@@ -1,167 +1,181 @@
-import { ScanLine, Mic, Code2, Check } from 'lucide-react'
+import { ScanLine, Mic, Code2, Check, Lock } from 'lucide-react'
 
 const SCAN_STEPS = [
-  { label: 'Fetching homepage',    done: true },
-  { label: 'Reading content',      done: true },
-  { label: 'Building knowledge',   done: true },
-  { label: 'Waking up assistant',  done: true },
+  'Fetching homepage',
+  'Reading content',
+  'Building knowledge',
+  'Assistant ready',
 ]
 
-const EMBED_CODE = [
-  { type: 'comment',  text: '<!-- Paste before </body> on every page -->' },
-  { type: 'tag',      text: '<script ' },
-  { type: 'attr',     text: 'src' },
-  { type: 'punct',    text: '=' },
-  { type: 'string',   text: '"https://unpkg.com/@helllo-ai/spark-chat-widget@latest/agent-chat.spark-core.latest.js"' },
-  { type: 'tag-end',  text: '></script>' },
-  { type: 'tag',      text: '<script>' },
-  { type: 'prop',     text: '  window.AgentChatWidget.init(' },
-  { type: 'value',    text: '{ agentId: "…", embedKey: "…", enableGuidedNavigation: true }' },
-  { type: 'prop',     text: ');' },
-  { type: 'tag-end',  text: '</script>' },
+const CODE_LINES = [
+  { cls: 'tok-comment', text: '<!-- Spark — paste before </body> -->' },
+  { cls: 'tok-tag', text: '<script src="…/agent-chat.spark-core.latest.js">' },
+  { cls: 'tok-tag', text: '</script>' },
+  { cls: 'tok-tag', text: '<script>' },
+  { cls: 'tok-property', text: '  AgentChatWidget.init({ agentId, embedKey });' },
+  { cls: 'tok-tag', text: '</script>' },
 ]
-
-function CodeLine({ type, text }: { type: string; text: string }) {
-  const classMap: Record<string, string> = {
-    comment:  'tok-comment',
-    tag:      'tok-tag',
-    'tag-end':'tok-tag',
-    attr:     'tok-attr',
-    string:   'tok-string',
-    punct:    'tok-punctuation',
-    prop:     'tok-property',
-    value:    'tok-value',
-  }
-  return <div className={classMap[type] ?? ''}>{text}</div>
-}
 
 export default function MagicMoment() {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="spark-section relative overflow-hidden">
       <div className="glow-divider" />
 
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 mt-24">
-        <div className="text-center mb-16 reveal">
+      <div className="max-w-6xl mx-auto px-2 sm:px-0">
+        <div className="text-center mb-8 reveal">
+          <span className="inline-block text-[12px] uppercase tracking-widest mb-2 font-medium text-[var(--spark-ember)]">
+            Try before you pay
+          </span>
           <h2
-            className="mb-4"
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(2rem, 4vw, 3rem)',
-              letterSpacing: '-0.02em',
-            }}
+            className="font-display text-[clamp(2rem,4vw,2.75rem)] tracking-tight spark-text-primary mb-2"
           >
             See it on{' '}
             <em className="gradient-text not-italic">your site</em>
-            {' '}before you sign up
+            {' '}before you pay
           </h2>
-          <p className="spark-text-muted">
-            No credit card. No install. Just your URL.
+          <p className="text-sm sm:text-base spark-text-muted max-w-lg mx-auto">
+            Sign up free to scan your pages and get your embed script. No credit card until you choose a paid plan.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5">
-
-          {/* ── Card 1: Scans your homepage ── */}
-          <div className="glass glass-hover rounded-2xl p-6 reveal rd1 flex flex-col gap-5">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: 'rgba(96,165,250,0.2)', border: '1px solid rgba(96,165,250,0.3)' }}
-            >
-              <ScanLine className="w-5 h-5" style={{ color: 'var(--spark-ember)' }} />
-            </div>
-            <div>
-              <h3 className="spark-text-primary font-semibold mb-1 text-[15px]">
-                Reads your homepage in seconds
-              </h3>
-              <p className="text-[13px] leading-relaxed spark-text-muted">
-                We scrape, parse, and understand your actual content — not a demo dataset.
-              </p>
-            </div>
-            <div className="mt-auto flex flex-col gap-2">
-              {SCAN_STEPS.map(({ label, done }) => (
-                <div key={label} className="flex items-center gap-2.5">
-                  <div
-                    className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background: done ? 'rgba(96,165,250,0.2)' : 'rgba(241,245,249,0.9)', border: `1px solid ${done ? 'rgba(96,165,250,0.5)' : 'hsl(var(--spark-border))'}` }}
-                  >
-                    {done && <Check className="w-2.5 h-2.5" style={{ color: 'var(--spark-ember)' }} />}
-                  </div>
-                  <span className={`text-[12.5px] ${done ? 'spark-text-primary' : 'spark-text-subtle'}`}>
-                    {label}
-                  </span>
+        <div className="grid md:grid-cols-3 gap-4 lg:gap-5">
+          {/* Card 1 — Scan */}
+          <article className="magic-card reveal rd1">
+            <div className="magic-card-accent" />
+            <div className="magic-card-body">
+              <span className="magic-step">Step 01</span>
+              <div className="flex items-start gap-3">
+                <div className="magic-icon">
+                  <ScanLine className="h-5 w-5" strokeWidth={2} />
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── Card 2: Chat + Voice ── */}
-          <div className="glass glass-hover rounded-2xl p-6 reveal rd2 flex flex-col gap-5">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: 'rgba(96,165,250,0.15)', border: '1px solid rgba(96,165,250,0.3)' }}
-            >
-              <Mic className="w-5 h-5" style={{ color: 'var(--spark)' }} />
-            </div>
-            <div>
-              <h3 className="spark-text-primary font-semibold mb-1 text-[15px]">
-                Chat + voice, in the browser
-              </h3>
-              <p className="text-[13px] leading-relaxed spark-text-muted">
-                Visitors type or talk. No app download, no phone system — just the browser.
-              </p>
-            </div>
-            <div className="mt-auto rounded-xl overflow-hidden border border-[hsl(var(--spark-border))]">
-              {/* Tab bar */}
-              <div className="flex" style={{ background: 'rgba(241,245,249,0.8)', borderBottom: '1px solid hsl(var(--spark-border))' }}>
-                {['Chat', 'Voice'].map((tab, i) => (
-                  <div
-                    key={tab}
-                    className={`flex-1 py-2 text-center text-[12px] font-medium transition-all ${i === 0 ? 'spark-text-primary' : 'spark-text-subtle'}`}
-                    style={{
-                      background: i === 0 ? 'rgba(96,165,250,0.15)' : 'transparent',
-                      borderBottom: i === 0 ? '1px solid var(--spark)' : 'none',
-                    }}
-                  >
-                    {tab}
-                  </div>
-                ))}
+                <div>
+                  <h3 className="font-display text-[15px] font-semibold spark-text-primary mb-1">
+                    Reads your site in seconds
+                  </h3>
+                  <p className="text-[13px] leading-relaxed spark-text-muted">
+                    We parse your real pages — not a canned demo dataset.
+                  </p>
+                </div>
               </div>
-              {/* Chat preview */}
-              <div className="p-3 flex flex-col gap-2">
-                <div className="self-end rounded-xl rounded-br-sm px-3 py-1.5 text-[11px] bg-gradient-spark text-white" style={{ maxWidth: '80%' }}>
-                  How much does it cost?
+
+              <div className="magic-preview">
+                <div className="magic-window-bar">
+                  <div className="magic-window-dots">
+                    <span /><span /><span />
+                  </div>
+                  <div className="magic-url-bar">
+                    <Lock className="h-2.5 w-2.5 text-[var(--spark)]" />
+                    yourwebsite.com
+                  </div>
                 </div>
-                <div className="self-start rounded-xl rounded-bl-sm px-3 py-1.5 text-[11px] spark-text-primary" style={{ background: 'rgba(241,245,249,0.9)', border: '1px solid hsl(var(--spark-border))', maxWidth: '80%' }}>
-                  We have a free plan! Want me to take you to Pricing?
+                <div className="p-3 space-y-3">
+                  <div>
+                    <div className="flex justify-between text-[10px] spark-text-muted mb-1.5">
+                      <span>Scanning homepage</span>
+                      <span className="font-medium text-[var(--spark-ember)]">100%</span>
+                    </div>
+                    <div className="magic-progress-track">
+                      <div className="magic-progress-fill" />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    {SCAN_STEPS.map((label) => (
+                      <div key={label} className="magic-scan-step spark-text-primary">
+                        <span className="magic-scan-step-icon">
+                          <Check className="h-2.5 w-2.5" strokeWidth={3} />
+                        </span>
+                        {label}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </article>
 
-          {/* ── Card 3: One script tag ── */}
-          <div className="glass glass-hover rounded-2xl p-6 reveal rd3 flex flex-col gap-5">
-            <div
-              className="w-10 h-10 rounded-xl flex items-center justify-center"
-              style={{ background: 'rgba(96,165,250,0.2)', border: '1px solid rgba(96,165,250,0.3)' }}
-            >
-              <Code2 className="w-5 h-5" style={{ color: 'var(--spark-ember)' }} />
+          {/* Card 2 — Chat + voice */}
+          <article className="magic-card reveal rd2">
+            <div className="magic-card-accent" />
+            <div className="magic-card-body">
+              <span className="magic-step">Step 02</span>
+              <div className="flex items-start gap-3">
+                <div className="magic-icon">
+                  <Mic className="h-5 w-5" strokeWidth={2} />
+                </div>
+                <div>
+                  <h3 className="font-display text-[15px] font-semibold spark-text-primary mb-1">
+                    Chat + voice, in the browser
+                  </h3>
+                  <p className="text-[13px] leading-relaxed spark-text-muted">
+                    Visitors type or talk — no app, no phone system, no plugins.
+                  </p>
+                </div>
+              </div>
+
+              <div className="magic-preview p-3 flex items-end justify-center">
+                <div className="w-full max-w-[220px] rounded-xl overflow-hidden border border-[hsl(var(--spark-border))] bg-white shadow-elevated">
+                  <div className="magic-widget-header">
+                    <div className="magic-widget-avatar">✦</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[11px] font-semibold leading-tight">Your Assistant</div>
+                      <div className="text-[9px] opacity-80">Online · chat & voice</div>
+                    </div>
+                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                  </div>
+                  <div className="p-2.5 flex flex-col gap-2">
+                    <div className="magic-bubble-user">How much does it cost?</div>
+                    <div className="magic-bubble-bot">
+                      We have plans from $49/mo. Want me to open Pricing?
+                    </div>
+                    <div className="magic-chip-row">
+                      <span className="magic-chip">Pricing</span>
+                      <span className="magic-chip">Book a demo</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 pt-1 border-t border-[hsl(var(--spark-border))]">
+                      <Mic className="h-3 w-3 text-[var(--spark)]" />
+                      <span className="text-[9px] spark-text-muted">Tap to speak</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <h3 className="spark-text-primary font-semibold mb-1 text-[15px]">
-                One script tag. Any site.
-              </h3>
-              <p className="text-[13px] leading-relaxed spark-text-muted">
-                Next.js, Webflow, Framer, plain HTML — paste before <code className="text-[11px] px-1 rounded spark-chip">&lt;/body&gt;</code> on every page.
-              </p>
+          </article>
+
+          {/* Card 3 — Embed */}
+          <article className="magic-card reveal rd3">
+            <div className="magic-card-accent" />
+            <div className="magic-card-body">
+              <span className="magic-step">Step 03</span>
+              <div className="flex items-start gap-3">
+                <div className="magic-icon">
+                  <Code2 className="h-5 w-5" strokeWidth={2} />
+                </div>
+                <div>
+                  <h3 className="font-display text-[15px] font-semibold spark-text-primary mb-1">
+                    One script tag. Any site.
+                  </h3>
+                  <p className="text-[13px] leading-relaxed spark-text-muted">
+                    Next.js, Webflow, Framer, WordPress — paste before{' '}
+                    <code className="text-[11px] px-1 py-0.5 rounded spark-chip">&lt;/body&gt;</code>.
+                  </p>
+                </div>
+              </div>
+
+              <div className="magic-preview">
+                <div className="magic-window-bar">
+                  <div className="magic-window-dots">
+                    <span /><span /><span />
+                  </div>
+                  <span className="text-[10px] font-mono spark-text-muted">embed-snippet.html</span>
+                </div>
+                <div className="magic-code-block">
+                  {CODE_LINES.map((line, i) => (
+                    <div key={i} className={`magic-code-line ${line.cls}`}>{line.text}</div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <div
-              className="mt-auto rounded-xl p-4 overflow-x-auto code-root"
-            >
-              {EMBED_CODE.map((line, i) => (
-                <CodeLine key={i} {...line} />
-              ))}
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>

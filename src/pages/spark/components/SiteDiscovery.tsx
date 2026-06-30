@@ -15,22 +15,22 @@ const EXTRA = 39
 
 export default function SiteDiscovery() {
   return (
-    <section className="relative py-24">
+    <section className="spark-section relative">
       <div className="glow-divider" />
 
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 mt-24">
-        <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-20">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
 
           {/* ── Left: text ── */}
           <div className="flex-1 reveal">
             <span
-              className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium"
+              className="inline-block text-[12px] uppercase tracking-widest mb-3 font-medium"
               style={{ color: 'var(--spark-ember)' }}
             >
               Site-wide training
             </span>
             <h2
-              className="mb-5"
+              className="mb-4"
               style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,2.75rem)', letterSpacing: '-0.02em', lineHeight: 1.1 }}
             >
               We found{' '}
@@ -38,11 +38,11 @@ export default function SiteDiscovery() {
               {' '}on your site.
               <br />Your assistant can learn them all.
             </h2>
-            <p className="text-[15px] leading-relaxed mb-6 spark-text-muted">
+            <p className="text-[15px] leading-relaxed mb-4 spark-text-muted">
               Before we crawl, Spark maps your entire site — sitemap and links — so
               you see exactly what's trainable and approve every page.
             </p>
-            <div className="flex flex-col gap-3 mb-8">
+            <div className="flex flex-col gap-3 mb-6">
               {[
                 ['Free plan', '10 pages per crawl — perfect to get started'],
                 ['Paid plans', 'Full-site training for richer, more accurate answers'],

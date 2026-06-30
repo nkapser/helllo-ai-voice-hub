@@ -3,7 +3,7 @@ import URLInput from './URLInput'
 
 export default function FinalCTA() {
   return (
-    <section className="relative py-32 overflow-hidden">
+    <section className="spark-section spark-section-cta relative overflow-hidden">
       <div className="glow-divider" />
 
       {/* Aurora accent — centered swell */}
@@ -37,7 +37,7 @@ export default function FinalCTA() {
         </h2>
 
         <p
-          className="reveal rd1 text-[17px] mb-10 spark-text-muted"
+          className="reveal rd1 text-[17px] mb-8 spark-text-muted"
         >
           Paste your URL. Fall in love in 30 seconds.
         </p>

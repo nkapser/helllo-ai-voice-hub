@@ -28,10 +28,10 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer
-      className="relative pt-16 pb-10 border-t border-[hsl(var(--spark-border))]"
+      className="relative pt-6 pb-8 border-t border-[hsl(var(--spark-border))]"
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
+        <div className="flex flex-col md:flex-row justify-between gap-8 mb-8">
 
           {/* Brand */}
           <div className="max-w-xs">

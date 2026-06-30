@@ -53,13 +53,11 @@ const PLATFORMS = ['Next.js', 'React', 'Webflow', 'Framer', 'Shopify', 'Plain HT
 
 export default function Install() {
   return (
-    <section className="relative py-24">
+    <section className="spark-section relative">
       <div className="glow-divider" />
 
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 mt-24">
-
-        {/* Header */}
-        <div className="text-center mb-16 reveal">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        <div className="text-center mb-8 reveal">
           <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'var(--spark-ember)' }}>
             Install
           </span>
@@ -76,7 +74,7 @@ export default function Install() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
 
           {/* ── Left: steps ── */}
           <div className="flex flex-col gap-7">
