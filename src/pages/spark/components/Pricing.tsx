@@ -1,4 +1,37 @@
-import { Check, Sparkles } from 'lucide-react'
+import {
+  Check,
+  Sparkles,
+  Coins,
+  FileSearch,
+  Mic,
+  MessageSquare,
+  Plug,
+  AudioLines,
+  Building2,
+} from 'lucide-react'
+
+const SIGNIN_URL = 'https://dash.helllo.ai/auth/signin?redirect=/console/spark'
+const ENTERPRISE_URL = 'mailto:hello@helllo.ai?subject=Spark%20Enterprise%20inquiry'
+
+const FREE_STATS = [
+  { icon: Coins, value: '500', label: 'credits included' },
+  { icon: FileSearch, value: '10', label: 'pages to crawl' },
+  { icon: Mic, value: '30 min', label: 'voice conversations' },
+  { icon: MessageSquare, value: '100', label: 'chat conversations' },
+]
+
+const ENTERPRISE_FEATURES = [
+  {
+    icon: Plug,
+    value: 'Custom integrations',
+    label: 'CRM, data warehouse, internal tools & bespoke workflows',
+  },
+  {
+    icon: AudioLines,
+    value: 'Premium voices',
+    label: 'Brand-matched voice quality, languages & deployment options',
+  },
+]
 
 interface PlanFeature {
   text: string
@@ -108,6 +141,45 @@ export default function Pricing() {
           </p>
         </div>
 
+        <div className="pricing-bands reveal rd1">
+          <article className="pricing-band pricing-band-free">
+            <div className="pricing-band-identity">
+              <span className="pricing-band-badge pricing-band-badge-free">Free forever</span>
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-display text-[2rem] font-bold leading-none spark-text-primary">$0</span>
+                <span className="text-[12px] spark-text-subtle">/ forever</span>
+              </div>
+              <p className="mt-1.5 text-[12.5px] leading-snug spark-text-muted">
+                Try Spark on your site — no credit card, no expiry.
+              </p>
+            </div>
+
+            <div className="pricing-band-divider" aria-hidden />
+
+            <div className="pricing-band-stats">
+              {FREE_STATS.map(({ icon: Icon, value, label }) => (
+                <div key={label} className="pricing-band-stat">
+                  <div className="pricing-band-stat-icon pricing-band-stat-icon-free">
+                    <Icon className="h-3.5 w-3.5" strokeWidth={2.2} />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="pricing-band-stat-value">{value}</div>
+                    <div className="pricing-band-stat-label">{label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="pricing-band-cta-wrap">
+              <a href={SIGNIN_URL} className="pricing-band-cta pricing-band-cta-free">
+                Start free
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <p className="pricing-paid-label reveal">Monthly plans</p>
+
         <div className="grid md:grid-cols-3 gap-5">
           {PLANS.map(({ name, price, period, tagline, cta, ctaHref, featured, features }, i) => (
             <div
@@ -172,8 +244,47 @@ export default function Pricing() {
           ))}
         </div>
 
+        <article className="pricing-band pricing-band-enterprise reveal mt-5">
+          <div className="pricing-band-identity">
+            <span className="pricing-band-badge pricing-band-badge-enterprise">
+              <Building2 className="h-3 w-3" strokeWidth={2.2} />
+              Enterprise
+            </span>
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-display text-[1.65rem] font-bold leading-none spark-text-primary">
+                Custom
+              </span>
+            </div>
+            <p className="mt-1.5 text-[12.5px] leading-snug spark-text-muted">
+              For high-volume sites, agencies & regulated teams.
+            </p>
+          </div>
+
+          <div className="pricing-band-divider" aria-hidden />
+
+          <div className="pricing-band-stats pricing-band-stats-enterprise">
+            {ENTERPRISE_FEATURES.map(({ icon: Icon, value, label }) => (
+              <div key={value} className="pricing-band-stat">
+                <div className="pricing-band-stat-icon pricing-band-stat-icon-enterprise">
+                  <Icon className="h-3.5 w-3.5" strokeWidth={2.2} />
+                </div>
+                <div className="min-w-0">
+                  <div className="pricing-band-stat-value">{value}</div>
+                  <div className="pricing-band-stat-label">{label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="pricing-band-cta-wrap">
+            <a href={ENTERPRISE_URL} className="pricing-band-cta pricing-band-cta-enterprise">
+              Talk to sales
+            </a>
+          </div>
+        </article>
+
         <p className="reveal text-center mt-6 text-[13px] spark-text-muted">
-          All plans include a free trial — paste your URL to get started. No credit card required.
+          Start on Free forever, upgrade when you need more. Paste your URL to get started.
         </p>
 
         <div className="text-center mt-8 reveal">
