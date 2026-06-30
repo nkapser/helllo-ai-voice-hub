@@ -1,0 +1,310 @@
+/* ═══════════════════════════════════════════════════════════════
+   Spark Landing Page — Custom CSS
+   Tailwind covers layout/spacing/colours; this file handles:
+   aurora blobs · animated elements · gradient utilities ·
+   glass surfaces · code syntax · reveal animations
+═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── CSS Custom Properties ───────────────────────────────────── */
+:root {
+  --spark-violet:       #7c5cff;
+  --spark-violet-light: #9d82ff;
+  --spark-cyan:         #22d3ee;
+  --spark-cyan-light:   #67e8f9;
+  --spark-bg:           #060815;
+  --spark-surface:      rgba(255,255,255,0.04);
+  --spark-border:       rgba(255,255,255,0.08);
+  --spark-border-hover: rgba(255,255,255,0.14);
+  --spark-white:        #f8fafc;
+
+  --font-display: 'Geist', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'Geist Mono', ui-monospace, monospace;
+}
+
+/* ── Base ────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+.spark-page {
+  background-color: var(--spark-bg);
+  color: var(--spark-white);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+.spark-page h1,
+.spark-page h2,
+.spark-page h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* ── Aurora Background Blobs ─────────────────────────────────── */
+.aurora-root {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+}
+
+.aurora-blob-1 {
+  width: 650px; height: 650px;
+  background: radial-gradient(circle, rgba(124,92,255,0.32) 0%, transparent 68%);
+  top: -220px; left: -180px;
+  animation: aurora-a 28s ease-in-out infinite;
+}
+
+.aurora-blob-2 {
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(34,211,238,0.22) 0%, transparent 68%);
+  top: -80px; right: -160px;
+  animation: aurora-b 34s ease-in-out infinite;
+}
+
+.aurora-blob-3 {
+  width: 380px; height: 380px;
+  background: radial-gradient(circle, rgba(124,92,255,0.16) 0%, transparent 68%);
+  bottom: 60px; right: 15%;
+  animation: aurora-a 40s ease-in-out infinite reverse;
+}
+
+@keyframes aurora-a {
+  0%,100% { transform: translate(0,0) scale(1); }
+  25%      { transform: translate(5%,10%) scale(1.07); }
+  50%      { transform: translate(10%,4%) scale(0.94); }
+  75%      { transform: translate(3%,14%) scale(1.04); }
+}
+
+@keyframes aurora-b {
+  0%,100% { transform: translate(0,0) scale(1); }
+  25%      { transform: translate(-7%,5%) scale(1.1); }
+  50%      { transform: translate(-4%,10%) scale(0.92); }
+  75%      { transform: translate(-9%,3%) scale(1.05); }
+}
+
+/* ── Gradient Text ───────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(120deg, var(--spark-violet-light) 0%, var(--spark-cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Glass Card ──────────────────────────────────────────────── */
+.glass {
+  background: var(--spark-surface);
+  border: 1px solid var(--spark-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-hover {
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.glass-hover:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--spark-border-hover);
+}
+
+/* ── CTA Button ──────────────────────────────────────────────── */
+.btn-spark {
+  background: linear-gradient(135deg, var(--spark-violet) 0%, var(--spark-cyan) 100%);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn-spark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.14);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.btn-spark:hover::before  { opacity: 1; }
+.btn-spark:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 32px rgba(124,92,255,0.45), 0 2px 10px rgba(34,211,238,0.2);
+}
+.btn-spark:active { transform: translateY(0); }
+
+/* ── URL Input Glow ──────────────────────────────────────────── */
+.url-input-wrap {
+  transition: box-shadow 0.25s ease;
+}
+.url-input-wrap:focus-within {
+  box-shadow:
+    0 0 0 1px rgba(124,92,255,0.55),
+    0 0 40px rgba(124,92,255,0.18),
+    0 0 80px rgba(34,211,238,0.09);
+}
+
+/* ── Widget Pulse ────────────────────────────────────────────── */
+@keyframes widget-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,92,255,0.55); }
+  50%       { box-shadow: 0 0 0 9px rgba(124,92,255,0); }
+}
+.widget-pulse { animation: widget-pulse 2.6s ease-in-out infinite; }
+
+/* ── Hero Fade-Up (immediate, for above-fold) ────────────────── */
+@keyframes fade-up-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.anim-fade-up {
+  opacity: 0;
+  animation: fade-up-in 0.65s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+.d0  { animation-delay: 0.05s; }
+.d1  { animation-delay: 0.15s; }
+.d2  { animation-delay: 0.25s; }
+.d3  { animation-delay: 0.38s; }
+.d4  { animation-delay: 0.52s; }
+.d5  { animation-delay: 0.66s; }
+.d6  { animation-delay: 0.80s; }
+
+/* ── Scroll Reveal ───────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.rd1 { transition-delay: 0.08s; }
+.rd2 { transition-delay: 0.18s; }
+.rd3 { transition-delay: 0.28s; }
+.rd4 { transition-delay: 0.38s; }
+.rd5 { transition-delay: 0.48s; }
+
+/* ── Code Syntax ─────────────────────────────────────────────── */
+.code-root {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.9;
+  tab-size: 2;
+}
+
+.tok-tag         { color: #f97583; }
+.tok-attr        { color: var(--spark-violet-light); }
+.tok-string      { color: var(--spark-cyan); }
+.tok-comment     { color: rgba(255,255,255,0.32); font-style: italic; }
+.tok-punctuation { color: rgba(255,255,255,0.42); }
+.tok-property    { color: #f0c070; }
+.tok-value       { color: #85e89d; }
+
+/* ── Gradient Border ─────────────────────────────────────────── */
+.gradient-border {
+  position: relative;
+  z-index: 0;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--spark-violet), var(--spark-cyan));
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── Logo Ticker ─────────────────────────────────────────────── */
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 24s linear infinite;
+}
+.ticker-track:hover { animation-play-state: paused; }
+
+/* ── Section Divider ─────────────────────────────────────────── */
+.glow-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(124,92,255,0.45) 30%,
+    rgba(34,211,238,0.45) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Dot Grid ────────────────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Sparkle badge ───────────────────────────────────────────── */
+@keyframes badge-shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position:  200% 0; }
+}
+.badge-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(124,92,255,0.15) 0%,
+    rgba(34,211,238,0.25) 50%,
+    rgba(124,92,255,0.15) 100%
+  );
+  background-size: 200% 100%;
+  animation: badge-shimmer 3.5s ease-in-out infinite;
+}
+
+/* ── Pricing featured glow ───────────────────────────────────── */
+.pricing-featured {
+  box-shadow:
+    0 0 0 1px rgba(124,92,255,0.5),
+    0 20px 60px rgba(124,92,255,0.2),
+    0 4px 16px rgba(34,211,238,0.1);
+}
+
+/* ── FAQ accordion ───────────────────────────────────────────── */
+.faq-body {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+}
+.faq-body.open {
+  opacity: 1;
+}
+
+/* ── Check icon pulse ────────────────────────────────────────── */
+@keyframes check-in {
+  from { transform: scale(0) rotate(-10deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.check-anim {
+  animation: check-in 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+/* ── Reduce motion ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .anim-fade-up { opacity: 1; }
+}

@@ -9,6 +9,7 @@ import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CancellationRefundPolicy from "./pages/CancellationRefundPolicy";
 import Console from "./pages/Console";
+import Spark from "./pages/spark";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/cancellation-refund" element={<CancellationRefundPolicy />} />
             <Route path="/console" element={<Console />} />
+            <Route path="/spark" element={<Spark />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
