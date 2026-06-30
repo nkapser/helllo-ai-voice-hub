@@ -6,35 +6,40 @@ const STEPS = [
     icon:  MousePointerClick,
     label: 'Try it',
     body:  'Paste your URL → play with a homepage-trained assistant in 30 seconds. No signup required.',
-    accent: '#7c5cff',
+    accent: 'var(--spark)',
+    accentRgb: '96,165,250',
   },
   {
     num:   '02',
     icon:  UserPlus,
     label: 'Account',
     body:  'Create a free account to save your assistant and set up your domain.',
-    accent: '#9d82ff',
+    accent: 'var(--spark-glow)',
+    accentRgb: '147,197,253',
   },
   {
     num:   '03',
     icon:  ShieldCheck,
     label: 'Verify',
     body:  "Prove you own the domain with a DNS TXT record or HTML meta tag — so only you can train an assistant on your site.",
-    accent: '#22d3ee',
+    accent: 'var(--spark-ember)',
+    accentRgb: '59,130,246',
   },
   {
     num:   '04',
     icon:  BookOpen,
     label: 'Train',
     body:  "We map your full site, crawl up to 10 pages free. You see every page, approve what gets learned.",
-    accent: '#67e8f9',
+    accent: 'var(--spark-glow)',
+    accentRgb: '147,197,253',
   },
   {
     num:   '05',
     icon:  Rocket,
     label: 'Launch',
     body:  'Copy the embed snippet, paste it site-wide before </body>. Visitors chat on every page.',
-    accent: '#22d3ee',
+    accent: 'var(--spark-ember)',
+    accentRgb: '59,130,246',
   },
 ]
 
@@ -47,7 +52,7 @@ export default function HowItWorks() {
         <div className="text-center mb-16 reveal">
           <span
             className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium"
-            style={{ color: 'rgba(124,92,255,0.8)' }}
+            style={{ color: 'var(--spark-ember)' }}
           >
             How it works
           </span>
@@ -68,10 +73,10 @@ export default function HowItWorks() {
           {/* Vertical connector line */}
           <div
             className="absolute left-[27px] top-10 bottom-10 w-px hidden sm:block"
-            style={{ background: 'linear-gradient(to bottom, rgba(124,92,255,0.5), rgba(34,211,238,0.5))' }}
+            style={{ background: 'linear-gradient(to bottom, rgba(96,165,250,0.5), rgba(59,130,246,0.5))' }}
           />
 
-          {STEPS.map(({ num, icon: Icon, label, body, accent }, i) => (
+          {STEPS.map(({ num, icon: Icon, label, body, accent, accentRgb }, i) => (
             <div
               key={num}
               className={`reveal rd${i + 1} relative flex gap-5 sm:gap-8 items-start group`}
@@ -82,8 +87,8 @@ export default function HowItWorks() {
                 <div
                   className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300"
                   style={{
-                    background: `rgba(${accent === '#7c5cff' ? '124,92,255' : accent === '#22d3ee' ? '34,211,238' : '157,130,255'},0.12)`,
-                    border: `1px solid ${accent}40`,
+                    background: `rgba(${accentRgb},0.12)`,
+                    border: `1px solid rgba(${accentRgb},0.25)`,
                   }}
                 >
                   <Icon className="w-5 h-5" style={{ color: accent }} />
@@ -99,9 +104,9 @@ export default function HowItWorks() {
                   >
                     {num}
                   </span>
-                  <h3 className="text-white font-semibold text-[15px]">{label}</h3>
+                  <h3 className="spark-text-primary font-semibold text-[15px]">{label}</h3>
                 </div>
-                <p className="text-[14px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.52)' }}>
+                <p className="text-[14px] leading-relaxed spark-text-muted">
                   {body}
                 </p>
               </div>

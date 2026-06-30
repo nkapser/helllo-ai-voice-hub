@@ -1,125 +1,74 @@
-import { CheckCircle2, Sparkles } from 'lucide-react'
-import URLInput     from './URLInput'
-import WidgetMockup from './WidgetMockup'
+import { Globe, Mic, Code2 } from 'lucide-react'
+import URLInput from './URLInput'
 
-const TRUST_ITEMS = [
-  'Free to start',
-  'Your data, your site',
-  'Live in 60 seconds',
+const LOGO_NAMES = ['acme.dev', 'northwind', 'lumen', 'studio·6', 'kraft.io', 'halcyon']
+
+const FEATURE_CARDS = [
+  {
+    icon: Globe,
+    title: 'Trained on your site',
+    body: 'We read your pages and build an assistant that knows your product, voice, and details.',
+  },
+  {
+    icon: Mic,
+    title: 'Chat + real voice',
+    body: 'Visitors type or talk. In-browser voice with no apps, no plugins, no friction.',
+  },
+  {
+    icon: Code2,
+    title: 'One-line embed',
+    body: 'Drop a single <script> tag. Works on any site — Next.js, plain HTML, Webflow, Framer.',
+  },
 ]
-
-const LOGO_NAMES = ['acme.dev', 'northwind', 'lumen', 'studio·6', 'kraft.io', 'halcyon', 'meridian', 'foxwood']
 
 export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-16"
+      className="mx-auto flex w-full max-w-6xl flex-col items-center px-2 pb-16 pt-10 text-center sm:pt-14 lg:pt-16"
     >
-      {/* ── Aurora background ── */}
-      <div className="aurora-root">
-        <div className="aurora-blob aurora-blob-1" />
-        <div className="aurora-blob aurora-blob-2" />
-        <div className="aurora-blob aurora-blob-3" />
+      <div className="spark-badge-pill animate-spark-rise d0 mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
+        <span className="h-1.5 w-1.5 rounded-full bg-[var(--spark)]" />
+        Launching on Product Hunt — be first to embed Spark
       </div>
 
-      {/* ── Dot grid overlay ── */}
-      <div className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
+      <h1 className="animate-spark-rise d1 mb-6 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight spark-text-primary sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
+        <span className="block max-[360px]:whitespace-normal sm:whitespace-nowrap">
+          Give your website
+        </span>
+        <span className="gradient-text block italic">a voice.</span>
+      </h1>
 
-      {/* ── Content ── */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 py-20 lg:py-28">
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-12">
+      <p className="animate-spark-rise d2 mx-auto mb-10 max-w-xl text-base spark-text-muted sm:text-lg">
+        Paste your URL. In 30 seconds, talk to an AI assistant trained on your site — then embed it in one line of code.
+      </p>
 
-          {/* ── LEFT: Text + CTA ── */}
-          <div className="flex-1 text-center lg:text-left max-w-2xl mx-auto lg:mx-0">
+      <div className="animate-spark-rise d3 w-full max-w-xl">
+        <URLInput id="hero-input" showTrustRow showExamples />
+      </div>
 
-            {/* Badge */}
-            <div className="anim-fade-up d0 inline-flex items-center gap-2 mb-8">
-              <div
-                className="badge-shimmer flex items-center gap-2 px-4 py-1.5 rounded-full"
-                style={{ border: '1px solid rgba(124,92,255,0.3)' }}
-              >
-                <Sparkles className="w-3 h-3" style={{ color: '#7c5cff' }} />
-                <span className="text-[12px] font-medium" style={{ color: 'rgba(255,255,255,0.75)' }}>
-                  Live in 60 seconds · no code · free to try
-                </span>
-              </div>
-            </div>
-
-            {/* Headline */}
-            <h1
-              className="anim-fade-up d1 leading-[1.08] mb-6"
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              <span className="block text-white">Give your website</span>
-              <em className="gradient-text not-italic block">a voice.</em>
-            </h1>
-
-            {/* Subhead */}
-            <p
-              className="anim-fade-up d2 text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0"
-              style={{ color: 'rgba(255,255,255,0.58)' }}
-            >
-              Paste your URL. In 30 seconds, talk to an AI assistant trained on
-              your site — then drop one line of code and never miss a visitor
-              question again.
-            </p>
-
-            {/* URL Input */}
-            <div className="anim-fade-up d3 mb-5">
-              <URLInput id="hero-input" size="large" />
-            </div>
-
-            {/* Trust row */}
-            <div className="anim-fade-up d4 flex items-center justify-center lg:justify-start flex-wrap gap-x-5 gap-y-2">
-              {TRUST_ITEMS.map((item) => (
-                <div key={item} className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" style={{ color: '#22d3ee' }} />
-                  <span className="text-[12.5px]" style={{ color: 'rgba(255,255,255,0.45)' }}>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ── RIGHT: Widget mockup ── */}
-          <div className="anim-fade-up d5 flex-1 flex justify-center lg:justify-end w-full">
-            <WidgetMockup />
-          </div>
-        </div>
-
-        {/* ── Social proof strip ── */}
-        <div className="relative z-10 mt-20 lg:mt-24">
-          <div className="anim-fade-up d6 text-center mb-6">
-            <span className="text-[12px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.28)' }}>
-              Trusted by indie builders shipping today
-            </span>
-          </div>
-          <div className="overflow-hidden" style={{ maskImage: 'linear-gradient(90deg,transparent,black 15%,black 85%,transparent)' }}>
-            <div className="ticker-track py-2">
-              {/* Doubled for seamless loop */}
-              {[...LOGO_NAMES, ...LOGO_NAMES].map((name, i) => (
-                <div
-                  key={i}
-                  className="flex-shrink-0 mx-8 text-sm font-medium"
-                  style={{ color: 'rgba(255,255,255,0.22)', letterSpacing: '0.05em' }}
-                >
-                  {name}
-                </div>
-              ))}
-            </div>
-          </div>
+      <div className="animate-spark-rise d4 mt-14 w-full">
+        <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.14em] spark-text-muted">
+          Trusted by indie builders shipping today
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-sm spark-text-subtle">
+          {LOGO_NAMES.map((name) => (
+            <span key={name}>{name}</span>
+          ))}
         </div>
       </div>
 
-      {/* ── Bottom gradient fade ── */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #060815)' }}
-      />
+      <div className="animate-spark-rise d5 mt-16 grid w-full max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
+        {FEATURE_CARDS.map(({ icon: Icon, title, body }) => (
+          <div key={title} className="glass rounded-2xl p-6 text-left">
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-spark text-white shadow-spark">
+              <Icon className="h-5 w-5" />
+            </div>
+            <h3 className="font-display text-base font-semibold spark-text-primary">{title}</h3>
+            <p className="mt-2 text-sm leading-relaxed spark-text-muted">{body}</p>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }

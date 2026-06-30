@@ -25,7 +25,7 @@ export default function SiteDiscovery() {
           <div className="flex-1 reveal">
             <span
               className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium"
-              style={{ color: 'rgba(124,92,255,0.8)' }}
+              style={{ color: 'var(--spark-ember)' }}
             >
               Site-wide training
             </span>
@@ -38,7 +38,7 @@ export default function SiteDiscovery() {
               {' '}on your site.
               <br />Your assistant can learn them all.
             </h2>
-            <p className="text-[15px] leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.52)' }}>
+            <p className="text-[15px] leading-relaxed mb-6 spark-text-muted">
               Before we crawl, Spark maps your entire site — sitemap and links — so
               you see exactly what's trainable and approve every page.
             </p>
@@ -50,13 +50,13 @@ export default function SiteDiscovery() {
                 <div key={tier} className="flex items-start gap-3">
                   <div
                     className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
-                    style={{ background: 'rgba(34,211,238,0.15)', border: '1px solid rgba(34,211,238,0.4)' }}
+                    style={{ background: 'rgba(96,165,250,0.15)', border: '1px solid rgba(96,165,250,0.4)' }}
                   >
-                    <Check className="w-3 h-3" style={{ color: '#22d3ee' }} />
+                    <Check className="w-3 h-3" style={{ color: 'var(--spark)' }} />
                   </div>
                   <div>
-                    <span className="text-white text-[14px] font-medium">{tier} — </span>
-                    <span className="text-[14px]" style={{ color: 'rgba(255,255,255,0.5)' }}>{desc}</span>
+                    <span className="spark-text-primary text-[14px] font-medium">{tier} — </span>
+                    <span className="text-[14px] spark-text-muted">{desc}</span>
                   </div>
                 </div>
               ))}
@@ -65,20 +65,17 @@ export default function SiteDiscovery() {
             {/* Upgrade callout */}
             <div
               className="rounded-xl p-4 flex items-center justify-between gap-4"
-              style={{ background: 'rgba(124,92,255,0.1)', border: '1px solid rgba(124,92,255,0.25)' }}
+              style={{ background: 'rgba(96,165,250,0.1)', border: '1px solid rgba(96,165,250,0.25)' }}
             >
               <div>
-                <div className="text-white text-[13.5px] font-medium mb-0.5">Train on all 47 pages</div>
-                <div className="text-[12px]" style={{ color: 'rgba(255,255,255,0.45)' }}>
+                <div className="spark-text-primary text-[13.5px] font-medium mb-0.5">Train on all 47 pages</div>
+                <div className="text-[12px] spark-text-muted">
                   Free plan covers 10. Upgrade for full-site training.
                 </div>
               </div>
               <a
                 href="https://app.helllo.ai/console/profile/billing"
-                className="flex-shrink-0 flex items-center gap-1.5 text-[12.5px] font-medium px-4 py-2 rounded-lg text-white transition-all duration-150"
-                style={{ background: 'rgba(124,92,255,0.3)', border: '1px solid rgba(124,92,255,0.4)' }}
-                onMouseEnter={e => { e.currentTarget.style.background = 'rgba(124,92,255,0.5)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'rgba(124,92,255,0.3)' }}
+                className="btn-spark flex-shrink-0 flex items-center gap-1.5 text-[12.5px] font-medium px-4 py-2 rounded-lg text-white transition-all duration-150"
               >
                 See plans <ArrowRight className="w-3.5 h-3.5" />
               </a>
@@ -88,20 +85,19 @@ export default function SiteDiscovery() {
           {/* ── Right: page list ── */}
           <div className="w-full lg:w-80 reveal rd2">
             <div
-              className="rounded-2xl overflow-hidden"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
+              className="rounded-2xl overflow-hidden glass"
             >
               <div
                 className="px-4 py-3 flex items-center gap-2"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.03)' }}
+                style={{ borderBottom: '1px solid hsl(var(--spark-border))', background: 'rgba(241,245,249,0.6)' }}
               >
-                <Globe className="w-3.5 h-3.5" style={{ color: '#22d3ee' }} />
-                <span className="text-[12px] font-medium" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                <Globe className="w-3.5 h-3.5" style={{ color: 'var(--spark)' }} />
+                <span className="text-[12px] font-medium spark-text-muted">
                   yourwebsite.com
                 </span>
                 <span
                   className="ml-auto text-[10.5px] font-medium px-2 py-0.5 rounded-full"
-                  style={{ background: 'rgba(34,211,238,0.15)', color: '#22d3ee' }}
+                  style={{ background: 'rgba(96,165,250,0.15)', color: 'var(--spark-ember)' }}
                 >
                   47 pages found
                 </span>
@@ -112,23 +108,23 @@ export default function SiteDiscovery() {
                   <div
                     key={path}
                     className="flex items-center gap-3 px-4 py-2.5 transition-all duration-150"
-                    style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
-                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)' }}
+                    style={{ borderBottom: '1px solid hsl(var(--spark-border)/0.5)' }}
+                    onMouseEnter={e => { e.currentTarget.style.background = 'rgba(241,245,249,0.8)' }}
                     onMouseLeave={e => { e.currentTarget.style.background = 'transparent' }}
                   >
                     <div
                       className="w-4 h-4 rounded flex items-center justify-center flex-shrink-0"
                       style={{
-                        background: checked ? 'rgba(34,211,238,0.2)' : 'rgba(255,255,255,0.05)',
-                        border: `1px solid ${checked ? 'rgba(34,211,238,0.5)' : 'rgba(255,255,255,0.1)'}`,
+                        background: checked ? 'rgba(96,165,250,0.2)' : 'rgba(241,245,249,0.9)',
+                        border: `1px solid ${checked ? 'rgba(96,165,250,0.5)' : 'hsl(var(--spark-border))'}`,
                       }}
                     >
-                      {checked && <Check className="w-2.5 h-2.5" style={{ color: '#22d3ee' }} />}
+                      {checked && <Check className="w-2.5 h-2.5" style={{ color: 'var(--spark-ember)' }} />}
                     </div>
-                    <span className="text-[12px] flex-1" style={{ color: checked ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.35)' }}>
+                    <span className={`text-[12px] flex-1 ${checked ? 'spark-text-primary' : 'spark-text-subtle'}`}>
                       {path}
                     </span>
-                    <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.28)' }}>
+                    <span className="text-[11px] spark-text-subtle">
                       {label}
                     </span>
                   </div>
@@ -136,13 +132,13 @@ export default function SiteDiscovery() {
 
                 <div
                   className="flex items-center gap-3 px-4 py-3"
-                  style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+                  style={{ borderTop: '1px solid hsl(var(--spark-border))' }}
                 >
                   <div
                     className="w-4 h-4 rounded flex-shrink-0"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
+                    style={{ background: 'rgba(241,245,249,0.9)', border: '1px solid hsl(var(--spark-border))' }}
                   />
-                  <span className="text-[12px]" style={{ color: 'rgba(255,255,255,0.3)' }}>
+                  <span className="text-[12px] spark-text-subtle">
                     +{EXTRA} more pages
                   </span>
                 </div>

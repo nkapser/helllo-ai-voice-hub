@@ -101,7 +101,7 @@ export default function Pricing() {
           style={{
             position: 'absolute',
             width: 500, height: 300,
-            background: 'radial-gradient(ellipse, rgba(124,92,255,0.1) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse, rgba(96,165,250,0.1) 0%, transparent 70%)',
             top: '10%', left: '50%', transform: 'translateX(-50%)',
             filter: 'blur(50px)',
           }}
@@ -112,7 +112,7 @@ export default function Pricing() {
 
         {/* Header */}
         <div className="text-center mb-14 reveal">
-          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'rgba(124,92,255,0.8)' }}>
+          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'var(--spark-ember)' }}>
             Pricing
           </span>
           <h2
@@ -122,7 +122,7 @@ export default function Pricing() {
             Start free. Scale when{' '}
             <em className="gradient-text not-italic">your site grows.</em>
           </h2>
-          <p className="text-[14px]" style={{ color: 'rgba(255,255,255,0.42)' }}>
+          <p className="text-[14px] spark-text-muted">
             India: INR pricing via Razorpay · International: USD via Stripe
           </p>
         </div>
@@ -132,17 +132,16 @@ export default function Pricing() {
           {PLANS.map(({ name, price, period, pages, credits, cta, ctaHref, featured, features }, i) => (
             <div
               key={name}
-              className={`reveal rd${i + 1} rounded-2xl p-6 flex flex-col gap-5 relative ${featured ? 'pricing-featured' : 'glass'}`}
+              className={`reveal rd${i + 1} rounded-2xl p-6 flex flex-col gap-5 relative ${featured ? 'pricing-featured glass' : 'glass'}`}
               style={featured ? {
-                background: 'rgba(124,92,255,0.1)',
-                border: '1px solid rgba(124,92,255,0.35)',
+                background: 'rgba(96,165,250,0.08)',
+                border: '1px solid rgba(96,165,250,0.35)',
               } : undefined}
             >
               {featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <div
-                    className="flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold text-white whitespace-nowrap"
-                    style={{ background: 'linear-gradient(135deg,#7c5cff,#22d3ee)' }}
+                    className="flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold text-white whitespace-nowrap bg-gradient-spark"
                   >
                     <Sparkles className="w-3 h-3" />
                     Most popular
@@ -152,26 +151,29 @@ export default function Pricing() {
 
               {/* Plan name + price */}
               <div>
-                <div className="text-[12.5px] font-semibold mb-3" style={{ color: featured ? '#9d82ff' : 'rgba(255,255,255,0.5)' }}>
+                <div
+                  className={`text-[12.5px] font-semibold mb-3 ${featured ? '' : 'spark-text-muted'}`}
+                  style={featured ? { color: 'var(--spark-ember)' } : undefined}
+                >
                   {name}
                 </div>
                 <div className="flex items-baseline gap-1">
                   <span
-                    className="text-3xl font-bold text-white"
+                    className="text-3xl font-bold spark-text-primary"
                     style={{ fontFamily: 'var(--font-display)' }}
                   >
                     {price}
                   </span>
-                  <span className="text-[13px]" style={{ color: 'rgba(255,255,255,0.38)' }}>
+                  <span className="text-[13px] spark-text-subtle">
                     {period}
                   </span>
                 </div>
               </div>
 
               {/* Key specs */}
-              <div className="text-[12.5px] flex flex-col gap-1.5">
-                <div style={{ color: 'rgba(255,255,255,0.6)' }}>{pages}</div>
-                <div style={{ color: 'rgba(255,255,255,0.6)' }}>{credits}</div>
+              <div className="text-[12.5px] flex flex-col gap-1.5 spark-text-muted">
+                <div>{pages}</div>
+                <div>{credits}</div>
               </div>
 
               {/* Features */}
@@ -179,12 +181,11 @@ export default function Pricing() {
                 {features.map(({ text, highlighted }) => (
                   <div key={text} className="flex items-start gap-2">
                     <Check
-                      className="w-3.5 h-3.5 flex-shrink-0 mt-0.5"
-                      style={{ color: highlighted ? '#22d3ee' : 'rgba(255,255,255,0.35)' }}
+                      className={`w-3.5 h-3.5 flex-shrink-0 mt-0.5 ${highlighted ? '' : 'spark-text-subtle'}`}
+                      style={highlighted ? { color: 'var(--spark)' } : undefined}
                     />
                     <span
-                      className="text-[12.5px]"
-                      style={{ color: highlighted ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.5)' }}
+                      className={`text-[12.5px] ${highlighted ? 'spark-text-primary' : 'spark-text-muted'}`}
                     >
                       {text}
                     </span>
@@ -195,20 +196,7 @@ export default function Pricing() {
               {/* CTA */}
               <a
                 href={ctaHref}
-                className={`block text-center py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150 ${featured ? 'btn-spark text-white' : ''}`}
-                style={!featured ? {
-                  background: 'rgba(255,255,255,0.06)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: 'rgba(255,255,255,0.7)',
-                } : undefined}
-                onMouseEnter={!featured ? e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.9)'
-                } : undefined}
-                onMouseLeave={!featured ? e => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.7)'
-                } : undefined}
+                className={`block text-center py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150 ${featured ? 'btn-spark text-white' : 'spark-btn-secondary'}`}
               >
                 {cta}
               </a>

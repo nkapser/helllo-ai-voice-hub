@@ -14,10 +14,10 @@ const STEPS = [
     body: (
       <>
         Add it before{' '}
-        <code className="text-[11px] px-1.5 py-0.5 rounded" style={{ background: 'rgba(255,255,255,0.08)', color: '#9d82ff' }}>
+        <code className="text-[11px] px-1.5 py-0.5 rounded spark-chip">
           &lt;/body&gt;
         </code>
-        {' '}in your site template — footer, layout, <code className="text-[11px] px-1 rounded" style={{ background: 'rgba(255,255,255,0.08)', color: '#9d82ff' }}>_document</code>, Webflow custom code, or Framer site settings.
+        {' '}in your site template — footer, layout, <code className="text-[11px] px-1 rounded spark-chip">_document</code>, Webflow custom code, or Framer site settings.
       </>
     ),
   },
@@ -60,7 +60,7 @@ export default function Install() {
 
         {/* Header */}
         <div className="text-center mb-16 reveal">
-          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'rgba(124,92,255,0.8)' }}>
+          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'var(--spark-ember)' }}>
             Install
           </span>
           <h2
@@ -71,7 +71,7 @@ export default function Install() {
             <em className="gradient-text not-italic">60 seconds</em>.
             <br />Seriously.
           </h2>
-          <p className="text-[15px]" style={{ color: 'rgba(255,255,255,0.48)' }}>
+          <p className="text-[15px] spark-text-muted">
             One snippet. Every page. No developer required — but devs will love it too.
           </p>
         </div>
@@ -84,21 +84,21 @@ export default function Install() {
               <div key={num} className={`reveal rd${i + 1} flex gap-5 items-start`}>
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-                  style={{ background: 'rgba(124,92,255,0.15)', border: '1px solid rgba(124,92,255,0.3)' }}
+                  style={{ background: 'rgba(96,165,250,0.15)', border: '1px solid rgba(96,165,250,0.3)' }}
                 >
-                  <Icon className="w-4.5 h-4.5" style={{ color: '#9d82ff', width: 18, height: 18 }} />
+                  <Icon className="w-4.5 h-4.5" style={{ color: 'var(--spark-ember)', width: 18, height: 18 }} />
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <span
                       className="text-[10.5px] font-bold uppercase tracking-widest"
-                      style={{ color: 'rgba(124,92,255,0.7)' }}
+                      style={{ color: 'var(--spark)' }}
                     >
                       Step {num}
                     </span>
-                    <span className="text-white font-semibold text-[14px]">{label}</span>
+                    <span className="spark-text-primary font-semibold text-[14px]">{label}</span>
                   </div>
-                  <p className="text-[13.5px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.52)' }}>
+                  <p className="text-[13.5px] leading-relaxed spark-text-muted">
                     {body}
                   </p>
                 </div>
@@ -108,12 +108,12 @@ export default function Install() {
             {/* Callout */}
             <div
               className="reveal rd4 rounded-xl p-4 flex gap-3 items-start"
-              style={{ background: 'rgba(34,211,238,0.07)', border: '1px solid rgba(34,211,238,0.2)' }}
+              style={{ background: 'rgba(96,165,250,0.07)', border: '1px solid rgba(96,165,250,0.2)' }}
             >
-              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: '#22d3ee' }} />
+              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: 'var(--spark)' }} />
               <div>
-                <div className="text-[13px] font-semibold text-white mb-0.5">Put it site-wide, not homepage-only</div>
-                <div className="text-[12.5px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                <div className="text-[13px] font-semibold spark-text-primary mb-0.5">Put it site-wide, not homepage-only</div>
+                <div className="text-[12.5px] leading-relaxed spark-text-muted">
                   Guided navigation and session memory only work when the widget loads on every page.
                 </div>
               </div>
@@ -121,17 +121,12 @@ export default function Install() {
 
             {/* Platform pills */}
             <div className="reveal rd5">
-              <div className="text-[11.5px] mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>Works on</div>
+              <div className="text-[11.5px] mb-3 spark-text-subtle">Works on</div>
               <div className="flex flex-wrap gap-2">
                 {PLATFORMS.map((p) => (
                   <span
                     key={p}
-                    className="text-[12px] px-3 py-1.5 rounded-lg"
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.09)',
-                      color: 'rgba(255,255,255,0.55)',
-                    }}
+                    className="spark-chip text-[12px] px-3 py-1.5 rounded-lg"
                   >
                     {p}
                   </span>
@@ -143,25 +138,21 @@ export default function Install() {
           {/* ── Right: code block ── */}
           <div className="reveal rd2">
             <div
-              className="rounded-2xl overflow-hidden"
-              style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(0,0,0,0.4)' }}
+              className="rounded-2xl overflow-hidden glass shadow-elevated"
             >
               {/* Code window titlebar */}
               <div
                 className="flex items-center justify-between px-4 py-3"
-                style={{ borderBottom: '1px solid rgba(255,255,255,0.07)', background: 'rgba(255,255,255,0.03)' }}
+                style={{ borderBottom: '1px solid hsl(var(--spark-border))', background: 'rgba(241,245,249,0.6)' }}
               >
                 <div className="flex items-center gap-1.5">
                   {['#ff5f57','#febc2e','#28c840'].map((c) => (
                     <div key={c} className="w-2.5 h-2.5 rounded-full" style={{ background: c }} />
                   ))}
                 </div>
-                <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.3)' }}>embed.html</span>
+                <span className="text-[11px] spark-text-subtle">embed.html</span>
                 <button
-                  className="text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1.5 transition-all duration-150"
-                  style={{ color: 'rgba(255,255,255,0.4)', background: 'rgba(255,255,255,0.06)' }}
-                  onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.8)' }}
-                  onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.4)' }}
+                  className="spark-btn-secondary text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1.5 transition-all duration-150"
                 >
                   <Copy className="w-3 h-3" /> Copy
                 </button>
@@ -175,8 +166,8 @@ export default function Install() {
               </pre>
             </div>
 
-            <p className="mt-4 text-[12.5px] text-center" style={{ color: 'rgba(255,255,255,0.32)' }}>
-              Your unique <code style={{ color: '#9d82ff' }}>agentId</code> and <code style={{ color: '#9d82ff' }}>embedKey</code> are generated in the Spark dashboard.
+            <p className="mt-4 text-[12.5px] text-center spark-text-subtle">
+              Your unique <code style={{ color: 'var(--spark-ember)' }}>agentId</code> and <code style={{ color: 'var(--spark-ember)' }}>embedKey</code> are generated in the Spark dashboard.
             </p>
           </div>
         </div>

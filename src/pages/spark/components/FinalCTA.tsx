@@ -12,16 +12,13 @@ export default function FinalCTA() {
           style={{
             position: 'absolute',
             width: 700, height: 500,
-            background: 'radial-gradient(ellipse, rgba(124,92,255,0.18) 0%, rgba(34,211,238,0.08) 50%, transparent 70%)',
+            background: 'radial-gradient(ellipse, rgba(96,165,250,0.18) 0%, rgba(59,130,246,0.08) 50%, transparent 70%)',
             top: '50%', left: '50%',
             transform: 'translate(-50%, -50%)',
             filter: 'blur(60px)',
           }}
         />
       </div>
-
-      {/* Dot grid */}
-      <div className="absolute inset-0 dot-grid opacity-30 pointer-events-none" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 text-center">
 
@@ -40,15 +37,14 @@ export default function FinalCTA() {
         </h2>
 
         <p
-          className="reveal rd1 text-[17px] mb-10"
-          style={{ color: 'rgba(255,255,255,0.52)' }}
+          className="reveal rd1 text-[17px] mb-10 spark-text-muted"
         >
           Paste your URL. Fall in love in 30 seconds.
         </p>
 
         {/* URL Input — large repeat */}
         <div className="reveal rd2 mb-6 max-w-xl mx-auto">
-          <URLInput id="final-cta-input" size="large" />
+          <URLInput id="final-cta-input" showExamples={false} showTrustRow={false} />
         </div>
 
         {/* Micro-copy trust */}
@@ -59,8 +55,8 @@ export default function FinalCTA() {
             { icon: X,          text: 'Cancel anytime' },
           ].map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-1.5">
-              <Icon className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'rgba(255,255,255,0.3)' }} />
-              <span className="text-[12.5px]" style={{ color: 'rgba(255,255,255,0.38)' }}>{text}</span>
+              <Icon className="w-3.5 h-3.5 flex-shrink-0 spark-text-subtle" />
+              <span className="text-[12.5px] spark-text-subtle">{text}</span>
             </div>
           ))}
         </div>

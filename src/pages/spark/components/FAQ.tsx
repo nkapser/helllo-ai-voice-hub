@@ -47,7 +47,7 @@ export default function FAQ() {
 
         {/* Header */}
         <div className="text-center mb-14 reveal">
-          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'rgba(124,92,255,0.8)' }}>
+          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'var(--spark-ember)' }}>
             FAQ
           </span>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em' }}>
@@ -62,10 +62,10 @@ export default function FAQ() {
             return (
               <div
                 key={q}
-                className={`reveal rd${Math.min(i + 1, 5)} rounded-xl overflow-hidden transition-all duration-200 glass-hover`}
+                className={`reveal rd${Math.min(i + 1, 5)} rounded-xl overflow-hidden transition-all duration-200 glass glass-hover`}
                 style={{
-                  background: isOpen ? 'rgba(124,92,255,0.08)' : 'rgba(255,255,255,0.03)',
-                  border: `1px solid ${isOpen ? 'rgba(124,92,255,0.25)' : 'rgba(255,255,255,0.07)'}`,
+                  background: isOpen ? 'rgba(96,165,250,0.08)' : undefined,
+                  border: isOpen ? '1px solid rgba(96,165,250,0.25)' : undefined,
                 }}
               >
                 <button
@@ -74,21 +74,20 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                 >
                   <span
-                    className="text-[14.5px] font-medium leading-snug"
-                    style={{ color: isOpen ? 'white' : 'rgba(255,255,255,0.8)' }}
+                    className={`text-[14.5px] font-medium leading-snug ${isOpen ? 'spark-text-primary' : 'spark-text-muted'}`}
                   >
                     {q}
                   </span>
                   <div
                     className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200"
                     style={{
-                      background: isOpen ? 'rgba(124,92,255,0.2)' : 'rgba(255,255,255,0.06)',
-                      border: `1px solid ${isOpen ? 'rgba(124,92,255,0.4)' : 'rgba(255,255,255,0.1)'}`,
+                      background: isOpen ? 'rgba(96,165,250,0.2)' : 'rgba(241,245,249,0.9)',
+                      border: `1px solid ${isOpen ? 'rgba(96,165,250,0.4)' : 'hsl(var(--spark-border))'}`,
                     }}
                   >
                     {isOpen
-                      ? <Minus className="w-3.5 h-3.5" style={{ color: '#9d82ff' }} />
-                      : <Plus  className="w-3.5 h-3.5" style={{ color: 'rgba(255,255,255,0.5)' }} />
+                      ? <Minus className="w-3.5 h-3.5" style={{ color: 'var(--spark-ember)' }} />
+                      : <Plus  className="w-3.5 h-3.5 spark-text-muted" />
                     }
                   </div>
                 </button>
@@ -103,8 +102,7 @@ export default function FAQ() {
                   }}
                 >
                   <p
-                    className="px-5 pb-4 text-[14px] leading-relaxed"
-                    style={{ color: 'rgba(255,255,255,0.55)' }}
+                    className="px-5 pb-4 text-[14px] leading-relaxed spark-text-muted"
                   >
                     {a}
                   </p>

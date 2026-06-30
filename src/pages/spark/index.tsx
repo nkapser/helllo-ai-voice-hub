@@ -78,21 +78,25 @@ const Spark = () => {
 
   return (
     <div className="spark-page antialiased">
+      <div className="spark-aurora" aria-hidden="true" />
+      <div className="spark-grid" aria-hidden="true" />
       <RevealInit />
 
-      <main className="relative overflow-x-hidden">
+      <div className="spark-content relative flex min-h-screen w-full flex-col">
         <Nav />
-        <Hero />
-        <MagicMoment />
-        <HowItWorks />
-        <Superpowers />
-        <SiteDiscovery />
-        <Install />
-        <Pricing />
-        <FAQ />
-        <FinalCTA />
+        <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
+          <Hero />
+          <MagicMoment />
+          <HowItWorks />
+          <Superpowers />
+          <SiteDiscovery />
+          <Install />
+          <Pricing />
+          <FAQ />
+          <FinalCTA />
+        </main>
         <Footer />
-      </main>
+      </div>
     </div>
   );
 };

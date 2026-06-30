@@ -28,8 +28,7 @@ const LINKS = [
 export default function Footer() {
   return (
     <footer
-      className="relative pt-16 pb-10"
-      style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+      className="relative pt-16 pb-10 border-t border-[hsl(var(--spark-border))]"
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <div className="flex flex-col md:flex-row justify-between gap-12 mb-12">
@@ -38,17 +37,16 @@ export default function Footer() {
           <div className="max-w-xs">
             <div className="flex items-center gap-2.5 mb-4">
               <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg,#7c5cff,#22d3ee)' }}
+                className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-spark shadow-spark"
               >
                 <Sparkles className="w-4 h-4 text-white" strokeWidth={1.8} />
               </div>
               <div>
-                <span className="font-semibold text-white text-[15px]">Spark</span>
-                <span className="text-[11px] ml-1.5" style={{ color: 'rgba(255,255,255,0.35)' }}>by Helllo.ai</span>
+                <span className="font-semibold spark-text-primary text-[15px]">Spark</span>
+                <span className="text-[11px] ml-1.5 spark-text-subtle">by Helllo.ai</span>
               </div>
             </div>
-            <p className="text-[13px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+            <p className="text-[13px] leading-relaxed spark-text-muted">
               Give your website a voice. Paste your URL, train on your content, embed one script tag.
             </p>
           </div>
@@ -57,7 +55,7 @@ export default function Footer() {
           <div className="flex flex-wrap gap-10 sm:gap-16">
             {LINKS.map(({ group, items }) => (
               <div key={group}>
-                <div className="text-[11.5px] uppercase tracking-widest font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.28)' }}>
+                <div className="text-[11.5px] uppercase tracking-widest font-semibold mb-4 spark-text-subtle">
                   {group}
                 </div>
                 <div className="flex flex-col gap-2.5">
@@ -65,10 +63,7 @@ export default function Footer() {
                     <a
                       key={label}
                       href={href}
-                      className="text-[13.5px] transition-colors duration-150"
-                      style={{ color: 'rgba(255,255,255,0.48)' }}
-                      onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.85)')}
-                      onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.48)')}
+                      className="text-[13.5px] spark-text-muted transition-colors duration-150 hover:text-[hsl(215_28%_17%)]"
                     >
                       {label}
                     </a>
@@ -81,18 +76,14 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div
-          className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
+          className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-[hsl(var(--spark-border))]"
         >
-          <span className="text-[12.5px]" style={{ color: 'rgba(255,255,255,0.28)' }}>
+          <span className="text-[12.5px] spark-text-subtle">
             © 2026 Helllo.ai — All rights reserved.
           </span>
           <a
             href="https://helllo.ai"
-            className="text-[12.5px] transition-colors duration-150"
-            style={{ color: 'rgba(255,255,255,0.28)' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.28)')}
+            className="text-[12.5px] spark-text-subtle transition-colors duration-150 hover:text-[hsl(215_28%_17%)]"
           >
             helllo.ai ↗
           </a>
