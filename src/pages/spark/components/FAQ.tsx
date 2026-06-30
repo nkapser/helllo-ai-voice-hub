@@ -24,7 +24,7 @@ const FAQS = [
   },
   {
     q: 'What makes Spark different from Intercom or Drift?',
-    a: 'Three things: guided navigation (Spark takes visitors to the right page mid-conversation), in-browser voice, and training from your actual site content. Spark is built for SMB websites, not enterprise sales teams with 6-figure contracts.',
+    a: 'Three things: guided navigation (Spark takes visitors to the right page mid-conversation), in-browser voice, and training from your actual site content. Spark is built for SMB website.',
   },
   {
     q: 'Does it work on mobile?',
