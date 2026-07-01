@@ -11,11 +11,16 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { getDashboardAuthSignInUrl } from '@/lib/dashboard'
+import {
+  SPARK_PLANS,
+  getPlanPricing,
+  getPricingRegionLabel,
+  type BillingInterval,
+} from '@/lib/spark-pricing'
+import { usePricingRegion } from '@/hooks/use-pricing-region'
 
 const SPARK_SIGNIN_URL = getDashboardAuthSignInUrl('/console/spark')
 const ENTERPRISE_URL = 'mailto:hello@helllo.ai?subject=Spark%20Enterprise%20inquiry'
-
-type BillingInterval = 'monthly' | 'annual'
 
 const FREE_STATS = [
   { icon: Coins, value: '500', label: 'credits included' },
@@ -37,104 +42,9 @@ const ENTERPRISE_FEATURES = [
   },
 ]
 
-interface PlanFeature {
-  text: string
-  highlighted?: boolean
-}
-
-interface Plan {
-  name: string
-  monthlyPrice: number
-  annualDiscountPercent: number
-  tagline: string
-  cta: string
-  featured?: boolean
-  features: PlanFeature[]
-}
-
-function formatUsd(amount: number): string {
-  return `$${Math.round(amount).toLocaleString('en-US')}`
-}
-
-function getAnnualTotal(monthlyPrice: number, discountPercent: number): number {
-  return Math.round(monthlyPrice * 12 * (1 - discountPercent / 100))
-}
-
-function getPlanPricing(
-  plan: Plan,
-  billing: BillingInterval
-): { price: string; period: string; savingsBadge?: string } {
-  if (billing === 'monthly') {
-    return {
-      price: formatUsd(plan.monthlyPrice),
-      period: '/month',
-    }
-  }
-
-  const annualTotal = getAnnualTotal(plan.monthlyPrice, plan.annualDiscountPercent)
-  const monthlyEquivalent = annualTotal / 12
-
-  return {
-    price: formatUsd(monthlyEquivalent),
-    period: '/month',
-    savingsBadge: `Save ${plan.annualDiscountPercent}%`,
-  }
-}
-
-const PLANS: Plan[] = [
-  {
-    name: 'Starter',
-    monthlyPrice: 49,
-    annualDiscountPercent: 15,
-    tagline: 'Best for a single marketing site',
-    cta: 'Start Starter',
-    features: [
-      { text: 'Voice: 16 credits/min (~300 mins/mo)', highlighted: true },
-      { text: 'Chat: 6 credits/conversation (~800/mo)' },
-      { text: '3 concurrent voice conversations' },
-      { text: 'Up to 1,000 pages' },
-      { text: 'Google Calendar & Calendly' },
-      { text: 'Chat + voice widget' },
-      { text: 'Guided navigation' },
-    ],
-  },
-  {
-    name: 'Growth',
-    monthlyPrice: 99,
-    annualDiscountPercent: 20,
-    tagline: 'Best for growing businesses',
-    cta: 'Get Growth',
-    featured: true,
-    features: [
-      { text: 'Voice: 12 credits/min (~800 mins/mo)', highlighted: true },
-      { text: 'Chat: 5 credits/conversation (~2,000/mo)' },
-      { text: '5 concurrent voice conversations' },
-      { text: 'Up to 2,000 pages' },
-      { text: 'Google Calendar, Calendly & Cal.com' },
-      { text: 'CRM integrations (Shopify)', highlighted: true },
-      { text: 'File uploads (FAQ, PDF)' },
-    ],
-  },
-  {
-    name: 'Scale',
-    monthlyPrice: 299,
-    annualDiscountPercent: 33,
-    tagline: 'Best for high-traffic sites & agencies',
-    cta: 'Get Scale',
-    features: [
-      { text: 'Voice: 10 credits/min (~3,000 mins/mo)', highlighted: true },
-      { text: 'Chat: 3 credits/conversation (~10,000/mo)' },
-      { text: '10 concurrent voice conversations' },
-      { text: 'Up to 6,000 pages' },
-      { text: 'Google Calendar, Calendly & Cal.com' },
-      { text: 'Custom integrations', highlighted: true },
-      { text: 'Priority support' },
-    ],
-  },
-]
-
 export default function Pricing() {
   const [billing, setBilling] = useState<BillingInterval>('monthly')
+  const region = usePricingRegion()
 
   return (
     <section id="pricing" className="spark-section relative">
@@ -168,7 +78,9 @@ export default function Pricing() {
           </h2>
           <p className="text-[14px] spark-text-muted max-w-lg mx-auto">
             Credits translate to real usage — minutes of voice and chat conversations.
-            India: INR via Razorpay · International: USD via Stripe
+            {region === 'IN'
+              ? ' India: INR via Razorpay'
+              : ' International: USD via Stripe'}
           </p>
         </div>
 
@@ -177,7 +89,9 @@ export default function Pricing() {
             <div className="pricing-band-identity">
               <span className="pricing-band-badge pricing-band-badge-free">Free forever</span>
               <div className="flex items-baseline gap-1.5">
-                <span className="font-display text-[2rem] font-bold leading-none spark-text-primary">$0</span>
+                <span className="font-display text-[2rem] font-bold leading-none spark-text-primary">
+                  {region === 'IN' ? '₹0' : '$0'}
+                </span>
                 <span className="text-[12px] spark-text-subtle">/ forever</span>
               </div>
               <p className="mt-1.5 text-[12.5px] leading-snug spark-text-muted">
@@ -238,9 +152,9 @@ export default function Pricing() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {PLANS.map((plan, i) => {
+          {SPARK_PLANS.map((plan, i) => {
             const { name, tagline, cta, featured, features } = plan
-            const { price, period, savingsBadge } = getPlanPricing(plan, billing)
+            const { price, period, savingsBadge } = getPlanPricing(plan, billing, region)
 
             return (
             <div
@@ -349,7 +263,7 @@ export default function Pricing() {
         </article>
 
         <p className="reveal text-center mt-6 text-[13px] spark-text-muted">
-          Start on Free forever, upgrade when you need more. Paste your URL to get started.
+          {getPricingRegionLabel(region)}. Start on Free forever, upgrade when you need more.
         </p>
 
         <div className="text-center mt-8 reveal">
