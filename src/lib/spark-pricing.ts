@@ -79,28 +79,21 @@ export const SPARK_PLANS: SparkPlan[] = [
   },
 ];
 
-export function detectPricingRegion(): PricingRegion {
-  if (typeof window === "undefined") return "INTL";
+export async function fetchPricingRegion(): Promise<PricingRegion> {
+  try {
+    const response = await fetch("/api/pricing-region", {
+      credentials: "same-origin",
+    });
 
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  if (timezone === "Asia/Kolkata" || timezone === "Asia/Calcutta") {
-    return "IN";
+    if (!response.ok) {
+      return "INTL";
+    }
+
+    const data = (await response.json()) as { region?: string };
+    return data.region === "IN" ? "IN" : "INTL";
+  } catch {
+    return "INTL";
   }
-
-  const languages = navigator.languages?.length
-    ? navigator.languages
-    : [navigator.language];
-
-  const isIndiaLocale = languages.some((lang) => {
-    const normalized = lang.toLowerCase();
-    return (
-      normalized.endsWith("-in") ||
-      normalized === "hi" ||
-      normalized.startsWith("hi-")
-    );
-  });
-
-  return isIndiaLocale ? "IN" : "INTL";
 }
 
 export function getPlanMonthlyPrice(plan: SparkPlan, region: PricingRegion): number {

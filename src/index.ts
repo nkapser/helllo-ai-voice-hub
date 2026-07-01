@@ -1,8 +1,14 @@
+import { createPricingRegionResponse } from "@/lib/pricing-region-server";
+
 export default {
   async fetch(request: Request, env: any, ctx: any): Promise<Response> {
     const url = new URL(request.url);
     const path = url.pathname;
     const hostname = url.hostname;
+
+    if (path === "/api/pricing-region") {
+      return createPricingRegionResponse(request);
+    }
 
     // Get the assets binding - try different possible names
     const assets = env.ASSETS || env.__STATIC_CONTENT_MANIFEST || env.SITE || env.ASSETS_BINDING;
