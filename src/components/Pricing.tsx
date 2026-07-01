@@ -97,7 +97,7 @@ const Pricing = () => {
             >
               Annual
               <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
-                Save up to 33%
+                Save up to 20%
               </span>
             </button>
           </div>

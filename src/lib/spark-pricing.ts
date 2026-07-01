@@ -29,7 +29,7 @@ export const SPARK_PLANS: SparkPlan[] = [
     name: "Starter",
     monthlyPriceUsd: 49,
     monthlyPriceInr: 4900,
-    annualDiscountPercent: 15,
+    annualDiscountPercent: 5,
     tagline: "Best for a single marketing site",
     cta: "Start Starter",
     features: [
@@ -46,7 +46,7 @@ export const SPARK_PLANS: SparkPlan[] = [
     name: "Growth",
     monthlyPriceUsd: 99,
     monthlyPriceInr: 9900,
-    annualDiscountPercent: 20,
+    annualDiscountPercent: 10,
     tagline: "Best for growing businesses",
     cta: "Get Growth",
     featured: true,
@@ -64,7 +64,7 @@ export const SPARK_PLANS: SparkPlan[] = [
     name: "Scale",
     monthlyPriceUsd: 299,
     monthlyPriceInr: 29900,
-    annualDiscountPercent: 33,
+    annualDiscountPercent: 20,
     tagline: "Best for high-traffic sites & agencies",
     cta: "Get Scale",
     features: [

@@ -146,7 +146,7 @@ export default function Pricing() {
               className={`pricing-billing-toggle-btn ${billing === 'annual' ? 'is-active' : ''}`}
             >
               Annual
-              <span className="pricing-billing-toggle-badge">Save up to 33%</span>
+              <span className="pricing-billing-toggle-badge">Save up to 20%</span>
             </button>
           </div>
         </div>
