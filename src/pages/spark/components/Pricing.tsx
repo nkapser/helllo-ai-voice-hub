@@ -9,10 +9,13 @@ import {
   AudioLines,
   Building2,
 } from 'lucide-react'
+import { useState } from 'react'
 import { getDashboardAuthSignInUrl } from '@/lib/dashboard'
 
 const SPARK_SIGNIN_URL = getDashboardAuthSignInUrl('/console/spark')
 const ENTERPRISE_URL = 'mailto:hello@helllo.ai?subject=Spark%20Enterprise%20inquiry'
+
+type BillingInterval = 'monthly' | 'annual'
 
 const FREE_STATS = [
   { icon: Coins, value: '500', label: 'credits included' },
@@ -41,19 +44,48 @@ interface PlanFeature {
 
 interface Plan {
   name: string
-  price: string
-  period: string
+  monthlyPrice: number
+  annualDiscountPercent: number
   tagline: string
   cta: string
   featured?: boolean
   features: PlanFeature[]
 }
 
+function formatUsd(amount: number): string {
+  return `$${Math.round(amount).toLocaleString('en-US')}`
+}
+
+function getAnnualTotal(monthlyPrice: number, discountPercent: number): number {
+  return Math.round(monthlyPrice * 12 * (1 - discountPercent / 100))
+}
+
+function getPlanPricing(
+  plan: Plan,
+  billing: BillingInterval
+): { price: string; period: string; savingsBadge?: string } {
+  if (billing === 'monthly') {
+    return {
+      price: formatUsd(plan.monthlyPrice),
+      period: '/month',
+    }
+  }
+
+  const annualTotal = getAnnualTotal(plan.monthlyPrice, plan.annualDiscountPercent)
+  const monthlyEquivalent = annualTotal / 12
+
+  return {
+    price: formatUsd(monthlyEquivalent),
+    period: '/month',
+    savingsBadge: `Save ${plan.annualDiscountPercent}%`,
+  }
+}
+
 const PLANS: Plan[] = [
   {
     name: 'Starter',
-    price: '$49',
-    period: '/month',
+    monthlyPrice: 49,
+    annualDiscountPercent: 15,
     tagline: 'Best for a single marketing site',
     cta: 'Start Starter',
     features: [
@@ -68,8 +100,8 @@ const PLANS: Plan[] = [
   },
   {
     name: 'Growth',
-    price: '$99',
-    period: '/month',
+    monthlyPrice: 99,
+    annualDiscountPercent: 20,
     tagline: 'Best for growing businesses',
     cta: 'Get Growth',
     featured: true,
@@ -85,8 +117,8 @@ const PLANS: Plan[] = [
   },
   {
     name: 'Scale',
-    price: '$299',
-    period: '/month',
+    monthlyPrice: 299,
+    annualDiscountPercent: 33,
     tagline: 'Best for high-traffic sites & agencies',
     cta: 'Get Scale',
     features: [
@@ -102,6 +134,8 @@ const PLANS: Plan[] = [
 ]
 
 export default function Pricing() {
+  const [billing, setBilling] = useState<BillingInterval>('monthly')
+
   return (
     <section id="pricing" className="spark-section relative">
       <div className="glow-divider" />
@@ -175,10 +209,40 @@ export default function Pricing() {
           </article>
         </div>
 
-        <p className="pricing-paid-label reveal">Monthly plans</p>
+        <p className="pricing-paid-label reveal">Paid plans</p>
+
+        <div className="pricing-billing-toggle reveal mb-6 flex justify-center">
+          <div
+            className="pricing-billing-toggle-track inline-flex items-center rounded-full p-1 glass"
+            role="group"
+            aria-label="Billing interval"
+          >
+            <button
+              type="button"
+              onClick={() => setBilling('monthly')}
+              aria-pressed={billing === 'monthly'}
+              className={`pricing-billing-toggle-btn ${billing === 'monthly' ? 'is-active' : ''}`}
+            >
+              Monthly
+            </button>
+            <button
+              type="button"
+              onClick={() => setBilling('annual')}
+              aria-pressed={billing === 'annual'}
+              className={`pricing-billing-toggle-btn ${billing === 'annual' ? 'is-active' : ''}`}
+            >
+              Annual
+              <span className="pricing-billing-toggle-badge">Save up to 33%</span>
+            </button>
+          </div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {PLANS.map(({ name, price, period, tagline, cta, featured, features }, i) => (
+          {PLANS.map((plan, i) => {
+            const { name, tagline, cta, featured, features } = plan
+            const { price, period, savingsBadge } = getPlanPricing(plan, billing)
+
+            return (
             <div
               key={name}
               className={`reveal rd${i + 1} rounded-2xl p-6 flex flex-col gap-5 relative ${featured ? 'pricing-featured glass' : 'glass'}`}
@@ -207,11 +271,14 @@ export default function Pricing() {
                   {name}
                 </div>
                 <p className="text-[12px] spark-text-subtle mb-3">{tagline}</p>
-                <div className="flex items-baseline gap-1">
+                <div className="flex items-baseline gap-1 flex-wrap">
                   <span className="text-3xl font-bold spark-text-primary font-display">
                     {price}
                   </span>
                   <span className="text-[13px] spark-text-subtle">{period}</span>
+                  {savingsBadge && (
+                    <span className="pricing-savings-badge">{savingsBadge}</span>
+                  )}
                 </div>
               </div>
 
@@ -238,7 +305,8 @@ export default function Pricing() {
                 {cta}
               </a>
             </div>
-          ))}
+            )
+          })}
         </div>
 
         <article className="pricing-band pricing-band-enterprise reveal mt-5">
