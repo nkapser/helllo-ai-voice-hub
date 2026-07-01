@@ -1,17 +1,9 @@
 import { useEffect } from "react";
+import { getDashboardUrl } from "@/lib/dashboard";
 
 const Console = () => {
   useEffect(() => {
-    // Detect environment based on hostname
-    const hostname = window.location.hostname;
-    const isStaging = hostname === 'staging.helllo.ai' || hostname.includes('staging');
-    
-    // Redirect to external dashboard console
-    if (isStaging) {
-      window.location.replace('https://dash-staging.helllo.ai/console');
-    } else {
-      window.location.replace('https://dash.helllo.ai/console');
-    }
+    window.location.replace(getDashboardUrl("/console"));
   }, []);
 
   return (

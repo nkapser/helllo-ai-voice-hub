@@ -9,8 +9,9 @@ import {
   AudioLines,
   Building2,
 } from 'lucide-react'
+import { getDashboardAuthSignInUrl } from '@/lib/dashboard'
 
-const SIGNIN_URL = 'https://dash.helllo.ai/auth/signin?redirect=/console/spark'
+const SPARK_SIGNIN_URL = getDashboardAuthSignInUrl('/console/spark')
 const ENTERPRISE_URL = 'mailto:hello@helllo.ai?subject=Spark%20Enterprise%20inquiry'
 
 const FREE_STATS = [
@@ -44,7 +45,6 @@ interface Plan {
   period: string
   tagline: string
   cta: string
-  ctaHref: string
   featured?: boolean
   features: PlanFeature[]
 }
@@ -56,7 +56,6 @@ const PLANS: Plan[] = [
     period: '/month',
     tagline: 'Best for a single marketing site',
     cta: 'Start Starter',
-    ctaHref: 'https://dash.helllo.ai/auth/signin?redirect=/console/spark',
     features: [
       { text: 'Voice: 16 credits/min (~300 mins/mo)', highlighted: true },
       { text: 'Chat: 6 credits/conversation (~800/mo)' },
@@ -73,7 +72,6 @@ const PLANS: Plan[] = [
     period: '/month',
     tagline: 'Best for growing businesses',
     cta: 'Get Growth',
-    ctaHref: 'https://dash.helllo.ai/auth/signin?redirect=/console/spark',
     featured: true,
     features: [
       { text: 'Voice: 12 credits/min (~800 mins/mo)', highlighted: true },
@@ -91,7 +89,6 @@ const PLANS: Plan[] = [
     period: '/month',
     tagline: 'Best for high-traffic sites & agencies',
     cta: 'Get Scale',
-    ctaHref: 'https://dash.helllo.ai/auth/signin?redirect=/console/spark',
     features: [
       { text: 'Voice: 10 credits/min (~3,000 mins/mo)', highlighted: true },
       { text: 'Chat: 3 credits/conversation (~10,000/mo)' },
@@ -171,7 +168,7 @@ export default function Pricing() {
             </div>
 
             <div className="pricing-band-cta-wrap">
-              <a href={SIGNIN_URL} className="pricing-band-cta pricing-band-cta-free">
+              <a href={SPARK_SIGNIN_URL} className="pricing-band-cta pricing-band-cta-free">
                 Start free
               </a>
             </div>
@@ -181,7 +178,7 @@ export default function Pricing() {
         <p className="pricing-paid-label reveal">Monthly plans</p>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {PLANS.map(({ name, price, period, tagline, cta, ctaHref, featured, features }, i) => (
+          {PLANS.map(({ name, price, period, tagline, cta, featured, features }, i) => (
             <div
               key={name}
               className={`reveal rd${i + 1} rounded-2xl p-6 flex flex-col gap-5 relative ${featured ? 'pricing-featured glass' : 'glass'}`}
@@ -235,7 +232,7 @@ export default function Pricing() {
               </div>
 
               <a
-                href={ctaHref}
+                href={SPARK_SIGNIN_URL}
                 className={`block text-center py-2.5 rounded-xl text-[13px] font-medium transition-all duration-150 ${featured ? 'btn-spark text-white' : 'spark-btn-secondary'}`}
               >
                 {cta}

@@ -1,4 +1,5 @@
 import { Check, Globe, ArrowRight } from 'lucide-react'
+import { getDashboardUrl } from '@/lib/dashboard'
 
 const PAGES = [
   { path: '/',          label: 'Home',        checked: true },
@@ -74,7 +75,7 @@ export default function SiteDiscovery() {
                 </div>
               </div>
               <a
-                href="https://dash.helllo.ai/console/profile/billing"
+                href={getDashboardUrl('/console/profile/billing')}
                 className="btn-spark flex-shrink-0 flex items-center gap-1.5 text-[12.5px] font-medium px-4 py-2 rounded-lg text-white transition-all duration-150"
               >
                 See plans <ArrowRight className="w-3.5 h-3.5" />

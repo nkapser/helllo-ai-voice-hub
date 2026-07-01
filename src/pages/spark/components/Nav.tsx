@@ -1,6 +1,8 @@
 import { Sparkles } from 'lucide-react'
+import { getDashboardAuthSignInUrl } from '@/lib/dashboard'
 
 export default function Nav() {
+  const signInUrl = getDashboardAuthSignInUrl('/console/spark')
   return (
     <header className="mx-auto w-full max-w-6xl border-b border-[hsl(var(--spark-border)/0.7)] px-4 py-4 sm:px-6">
       <nav className="relative z-10 flex items-center justify-between">
@@ -26,7 +28,7 @@ export default function Nav() {
             Helllo.ai
           </a>
           <a
-            href="https://dash.helllo.ai/auth/signin?redirect=/console/spark"
+            href={signInUrl}
             className="spark-btn-secondary inline-flex h-9 items-center rounded-lg px-4 text-sm font-medium"
           >
             Sign in
