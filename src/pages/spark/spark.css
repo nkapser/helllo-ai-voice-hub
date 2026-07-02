@@ -869,6 +869,75 @@
   animation: widget-pulse 2.6s ease-in-out infinite;
 }
 
+/* ── Hero section + shader gradient ──────────────────────────── */
+.hero-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-shader-gradient,
+.hero-shader-fallback {
+  position: absolute;
+  inset: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    black 75%,
+    transparent 100%
+  );
+}
+
+.hero-shader-canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100%;
+}
+
+.hero-shader-veil {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(248, 250, 252, 0.45) 0%,
+      rgba(248, 250, 252, 0.2) 42%,
+      rgba(241, 245, 249, 0.35) 70%,
+      rgba(248, 250, 252, 0.72) 100%
+    ),
+    radial-gradient(
+      75% 60% at 50% 38%,
+      rgba(255, 255, 255, 0.35) 0%,
+      transparent 68%
+    );
+  pointer-events: none;
+}
+
+.hero-shader-fallback {
+  background: linear-gradient(
+    180deg,
+    hsl(var(--spark-background)) 0%,
+    hsl(204 94% 96%) 45%,
+    hsl(var(--spark-background)) 100%
+  );
+}
+
+.hero-shader-fallback-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(55% 45% at 50% 28%, rgba(147, 197, 253, 0.28), transparent 70%),
+    radial-gradient(40% 35% at 82% 55%, rgba(96, 165, 250, 0.12), transparent 70%),
+    radial-gradient(35% 30% at 12% 62%, rgba(224, 242, 254, 0.35), transparent 70%);
+}
+
 /* ── Hero voice field (ambient background) ───────────────────── */
 .hero-voice-stage {
   position: relative;
@@ -1097,9 +1166,19 @@
   opacity: 0.72;
 }
 
+.hero-spark-logo {
+  position: relative;
+  z-index: 2;
+}
+
 .hero-voice-content {
   position: relative;
   z-index: 1;
+}
+
+.hero-voice-content h1,
+.hero-voice-content .spark-badge-pill {
+  text-shadow: 0 1px 20px rgba(248, 250, 252, 0.9);
 }
 
 @media (prefers-reduced-motion: reduce) {

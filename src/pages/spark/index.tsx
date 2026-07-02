@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Nav from "@/pages/spark/components/Nav";
 import Hero from "@/pages/spark/components/Hero";
 import MagicMoment from "@/pages/spark/components/MagicMoment";
 import HowItWorks from "@/pages/spark/components/HowItWorks";
@@ -84,9 +83,8 @@ const Spark = () => {
       <RevealInit />
 
       <div className="spark-content relative flex min-h-screen w-full flex-col">
-        <Nav />
+        <Hero />
         <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
-          <Hero />
           <DataPrivacyStrip />
           <MagicMoment />
           <HowItWorks />
