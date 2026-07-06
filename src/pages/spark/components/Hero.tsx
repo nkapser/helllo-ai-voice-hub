@@ -14,7 +14,7 @@ export default function Hero() {
         <a
           href="/spark"
           className="hero-spark-logo mb-8 inline-flex items-center gap-3 text-left"
-          aria-label="Spark by Helllo.ai"
+          aria-label="Spark"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-spark text-white shadow-spark">
             <Sparkles className="h-4 w-4" strokeWidth={2} />
@@ -22,9 +22,6 @@ export default function Hero() {
           <span className="leading-tight">
             <span className="block font-display text-lg font-semibold tracking-tight spark-text-primary">
               Spark
-            </span>
-            <span className="block text-[10px] font-medium uppercase tracking-[0.12em] spark-text-muted">
-              by Helllo.ai
             </span>
           </span>
         </a>
@@ -65,9 +62,6 @@ export default function Hero() {
               </span>
               perceptorylabs.ai
             </a>
-            <p className="mt-3 text-[12.5px] spark-text-subtle max-w-sm mx-auto">
-              Production AI from the team behind Helllo.ai
-            </p>
           </div>
         </div>
       </div>
