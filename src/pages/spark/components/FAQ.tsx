@@ -11,6 +11,10 @@ const FAQS = [
     a: 'Answers are grounded in pages you approve and files you upload — not the open internet. If Spark doesn\'t know something, it says so instead of making it up.',
   },
   {
+    q: 'Is my data used to train other AI models?',
+    a: 'No. Your content trains only your assistant — it\'s never used to train foundation models or shared with other customers. You see and approve every page before it\'s crawled, and can delete your data anytime. Full details in our Privacy Policy.',
+  },
+  {
     q: 'Can I try it before signing up?',
     a: 'Yes. Paste your URL and immediately chat with a homepage-trained assistant — no account, no credit card. Sign up only when you want to save and embed.',
   },

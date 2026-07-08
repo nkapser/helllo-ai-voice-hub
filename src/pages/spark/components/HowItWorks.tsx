@@ -37,7 +37,7 @@ const STEPS = [
     num:   '05',
     icon:  Rocket,
     label: 'Launch',
-    body:  'Copy the embed snippet, paste it site-wide before </body>. Visitors chat on every page.',
+    body:  'Copy the embed snippet, paste it site-wide before </body>. Works on Next.js, React, Webflow, Framer, Shopify, or plain HTML — visitors chat on every page.',
     accent: 'var(--spark-ember)',
     accentRgb: '59,130,246',
   },

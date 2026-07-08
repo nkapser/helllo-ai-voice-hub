@@ -1,16 +1,12 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "@/pages/spark/components/Hero";
-import MagicMoment from "@/pages/spark/components/MagicMoment";
 import HowItWorks from "@/pages/spark/components/HowItWorks";
-import Superpowers from "@/pages/spark/components/Superpowers";
-import SiteDiscovery from "@/pages/spark/components/SiteDiscovery";
-import Install from "@/pages/spark/components/Install";
+import FeatureShowcase from "@/pages/spark/components/FeatureShowcase";
 import Pricing from "@/pages/spark/components/Pricing";
 import FAQ from "@/pages/spark/components/FAQ";
 import FinalCTA from "@/pages/spark/components/FinalCTA";
 import Footer from "@/pages/spark/components/Footer";
-import DataPrivacyStrip from "@/pages/spark/components/DataPrivacyStrip";
 import RevealInit from "@/pages/spark/components/RevealInit";
 import { setSEO } from "@/lib/seo";
 import { scrollToHash } from "@/lib/scroll";
@@ -21,20 +17,20 @@ const Spark = () => {
 
   useEffect(() => {
     setSEO({
-      title: "Spark — Give your website a voice | Helllo.ai",
+      title: "Spark — Give your website a brain | Helllo.ai",
       description:
-        "Paste your URL. In 30 seconds, talk to an AI assistant trained on your site — then drop one line of code and never miss a visitor question again.",
+        "Paste your URL. In 30 seconds, get an AI assistant trained on your site that answers questions, books meetings, and guides visitors to the right page — then embed it in one line of code.",
       keywords:
         "AI website assistant, website chatbot, voice AI for websites, Spark Helllo.ai, no-code chatbot",
       canonical: "https://www.helllo.ai/spark",
-      ogTitle: "Spark — Give your website a voice",
+      ogTitle: "Spark — Give your website a brain",
       ogDescription:
-        "Paste your URL → AI assistant trained on your site in 30 seconds → one script tag, go live.",
+        "Paste your URL → AI assistant trained on your site in 30 seconds → answers, navigates, books meetings → one script tag, go live.",
       ogUrl: "https://www.helllo.ai/spark",
       ogImage: "https://helllo.ai/og/spark.png",
-      twitterTitle: "Spark — Give your website a voice",
+      twitterTitle: "Spark — Give your website a brain",
       twitterDescription:
-        "Paste your URL → 30 seconds → AI assistant trained on your site → one script tag.",
+        "Paste your URL → 30 seconds → AI assistant trained on your site → answers, navigates, books meetings.",
       twitterImage: "https://helllo.ai/og/spark.png",
     });
 
@@ -85,12 +81,10 @@ const Spark = () => {
       <div className="spark-content relative flex min-h-screen w-full flex-col">
         <Hero />
         <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
-          <DataPrivacyStrip />
-          <MagicMoment />
           <HowItWorks />
-          <Superpowers />
-          <SiteDiscovery />
-          <Install />
+        </main>
+        <FeatureShowcase />
+        <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
           <Pricing />
           <FAQ />
           <FinalCTA />

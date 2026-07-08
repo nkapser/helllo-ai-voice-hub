@@ -36,11 +36,11 @@ export default function Hero() {
             <span className="block max-[360px]:whitespace-normal sm:whitespace-nowrap">
               Give your website
             </span>
-            <span className="gradient-text block italic">a voice.</span>
+            <span className="gradient-text block italic">a brain.</span>
           </h1>
 
           <p className="animate-spark-rise d2 mx-auto mb-8 max-w-xl text-base spark-text-muted sm:text-lg">
-            Paste your URL. In 30 seconds, talk to an AI assistant trained on your site — then embed it in one line of code.
+            Paste your URL. In 30 seconds, get an AI assistant trained on your site that answers, navigates, and books meetings — chat or voice, one line of code.
           </p>
 
           <div className="animate-spark-rise d3 w-full max-w-xl">
