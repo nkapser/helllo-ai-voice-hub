@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "@/pages/spark/components/Hero";
-import HowItWorks from "@/pages/spark/components/HowItWorks";
 import FeatureShowcase from "@/pages/spark/components/FeatureShowcase";
 import Pricing from "@/pages/spark/components/Pricing";
 import FAQ from "@/pages/spark/components/FAQ";
@@ -80,9 +79,6 @@ const Spark = () => {
 
       <div className="spark-content relative flex min-h-screen w-full flex-col">
         <Hero />
-        <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
-          <HowItWorks />
-        </main>
         <FeatureShowcase />
         <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
           <Pricing />

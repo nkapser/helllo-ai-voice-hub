@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ShaderGradientCanvas, ShaderGradient } from "@shadergradient/react";
 
 /** Spark theme: ember → glow → soft accent (maps user preset structure) */
@@ -7,6 +7,8 @@ const SPARK_SHADER_COLORS = {
   color2: "#93c5fd",
   color3: "#dbeafe",
 } as const;
+
+const SHADER_SPEED = 0.3;
 
 function HeroShaderFallback() {
   return (
@@ -17,20 +19,44 @@ function HeroShaderFallback() {
 }
 
 export default function HeroShaderGradient() {
-  const [motionEnabled, setMotionEnabled] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const elapsedRef = useRef(0);
+  const lastFrameRef = useRef<number>();
+  const [uTime, setUTime] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(() =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
-    setMounted(true);
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setMotionEnabled(!media.matches);
-
-    const onChange = () => setMotionEnabled(!media.matches);
+    const onChange = () => setReduceMotion(media.matches);
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
   }, []);
 
-  if (!mounted || !motionEnabled) {
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    let raf = 0;
+    let frame = 0;
+    const tick = (now: number) => {
+      if (lastFrameRef.current !== undefined) {
+        const dt = (now - lastFrameRef.current) / 1000;
+        elapsedRef.current += dt * SHADER_SPEED;
+        frame += 1;
+        if (frame % 2 === 0) {
+          setUTime(elapsedRef.current);
+        }
+      }
+      lastFrameRef.current = now;
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [reduceMotion]);
+
+  if (reduceMotion) {
     return <HeroShaderFallback />;
   }
 
@@ -45,7 +71,7 @@ export default function HeroShaderGradient() {
       >
         <ShaderGradient
           control="props"
-          animate="on"
+          animate="off"
           type="plane"
           shader="defaults"
           brightness={1.2}
@@ -69,9 +95,9 @@ export default function HeroShaderGradient() {
           uAmplitude={1}
           uDensity={1.3}
           uFrequency={5.5}
-          uSpeed={0.3}
+          uSpeed={SHADER_SPEED}
           uStrength={2}
-          uTime={0}
+          uTime={uTime}
           wireframe={false}
           {...SPARK_SHADER_COLORS}
         />

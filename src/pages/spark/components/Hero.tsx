@@ -1,8 +1,32 @@
+import { useEffect, useRef } from 'react'
 import { Sparkles } from 'lucide-react'
 import URLInput from './URLInput'
 import HeroShaderGradient from './HeroShaderGradient'
 
+const HERO_SETTLED_KEY = 'spark-hero-settled'
+const HERO_ENTRANCE_MS = 360 + 600 + 50
+
 export default function Hero() {
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = contentRef.current
+    if (!el) return
+
+    const settle = () => {
+      el.classList.add('hero-settled')
+      sessionStorage.setItem(HERO_SETTLED_KEY, '1')
+    }
+
+    if (sessionStorage.getItem(HERO_SETTLED_KEY) === '1') {
+      settle()
+      return
+    }
+
+    const timer = window.setTimeout(settle, HERO_ENTRANCE_MS)
+    return () => window.clearTimeout(timer)
+  }, [])
+
   return (
     <section
       id="hero"
@@ -26,7 +50,7 @@ export default function Hero() {
           </span>
         </a>
 
-        <div className="hero-voice-content flex w-full flex-col items-center">
+        <div ref={contentRef} className="hero-voice-content flex w-full flex-col items-center">
           <div className="spark-badge-pill animate-spark-rise d0 mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--spark)]" />
             Launching on Product Hunt — be first to embed Spark

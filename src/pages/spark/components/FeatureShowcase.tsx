@@ -211,8 +211,13 @@ function StackedShowcase() {
   const introRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
-  const labelRefs = useRef<(HTMLSpanElement | null)[]>([])
+  const labelRefs = useRef<(HTMLButtonElement | null)[]>([])
   const progressRef = useRef<HTMLDivElement>(null)
+  const scrollToCardRef = useRef<(index: number) => void>(() => {})
+
+  const handleRailClick = (index: number) => {
+    scrollToCardRef.current(index)
+  }
 
   useLayoutEffect(() => {
     const section = sectionRef.current
@@ -322,9 +327,15 @@ function StackedShowcase() {
           if (!label) return
           const focus = gsap.utils.clamp(0, 1, 1 - Math.abs(scaled - i))
           const complete = scaled > i + 0.45
+          const active = focus > 0.62
           label.style.setProperty('--rail-focus', focus.toFixed(3))
-          label.classList.toggle('is-active', focus > 0.62)
+          label.classList.toggle('is-active', active)
           label.classList.toggle('is-complete', complete)
+          if (active) {
+            label.setAttribute('aria-current', 'step')
+          } else {
+            label.removeAttribute('aria-current')
+          }
         })
 
         if (progressRef.current) {
@@ -349,7 +360,7 @@ function StackedShowcase() {
         }
       }
 
-      ScrollTrigger.create({
+      const trigger = ScrollTrigger.create({
         trigger: section,
         start: 'top top',
         end: () => `+=${window.innerHeight * (cards.length - 1) * 1.05}`,
@@ -360,10 +371,20 @@ function StackedShowcase() {
         onUpdate: (self) => setScene(self.progress),
       })
 
+      scrollToCardRef.current = (index: number) => {
+        const total = cards.length
+        const progress = total > 1 ? index / (total - 1) : 0
+        const y = trigger.start + (trigger.end - trigger.start) * progress
+        window.scrollTo({ top: y, behavior: 'smooth' })
+      }
+
       setScene(0)
     }, section)
 
-    return () => ctx.revert()
+    return () => {
+      scrollToCardRef.current = () => {}
+      ctx.revert()
+    }
   }, [])
 
   return (
@@ -379,22 +400,25 @@ function StackedShowcase() {
               <em className="gradient-text not-italic">A teammate for your website.</em>
             </h2>
             <p className="text-[15px] max-w-xl spark-text-muted">
-              Four things visitors actually need — keep scrolling as each one takes the stage.
+              Four things visitors actually need — scroll or pick one on the left.
             </p>
           </div>
 
           <div className="feature-stack-body">
-            <aside className="feature-stack-rail" aria-label="Feature progress">
+            <aside className="feature-stack-rail" aria-label="Feature navigation">
               {PANELS.map((panel, i) => (
-                <span
+                <button
                   key={panel.title}
+                  type="button"
                   ref={(el) => { labelRefs.current[i] = el }}
                   className="feature-stack-rail-item"
                   style={{ '--rail-focus': '0' } as CSSProperties}
+                  onClick={() => handleRailClick(i)}
+                  aria-label={`Show feature ${i + 1}: ${panel.title}`}
                 >
                   <span className="feature-stack-rail-num">0{i + 1}</span>
                   <span className="feature-stack-rail-label">{panel.title}</span>
-                </span>
+                </button>
               ))}
               <div className="feature-stack-rail-track">
                 <div ref={progressRef} className="feature-stack-rail-fill" />
