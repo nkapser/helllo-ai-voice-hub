@@ -44,7 +44,7 @@ export default function FinalCTA() {
 
         {/* URL Input — large repeat */}
         <div className="reveal rd2 mb-6 max-w-xl mx-auto">
-          <URLInput id="final-cta-input" showExamples={false} showTrustRow={false} />
+          <URLInput id="final-cta-input" showTrustRow={false} />
         </div>
 
         {/* Micro-copy trust */}

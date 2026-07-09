@@ -5,16 +5,12 @@ import { sparkAppUrl } from '../lib/utils'
 interface URLInputProps {
   id?: string
   placeholder?: string
-  showExamples?: boolean
   showTrustRow?: boolean
 }
-
-const EXAMPLE_URLS = ['stripe.com', 'notion.so', 'linear.app']
 
 export default function URLInput({
   id = 'url-input',
   placeholder = 'yourwebsite.com',
-  showExamples = true,
   showTrustRow = false,
 }: URLInputProps) {
   const [url, setUrl] = useState('')
@@ -80,20 +76,6 @@ export default function URLInput({
         </div>
       )}
 
-      {showExamples && (
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-          {EXAMPLE_URLS.map((ex) => (
-            <button
-              key={ex}
-              type="button"
-              onClick={() => setUrl(ex)}
-              className="spark-chip rounded-full px-3 py-1 font-mono text-xs"
-            >
-              {ex}
-            </button>
-          ))}
-        </div>
-      )}
     </form>
   )
 }
