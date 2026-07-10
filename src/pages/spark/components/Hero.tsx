@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Sparkles } from 'lucide-react'
 import URLInput from './URLInput'
 import HeroShaderGradient from './HeroShaderGradient'
@@ -6,19 +6,17 @@ import HeroShaderGradient from './HeroShaderGradient'
 const HERO_SETTLED_KEY = 'spark-hero-settled'
 const HERO_ENTRANCE_MS = 360 + 600 + 50
 
-const rotatingPhrases = ['talks to them', 'guides them', 'converts them']
-const phraseHeightEm = 1.2
-const slotRepeatCount = 12
+const rotatingPhrases = ['that talks to', 'that guides', 'that converts']
+const TYPE_SPEED = 80
+const DELETE_SPEED = 40
+const PAUSE_AT_FULL = 1500
+const PAUSE_AT_EMPTY = 300
 
 export default function Hero() {
   const contentRef = useRef<HTMLDivElement>(null)
-  const [slotIndex, setSlotIndex] = useState(0)
-  const [isSlotResetting, setIsSlotResetting] = useState(false)
-
-  const slotItems = useMemo(
-    () => Array.from({ length: rotatingPhrases.length * slotRepeatCount }, (_, i) => rotatingPhrases[i % rotatingPhrases.length]),
-    []
-  )
+  const [typedText, setTypedText] = useState('')
+  const [phraseIndex, setPhraseIndex] = useState(0)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   useEffect(() => {
     const el = contentRef.current
@@ -39,37 +37,32 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    const stepSize = 1
-    let intervalId: number | undefined
+    const currentPhrase = rotatingPhrases[phraseIndex]
 
-    const initialDelay = window.setTimeout(() => {
-      setSlotIndex((prev) => prev + stepSize)
-
-      intervalId = window.setInterval(() => {
-        setSlotIndex((prev) => {
-          const next = prev + stepSize
-          if (next >= slotItems.length) return 0
-          return next
-        })
-      }, 2500)
-    }, 800)
-
-    return () => {
-      window.clearTimeout(initialDelay)
-      if (intervalId) window.clearInterval(intervalId)
-    }
-  }, [slotItems.length])
-
-  useEffect(() => {
-    if (slotIndex >= rotatingPhrases.length) {
-      const timeoutId = window.setTimeout(() => {
-        setIsSlotResetting(true)
-        setSlotIndex(0)
-        window.requestAnimationFrame(() => setIsSlotResetting(false))
-      }, 700)
+    if (!isDeleting && typedText === currentPhrase) {
+      const timeoutId = window.setTimeout(() => setIsDeleting(true), PAUSE_AT_FULL)
       return () => window.clearTimeout(timeoutId)
     }
-  }, [slotIndex])
+
+    if (isDeleting && typedText === '') {
+      setIsDeleting(false)
+      setPhraseIndex((prev) => (prev + 1) % rotatingPhrases.length)
+      return
+    }
+
+    const timeoutId = window.setTimeout(
+      () => {
+        setTypedText((prev) =>
+          isDeleting
+            ? currentPhrase.slice(0, prev.length - 1)
+            : currentPhrase.slice(0, prev.length + 1)
+        )
+      },
+      isDeleting ? (typedText === '' ? PAUSE_AT_EMPTY : DELETE_SPEED) : TYPE_SPEED
+    )
+
+    return () => window.clearTimeout(timeoutId)
+  }, [typedText, isDeleting, phraseIndex])
 
   return (
     <section
@@ -77,34 +70,18 @@ export default function Hero() {
       className="hero-section relative w-full px-4 pb-10 pt-6 text-center sm:px-6 sm:pt-8 lg:pt-10"
     >
       <style>{`
-        .hero-slot {
-          display: inline-flex;
-          align-items: baseline;
-          justify-content: center;
-          height: 1.2em;
-          overflow: hidden;
-          vertical-align: baseline;
-          min-width: max-content;
-          font-size: 0.95em;
+        .hero-typewriter-cursor {
+          display: inline-block;
+          width: 0.04em;
+          margin-left: 0.05em;
+          animation: hero-blink 1s step-end infinite;
         }
-        .hero-slot-track {
-          display: block;
-          will-change: transform;
-          transition: transform 700ms cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-        .hero-slot-track.no-transition {
-          transition: none;
-        }
-        .hero-slot-item {
-          display: block;
-          height: 1.2em;
-          line-height: 1.2em;
-          white-space: nowrap;
-          text-align: center;
-          padding-right: 0.2em;
+        @keyframes hero-blink {
+          0%, 50% { opacity: 1; }
+          51%, 100% { opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .hero-slot-track { transition: none; }
+          .hero-typewriter-cursor { animation: none; }
         }
       `}</style>
       <HeroShaderGradient />
@@ -136,25 +113,20 @@ export default function Hero() {
             Launching on Product Hunt — be first to embed Spark
           </div>
 
-          <h1 className="animate-spark-rise d1 mb-16 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight text-black sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
+          <h1 className="animate-spark-rise d1 mb-24 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight text-black sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
             <span className="block">
-              Give your website visitors an assistant that
+              Give your website
             </span>
             <span className="block">
-              <span className="hero-slot" aria-live="polite">
-                <span
-                  className={`hero-slot-track italic text-blue-900 ${isSlotResetting ? 'no-transition' : ''}`}
-                  style={{
-                    transform: `translateY(-${slotIndex * phraseHeightEm}em)`,
-                  }}
-                >
-                  {slotItems.map((phrase, index) => (
-                    <span key={`${phrase}-${index}`} className="hero-slot-item">
-                      {phrase}
-                    </span>
-                  ))}
-                </span>
+              an assistant
+            </span>
+            <span className="block">
+              <span className="italic text-blue-900" aria-live="polite">
+                {typedText}<span className="hero-typewriter-cursor text-blue-900">_</span>
               </span>
+            </span>
+            <span className="block">
+              visitors
             </span>
           </h1>
 
