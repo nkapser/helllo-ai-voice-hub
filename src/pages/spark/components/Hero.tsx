@@ -67,7 +67,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="hero-section relative w-full px-4 pb-10 pt-6 text-center sm:px-6 sm:pt-8 lg:pt-10"
+      className="hero-section relative w-full px-4 pb-10 pt-4 text-center sm:px-6 sm:pt-6 lg:pt-8"
     >
       <style>{`
         .hero-typewriter-cursor {
@@ -106,7 +106,7 @@ export default function Hero() {
       <div className="relative z-[1] mx-auto w-full max-w-6xl">
         <div
           ref={contentRef}
-          className="hero-voice-content mt-24 flex w-full flex-col items-center sm:mt-28"
+          className="hero-voice-content flex w-full flex-col items-center"
         >
           <div className="spark-badge-pill animate-spark-rise d0 mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--spark)]" />
