@@ -8,7 +8,7 @@ import FinalCTA from "@/pages/spark/components/FinalCTA";
 import Footer from "@/pages/spark/components/Footer";
 import RevealInit from "@/pages/spark/components/RevealInit";
 import { setSEO } from "@/lib/seo";
-import { scrollToHash } from "@/lib/scroll";
+import { scrollToSparkHash } from "@/lib/scroll";
 import "@/pages/spark/spark.css";
 
 const Spark = () => {
@@ -46,7 +46,7 @@ const Spark = () => {
     if (!location.hash) return;
 
     const scrollToHashTarget = () => {
-      scrollToHash(location.hash);
+      scrollToSparkHash(location.hash);
     };
 
     const runAfterLayout = () => {

@@ -497,7 +497,7 @@ export default function FeatureShowcase() {
   }, [])
 
   return (
-    <section id="superpowers" className="spark-section relative feature-showcase-section">
+    <section id="features" className="spark-section relative feature-showcase-section scroll-mt-4">
       <div className="glow-divider" />
       {useStacked ? <StackedShowcase /> : <StaticFallback />}
     </section>

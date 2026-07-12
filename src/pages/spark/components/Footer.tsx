@@ -4,9 +4,11 @@ const LINKS = [
   {
     group: 'Product',
     items: [
-      { label: 'Spark',    href: '/spark' },
-      { label: 'Pricing',  href: '/spark#pricing' },
-      { label: 'Docs',     href: 'https://docs.helllo.ai' },
+      { label: 'Spark',     href: '/spark' },
+      { label: 'Features',  href: '/spark#features' },
+      { label: 'Pricing',   href: '/spark#pricing' },
+      { label: 'FAQ',       href: '/spark#faq' },
+      { label: 'Docs',      href: 'https://docs.helllo.ai' },
     ],
   },
   {

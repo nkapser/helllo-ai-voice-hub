@@ -44,7 +44,7 @@ export default function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="spark-section relative">
+    <section id="faq" className="spark-section relative scroll-mt-4">
       <div className="glow-divider" />
 
       <div className="max-w-3xl mx-auto px-5 sm:px-8">

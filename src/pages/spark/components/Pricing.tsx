@@ -47,7 +47,7 @@ export default function Pricing() {
   const region = usePricingRegion()
 
   return (
-    <section id="pricing" className="spark-section relative">
+    <section id="pricing" className="spark-section relative scroll-mt-4">
       <div className="glow-divider" />
 
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
