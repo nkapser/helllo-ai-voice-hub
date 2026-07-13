@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Hero from "@/pages/spark/components/Hero";
-import FeatureShowcase from "@/pages/spark/components/FeatureShowcase";
+import HowItWorks from "@/pages/spark/components/HowItWorks";
+import Platform from "@/pages/spark/components/Platform";
+import UseCases from "@/pages/spark/components/UseCases";
+import Integrations from "@/pages/spark/components/Integrations";
 import Pricing from "@/pages/spark/components/Pricing";
 import FAQ from "@/pages/spark/components/FAQ";
 import FinalCTA from "@/pages/spark/components/FinalCTA";
@@ -79,8 +82,11 @@ const Spark = () => {
 
       <div className="spark-content relative flex min-h-screen w-full flex-col">
         <Hero />
-        <FeatureShowcase />
         <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 sm:px-6">
+          <HowItWorks />
+          <Platform />
+          <UseCases />
+          <Integrations />
           <Pricing />
           <FAQ />
           <FinalCTA />

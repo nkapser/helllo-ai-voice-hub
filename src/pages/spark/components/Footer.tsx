@@ -4,48 +4,45 @@ const LINKS = [
   {
     group: 'Product',
     items: [
-      { label: 'Spark',     href: '/spark' },
-      { label: 'Features',  href: '/spark#features' },
-      { label: 'Pricing',   href: '/spark#pricing' },
-      { label: 'FAQ',       href: '/spark#faq' },
-      { label: 'Docs',      href: 'https://docs.helllo.ai' },
+      { label: 'How it works', href: '/spark#how-it-works' },
+      { label: 'Platform', href: '/spark#platform' },
+      { label: 'Use cases', href: '/spark#use-cases' },
+      { label: 'Integration', href: '/spark#integration' },
+      { label: 'Pricing', href: '/spark#pricing' },
+      { label: 'FAQ', href: '/spark#faq' },
     ],
   },
   {
     group: 'Company',
     items: [
       { label: 'Helllo.ai', href: 'https://helllo.ai' },
-      { label: 'Blog',      href: 'https://helllo.ai/blog' },
+      { label: 'Blog', href: 'https://helllo.ai/blog' },
+      { label: 'Docs', href: 'https://docs.helllo.ai' },
     ],
   },
   {
     group: 'Legal',
     items: [
       { label: 'Privacy', href: 'https://helllo.ai/privacy' },
-      { label: 'Terms',   href: 'https://helllo.ai/terms' },
+      { label: 'Terms', href: 'https://helllo.ai/terms' },
     ],
   },
 ]
 
 export default function Footer() {
   return (
-    <footer
-      className="relative pt-6 pb-8 border-t border-[hsl(var(--spark-border))]"
-    >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex flex-col md:flex-row justify-between gap-8 mb-8">
-
+    <footer className="relative border-t border-[hsl(var(--spark-border))] pb-8 pt-10">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
+        <div className="mb-10 flex flex-col justify-between gap-10 md:flex-row">
           {/* Brand */}
           <div className="max-w-xs">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center bg-gradient-spark shadow-spark"
-              >
-                <Sparkles className="w-4 h-4 text-white" strokeWidth={1.8} />
+            <div className="mb-4 flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-spark shadow-spark">
+                <Sparkles className="h-4 w-4 text-white" strokeWidth={1.8} />
               </div>
               <div>
-                <span className="font-semibold spark-text-primary text-[15px]">Spark</span>
-                <span className="text-[11px] ml-1.5 spark-text-subtle">by Helllo.ai</span>
+                <span className="text-[15px] font-semibold spark-text-primary">Spark</span>
+                <span className="ml-1.5 text-[11px] spark-text-subtle">by Helllo.ai</span>
               </div>
             </div>
             <p className="text-[13px] leading-relaxed spark-text-muted">
@@ -68,7 +65,7 @@ export default function Footer() {
           <div className="flex flex-wrap gap-10 sm:gap-16">
             {LINKS.map(({ group, items }) => (
               <div key={group}>
-                <div className="text-[11.5px] uppercase tracking-widest font-semibold mb-4 spark-text-subtle">
+                <div className="mb-4 text-[11.5px] font-semibold uppercase tracking-widest spark-text-subtle">
                   {group}
                 </div>
                 <div className="flex flex-col gap-2.5">
@@ -87,10 +84,13 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Ghost wordmark */}
+        <div className="flex justify-center overflow-hidden" aria-hidden="true">
+          <span className="footer-ghost-word -mb-3 sm:-mb-6">helllo.ai</span>
+        </div>
+
         {/* Bottom bar */}
-        <div
-          className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-[hsl(var(--spark-border))]"
-        >
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-[hsl(var(--spark-border))] pt-6 sm:flex-row">
           <span className="text-[12.5px] spark-text-subtle">
             © 2026 Helllo.ai — All rights reserved.
           </span>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus, Minus } from 'lucide-react'
+import { Plus } from 'lucide-react'
 
 const FAQS = [
   {
@@ -28,7 +28,7 @@ const FAQS = [
   },
   {
     q: 'What makes Spark different from Intercom or Drift?',
-    a: 'Three things: guided navigation (Spark takes visitors to the right page mid-conversation), in-browser voice, and training from your actual site content. Spark is built for SMB website.',
+    a: 'Three things: guided navigation (Spark takes visitors to the right page mid-conversation), in-browser voice, and training from your actual site content. Spark is built for SMB websites.',
   },
   {
     q: 'Does it work on mobile?',
@@ -41,60 +41,53 @@ const FAQS = [
 ]
 
 export default function FAQ() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null)
+  const [openIdx, setOpenIdx] = useState<number | null>(0)
 
   return (
     <section id="faq" className="spark-section relative scroll-mt-4">
       <div className="glow-divider" />
 
-      <div className="max-w-3xl mx-auto px-5 sm:px-8">
-        <div className="text-center mb-8 reveal">
-          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium" style={{ color: 'var(--spark-ember)' }}>
-            FAQ
-          </span>
-          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem,4vw,3rem)', letterSpacing: '-0.02em' }}>
-            Questions? We thought about them.
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
+        {/* Header column */}
+        <div className="reveal lg:sticky lg:top-8 lg:self-start">
+          <div className="section-eyebrow">
+            <span className="section-eyebrow-label">FAQ</span>
+          </div>
+          <h2 className="section-duo-head spark-text-primary">
+            Frequently asked questions.{' '}
+            <span className="duo-muted">The honest answers, before you ask.</span>
           </h2>
+          <p className="mt-4 text-[14px] spark-text-muted">
+            Something else on your mind?{' '}
+            <a href="mailto:hello@helllo.ai" className="font-medium" style={{ color: 'var(--spark-ember)' }}>
+              Ask us directly
+            </a>{' '}
+            — or just ask the widget.
+          </p>
         </div>
 
-        {/* Accordion */}
-        <div className="flex flex-col gap-2">
+        {/* Accordion column */}
+        <div className="reveal rd1 flex flex-col">
           {FAQS.map(({ q, a }, i) => {
             const isOpen = openIdx === i
             return (
-              <div
-                key={q}
-                className={`reveal rd${Math.min(i + 1, 5)} rounded-xl overflow-hidden transition-all duration-200 glass glass-hover`}
-                style={{
-                  background: isOpen ? 'rgba(96,165,250,0.08)' : undefined,
-                  border: isOpen ? '1px solid rgba(96,165,250,0.25)' : undefined,
-                }}
-              >
+              <div key={q} className="faq-row">
                 <button
-                  className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
+                  className="flex w-full items-center justify-between gap-4 py-4 text-left"
                   onClick={() => setOpenIdx(isOpen ? null : i)}
                   aria-expanded={isOpen}
                 >
-                  <span
-                    className={`text-[14.5px] font-medium leading-snug ${isOpen ? 'spark-text-primary' : 'spark-text-muted'}`}
-                  >
+                  <span className={`text-[14.5px] font-medium leading-snug ${isOpen ? 'spark-text-primary' : 'spark-text-muted'}`}>
                     {q}
                   </span>
-                  <div
-                    className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200"
+                  <Plus
+                    className="h-4 w-4 flex-shrink-0 transition-transform duration-200"
                     style={{
-                      background: isOpen ? 'rgba(96,165,250,0.2)' : 'rgba(241,245,249,0.9)',
-                      border: `1px solid ${isOpen ? 'rgba(96,165,250,0.4)' : 'hsl(var(--spark-border))'}`,
+                      color: isOpen ? 'var(--spark-ember)' : 'var(--spark-fg-subtle)',
+                      transform: isOpen ? 'rotate(45deg)' : 'none',
                     }}
-                  >
-                    {isOpen
-                      ? <Minus className="w-3.5 h-3.5" style={{ color: 'var(--spark-ember)' }} />
-                      : <Plus  className="w-3.5 h-3.5 spark-text-muted" />
-                    }
-                  </div>
+                  />
                 </button>
-
-                {/* Body — animate via style */}
                 <div
                   style={{
                     maxHeight: isOpen ? 400 : 0,
@@ -103,11 +96,7 @@ export default function FAQ() {
                     transition: 'max-height 0.36s cubic-bezier(0.4,0,0.2,1), opacity 0.28s ease',
                   }}
                 >
-                  <p
-                    className="px-5 pb-4 text-[14px] leading-relaxed spark-text-muted"
-                  >
-                    {a}
-                  </p>
+                  <p className="pb-4 pr-8 text-[14px] leading-relaxed spark-text-muted">{a}</p>
                 </div>
               </div>
             )
