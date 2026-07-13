@@ -1,5 +1,5 @@
-import { Sparkles } from 'lucide-react'
 import { getDashboardAuthSignInUrl } from '@/lib/dashboard'
+import SparkLogo from './SparkLogo'
 
 export default function Nav() {
   const signInUrl = getDashboardAuthSignInUrl('/console/spark')
@@ -7,9 +7,7 @@ export default function Nav() {
     <header className="mx-auto w-full max-w-6xl border-b border-[hsl(var(--spark-border)/0.7)] px-4 py-4 sm:px-6">
       <nav className="relative z-10 flex items-center justify-between">
         <a href="/spark" className="flex items-center gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-spark text-white shadow-spark">
-            <Sparkles className="h-4 w-4" strokeWidth={2} />
-          </span>
+          <SparkLogo size={30} />
           <span className="leading-tight">
             <span className="block font-display text-lg font-semibold tracking-tight spark-text-primary">
               Spark

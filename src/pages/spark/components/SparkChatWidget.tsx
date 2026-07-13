@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Sparkles, LayoutGrid, MessageSquareX, Minus, X, Send } from 'lucide-react'
+import { LayoutGrid, MessageSquareX, Minus, X, Send } from 'lucide-react'
+import SparkLogo from './SparkLogo'
 
 export type ChatDemo = {
   /** Opening bot greeting (optional — falls back to a generic one) */
@@ -54,7 +55,7 @@ export default function SparkChatWidget({
       {/* Header */}
       <div className="chatw-header">
         <div className="chatw-avatar">
-          <Sparkles className="h-4.5 w-4.5" style={{ width: 18, height: 18 }} strokeWidth={2} />
+          <SparkLogo size={16} fill="white" ripples={false} />
           <span className="chatw-avatar-dot" />
         </div>
         <div className="min-w-0 leading-tight">

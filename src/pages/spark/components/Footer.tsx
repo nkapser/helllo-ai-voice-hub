@@ -1,4 +1,4 @@
-import { Sparkles } from 'lucide-react'
+import SparkLogo from './SparkLogo'
 
 const LINKS = [
   {
@@ -37,9 +37,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-xs">
             <div className="mb-4 flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-spark shadow-spark">
-                <Sparkles className="h-4 w-4 text-white" strokeWidth={1.8} />
-              </div>
+              <SparkLogo size={26} />
               <div>
                 <span className="text-[15px] font-semibold spark-text-primary">Spark</span>
                 <span className="ml-1.5 text-[11px] spark-text-subtle">by Helllo.ai</span>

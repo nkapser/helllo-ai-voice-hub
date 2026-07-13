@@ -1,5 +1,6 @@
-import { ShieldCheck, CreditCard, X, Sparkles } from 'lucide-react'
+import { ShieldCheck, CreditCard, X } from 'lucide-react'
 import URLInput from './URLInput'
+import SparkLogo from './SparkLogo'
 
 export default function FinalCTA() {
   return (
@@ -48,9 +49,7 @@ export default function FinalCTA() {
       {/* Brand band */}
       <div className="cta-brand-band reveal rd4">
         <div className="flex flex-col items-center gap-2 px-6 pb-2 pt-10 sm:pt-12">
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-spark text-white shadow-spark">
-            <Sparkles className="h-6 w-6" strokeWidth={1.8} />
-          </span>
+          <SparkLogo size={52} />
           <span className="text-[11px] font-semibold uppercase tracking-[0.16em]" style={{ color: 'var(--spark-ember)' }}>
             by Helllo.ai
           </span>

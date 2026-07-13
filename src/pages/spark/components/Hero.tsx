@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Sparkles } from 'lucide-react'
 import URLInput from './URLInput'
+import SparkLogo from './SparkLogo'
 import HeroShaderGradient from './HeroShaderGradient'
 
 const HERO_SETTLED_KEY = 'spark-hero-settled'
@@ -92,9 +92,7 @@ export default function Hero() {
           className="inline-flex items-center gap-3"
           aria-label="Spark"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-spark text-white shadow-spark">
-            <Sparkles className="h-4 w-4" strokeWidth={2} />
-          </span>
+          <SparkLogo size={30} />
           <span className="leading-tight">
             <span className="block font-display text-lg font-semibold tracking-tight text-black">
               Spark
