@@ -117,7 +117,7 @@ export default function Hero() {
         >
           <div className="spark-badge-pill animate-spark-rise d0 mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--spark)]" />
-            Launching on Product Hunt — be first to embed Spark
+            No credit card · Free forever · Live in 30 seconds
           </div>
 
           <h1 className="animate-spark-rise d1 mb-24 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight text-black sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">

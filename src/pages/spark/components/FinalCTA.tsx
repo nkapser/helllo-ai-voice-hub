@@ -9,7 +9,7 @@ export default function FinalCTA() {
 
       <div className="relative z-10 mx-auto max-w-3xl text-center">
         <div className="section-eyebrow reveal justify-center">
-          <span className="section-eyebrow-idx">[05]</span>
+          <span className="section-eyebrow-idx">[06]</span>
           <span className="section-eyebrow-label">Start</span>
         </div>
 

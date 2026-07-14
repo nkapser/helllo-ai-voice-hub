@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,10 +11,21 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CancellationRefundPolicy from "./pages/CancellationRefundPolicy";
 import Console from "./pages/Console";
 import Auth from "./pages/Auth";
-import Spark from "./pages/spark";
 import NotFound from "./pages/NotFound";
 
+const Spark = lazy(() => import("./pages/spark"));
+
 const queryClient = new QueryClient();
+
+function SparkRouteFallback() {
+  return (
+    <div
+      className="min-h-screen bg-[hsl(210_40%_98%)]"
+      aria-busy="true"
+      aria-label="Loading Spark"
+    />
+  );
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -29,7 +41,14 @@ const App = () => (
             <Route path="/cancellation-refund" element={<CancellationRefundPolicy />} />
             <Route path="/console" element={<Console />} />
             <Route path="/auth/*" element={<Auth />} />
-            <Route path="/spark" element={<Spark />} />
+            <Route
+              path="/spark"
+              element={
+                <Suspense fallback={<SparkRouteFallback />}>
+                  <Spark />
+                </Suspense>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -16,8 +16,7 @@ const LINKS = [
     group: 'Company',
     items: [
       { label: 'Helllo.ai', href: 'https://helllo.ai' },
-      { label: 'Blog', href: 'https://helllo.ai/blog' },
-      { label: 'Docs', href: 'https://docs.helllo.ai' },
+      { label: 'Contact', href: 'mailto:hi@helllo.ai' },
     ],
   },
   {

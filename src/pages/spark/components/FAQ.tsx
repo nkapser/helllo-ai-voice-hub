@@ -23,7 +23,7 @@ export default function FAQ() {
           </h2>
           <p className="mt-4 text-[14px] spark-text-muted">
             Something else on your mind?{' '}
-            <a href="mailto:hello@helllo.ai" className="font-medium" style={{ color: 'var(--spark-ember)' }}>
+            <a href="mailto:hi@helllo.ai" className="font-medium" style={{ color: 'var(--spark-ember)' }}>
               Ask us directly
             </a>{' '}
             — or just ask the widget.

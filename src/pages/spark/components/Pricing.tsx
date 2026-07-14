@@ -20,7 +20,7 @@ import {
 import { usePricingRegion } from '@/hooks/use-pricing-region'
 
 const SPARK_SIGNIN_URL = getDashboardAuthSignInUrl('/console/spark')
-const ENTERPRISE_URL = 'mailto:hello@helllo.ai?subject=Spark%20Enterprise%20inquiry'
+const ENTERPRISE_URL = 'mailto:hi@helllo.ai?subject=Spark%20Enterprise%20inquiry'
 
 const FREE_STATS = [
   { icon: Coins, value: '500', label: 'credits included' },
@@ -67,9 +67,10 @@ export default function Pricing() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-2 sm:px-0">
         <div className="text-center mb-8 reveal">
-          <span className="inline-block text-[12px] uppercase tracking-widest mb-4 font-medium text-[var(--spark-ember)]">
-            Pricing
-          </span>
+          <div className="section-eyebrow justify-center">
+            <span className="section-eyebrow-idx">[05]</span>
+            <span className="section-eyebrow-label">Pricing</span>
+          </div>
           <h2
             className="mb-3 font-display text-[clamp(2rem,4vw,3rem)] tracking-tight spark-text-primary"
           >

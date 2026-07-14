@@ -83,7 +83,7 @@ The assistant stops responding until you upgrade or add credits. We email you be
 - Website: https://www.helllo.ai
 - Privacy: https://www.helllo.ai/privacy
 - Terms: https://www.helllo.ai/terms
-- Contact: hello@helllo.ai
+- Contact: hi@helllo.ai
 
 ## Discovery
 
