@@ -37,6 +37,7 @@ Disallow: /tsconfig*.json
 # Block XML files except sitemap
 Disallow: /*.xml$
 Allow: /sitemap.xml
+Allow: /llms.txt
 Allow: /robots.txt
 
 # Allow important files for SEO

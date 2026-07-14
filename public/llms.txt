@@ -1,0 +1,55 @@
+# Helllo.ai
+
+> Helllo.ai builds AI products for customer experience. Spark is our AI website assistant for SMBs.
+
+## Products
+
+- [Spark — AI Website Assistant](https://www.helllo.ai/spark): Paste your URL, train an assistant on your site in ~30 seconds, embed with one script tag. Answers questions by chat or voice, navigates visitors to the right page mid-conversation, and books meetings on Google Calendar, Calendly, or Cal.com.
+- [Helllo.ai Voice Agents](https://www.helllo.ai/): Production-ready AI voice agents with agentic orchestration for phone and customer experience automation.
+
+## Spark — Key Facts
+
+- **What it is:** An embeddable AI assistant widget for business websites.
+- **Who it's for:** SMB website owners, marketing teams, and agencies.
+- **Setup:** No developer required. One script tag in site footer or Webflow/Framer custom code.
+- **Training data:** Approved website pages and uploaded files only — not the open internet.
+- **Capabilities:** Q&A, guided page navigation, voice + chat, calendar booking, lead capture, 50+ languages.
+- **Free trial:** 500 credits, 10 pages crawled, ~30 min voice, ~100 chat conversations. No credit card.
+- **Paid plans:** Starter from $49/mo, Growth $99/mo, Scale $299/mo.
+- **Differentiators vs Intercom/Drift:** Guided navigation (takes visitors to pages mid-chat), in-browser voice, training from actual site content.
+
+## Spark — Canonical URLs
+
+- Product page: https://www.helllo.ai/spark
+- How it works: https://www.helllo.ai/spark#how-it-works
+- Features: https://www.helllo.ai/spark#features
+- Pricing: https://www.helllo.ai/spark#pricing
+- FAQ: https://www.helllo.ai/spark#faq
+
+## Spark — Frequently Asked Questions
+
+### Do I need a developer?
+No. Copy one script tag into your site footer. Works with Webflow, Framer, and any HTML site in about 2 minutes.
+
+### Will it hallucinate about my business?
+No. Answers are grounded in pages you approve and files you upload. If Spark doesn't know something, it says so.
+
+### Is my data used to train other AI models?
+No. Your content trains only your assistant and is never used to train foundation models or shared with other customers.
+
+### Can I try it before signing up?
+Yes. Paste your URL and chat with a homepage-trained assistant immediately — no account or credit card required.
+
+### What makes Spark different from Intercom or Drift?
+Guided navigation (Spark navigates to pages mid-conversation), in-browser voice, and training from your actual site content. Built for SMB websites.
+
+## Company
+
+- Website: https://www.helllo.ai
+- Privacy: https://www.helllo.ai/privacy
+- Terms: https://www.helllo.ai/terms
+- Contact: hello@helllo.ai
+
+## Sitemap
+
+- https://www.helllo.ai/sitemap.xml

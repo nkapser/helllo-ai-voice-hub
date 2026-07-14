@@ -11,6 +11,7 @@ export interface SEOData {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: string;
   ogUrl?: string;
   twitterCard?: string;
@@ -96,6 +97,7 @@ export function setSEO(data: SEOData): void {
   // Update title
   if (seo.title) {
     document.title = seo.title;
+    updateMetaTag("title", seo.title);
   }
 
   // Update meta tags
@@ -128,11 +130,15 @@ export function setSEO(data: SEOData): void {
   if (seo.ogImage) {
     updateMetaTag("og:image", seo.ogImage, "property");
   }
+  if (seo.ogImageAlt) {
+    updateMetaTag("og:image:alt", seo.ogImageAlt, "property");
+  }
   if (seo.ogType) {
     updateMetaTag("og:type", seo.ogType, "property");
   }
   if (seo.ogUrl) {
     updateMetaTag("og:url", seo.ogUrl, "property");
+    updateMetaTag("twitter:url", seo.ogUrl, "property");
   }
   // Update og:updated_time
   updateMetaTag("og:updated_time", new Date().toISOString(), "property");
@@ -170,6 +176,82 @@ export function generateBreadcrumbSchema(items: Array<{ name: string; url: strin
       name: item.name,
       item: item.url,
     })),
+  };
+}
+
+/**
+ * Generates WebPage structured data
+ */
+export function generateWebPageSchema(data: {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+}): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: data.name,
+    description: data.description,
+    url: data.url,
+    image: data.image,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Helllo.ai",
+      url: "https://www.helllo.ai",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Helllo.ai",
+      url: "https://www.helllo.ai",
+    },
+  };
+}
+
+/**
+ * Generates SoftwareApplication structured data
+ */
+export function generateSoftwareApplicationSchema(data: {
+  name: string;
+  alternateName?: string;
+  description: string;
+  url: string;
+  image?: string;
+  applicationCategory?: string;
+  operatingSystem?: string;
+  brandName?: string;
+  brandUrl?: string;
+  featureList?: string[];
+  offers?: Array<{ price: string; priceCurrency: string; description: string }>;
+}): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: data.name,
+    ...(data.alternateName ? { alternateName: data.alternateName } : {}),
+    applicationCategory: data.applicationCategory ?? "BusinessApplication",
+    operatingSystem: data.operatingSystem ?? "Web",
+    description: data.description,
+    url: data.url,
+    image: data.image,
+    brand: {
+      "@type": "Brand",
+      name: data.brandName ?? "Helllo.ai",
+      url: data.brandUrl ?? "https://www.helllo.ai",
+    },
+    ...(data.featureList?.length
+      ? { featureList: data.featureList }
+      : {}),
+    ...(data.offers?.length
+      ? {
+          offers: data.offers.map((offer) => ({
+            "@type": "Offer",
+            price: offer.price,
+            priceCurrency: offer.priceCurrency,
+            description: offer.description,
+          })),
+        }
+      : {}),
   };
 }
 

@@ -1,4 +1,31 @@
 import { createPricingRegionResponse } from "@/lib/pricing-region-server";
+import { isBotUserAgent, patchSparkIndexHtml } from "@/lib/spark-seo";
+
+async function serveIndexHtml(
+  assets: { fetch: (input: RequestInfo | URL) => Promise<Response> },
+  url: URL,
+  request: Request,
+): Promise<Response> {
+  const indexUrl = new URL("/index.html", url.origin);
+  const indexResponse = await assets.fetch(indexUrl);
+  const path = url.pathname;
+
+  if (
+    (path === "/spark" || path === "/spark/") &&
+    isBotUserAgent(request.headers.get("user-agent"))
+  ) {
+    const html = await indexResponse.text();
+    return new Response(patchSparkIndexHtml(html), {
+      status: indexResponse.status,
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "public, max-age=300",
+      },
+    });
+  }
+
+  return indexResponse;
+}
 
 export default {
   async fetch(request: Request, env: any, ctx: any): Promise<Response> {
@@ -39,8 +66,7 @@ export default {
 
     // For SPA routing, serve index.html for all routes that don't have a file extension
     if (!path.includes('.')) {
-      const indexUrl = new URL('/index.html', url.origin);
-      return assets.fetch(indexUrl);
+      return serveIndexHtml(assets, url, request);
     }
 
     // Try to serve the requested file
@@ -48,8 +74,7 @@ export default {
       return await assets.fetch(request);
     } catch (error) {
       // If file not found, serve index.html for SPA routing
-      const indexUrl = new URL('/index.html', url.origin);
-      return assets.fetch(indexUrl);
+      return serveIndexHtml(assets, url, request);
     }
   },
 };

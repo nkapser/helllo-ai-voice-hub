@@ -1,44 +1,8 @@
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
+import { SPARK_FAQS } from '@/lib/spark-seo'
 
-const FAQS = [
-  {
-    q: 'Do I need a developer?',
-    a: 'No. Copy one script tag into your site footer. If you use Webflow or Framer, paste it in site settings under "Custom Code." Any non-technical site owner can do this in 2 minutes.',
-  },
-  {
-    q: 'Will it hallucinate about my business?',
-    a: 'Answers are grounded in pages you approve and files you upload — not the open internet. If Spark doesn\'t know something, it says so instead of making it up.',
-  },
-  {
-    q: 'Is my data used to train other AI models?',
-    a: 'No. Your content trains only your assistant — it\'s never used to train foundation models or shared with other customers. You see and approve every page before it\'s crawled, and can delete your data anytime. Full details in our Privacy Policy.',
-  },
-  {
-    q: 'Can I try it before signing up?',
-    a: 'Yes. Paste your URL and immediately chat with a homepage-trained assistant — no account, no credit card. Sign up only when you want to save and embed.',
-  },
-  {
-    q: 'Why do I need to verify my domain?',
-    a: 'So only you can train an assistant on your site. It\'s a standard ownership check (DNS TXT record or HTML meta tag) — the same way Google Search Console works.',
-  },
-  {
-    q: 'Chat or voice — which does it support?',
-    a: 'Both, in the same widget. Visitors can type or tap the mic to talk. No app download, no phone call system — it\'s all browser-native.',
-  },
-  {
-    q: 'What makes Spark different from Intercom or Drift?',
-    a: 'Three things: guided navigation (Spark takes visitors to the right page mid-conversation), in-browser voice, and training from your actual site content. Spark is built for SMB websites.',
-  },
-  {
-    q: 'Does it work on mobile?',
-    a: 'Yes. The widget is fully responsive and touch-optimised — tap to chat, tap to talk, swipe to close.',
-  },
-  {
-    q: 'What happens when the free trial credits run out?',
-    a: 'The assistant stops responding until you upgrade or add credits. We\'ll email you before they run out so you\'re never caught off guard.',
-  },
-]
+const FAQS = SPARK_FAQS
 
 export default function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(0)
