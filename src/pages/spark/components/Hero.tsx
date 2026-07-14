@@ -6,6 +6,11 @@ import HeroShaderGradient from './HeroShaderGradient'
 const HERO_SETTLED_KEY = 'spark-hero-settled'
 const HERO_ENTRANCE_MS = 360 + 600 + 50
 
+const HERO_NAV_LINKS = [
+  { label: 'Use cases', href: '#use-cases' },
+  { label: 'Pricing', href: '#pricing' },
+] as const
+
 const rotatingPhrases = ['that talks to', 'that guides', 'that converts']
 const HERO_SEO_HEADLINE =
   'Give your website an assistant that talks to, guides, and converts visitors'
@@ -95,19 +100,33 @@ export default function Hero() {
       `}</style>
       <HeroShaderGradient />
 
-      <div className="absolute left-4 top-4 z-10 text-left sm:left-6 sm:top-6 lg:left-8 lg:top-8">
-        <a
-          href="/spark"
-          className="inline-flex items-center gap-3"
-          aria-label="Spark"
-        >
-          <SparkLogo size={30} />
-          <span className="leading-tight">
-            <span className="block font-display text-lg font-semibold tracking-tight text-black">
-              Spark
+      <div className="absolute left-4 right-4 top-4 z-10 sm:left-6 sm:right-6 sm:top-6 lg:left-8 lg:right-8 lg:top-8">
+        <div className="flex items-start justify-between gap-4">
+          <a
+            href="/spark"
+            className="inline-flex items-center gap-3 text-left"
+            aria-label="Spark"
+          >
+            <SparkLogo size={30} />
+            <span className="leading-tight">
+              <span className="block font-display text-lg font-semibold tracking-tight text-black">
+                Spark
+              </span>
             </span>
-          </span>
-        </a>
+          </a>
+
+          <nav className="flex items-center gap-1 sm:gap-2" aria-label="Spark page sections">
+            {HERO_NAV_LINKS.map(({ label, href }) => (
+              <a
+                key={href}
+                href={href}
+                className="rounded-md px-2 py-2 text-[13px] font-medium text-black/70 transition-colors hover:text-black sm:px-2.5"
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </div>
 
       <div className="relative z-[1] mx-auto w-full max-w-6xl">
@@ -120,7 +139,7 @@ export default function Hero() {
             No credit card · Free forever · Live in 30 seconds
           </div>
 
-          <h1 className="animate-spark-rise d1 mb-24 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight text-black sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
+          <h1 className="animate-spark-rise d1 mb-8 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight text-black sm:mb-10 sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
             <span className="sr-only">{HERO_SEO_HEADLINE}</span>
             <span aria-hidden="true" className="block">
               Give your website
@@ -141,7 +160,7 @@ export default function Hero() {
             </span>
           </h1>
 
-          <div className="animate-spark-rise d3 mb-16 w-full max-w-xl">
+          <div className="animate-spark-rise d3 mb-8 w-full max-w-xl sm:mb-10">
             <URLInput id="hero-input" showTrustRow={false} />
           </div>
 
