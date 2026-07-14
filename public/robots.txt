@@ -115,3 +115,6 @@ Crawl-delay: 10
 
 # Sitemap locations
 Sitemap: https://www.helllo.ai/sitemap.xml
+
+# LLM-readable product summary (GEO)
+# https://www.helllo.ai/llms.txt

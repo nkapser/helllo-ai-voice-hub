@@ -256,6 +256,75 @@ export function generateSoftwareApplicationSchema(data: {
 }
 
 /**
+ * Generates HowTo structured data
+ */
+export function generateHowToSchema(data: {
+  name: string;
+  description: string;
+  url?: string;
+  steps: Array<{ name: string; text: string }>;
+}): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: data.name,
+    description: data.description,
+    ...(data.url ? { url: data.url } : {}),
+    step: data.steps.map((step, index) => ({
+      "@type": "HowToStep",
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+    })),
+  };
+}
+
+/**
+ * Generates OfferCatalog structured data
+ */
+export function generateOfferCatalogSchema(data: {
+  name: string;
+  url: string;
+  offers: Array<{
+    name: string;
+    price: string;
+    priceCurrency: string;
+    description?: string;
+    billingDuration?: string;
+  }>;
+}): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: data.name,
+    url: data.url,
+    itemListElement: data.offers.map((offer) => ({
+      "@type": "Offer",
+      name: offer.name,
+      price: offer.price,
+      priceCurrency: offer.priceCurrency,
+      ...(offer.description ? { description: offer.description } : {}),
+      ...(offer.billingDuration
+        ? {
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: offer.price,
+              priceCurrency: offer.priceCurrency,
+              unitText: offer.billingDuration,
+            },
+          }
+        : {}),
+      url: data.url,
+      seller: {
+        "@type": "Organization",
+        name: "Helllo.ai",
+        url: "https://www.helllo.ai",
+      },
+    })),
+  };
+}
+
+/**
  * Generates FAQPage structured data
  */
 export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>): Record<string, any> {

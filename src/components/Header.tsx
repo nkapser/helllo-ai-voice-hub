@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock, Home, Heart, Briefcase, Landmark, MessageSquare, CheckCircle2, GitBranch, ClipboardList, RotateCcw, DollarSign, TrendingUp, Handshake, Search, RefreshCw, Database, Workflow, ArrowRight } from "lucide-react";
+import { Menu, X, ChevronDown, Phone, Users, Headphones, Shield, BookOpen, Building2, Settings, Lightbulb, FileText, Play, HelpCircle, Star, Calendar, Clock, Home, Heart, Briefcase, Landmark, MessageSquare, CheckCircle2, GitBranch, ClipboardList, RotateCcw, DollarSign, TrendingUp, Handshake, Search, RefreshCw, Database, Workflow, ArrowRight, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -318,6 +318,17 @@ const Header = () => {
                 {/* Simple nav items */}
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
+                    <a
+                      href="/spark"
+                      className="group inline-flex h-10 w-max items-center justify-center gap-1.5 rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none"
+                    >
+                      <Sparkles className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
+                      Spark
+                    </a>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
                     <a 
                       href="#pricing" 
                       className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none"
@@ -476,6 +487,14 @@ const Header = () => {
 
               {/* Mobile Simple Nav */}
               <div className="space-y-1">
+                <a
+                  href="/spark"
+                  className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-lg mx-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Sparkles className="h-4 w-4 text-primary" aria-hidden="true" />
+                  Spark
+                </a>
                 <a
                   href="#pricing"
                   className="block px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground transition-colors rounded-lg mx-2"

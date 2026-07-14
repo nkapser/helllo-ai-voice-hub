@@ -1,21 +1,42 @@
 # Helllo.ai
 
-> Helllo.ai builds AI products for customer experience. Spark is our AI website assistant for SMBs.
+> Helllo.ai builds AI products for customer experience. Spark is our AI website assistant for SMBs — paste your URL, train on your site in ~30 seconds, embed with one script tag.
 
 ## Products
 
-- [Spark — AI Website Assistant](https://www.helllo.ai/spark): Paste your URL, train an assistant on your site in ~30 seconds, embed with one script tag. Answers questions by chat or voice, navigates visitors to the right page mid-conversation, and books meetings on Google Calendar, Calendly, or Cal.com.
+- [Spark — AI Website Assistant](https://www.helllo.ai/spark): Paste your URL, get an AI assistant trained on your site in 30 seconds, embed with one script tag. Answers questions by chat or voice, navigates visitors to the right page mid-conversation, and books meetings on Google Calendar, Calendly, or Cal.com. Free forever plan available.
 - [Helllo.ai Voice Agents](https://www.helllo.ai/): Production-ready AI voice agents with agentic orchestration for phone and customer experience automation.
+
+## Spark — What It Is
+
+Spark is an embeddable AI website assistant by Helllo.ai. It trains on your approved site content and uploaded files, answers visitor questions by chat or voice, navigates to pages mid-conversation, and books meetings on your calendar — with no developer required.
+
+## Spark — How It Works
+
+1. **Paste your URL** — Spark reads your pages and builds an assistant that knows your services, prices, hours, and policies.
+2. **Teach it the rest** — Add PDFs, price lists, and Q&A pairs. Retrain in one click when content changes.
+3. **Embed with one line** — Drop a script tag in your footer or site builder (WordPress, Wix, Webflow, Shopify).
+4. **Watch visits become leads** — Spark answers, guides, books meetings, and captures contacts 24/7.
+
+## Spark — Platform Features
+
+- Trained on your site — answers grounded in approved pages and uploaded files
+- Voice + chat in one embeddable widget
+- Guided navigation — opens pages mid-conversation
+- Meeting booking via Google Calendar, Calendly, and Cal.com
+- Lightweight lead CRM with searchable conversations and contacts
+- Answer control and guardrails with one-click revisions
+- Live monitoring and analytics
+- 50+ language auto-detection
+- Brand customization for colors, avatar, tone, and welcome screen
 
 ## Spark — Key Facts
 
-- **What it is:** An embeddable AI assistant widget for business websites.
 - **Who it's for:** SMB website owners, marketing teams, and agencies.
 - **Setup:** No developer required. One script tag in site footer or Webflow/Framer custom code.
 - **Training data:** Approved website pages and uploaded files only — not the open internet.
-- **Capabilities:** Q&A, guided page navigation, voice + chat, calendar booking, lead capture, 50+ languages.
 - **Free plan:** Free forever — 500 credits, 10 pages crawled, ~30 min voice, ~100 chat conversations. No credit card.
-- **Paid plans:** Starter from $49/mo, Growth $99/mo, Scale $299/mo.
+- **Paid plans:** Starter $49/mo, Growth $99/mo, Scale $299/mo, Enterprise custom.
 - **Differentiators vs Intercom/Drift:** Guided navigation (takes visitors to pages mid-chat), in-browser voice, training from actual site content.
 
 ## Spark — Canonical URLs
@@ -31,7 +52,7 @@
 ## Spark — Frequently Asked Questions
 
 ### Do I need a developer?
-No. Copy one script tag into your site footer. Works with Webflow, Framer, and any HTML site in about 2 minutes.
+No. Copy one script tag into your site footer. Works with Webflow, Framer, WordPress, Shopify, and any HTML site in about 2 minutes.
 
 ### Will it hallucinate about my business?
 No. Answers are grounded in pages you approve and files you upload. If Spark doesn't know something, it says so.
@@ -42,8 +63,20 @@ No. Your content trains only your assistant and is never used to train foundatio
 ### Can I try it before signing up?
 Yes. Paste your URL and chat with a homepage-trained assistant immediately — no account or credit card required.
 
+### Why do I need to verify my domain?
+So only you can train an assistant on your site. Standard ownership check via DNS TXT record or HTML meta tag.
+
+### Chat or voice — which does it support?
+Both, in the same widget. Visitors type or tap the mic. Browser-native — no app or phone system required.
+
 ### What makes Spark different from Intercom or Drift?
 Guided navigation (Spark navigates to pages mid-conversation), in-browser voice, and training from your actual site content. Built for SMB websites.
+
+### Does it work on mobile?
+Yes. Fully responsive and touch-optimised — tap to chat, tap to talk, swipe to close.
+
+### What happens when my free credits run out?
+The assistant stops responding until you upgrade or add credits. We email you before they run out.
 
 ## Company
 
@@ -52,6 +85,7 @@ Guided navigation (Spark navigates to pages mid-conversation), in-browser voice,
 - Terms: https://www.helllo.ai/terms
 - Contact: hello@helllo.ai
 
-## Sitemap
+## Discovery
 
-- https://www.helllo.ai/sitemap.xml
+- Sitemap: https://www.helllo.ai/sitemap.xml
+- LLM summary: https://www.helllo.ai/llms.txt

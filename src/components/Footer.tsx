@@ -138,6 +138,7 @@ const Footer = () => {
     {
       title: "Product", 
       links: [
+        { name: "Spark", href: "/spark" },
         { name: "Features", href: "#features" },
         { name: "Pricing", href: "#pricing" },
         { name: "Documentation", href: "#docs" },

@@ -1,6 +1,8 @@
 import {
   generateBreadcrumbSchema,
   generateFAQSchema,
+  generateHowToSchema,
+  generateOfferCatalogSchema,
   generateSoftwareApplicationSchema,
   generateWebPageSchema,
   type SEOData,
@@ -10,6 +12,76 @@ export const SPARK_OG_IMAGE =
   "https://ik.imagekit.io/ise7sbyg9/spark-image-banner.png?tr=f-webp,q-auto";
 
 export const SPARK_CANONICAL = "https://www.helllo.ai/spark";
+
+export const SPARK_META_DESCRIPTION =
+  "Paste your URL and get an AI assistant trained on your site in 30 seconds. Answers questions, navigates pages, and books meetings — embed with one script tag, free forever.";
+
+export const SPARK_HOW_IT_WORKS_STEPS = [
+  {
+    name: "Paste your URL",
+    text: "Spark reads your pages and builds an assistant that knows your business — services, prices, hours, policies. No setup wizard, no code, no copy-pasting content.",
+  },
+  {
+    name: "Teach it the rest",
+    text: "Add PDFs, price lists and Q&A pairs for anything your site doesn't say. When things change, retrain in one click — your assistant never falls behind.",
+  },
+  {
+    name: "Embed with one line",
+    text: "Drop a single script tag in your footer — or paste it into WordPress, Wix, Webflow or Shopify settings. The widget is live the moment you save.",
+  },
+  {
+    name: "Watch visits become leads",
+    text: "Spark answers questions by voice or chat, walks visitors to the right page, books meetings and captures contact details — around the clock, in any language.",
+  },
+] as const;
+
+export const SPARK_PLATFORM_FEATURES = [
+  "Trained on your site — answers grounded in approved pages and uploaded files",
+  "Voice + chat in one embeddable widget",
+  "Guided navigation — opens pages mid-conversation",
+  "Meeting booking via Google Calendar, Calendly, and Cal.com",
+  "Lightweight lead CRM with searchable conversations and contacts",
+  "Answer control and guardrails with one-click revisions",
+  "Live monitoring and analytics",
+  "50+ language auto-detection",
+  "Brand customization for colors, avatar, tone, and welcome screen",
+] as const;
+
+export const SPARK_PRICING_OFFERS = [
+  {
+    name: "Free forever",
+    price: "0",
+    priceCurrency: "USD",
+    description: "500 credits, 10 pages crawled, 30 min voice, 100 chat conversations. No credit card.",
+  },
+  {
+    name: "Starter",
+    price: "49",
+    priceCurrency: "USD",
+    description: "Best for a single marketing site. Up to 1,000 pages, calendar integrations, guided navigation.",
+    billingDuration: "MONTH",
+  },
+  {
+    name: "Growth",
+    price: "99",
+    priceCurrency: "USD",
+    description: "Best for growing businesses. Up to 2,000 pages, CRM integrations, file uploads.",
+    billingDuration: "MONTH",
+  },
+  {
+    name: "Scale",
+    price: "299",
+    priceCurrency: "USD",
+    description: "Best for high-traffic sites and agencies. Up to 6,000 pages, custom integrations, priority support.",
+    billingDuration: "MONTH",
+  },
+  {
+    name: "Enterprise",
+    price: "0",
+    priceCurrency: "USD",
+    description: "Custom pricing for high-volume sites, agencies, and regulated teams.",
+  },
+] as const;
 
 export const SPARK_FAQS = [
   {
@@ -45,29 +117,27 @@ export const SPARK_FAQS = [
     a: "Yes. The widget is fully responsive and touch-optimised — tap to chat, tap to talk, swipe to close.",
   },
   {
-    q: "What happens when the free trial credits run out?",
+    q: "What happens when my free credits run out?",
     a: "The assistant stops responding until you upgrade or add credits. We'll email you before they run out so you're never caught off guard.",
   },
 ] as const;
 
 export const SPARK_SEO: SEOData = {
   title: "Spark — Give Your Website an AI Assistant | Helllo.ai",
-  description:
-    "Give your website an AI assistant trained on your data. Answers questions, navigates pages, and books meetings on your calendar — live in 30 seconds, free to start.",
+  description: SPARK_META_DESCRIPTION,
   keywords:
-    "Spark, AI website assistant, website chatbot, voice AI for websites, Helllo.ai, no-code chatbot, guided navigation chatbot, calendar booking assistant, SMB website AI, embed website assistant",
+    "Spark, AI website assistant, paste URL chatbot, website chatbot, voice AI for websites, Helllo.ai, no-code chatbot, one script tag embed, guided navigation chatbot, calendar booking assistant, SMB website AI",
   canonical: SPARK_CANONICAL,
   ogType: "website",
   ogTitle: "Spark — Give Your Website an AI Assistant",
-  ogDescription:
-    "Give your website an AI assistant trained on your data. Answers questions, navigates pages, and books meetings on your calendar — live in 30 seconds, free to start.",
+  ogDescription: SPARK_META_DESCRIPTION,
   ogUrl: SPARK_CANONICAL,
   ogImage: SPARK_OG_IMAGE,
   ogImageAlt: "Spark by Helllo.ai — AI assistant for your website",
   twitterCard: "summary_large_image",
   twitterTitle: "Spark — Give Your Website an AI Assistant",
   twitterDescription:
-    "AI assistant trained on your website in 30 seconds. Answers questions, navigates pages, and books meetings — free to start.",
+    "Paste your URL → AI assistant in 30 seconds → answers, navigates, books meetings → one script tag, free forever.",
   twitterImage: SPARK_OG_IMAGE,
 };
 
@@ -94,28 +164,34 @@ export function getSparkStructuredData(): Record<string, unknown>[] {
       operatingSystem: "Web",
       brandName: "Helllo.ai",
       brandUrl: "https://www.helllo.ai",
-      featureList: [
-        "Trained on approved website pages and uploaded files",
-        "Voice and chat in one embeddable widget",
-        "Guided navigation to pages mid-conversation",
-        "Google Calendar, Calendly, and Cal.com booking",
-        "50+ language auto-detection",
-        "No-code setup with one script tag",
-        "Free forever plan with 500 credits",
-      ],
+      featureList: [...SPARK_PLATFORM_FEATURES],
       offers: [
         {
           price: "0",
           priceCurrency: "USD",
-          description:
-            "Free forever — 500 credits, 10 pages, 30 min voice, 100 chat conversations",
-        },
-        {
-          price: "49",
-          priceCurrency: "USD",
-          description: "Starter plan from $49/month",
+          description: SPARK_PRICING_OFFERS[0].description,
         },
       ],
+    }),
+    generateHowToSchema({
+      name: "How to add Spark to your website",
+      description:
+        "Paste your URL, train an AI assistant on your site, and embed it with one script tag in about 30 seconds.",
+      url: `${SPARK_CANONICAL}#how-it-works`,
+      steps: SPARK_HOW_IT_WORKS_STEPS.map(({ name, text }) => ({ name, text })),
+    }),
+    generateOfferCatalogSchema({
+      name: "Spark pricing",
+      url: `${SPARK_CANONICAL}#pricing`,
+      offers: SPARK_PRICING_OFFERS.map((offer) => ({
+        name: offer.name,
+        price: offer.price,
+        priceCurrency: offer.priceCurrency,
+        description: offer.description,
+        ...("billingDuration" in offer && offer.billingDuration
+          ? { billingDuration: offer.billingDuration }
+          : {}),
+      })),
     }),
     generateFAQSchema(
       SPARK_FAQS.map(({ q, a }) => ({ question: q, answer: a })),
