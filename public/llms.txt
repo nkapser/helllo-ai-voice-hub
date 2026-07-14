@@ -14,7 +14,7 @@
 - **Setup:** No developer required. One script tag in site footer or Webflow/Framer custom code.
 - **Training data:** Approved website pages and uploaded files only — not the open internet.
 - **Capabilities:** Q&A, guided page navigation, voice + chat, calendar booking, lead capture, 50+ languages.
-- **Free trial:** 500 credits, 10 pages crawled, ~30 min voice, ~100 chat conversations. No credit card.
+- **Free plan:** Free forever — 500 credits, 10 pages crawled, ~30 min voice, ~100 chat conversations. No credit card.
 - **Paid plans:** Starter from $49/mo, Growth $99/mo, Scale $299/mo.
 - **Differentiators vs Intercom/Drift:** Guided navigation (takes visitors to pages mid-chat), in-browser voice, training from actual site content.
 
@@ -22,7 +22,9 @@
 
 - Product page: https://www.helllo.ai/spark
 - How it works: https://www.helllo.ai/spark#how-it-works
-- Features: https://www.helllo.ai/spark#features
+- Platform: https://www.helllo.ai/spark#platform
+- Use cases: https://www.helllo.ai/spark#use-cases
+- Integration: https://www.helllo.ai/spark#integration
 - Pricing: https://www.helllo.ai/spark#pricing
 - FAQ: https://www.helllo.ai/spark#faq
 

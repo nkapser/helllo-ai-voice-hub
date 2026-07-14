@@ -62,7 +62,21 @@
   </url>
 
   <url>
-    <loc>https://www.helllo.ai/spark#features</loc>
+    <loc>https://www.helllo.ai/spark#platform</loc>
+    <lastmod>2026-07-14T11:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.helllo.ai/spark#use-cases</loc>
+    <lastmod>2026-07-14T11:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.helllo.ai/spark#integration</loc>
     <lastmod>2026-07-14T11:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

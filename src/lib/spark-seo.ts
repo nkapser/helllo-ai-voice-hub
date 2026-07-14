@@ -101,13 +101,14 @@ export function getSparkStructuredData(): Record<string, unknown>[] {
         "Google Calendar, Calendly, and Cal.com booking",
         "50+ language auto-detection",
         "No-code setup with one script tag",
-        "Free trial with 500 credits",
+        "Free forever plan with 500 credits",
       ],
       offers: [
         {
           price: "0",
           priceCurrency: "USD",
-          description: "Free trial with 500 credits, 10 pages, 30 min voice, 100 chat conversations",
+          description:
+            "Free forever — 500 credits, 10 pages, 30 min voice, 100 chat conversations",
         },
         {
           price: "49",

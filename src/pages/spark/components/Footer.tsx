@@ -44,7 +44,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-[13px] leading-relaxed spark-text-muted">
-              Give your website a voice. Paste your URL, train on your content, embed one script tag.
+              Give your website an AI assistant. Paste your URL, train on your content, embed one script tag.
             </p>
             <p className="mt-3 text-[12px] spark-text-subtle">
               Built by{' '}

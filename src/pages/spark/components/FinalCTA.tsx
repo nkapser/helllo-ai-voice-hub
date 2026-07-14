@@ -25,7 +25,7 @@ export default function FinalCTA() {
         </h2>
 
         <p className="reveal rd1 mb-8 text-[17px] spark-text-muted">
-          Paste your URL and meet your website's new voice in 30 seconds.
+          Paste your URL and meet your website&apos;s new AI assistant in 30 seconds.
         </p>
 
         <div className="reveal rd2 mx-auto mb-6 max-w-xl">
@@ -35,7 +35,7 @@ export default function FinalCTA() {
         <div className="reveal rd3 flex flex-wrap items-center justify-center gap-5">
           {[
             { icon: CreditCard, text: 'No credit card' },
-            { icon: ShieldCheck, text: 'Free trial credits' },
+            { icon: ShieldCheck, text: 'Free credits included' },
             { icon: X, text: 'Cancel anytime' },
           ].map(({ icon: Icon, text }) => (
             <div key={text} className="flex items-center gap-1.5">

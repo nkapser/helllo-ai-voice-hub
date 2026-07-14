@@ -26,14 +26,23 @@ export function scrollToHash(
 
 /** Spark landing section hash fragments. */
 export const SPARK_SECTIONS = {
-  features: "features",
+  howItWorks: "how-it-works",
+  platform: "platform",
+  useCases: "use-cases",
+  integration: "integration",
   pricing: "pricing",
   faq: "faq",
 } as const;
 
+/** Legacy hash aliases from earlier Spark page versions. */
+const SPARK_HASH_ALIASES: Record<string, string> = {
+  superpowers: SPARK_SECTIONS.platform,
+  features: SPARK_SECTIONS.platform,
+};
+
 /** Scroll to a Spark landing section by hash fragment. */
 export function scrollToSparkHash(hash: string, behavior: ScrollBehavior = "smooth"): boolean {
   const id = hash.replace(/^#/, "");
-  const targetId = id === "superpowers" ? SPARK_SECTIONS.features : id;
+  const targetId = SPARK_HASH_ALIASES[id] ?? id;
   return scrollToHash(`#${targetId}`, behavior, SPARK_HEADER_OFFSET);
 }

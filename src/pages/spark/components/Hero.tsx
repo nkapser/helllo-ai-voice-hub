@@ -7,6 +7,8 @@ const HERO_SETTLED_KEY = 'spark-hero-settled'
 const HERO_ENTRANCE_MS = 360 + 600 + 50
 
 const rotatingPhrases = ['that talks to', 'that guides', 'that converts']
+const HERO_SEO_HEADLINE =
+  'Give your website an assistant that talks to, guides, and converts visitors'
 const TYPE_SPEED = 80
 const DELETE_SPEED = 40
 const PAUSE_AT_FULL = 1500
@@ -14,7 +16,12 @@ const PAUSE_AT_EMPTY = 300
 
 export default function Hero() {
   const contentRef = useRef<HTMLDivElement>(null)
-  const [typedText, setTypedText] = useState('')
+  const [prefersReducedMotion] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
+  const [typedText, setTypedText] = useState(prefersReducedMotion ? rotatingPhrases[0] : '')
   const [phraseIndex, setPhraseIndex] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -37,6 +44,8 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
+    if (prefersReducedMotion) return
+
     const currentPhrase = rotatingPhrases[phraseIndex]
 
     if (!isDeleting && typedText === currentPhrase) {
@@ -62,7 +71,7 @@ export default function Hero() {
     )
 
     return () => window.clearTimeout(timeoutId)
-  }, [typedText, isDeleting, phraseIndex])
+  }, [typedText, isDeleting, phraseIndex, prefersReducedMotion])
 
   return (
     <section
@@ -112,18 +121,22 @@ export default function Hero() {
           </div>
 
           <h1 className="animate-spark-rise d1 mb-24 w-full font-display text-[2.75rem] font-normal leading-[0.95] tracking-tight text-black sm:text-6xl sm:leading-[0.95] md:text-7xl xl:text-8xl">
-            <span className="block">
+            <span className="sr-only">{HERO_SEO_HEADLINE}</span>
+            <span aria-hidden="true" className="block">
               Give your website
             </span>
-            <span className="block">
+            <span aria-hidden="true" className="block">
               an assistant
             </span>
-            <span className="block">
-              <span className="italic text-blue-900" aria-live="polite">
-                {typedText}<span className="hero-typewriter-cursor text-blue-900">_</span>
+            <span aria-hidden="true" className="block">
+              <span className="italic text-blue-900">
+                {typedText}
+                {!prefersReducedMotion && (
+                  <span className="hero-typewriter-cursor text-blue-900">_</span>
+                )}
               </span>
             </span>
-            <span className="block">
+            <span aria-hidden="true" className="block">
               visitors
             </span>
           </h1>
