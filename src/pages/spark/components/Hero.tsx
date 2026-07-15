@@ -132,7 +132,7 @@ export default function Hero() {
       <div className="relative z-[1] mx-auto w-full max-w-6xl">
         <div
           ref={contentRef}
-          className="hero-voice-content flex w-full flex-col items-center"
+          className="hero-voice-content flex w-full flex-col items-center pt-16 md:pt-14 lg:pt-12"
         >
           <div className="spark-badge-pill animate-spark-rise d0 mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--spark)]" />
