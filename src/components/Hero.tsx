@@ -328,7 +328,7 @@ const Hero = () => {
           text-align: right;
           will-change: transform;
           transition: transform 700ms cubic-bezier(0.25, 0.1, 0.25, 1), filter 700ms ease;
-          background: linear-gradient(to bottom, #7c5dff 0%, #7c5dff 75%, #9d7aff 75%, #b894ff 85%, #7c5dff 100%);
+          background: linear-gradient(to bottom, #3b82f6 0%, #3b82f6 75%, #60a5fa 75%, #93c5fd 85%, #3b82f6 100%);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -348,8 +348,8 @@ const Hero = () => {
         @media (prefers-reduced-motion: reduce) {
           .hero-slot-track {
             transition: none;
-            background: #7c5dff;
-            -webkit-text-fill-color: #7c5dff;
+            background: #3b82f6;
+            -webkit-text-fill-color: #3b82f6;
           }
           .hero-slot-track.is-spinning {
             filter: none;
@@ -415,7 +415,7 @@ const Hero = () => {
 
           {/* Experience Call Widget */}
           <div className="">
-            <Card className="border border-purple-300/60 bg-blue-50/80 shadow-sm rounded-lg overflow-hidden w-full">
+            <Card className="border border-[hsl(214_32%_84%)] bg-sky-50/70 shadow-sm rounded-xl overflow-hidden w-full">
               <CardHeader className="text-center pb-4 pt-5 px-4 sm:px-8 md:px-12 lg:px-16">
               </CardHeader>
               <CardContent className="px-4 sm:px-8 md:px-12 lg:px-16 pb-3">

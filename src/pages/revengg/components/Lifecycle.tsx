@@ -35,12 +35,12 @@ const Lifecycle = () => {
           aria-label="Customer lifecycle: acquire, qualify, convert, retain, grow"
         >
           {/* base path */}
-          <path d={PATH} fill="none" stroke="#E7E7E0" strokeWidth="2" />
+          <path d={PATH} fill="none" stroke="#CBD5E1" strokeWidth="2" />
           {/* drawn-in ink path */}
           <path
             d={PATH}
             fill="none"
-            stroke="#111111"
+            stroke="#1F2937"
             strokeWidth="2"
             strokeLinecap="round"
             className="rev-draw"
@@ -60,7 +60,7 @@ const Lifecycle = () => {
           )}
           {/* travelling dot */}
           {!reduced && inView && (
-            <circle r="4" fill="#9FEA28" stroke="#111111" strokeWidth="1.5">
+            <circle r="4" fill="#9FEA28" stroke="#1F2937" strokeWidth="1.5">
               <animateMotion dur="6s" repeatCount="indefinite" path={PATH} />
             </circle>
           )}
@@ -72,7 +72,7 @@ const Lifecycle = () => {
             return (
               <g key={s.label} className="rev-pop" style={{ "--rev-d": `${i * 140}ms` } as React.CSSProperties}>
                 <circle cx={s.x} cy={y} r="10" fill="#9FEA28" opacity="0.18" className={!reduced ? "rev-pulse" : undefined} />
-                <circle cx={s.x} cy={y} r="5" fill="#FBFBF9" stroke="#111111" strokeWidth="2" />
+                <circle cx={s.x} cy={y} r="5" fill="#F8FAFC" stroke="#1F2937" strokeWidth="2" />
                 <text
                   x={s.x}
                   y={y + 32}
@@ -80,7 +80,7 @@ const Lifecycle = () => {
                   fontFamily="var(--rev-font-mono)"
                   fontSize="11"
                   letterSpacing="1.5"
-                  fill="#111111"
+                  fill="#1F2937"
                   fontWeight="500"
                 >
                   {s.label.toUpperCase()}

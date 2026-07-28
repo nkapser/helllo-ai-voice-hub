@@ -15,13 +15,14 @@ import NotFound from "./pages/NotFound";
 
 const Spark = lazy(() => import("./pages/spark"));
 const RevEngg = lazy(() => import("./pages/revengg"));
+const DesignLanguageSystem = lazy(() => import("./pages/design-language-system"));
 
 const queryClient = new QueryClient();
 
 function RevEnggRouteFallback() {
   return (
     <div
-      className="min-h-screen bg-[#FBFBF9]"
+      className="min-h-screen bg-[hsl(210_40%_98%)]"
       aria-busy="true"
       aria-label="Loading RevEngg"
     />
@@ -55,6 +56,14 @@ const App = () => (
               }
             />
             <Route path="/helllo" element={<Index />} />
+            <Route
+              path="/design-language-system"
+              element={
+                <Suspense fallback={<RevEnggRouteFallback />}>
+                  <DesignLanguageSystem />
+                </Suspense>
+              }
+            />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/cancellation-refund" element={<CancellationRefundPolicy />} />

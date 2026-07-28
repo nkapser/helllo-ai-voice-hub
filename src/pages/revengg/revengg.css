@@ -1,24 +1,34 @@
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900,901&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@700,900,901&display=swap");
 
-/* ------------------------------------------------------------------ */
-/*  RevEngg — design tokens (scoped to .rev-page)                      */
-/* ------------------------------------------------------------------ */
+/* ═══════════════════════════════════════════════════════════════
+   RevEngg — Helllo Design Language (shared with /spark, /helllo)
+   Neutrals: cool slate on hsl(210 40% 98%)
+   Type: Geist (display) · Inter (body) · Geist Mono (labels)
+   Accent: RevEngg gothic green #9FEA28 (wordmark: Satoshi Black)
+   Note: Geist/Inter/Geist Mono are loaded globally in index.html.
+═══════════════════════════════════════════════════════════════ */
 
 .rev-page {
-  --rev-paper: #fbfbf9;
+  /* neutrals — identical to the /spark scale */
+  --rev-paper: hsl(210 40% 98%);
   --rev-surface: #ffffff;
-  --rev-ink: #111111;
-  --rev-ink-70: rgba(17, 17, 17, 0.7);
-  --rev-ink-50: rgba(17, 17, 17, 0.5);
-  --rev-ink-30: rgba(17, 17, 17, 0.3);
+  --rev-ink: hsl(215 28% 17%);
+  --rev-ink-70: hsl(215 16% 40%);
+  --rev-ink-50: hsl(215 16% 47%);
+  --rev-ink-30: hsl(215 16% 47% / 0.45);
+  --rev-hairline: hsl(214 32% 84%);
+
+  /* RevEngg accent */
   --rev-green: #9fea28;
+  --rev-green-ember: #65a30d;
   --rev-green-soft: rgba(159, 234, 40, 0.14);
-  --rev-green-deep: #4e7d0e; /* accessible green for small text on light */
-  --rev-hairline: #e7e7e0;
-  --rev-font-display: "Satoshi", "Inter", system-ui, sans-serif;
+  --rev-green-deep: #4d7c0f; /* accessible green for small text on light */
+
+  /* type */
+  --rev-font-display: "Geist", "Inter", system-ui, sans-serif;
   --rev-font-body: "Inter", system-ui, sans-serif;
   --rev-font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
+  --rev-font-logo: "Satoshi", "Geist", system-ui, sans-serif;
 
   font-family: var(--rev-font-body);
   background-color: var(--rev-paper);
@@ -27,10 +37,35 @@
   text-rendering: optimizeLegibility;
 }
 
+/* ── Background layers (shared language: aurora + dot grid) ──── */
+.rev-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    radial-gradient(80% 50% at 50% -20%, rgba(159, 234, 40, 0.16), transparent),
+    radial-gradient(60% 40% at 100% 100%, rgba(147, 197, 253, 0.1), transparent),
+    radial-gradient(50% 35% at 0% 80%, rgba(224, 242, 254, 0.35), transparent);
+}
+
+.rev-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(80% 60% at 50% 40%, black 30%, transparent 75%);
+  opacity: 0.35;
+}
+
+/* ── Typography ──────────────────────────────────────────────── */
 .rev-display {
   font-family: var(--rev-font-display);
-  font-weight: 900;
-  letter-spacing: -0.03em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .rev-mono {
@@ -39,26 +74,32 @@
   text-transform: uppercase;
 }
 
-/* Eyebrow label */
 .rev-eyebrow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
   font-family: var(--rev-font-mono);
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--rev-ink-70);
+  color: var(--rev-ink-50);
 }
 
-/* Wordmark */
+.rev-eyebrow-idx {
+  color: var(--rev-green-deep);
+}
+
+/* ── Wordmark (brand asset — stays Satoshi, stays #111) ──────── */
 .rev-wordmark {
-  font-family: var(--rev-font-display);
+  font-family: var(--rev-font-logo);
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1;
   white-space: nowrap;
 }
 .rev-wordmark .rev-wm-rev {
-  color: var(--rev-ink);
+  color: #111111;
 }
 .rev-wordmark .rev-wm-engg {
   color: var(--rev-green);
@@ -66,62 +107,78 @@
   padding-right: 0.06em; /* italic overhang */
 }
 .rev-wordmark .rev-wm-dot {
-  color: var(--rev-ink);
+  color: #111111;
 }
 
-/* Buttons */
+/* ── Buttons (shared shape/motion, green accent) ─────────────── */
 .rev-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   font-family: var(--rev-font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.9375rem;
   letter-spacing: -0.01em;
-  border-radius: 9999px;
-  padding: 0.875rem 1.75rem;
+  border-radius: 0.75rem;
+  padding: 0.8125rem 1.625rem;
   min-height: 48px;
   cursor: pointer;
-  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+  user-select: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease,
+    background-color 0.18s ease, border-color 0.18s ease;
   will-change: transform;
 }
 .rev-btn:focus-visible {
-  outline: 2px solid var(--rev-ink);
+  outline: 2px solid var(--rev-green-deep);
   outline-offset: 3px;
 }
+.rev-btn:active {
+  transform: translateY(0);
+}
+
+/* dark primary */
 .rev-btn-primary {
-  background: var(--rev-ink);
+  background: linear-gradient(135deg, hsl(215 28% 24%) 0%, hsl(215 28% 15%) 100%);
   color: #ffffff;
+  box-shadow:
+    0 8px 32px -8px rgba(15, 23, 42, 0.4),
+    0 0 0 1px rgba(15, 23, 42, 0.06);
 }
 .rev-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px -12px rgba(17, 17, 17, 0.5);
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 12px 40px -8px rgba(15, 23, 42, 0.5);
 }
-.rev-btn-primary:active {
-  transform: translateY(0) scale(0.98);
-}
+
+/* accent CTA — the "spark gradient" pattern in RevEngg green */
 .rev-btn-green {
-  background: var(--rev-green);
-  color: var(--rev-ink);
+  background: linear-gradient(135deg, var(--rev-green) 0%, #86d616 100%);
+  color: #111111;
+  box-shadow:
+    0 8px 32px -8px rgba(132, 204, 22, 0.45),
+    0 0 0 1px rgba(159, 234, 40, 0.4);
 }
 .rev-btn-green:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px -14px rgba(159, 234, 40, 0.9);
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow:
+    0 12px 40px -8px rgba(101, 163, 13, 0.5),
+    0 0 0 1px rgba(159, 234, 40, 0.5);
 }
-.rev-btn-green:active {
-  transform: translateY(0) scale(0.98);
-}
+
+/* secondary */
 .rev-btn-ghost {
-  background: transparent;
+  background: var(--rev-surface);
   color: var(--rev-ink);
   border: 1px solid var(--rev-hairline);
 }
 .rev-btn-ghost:hover {
-  border-color: var(--rev-ink-30);
-  background: var(--rev-surface);
-  transform: translateY(-2px);
+  background: var(--rev-green-soft);
+  border-color: var(--rev-green-ember);
+  transform: translateY(-1px);
 }
+
 .rev-btn-ghost-light {
   background: transparent;
   color: #ffffff;
@@ -129,32 +186,49 @@
 }
 .rev-btn-ghost-light:hover {
   border-color: rgba(255, 255, 255, 0.6);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-/* Cards */
+/* ── Surfaces ────────────────────────────────────────────────── */
 .rev-card {
   background: var(--rev-surface);
-  border: 1px solid var(--rev-hairline);
+  border: 1px solid hsl(214 32% 84% / 0.8);
   border-radius: 1.25rem;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 12px 40px -16px rgba(15, 23, 42, 0.12);
 }
 
-/* ------------------------------------------------------------------ */
-/*  Reveal-on-scroll                                                   */
-/* ------------------------------------------------------------------ */
+.rev-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid hsl(214 32% 84% / 0.7);
+}
+
+.rev-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(159, 234, 40, 0.45) 30%,
+    rgba(101, 163, 13, 0.45) 70%,
+    transparent 100%
+  );
+}
+
+/* ── Reveal-on-scroll (shared: 0.6s, spring-out curve) ───────── */
 .rev-reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 700ms cubic-bezier(0.2, 0.65, 0.25, 1), transform 700ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .rev-reveal.rev-in {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ------------------------------------------------------------------ */
-/*  Keyframes (product-story motion only)                              */
-/* ------------------------------------------------------------------ */
+/* ── Keyframes (product-story motion only) ───────────────────── */
 
 /* signal travelling along a dashed path */
 @keyframes rev-dash-flow {
@@ -222,11 +296,11 @@
 .rev-active .rev-pop,
 .rev-active.rev-pop {
   opacity: 0;
-  animation: rev-pop 500ms cubic-bezier(0.2, 0.65, 0.25, 1) forwards;
+  animation: rev-pop 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: var(--rev-d, 0ms);
 }
 
-/* blinking cursor / live tick */
+/* blinking live tick */
 @keyframes rev-blink {
   0%,
   55% {
@@ -255,7 +329,7 @@
 .rev-active.rev-grow-x {
   transform-origin: left center;
   transform-box: fill-box;
-  animation: rev-grow-x 900ms cubic-bezier(0.2, 0.65, 0.25, 1) forwards;
+  animation: rev-grow-x 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: var(--rev-d, 0ms);
   transform: scaleX(0);
 }
@@ -265,7 +339,7 @@
   opacity: 0;
   transform: translateY(18px) scale(0.99);
   pointer-events: none;
-  transition: opacity 450ms cubic-bezier(0.2, 0.65, 0.25, 1), transform 450ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .rev-panel.rev-active {
   opacity: 1;
@@ -275,12 +349,16 @@
 
 /* feature nav card */
 .rev-feature-card {
-  transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.22s ease;
+}
+.rev-feature-card:hover {
+  transform: translateY(-1px);
 }
 .rev-feature-card .rev-feature-sub {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 380ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .rev-feature-card .rev-feature-sub > div {
   overflow: hidden;
@@ -291,22 +369,20 @@
 .rev-feature-card .rev-feature-bar {
   transform: scaleY(0);
   transform-origin: top center;
-  transition: transform 380ms cubic-bezier(0.2, 0.65, 0.25, 1);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .rev-feature-card[data-active="true"] .rev-feature-bar {
   transform: scaleY(1);
 }
 
-/* marquee-free trust strip divider */
+/* trust strip divider */
 .rev-vline {
   width: 1px;
   align-self: stretch;
   background: var(--rev-hairline);
 }
 
-/* ------------------------------------------------------------------ */
-/*  Reduced motion: keep the story readable, kill the motion           */
-/* ------------------------------------------------------------------ */
+/* ── Reduced motion ──────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .rev-page *,
   .rev-page *::before,
@@ -320,6 +396,7 @@
     opacity: 1 !important;
     transform: none !important;
   }
+  .rev-in .rev-pop,
   .rev-active .rev-pop,
   .rev-draw {
     opacity: 1 !important;

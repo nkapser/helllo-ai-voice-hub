@@ -21,7 +21,7 @@ const metrics: Metric[] = [
 const MetricCard = ({ metric, index, start }: { metric: Metric; index: number; start: boolean }) => {
   const v = useCountUp(metric.value ?? 0, start, 1300 + index * 100);
   return (
-    <div className="rev-card group p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-28px_rgba(17,17,17,0.28)] md:p-8">
+    <div className="rev-card group p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_48px_-28px_rgba(15,23,42,0.24)] md:p-8">
       <p className="rev-display text-5xl tabular-nums md:text-6xl">
         {metric.value === null ? metric.display : `${Math.round(v)}${metric.suffix}`}
       </p>
@@ -41,7 +41,10 @@ const Outcomes = () => {
         ref={ref}
         className={`rev-reveal ${inView ? "rev-in" : ""} mx-auto max-w-7xl`}
       >
-        <p className="rev-eyebrow">Outcomes</p>
+        <p className="rev-eyebrow">
+          <span className="rev-eyebrow-idx">[02]</span>
+          <span>Outcomes</span>
+        </p>
         <h2 className="rev-display mt-3 text-4xl leading-[1.05] md:text-6xl">
           Every Customer Interaction.
           <br />

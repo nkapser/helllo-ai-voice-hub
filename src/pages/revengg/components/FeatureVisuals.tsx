@@ -8,16 +8,16 @@
 
 const MONO = "'Geist Mono', ui-monospace, monospace";
 const SANS = "'Inter', system-ui, sans-serif";
-const DISPLAY = "'Satoshi', 'Inter', sans-serif";
+const DISPLAY = "'Geist', 'Inter', sans-serif";
 
-const INK = "#111111";
-const INK50 = "rgba(17,17,17,0.5)";
-const INK70 = "rgba(17,17,17,0.7)";
+const INK = "#1F2937";
+const INK50 = "#64748B";
+const INK70 = "#475569";
 const GREEN = "#9FEA28";
-const GREEN_DEEP = "#4E7D0E";
-const HAIR = "#E7E7E0";
-const PAPER = "#FBFBF9";
-const SOFT = "#F4F4EE";
+const GREEN_DEEP = "#4D7C0F";
+const HAIR = "#CBD5E1";
+const PAPER = "#F8FAFC";
+const SOFT = "#F1F5F9";
 
 const d = (ms: number) => ({ "--rev-d": `${ms}ms` } as React.CSSProperties);
 
@@ -283,7 +283,7 @@ export const QualificationVisual = () => {
             <Body x={356} y={y + 24} size={11.5} weight={600}>{q.name}</Body>
             <Label x={356} y={y + 39} size={7.5} fill={INK50}>INTENT {q.score}/100</Label>
             <rect x={452} y={y + 21} width={62} height={5} rx="2.5" fill={SOFT} />
-            <rect x={452} y={y + 21} width={(62 * q.score) / 100} height={5} rx="2.5" fill={i === 0 ? GREEN : "#c9c9c0"} className="rev-grow-x" style={d(500 + i * 140)} />
+            <rect x={452} y={y + 21} width={(62 * q.score) / 100} height={5} rx="2.5" fill={i === 0 ? GREEN : "#94A3B8"} className="rev-grow-x" style={d(500 + i * 140)} />
           </g>
         );
       })}

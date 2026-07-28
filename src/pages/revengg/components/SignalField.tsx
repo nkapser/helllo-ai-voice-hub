@@ -92,7 +92,7 @@ const SignalField = () => {
       ctx.clearRect(0, 0, w, h);
       ctx.lineWidth = 1;
       for (const c of curves) {
-        ctx.strokeStyle = "rgba(17, 17, 17, 0.035)";
+        ctx.strokeStyle = "rgba(30, 41, 59, 0.05)";
         ctx.beginPath();
         ctx.moveTo(c.p0[0], c.p0[1]);
         ctx.bezierCurveTo(c.p1[0], c.p1[1], c.p2[0], c.p2[1], c.p3[0], c.p3[1]);
@@ -116,7 +116,7 @@ const SignalField = () => {
         ctx.beginPath();
         ctx.fillStyle = p.green
           ? `rgba(120, 180, 30, ${0.28 * alpha})`
-          : `rgba(17, 17, 17, ${0.14 * alpha})`;
+          : `rgba(30, 41, 59, ${0.14 * alpha})`;
         ctx.arc(x, y, p.size, 0, Math.PI * 2);
         ctx.fill();
       }

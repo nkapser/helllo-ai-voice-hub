@@ -28,6 +28,8 @@ const RevEnggPage = () => {
 
   return (
     <div className="rev-page relative min-h-screen overflow-x-clip">
+      <div className="rev-aurora" aria-hidden="true" />
+      <div className="rev-grid" aria-hidden="true" />
       <SignalField />
       <Nav />
       <main>

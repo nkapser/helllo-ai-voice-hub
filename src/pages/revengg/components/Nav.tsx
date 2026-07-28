@@ -23,9 +23,7 @@ const Nav = () => {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-[var(--rev-hairline)] bg-[rgba(251,251,249,0.85)] backdrop-blur-md"
-          : "bg-transparent"
+        scrolled ? "rev-glass" : "bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">

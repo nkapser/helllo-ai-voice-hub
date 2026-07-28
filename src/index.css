@@ -6,40 +6,40 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors - Professional Blue & Green */
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    /* Helllo Design Language — cool slate neutrals shared with /spark and / */
+    --background: 210 40% 98%;
+    --foreground: 215 28% 17%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 215 28% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 215 28% 17%;
 
-    /* Primary: Professional Blue */
-    --primary: 214 84% 46%;
+    /* Primary: Spark blue family (AA-safe on white) */
+    --primary: 217 84% 46%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 214 75% 55%;
-    --primary-dark: 214 90% 38%;
+    --primary-light: 217 91% 60%;
+    --primary-dark: 217 90% 38%;
 
     /* Secondary: Modern Green Accent */
     --secondary: 162 73% 46%;
     --secondary-foreground: 0 0% 100%;
     --secondary-light: 162 65% 55%;
 
-    /* Elegant Grays */
-    --muted: 210 15% 96%;
-    --muted-foreground: 215 15% 55%;
+    /* Elegant Grays — slate scale */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 25% 92%;
-    --accent-foreground: 215 25% 25%;
+    --accent: 204 94% 94%;
+    --accent-foreground: 217 90% 38%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 214 84% 46%;
+    --border: 214 32% 84%;
+    --input: 214 32% 84%;
+    --ring: 217 91% 60%;
 
     --radius: 0.75rem;
 
@@ -48,10 +48,10 @@
     --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
     --gradient-hero: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--accent)) 100%);
     
-    /* Elegant Shadows */
-    --shadow-soft: 0 2px 8px hsl(var(--primary) / 0.08);
-    --shadow-medium: 0 8px 24px hsl(var(--primary) / 0.12);
-    --shadow-strong: 0 16px 40px hsl(var(--primary) / 0.16);
+    /* Elegant Shadows — slate-based, matching /spark elevation */
+    --shadow-soft: 0 1px 2px hsl(222 47% 11% / 0.04), 0 4px 12px hsl(222 47% 11% / 0.05);
+    --shadow-medium: 0 1px 2px hsl(222 47% 11% / 0.04), 0 12px 40px -16px hsl(222 47% 11% / 0.12);
+    --shadow-strong: 0 20px 50px -12px hsl(222 47% 11% / 0.16);
     
     /* Professional Success Colors */
     --success: 142 76% 36%;
@@ -125,5 +125,16 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Inter", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Helllo Design Language: Geist for display typography */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: "Geist", "Inter", system-ui, sans-serif;
+    letter-spacing: -0.02em;
   }
 }

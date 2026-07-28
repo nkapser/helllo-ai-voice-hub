@@ -8,9 +8,9 @@ import { useCountUp, useInView } from "../lib/hooks";
 
 const channels = [
   { label: "WhatsApp", value: 38, cls: "bg-[var(--rev-green)]" },
-  { label: "Voice", value: 27, cls: "bg-[#111111]" },
-  { label: "Email", value: 21, cls: "bg-[#c9c9c0]" },
-  { label: "Web", value: 14, cls: "bg-[#e7e7e0]" },
+  { label: "Voice", value: 27, cls: "bg-[#1F2937]" },
+  { label: "Email", value: 21, cls: "bg-[#94A3B8]" },
+  { label: "Web", value: 14, cls: "bg-[#CBD5E1]" },
 ];
 
 const kpis = [
@@ -41,12 +41,12 @@ const DashboardIllustration = () => {
         className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(60%_60%_at_70%_30%,rgba(159,234,40,0.18),transparent_70%)]"
       />
 
-      <div className="rev-card relative overflow-hidden !rounded-[1.5rem] shadow-[0_40px_80px_-40px_rgba(17,17,17,0.25)]">
+      <div className="rev-card relative overflow-hidden !rounded-[1.5rem] shadow-[0_40px_80px_-40px_rgba(15,23,42,0.25)]">
         {/* window chrome */}
         <div className="flex items-center gap-2 border-b border-[var(--rev-hairline)] px-5 py-3">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#e7e7e0]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[#e7e7e0]" />
-          <span className="h-2.5 w-2.5 rounded-full bg-[var(--rev-green)]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
           <span className="rev-mono ml-3 text-[10px] text-[var(--rev-ink-50)]">
             app.revengg.ai / revenue
           </span>
@@ -86,7 +86,7 @@ const DashboardIllustration = () => {
                 </linearGradient>
               </defs>
               {[24, 56, 88].map((y) => (
-                <line key={y} x1="0" y1={y} x2="320" y2={y} stroke="#EFEFEA" strokeWidth="1" />
+                <line key={y} x1="0" y1={y} x2="320" y2={y} stroke="#E2E8F0" strokeWidth="1" />
               ))}
               <path
                 d="M0 96 C30 92 44 84 62 82 C84 79 92 68 116 66 C140 64 150 52 176 50 C202 48 212 40 238 34 C260 29 282 22 320 12 L320 120 L0 120 Z"
@@ -97,13 +97,13 @@ const DashboardIllustration = () => {
               <path
                 d="M0 96 C30 92 44 84 62 82 C84 79 92 68 116 66 C140 64 150 52 176 50 C202 48 212 40 238 34 C260 29 282 22 320 12"
                 fill="none"
-                stroke="#111111"
+                stroke="#1F2937"
                 strokeWidth="2"
                 strokeLinecap="round"
                 className="rev-draw"
                 style={{ "--rev-draw-len": "420" } as React.CSSProperties}
               />
-              <circle cx="320" cy="12" r="3.5" fill="#9FEA28" stroke="#111111" strokeWidth="1.5" />
+              <circle cx="320" cy="12" r="3.5" fill="#9FEA28" stroke="#1F2937" strokeWidth="1.5" />
               <circle cx="320" cy="12" r="8" fill="#9FEA28" opacity="0.25" className="rev-pulse" />
             </svg>
             <div className="rev-mono mt-1 flex justify-between text-[9px] text-[var(--rev-ink-30)]">
@@ -118,7 +118,7 @@ const DashboardIllustration = () => {
               <p className="rev-mono text-[10px] text-[var(--rev-ink-50)]">Repeat Purchase Rate</p>
               <div className="mt-2 flex items-center gap-3">
                 <svg viewBox="0 0 44 44" className="h-12 w-12 -rotate-90" aria-hidden="true">
-                  <circle cx="22" cy="22" r="18" fill="none" stroke="#EFEFEA" strokeWidth="6" />
+                  <circle cx="22" cy="22" r="18" fill="none" stroke="#E2E8F0" strokeWidth="6" />
                   <circle
                     cx="22" cy="22" r="18" fill="none" stroke="#9FEA28" strokeWidth="6"
                     strokeLinecap="round"
@@ -142,7 +142,7 @@ const DashboardIllustration = () => {
                     <span className="w-16 text-[11px] font-medium text-[var(--rev-ink-70)]">
                       {c.label}
                     </span>
-                    <span className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-[#F1F1EB]">
+                    <span className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-[#F1F5F9]">
                       <span
                         className={`absolute inset-y-0 left-0 rounded-full ${c.cls} ${inView ? "rev-active rev-grow-x" : "scale-x-0"}`}
                         style={{ width: `${c.value * 2.4}%`, "--rev-d": `${300 + i * 120}ms` } as React.CSSProperties}
@@ -167,7 +167,7 @@ const DashboardIllustration = () => {
       </div>
 
       {/* floating agent chip */}
-      <div className="rev-card absolute -left-4 -bottom-5 hidden items-center gap-2.5 !rounded-full px-4 py-2.5 shadow-[0_20px_40px_-20px_rgba(17,17,17,0.35)] sm:flex">
+      <div className="rev-card absolute -left-4 -bottom-5 hidden items-center gap-2.5 !rounded-full px-4 py-2.5 shadow-[0_20px_40px_-20px_rgba(15,23,42,0.35)] sm:flex">
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[var(--rev-ink)]">
           <Radio className="h-3.5 w-3.5 text-[var(--rev-green)]" aria-hidden="true" />
         </span>

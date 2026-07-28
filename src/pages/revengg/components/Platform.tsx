@@ -123,7 +123,10 @@ const Platform = () => {
   return (
     <section id="platform" className="relative z-10 mt-16 lg:mt-24">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
-        <p className="rev-eyebrow">The Platform</p>
+        <p className="rev-eyebrow">
+          <span className="rev-eyebrow-idx">[01]</span>
+          <span>The Platform</span>
+        </p>
         <h2 className="rev-display mt-3 max-w-2xl text-4xl md:text-5xl">
           Revenue Engineering,{" "}
           <span className="italic text-[var(--rev-green-deep)]">end to end.</span>
@@ -157,7 +160,7 @@ const Platform = () => {
                     onClick={() => jumpTo(i)}
                     className={`rev-feature-card relative w-full cursor-pointer rounded-2xl border px-5 py-3.5 text-left ${
                       isActive
-                        ? "border-[var(--rev-ink)] bg-[var(--rev-surface)] shadow-[0_16px_40px_-24px_rgba(17,17,17,0.3)]"
+                        ? "border-[var(--rev-green-ember)] bg-[var(--rev-surface)] shadow-[0_16px_40px_-24px_rgba(101,163,13,0.35)]"
                         : "border-[var(--rev-hairline)] bg-transparent hover:bg-[var(--rev-surface)]"
                     }`}
                   >
@@ -165,7 +168,7 @@ const Platform = () => {
                     <span className="flex items-center gap-3.5">
                       <span
                         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
-                          isActive ? "bg-[var(--rev-green)]" : "bg-[#F1F1EB]"
+                          isActive ? "bg-[var(--rev-green)]" : "bg-[#F1F5F9]"
                         }`}
                       >
                         <f.icon className="h-[18px] w-[18px] text-[var(--rev-ink)]" aria-hidden="true" />
