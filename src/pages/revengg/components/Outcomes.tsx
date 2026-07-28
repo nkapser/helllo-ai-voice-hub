@@ -36,7 +36,7 @@ const Outcomes = () => {
   const { ref: ctaRef, inView: ctaIn } = useInView<HTMLDivElement>(0.25);
 
   return (
-    <section id="outcomes" className="relative z-10 mt-24 px-5 pb-10 md:px-8 lg:mt-10">
+    <section id="outcomes" className="relative z-10 mt-24 scroll-mt-24 px-5 pb-10 md:px-8 lg:mt-10">
       <div
         ref={ref}
         className={`rev-reveal ${inView ? "rev-in" : ""} mx-auto max-w-7xl`}

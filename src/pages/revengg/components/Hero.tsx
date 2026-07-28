@@ -12,10 +12,10 @@ const Hero = () => {
   const { ref, inView } = useInView<HTMLDivElement>(0.1);
 
   return (
-    <section className="relative z-10 px-5 pt-20 md:px-8 lg:pt-24">
+    <section className="relative z-10 px-5 pt-16 md:px-8 lg:pt-20">
       <div
         ref={ref}
-        className={`rev-reveal ${inView ? "rev-in" : ""} mx-auto grid max-w-7xl items-center gap-14 lg:min-h-[calc(100vh-7rem)] lg:grid-cols-12 lg:gap-10`}
+        className={`rev-reveal ${inView ? "rev-in" : ""} mx-auto grid max-w-7xl items-center gap-14 lg:min-h-[calc(100vh-6rem)] lg:grid-cols-12 lg:gap-10`}
       >
         {/* Left — message */}
         <div className="lg:col-span-5">
