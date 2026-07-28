@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { setSEO } from "@/lib/seo";
+import { REVENGG_SEO, getRevEnggStructuredData } from "@/lib/revengg-seo";
 import "./revengg.css";
 import SignalField from "./components/SignalField";
 import Nav from "./components/Nav";
@@ -12,16 +13,8 @@ import RevFooter from "./components/RevFooter";
 const RevEnggPage = () => {
   useEffect(() => {
     setSEO({
-      title: "RevEngg — AI Revenue Engineering Platform for D2C Brands | helllo.ai",
-      description:
-        "Engineer every customer interaction into measurable revenue. RevEngg's AI agents discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
-      keywords:
-        "revenue engineering, AI revenue platform, D2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation",
-      canonical: "https://www.helllo.ai/",
-      ogUrl: "https://www.helllo.ai/",
-      ogTitle: "RevEngg — AI Revenue Engineering Platform for D2C Brands",
-      ogDescription:
-        "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
+      ...REVENGG_SEO,
+      structuredData: getRevEnggStructuredData(),
     });
     document.documentElement.lang = "en";
   }, []);

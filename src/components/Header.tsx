@@ -172,6 +172,18 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-8" role="navigation" aria-label="Main navigation">
             <NavigationMenu>
               <NavigationMenuList>
+                {/* Home */}
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild>
+                    <a
+                      href="/"
+                      className="inline-flex h-10 items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                    >
+                      Home
+                    </a>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+
                 {/* Features Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>Features</NavigationMenuTrigger>
@@ -387,6 +399,15 @@ const Header = () => {
         {isMenuOpen && (
           <div id="mobile-menu" className="lg:hidden py-4 border-t border-border max-h-[80vh] overflow-y-auto" role="navigation" aria-label="Mobile navigation">
             <nav className="flex flex-col space-y-3">
+              {/* Mobile Home */}
+              <a
+                href="/"
+                className="mx-4 py-2 px-3 rounded-lg font-semibold text-sm text-foreground hover:bg-accent transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </a>
+
               {/* Mobile Features - Compact */}
               <div className="space-y-1">
                 <h3 className="font-semibold text-sm text-foreground px-4">Features</h3>

@@ -116,6 +116,12 @@ export default function Hero() {
           </a>
 
           <nav className="flex items-center gap-1 sm:gap-2" aria-label="Spark page sections">
+            <a
+              href="/"
+              className="rounded-md px-2 py-2 text-[13px] font-medium text-black/70 transition-colors hover:text-black sm:px-2.5"
+            >
+              Home
+            </a>
             {HERO_NAV_LINKS.map(({ label, href }) => (
               <a
                 key={href}

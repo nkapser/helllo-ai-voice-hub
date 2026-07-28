@@ -1,5 +1,30 @@
 import { createPricingRegionResponse } from "@/lib/pricing-region-server";
-import { isBotUserAgent, patchSparkIndexHtml } from "@/lib/spark-seo";
+import { isBotUserAgent } from "@/lib/seo";
+import { patchSparkIndexHtml } from "@/lib/spark-seo";
+import { patchRevEnggIndexHtml } from "@/lib/revengg-seo";
+import { patchHellloIndexHtml } from "@/lib/helllo-seo";
+
+// This is a client-rendered SPA: every route serves the same index.html,
+// and only client-side JS (setSEO, see src/lib/seo.ts) corrects the
+// title/description/OG/JSON-LD per page. Bots and social-preview
+// scrapers that don't execute JS (GPTBot, ClaudeBot, PerplexityBot,
+// facebookexternalhit, Twitterbot, LinkedInBot, WhatsApp, …) would
+// otherwise see the same generic tags no matter which product page
+// they requested. We detect those bots here and rewrite index.html
+// with the correct per-route SEO before returning it — one patcher per
+// product route, matched by path.
+const ROUTE_PATCHERS: Record<string, (html: string) => string> = {
+  "/": patchRevEnggIndexHtml,
+  "/helllo": patchHellloIndexHtml,
+  "/spark": patchSparkIndexHtml,
+};
+
+function resolvePatcher(pathname: string): ((html: string) => string) | undefined {
+  const normalized = pathname.endsWith("/") && pathname !== "/"
+    ? pathname.slice(0, -1)
+    : pathname;
+  return ROUTE_PATCHERS[normalized];
+}
 
 async function serveIndexHtml(
   assets: { fetch: (input: RequestInfo | URL) => Promise<Response> },
@@ -8,14 +33,11 @@ async function serveIndexHtml(
 ): Promise<Response> {
   const indexUrl = new URL("/index.html", url.origin);
   const indexResponse = await assets.fetch(indexUrl);
-  const path = url.pathname;
+  const patch = resolvePatcher(url.pathname);
 
-  if (
-    (path === "/spark" || path === "/spark/") &&
-    isBotUserAgent(request.headers.get("user-agent"))
-  ) {
+  if (patch && isBotUserAgent(request.headers.get("user-agent"))) {
     const html = await indexResponse.text();
-    return new Response(patchSparkIndexHtml(html), {
+    return new Response(patch(html), {
       status: indexResponse.status,
       headers: {
         "Content-Type": "text/html; charset=utf-8",

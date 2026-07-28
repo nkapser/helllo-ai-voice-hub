@@ -160,7 +160,7 @@ const Platform = () => {
                     onClick={() => jumpTo(i)}
                     className={`rev-feature-card relative w-full cursor-pointer rounded-2xl border px-5 py-3.5 text-left ${
                       isActive
-                        ? "border-[var(--rev-green-ember)] bg-[var(--rev-surface)] shadow-[0_16px_40px_-24px_rgba(101,163,13,0.35)]"
+                        ? "border-[var(--rev-green-ember)] bg-[var(--rev-surface)] shadow-[0_16px_40px_-24px_rgba(59,130,246,0.35)]"
                         : "border-[var(--rev-hairline)] bg-transparent hover:bg-[var(--rev-surface)]"
                     }`}
                   >

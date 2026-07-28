@@ -74,7 +74,7 @@ const Outcomes = () => {
                 key={i}
                 d={`M-40 ${300 - i * 60} C300 ${310 - i * 70}, 700 ${220 - i * 40}, 1240 ${140 - i * 30}`}
                 fill="none"
-                stroke={i === 1 ? "#9FEA28" : "#ffffff"}
+                stroke={i === 1 ? "#60A5FA" : "#ffffff"}
                 strokeWidth="1.5"
                 className={i === 1 ? "rev-flow" : undefined}
               />

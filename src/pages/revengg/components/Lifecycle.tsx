@@ -51,7 +51,7 @@ const Lifecycle = () => {
             <path
               d={PATH}
               fill="none"
-              stroke="#9FEA28"
+              stroke="#60A5FA"
               strokeWidth="2.5"
               strokeLinecap="round"
               className="rev-flow"
@@ -60,7 +60,7 @@ const Lifecycle = () => {
           )}
           {/* travelling dot */}
           {!reduced && inView && (
-            <circle r="4" fill="#9FEA28" stroke="#1F2937" strokeWidth="1.5">
+            <circle r="4" fill="#60A5FA" stroke="#1F2937" strokeWidth="1.5">
               <animateMotion dur="6s" repeatCount="indefinite" path={PATH} />
             </circle>
           )}
@@ -71,7 +71,7 @@ const Lifecycle = () => {
             const y = ys[i];
             return (
               <g key={s.label} className="rev-pop" style={{ "--rev-d": `${i * 140}ms` } as React.CSSProperties}>
-                <circle cx={s.x} cy={y} r="10" fill="#9FEA28" opacity="0.18" className={!reduced ? "rev-pulse" : undefined} />
+                <circle cx={s.x} cy={y} r="10" fill="#60A5FA" opacity="0.18" className={!reduced ? "rev-pulse" : undefined} />
                 <circle cx={s.x} cy={y} r="5" fill="#F8FAFC" stroke="#1F2937" strokeWidth="2" />
                 <text
                   x={s.x}

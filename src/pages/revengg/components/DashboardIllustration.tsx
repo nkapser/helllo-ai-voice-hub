@@ -38,7 +38,7 @@ const DashboardIllustration = () => {
       {/* soft green glow behind the app frame */}
       <div
         aria-hidden="true"
-        className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(60%_60%_at_70%_30%,rgba(159,234,40,0.18),transparent_70%)]"
+        className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(60%_60%_at_70%_30%,rgba(96,165,250,0.2),transparent_70%)]"
       />
 
       <div className="rev-card relative overflow-hidden !rounded-[1.5rem] shadow-[0_40px_80px_-40px_rgba(15,23,42,0.25)]">
@@ -81,8 +81,8 @@ const DashboardIllustration = () => {
             >
               <defs>
                 <linearGradient id="revArea" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#9FEA28" stopOpacity="0.35" />
-                  <stop offset="100%" stopColor="#9FEA28" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.35" />
+                  <stop offset="100%" stopColor="#60A5FA" stopOpacity="0" />
                 </linearGradient>
               </defs>
               {[24, 56, 88].map((y) => (
@@ -103,8 +103,8 @@ const DashboardIllustration = () => {
                 className="rev-draw"
                 style={{ "--rev-draw-len": "420" } as React.CSSProperties}
               />
-              <circle cx="320" cy="12" r="3.5" fill="#9FEA28" stroke="#1F2937" strokeWidth="1.5" />
-              <circle cx="320" cy="12" r="8" fill="#9FEA28" opacity="0.25" className="rev-pulse" />
+              <circle cx="320" cy="12" r="3.5" fill="#60A5FA" stroke="#1F2937" strokeWidth="1.5" />
+              <circle cx="320" cy="12" r="8" fill="#60A5FA" opacity="0.25" className="rev-pulse" />
             </svg>
             <div className="rev-mono mt-1 flex justify-between text-[9px] text-[var(--rev-ink-30)]">
               <span>Jan</span><span>Mar</span><span>May</span><span>Jul</span>
@@ -120,7 +120,7 @@ const DashboardIllustration = () => {
                 <svg viewBox="0 0 44 44" className="h-12 w-12 -rotate-90" aria-hidden="true">
                   <circle cx="22" cy="22" r="18" fill="none" stroke="#E2E8F0" strokeWidth="6" />
                   <circle
-                    cx="22" cy="22" r="18" fill="none" stroke="#9FEA28" strokeWidth="6"
+                    cx="22" cy="22" r="18" fill="none" stroke="#60A5FA" strokeWidth="6"
                     strokeLinecap="round"
                     strokeDasharray="113"
                     strokeDashoffset={113 - (113 * repeat) / 100}

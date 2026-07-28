@@ -5,6 +5,7 @@ import {
   generateOfferCatalogSchema,
   generateSoftwareApplicationSchema,
   generateWebPageSchema,
+  patchIndexHtmlSEO,
   type SEOData,
 } from "@/lib/seo";
 
@@ -199,91 +200,26 @@ export function getSparkStructuredData(): Record<string, unknown>[] {
   ];
 }
 
-const BOT_USER_AGENT =
-  /bot|crawler|spider|facebookexternalhit|twitterbot|linkedinbot|slackbot|whatsapp|telegram|discord|embedly|preview|gptbot|chatgpt-user|claudebot|anthropic-ai|perplexitybot|google-extended|bingpreview/i;
-
-export function isBotUserAgent(userAgent: string | null): boolean {
-  return BOT_USER_AGENT.test(userAgent ?? "");
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-function replaceMetaContent(
-  html: string,
-  attribute: "name" | "property",
-  key: string,
-  content: string,
-): string {
-  const pattern = new RegExp(
-    `(<meta\\s+${attribute}="${key}"\\s+content=")[^"]*("\\s*/?>)`,
-    "i",
-  );
-  if (pattern.test(html)) {
-    return html.replace(pattern, `$1${escapeHtml(content)}$2`);
-  }
-  return html;
-}
-
-function replaceLinkHref(html: string, rel: string, href: string): string {
-  const pattern = new RegExp(`(<link\\s+rel="${rel}"\\s+href=")[^"]*(")`, "i");
-  if (pattern.test(html)) {
-    return html.replace(pattern, `$1${escapeHtml(href)}$2`);
-  }
-  return html;
-}
-
-/** Patch index.html meta tags for Spark crawlers that do not execute client-side JS. */
+/** Patch index.html meta tags + JSON-LD for Spark crawlers that don't execute client-side JS. */
 export function patchSparkIndexHtml(html: string): string {
-  let patched = html.replace(
-    /<title>[^<]*<\/title>/i,
-    `<title>${escapeHtml(SPARK_SEO.title!)}</title>`,
+  return patchIndexHtmlSEO(
+    html,
+    {
+      title: SPARK_SEO.title!,
+      description: SPARK_SEO.description!,
+      keywords: SPARK_SEO.keywords!,
+      canonical: SPARK_SEO.canonical!,
+      ogType: SPARK_SEO.ogType!,
+      ogUrl: SPARK_SEO.ogUrl!,
+      ogTitle: SPARK_SEO.ogTitle!,
+      ogDescription: SPARK_SEO.ogDescription!,
+      ogImage: SPARK_SEO.ogImage!,
+      ogImageAlt: SPARK_SEO.ogImageAlt!,
+      twitterCard: SPARK_SEO.twitterCard!,
+      twitterTitle: SPARK_SEO.twitterTitle!,
+      twitterDescription: SPARK_SEO.twitterDescription!,
+      twitterImage: SPARK_SEO.twitterImage!,
+    },
+    getSparkStructuredData(),
   );
-
-  patched = replaceMetaContent(patched, "name", "title", SPARK_SEO.title!);
-  patched = replaceMetaContent(patched, "name", "description", SPARK_SEO.description!);
-  patched = replaceMetaContent(patched, "name", "keywords", SPARK_SEO.keywords!);
-  patched = replaceLinkHref(patched, "canonical", SPARK_SEO.canonical!);
-
-  patched = replaceMetaContent(patched, "property", "og:type", SPARK_SEO.ogType!);
-  patched = replaceMetaContent(patched, "property", "og:url", SPARK_SEO.ogUrl!);
-  patched = replaceMetaContent(patched, "property", "og:title", SPARK_SEO.ogTitle!);
-  patched = replaceMetaContent(
-    patched,
-    "property",
-    "og:description",
-    SPARK_SEO.ogDescription!,
-  );
-  patched = replaceMetaContent(patched, "property", "og:image", SPARK_SEO.ogImage!);
-  patched = replaceMetaContent(patched, "property", "og:image:alt", SPARK_SEO.ogImageAlt!);
-  patched = replaceMetaContent(patched, "property", "twitter:card", SPARK_SEO.twitterCard!);
-  patched = replaceMetaContent(patched, "property", "twitter:url", SPARK_SEO.ogUrl!);
-  patched = replaceMetaContent(patched, "property", "twitter:title", SPARK_SEO.twitterTitle!);
-  patched = replaceMetaContent(
-    patched,
-    "property",
-    "twitter:description",
-    SPARK_SEO.twitterDescription!,
-  );
-  patched = replaceMetaContent(patched, "property", "twitter:image", SPARK_SEO.twitterImage!);
-  patched = replaceMetaContent(
-    patched,
-    "property",
-    "twitter:image:alt",
-    SPARK_SEO.ogImageAlt!,
-  );
-
-  const structuredDataScripts = getSparkStructuredData()
-    .map(
-      (schema) =>
-        `<script type="application/ld+json" data-spark-seo="true">${JSON.stringify(schema)}</script>`,
-    )
-    .join("\n    ");
-
-  return patched.replace("</head>", `    ${structuredDataScripts}\n  </head>`);
 }

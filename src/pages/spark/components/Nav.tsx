@@ -20,6 +20,12 @@ export default function Nav() {
 
         <div className="flex items-center gap-2 sm:gap-4">
           <a
+            href="/"
+            className="text-sm spark-text-muted transition-colors hover:text-[hsl(215_28%_17%)]"
+          >
+            Home
+          </a>
+          <a
             href="https://www.helllo.ai"
             className="hidden text-sm spark-text-muted transition-colors hover:text-[hsl(215_28%_17%)] sm:inline"
           >

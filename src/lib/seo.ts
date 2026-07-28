@@ -22,20 +22,28 @@ export interface SEOData {
   structuredData?: Record<string, any>[];
 }
 
+// RevEngg now lives at the root domain — this is the fallback baseline
+// used whenever a page doesn't fully override SEO data. Helllo Voice and
+// Spark always pass their own complete SEOData (see helllo-seo.ts /
+// spark-seo.ts) so they never fall through to these values.
+export const REVENGG_OG_IMAGE =
+  "https://ik.imagekit.io/ise7sbyg9/Screenshot%202026-07-28%20at%2021.30.12.png?tr=f-webp,q-auto";
+
 const defaultSEO: SEOData = {
-  title: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
-  description: "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge your customer experience with intelligent voice automation. Easy setup, CRM integration, and multi-language support. Start your free trial today.",
-  keywords: "AI voice agents, agentic flows, customer experience automation, voice AI orchestration, production-ready AI agents, intelligent voice automation, CRM integration, multi-language support, agentic AI, voice agent platform",
+  title: "RevEngg — AI Revenue Engineering Platform for D2C Brands | Helllo.ai",
+  description: "Engineer every customer interaction into measurable revenue. RevEngg's AI agents discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
+  keywords: "revenue engineering, AI revenue platform, D2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation",
   canonical: "https://www.helllo.ai/",
-  ogTitle: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
-  ogDescription: "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge your customer experience with intelligent voice automation. Start your free trial today.",
-  ogImage: "https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto",
+  ogTitle: "RevEngg — AI Revenue Engineering Platform for D2C Brands",
+  ogDescription: "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
+  ogImage: REVENGG_OG_IMAGE,
+  ogImageAlt: "RevEngg — AI Revenue Engineering Platform dashboard",
   ogType: "website",
   ogUrl: "https://www.helllo.ai/",
   twitterCard: "summary_large_image",
-  twitterTitle: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
-  twitterDescription: "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge your customer experience with intelligent voice automation.",
-  twitterImage: "https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto",
+  twitterTitle: "RevEngg — AI Revenue Engineering Platform for D2C Brands",
+  twitterDescription: "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
+  twitterImage: REVENGG_OG_IMAGE,
   noindex: false,
 };
 
@@ -71,18 +79,24 @@ function updateLinkTag(rel: string, href: string, attributes?: Record<string, st
 }
 
 /**
- * Updates structured data (JSON-LD)
+ * Updates structured data (JSON-LD).
+ *
+ * Only scripts tagged `data-route-seo="true"` are touched — the static
+ * schema baked into index.html (Organization, WebSite) is left alone.
+ * Route-specific scripts are cleared before re-adding so client-side
+ * navigation between pages never accumulates stale/duplicate JSON-LD
+ * (which would otherwise confuse crawlers and AI answer engines reading
+ * the live DOM).
  */
 function updateStructuredData(data: Record<string, any>[]): void {
-  // Remove existing structured data scripts (optional - you may want to keep some)
-  const existingScripts = document.querySelectorAll('script[type="application/ld+json"]');
-  // Keep first 3 scripts (Organization, WebSite, SoftwareApplication from index.html)
-  // Remove only dynamically added ones if needed
-  
-  // Add new structured data
+  document
+    .querySelectorAll('script[data-route-seo="true"]')
+    .forEach((el) => el.remove());
+
   data.forEach((schema) => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
+    script.dataset.routeSeo = "true";
     script.textContent = JSON.stringify(schema);
     document.head.appendChild(script);
   });
@@ -340,6 +354,123 @@ export function generateFAQSchema(faqs: Array<{ question: string; answer: string
       },
     })),
   };
+}
+
+/* ────────────────────────────────────────────────────────────────
+ * Bot-facing static-HTML patching (GEO)
+ *
+ * The site is a client-rendered SPA — real browsers and JS-executing
+ * crawlers (Googlebot, Bingbot) get correct per-route SEO via setSEO()
+ * above. But social-preview scrapers and most AI/LLM crawlers
+ * (GPTBot, ClaudeBot, PerplexityBot, facebookexternalhit, Twitterbot,
+ * LinkedInBot, WhatsApp, …) fetch index.html and never run JS, so they
+ * only ever see whatever is baked into the static file. The Cloudflare
+ * Worker (src/index.ts) detects these bots and rewrites index.html
+ * per-route using the helpers below before returning it.
+ * ──────────────────────────────────────────────────────────────── */
+
+export const BOT_USER_AGENT =
+  /bot|crawler|spider|facebookexternalhit|twitterbot|linkedinbot|slackbot|whatsapp|telegram|discord|embedly|preview|gptbot|chatgpt-user|claudebot|anthropic-ai|perplexitybot|google-extended|bingpreview/i;
+
+export function isBotUserAgent(userAgent: string | null): boolean {
+  return BOT_USER_AGENT.test(userAgent ?? "");
+}
+
+export function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+export function replaceMetaContent(
+  html: string,
+  attribute: "name" | "property",
+  key: string,
+  content: string,
+): string {
+  const pattern = new RegExp(
+    `(<meta\\s+${attribute}="${key}"\\s+content=")[^"]*("\\s*/?>)`,
+    "i",
+  );
+  if (pattern.test(html)) {
+    return html.replace(pattern, `$1${escapeHtml(content)}$2`);
+  }
+  return html;
+}
+
+export function replaceLinkHref(html: string, rel: string, href: string): string {
+  const pattern = new RegExp(`(<link\\s+rel="${rel}"\\s+href=")[^"]*(")`, "i");
+  if (pattern.test(html)) {
+    return html.replace(pattern, `$1${escapeHtml(href)}$2`);
+  }
+  return html;
+}
+
+/**
+ * Patches every crawler-relevant tag in index.html for one route, then
+ * appends the route's JSON-LD (tagged `data-route-seo` so it's easy to
+ * spot in a view-source diff). Shared by every product's *-seo.ts module.
+ */
+export function patchIndexHtmlSEO(
+  html: string,
+  seo: Required<
+    Pick<
+      SEOData,
+      | "title"
+      | "description"
+      | "keywords"
+      | "canonical"
+      | "ogType"
+      | "ogUrl"
+      | "ogTitle"
+      | "ogDescription"
+      | "ogImage"
+      | "ogImageAlt"
+      | "twitterCard"
+      | "twitterTitle"
+      | "twitterDescription"
+      | "twitterImage"
+    >
+  >,
+  structuredData: Record<string, any>[] = [],
+): string {
+  let patched = html.replace(
+    /<title>[^<]*<\/title>/i,
+    `<title>${escapeHtml(seo.title)}</title>`,
+  );
+
+  patched = replaceMetaContent(patched, "name", "title", seo.title);
+  patched = replaceMetaContent(patched, "name", "description", seo.description);
+  patched = replaceMetaContent(patched, "name", "keywords", seo.keywords);
+  patched = replaceLinkHref(patched, "canonical", seo.canonical);
+
+  patched = replaceMetaContent(patched, "property", "og:type", seo.ogType);
+  patched = replaceMetaContent(patched, "property", "og:url", seo.ogUrl);
+  patched = replaceMetaContent(patched, "property", "og:title", seo.ogTitle);
+  patched = replaceMetaContent(patched, "property", "og:description", seo.ogDescription);
+  patched = replaceMetaContent(patched, "property", "og:image", seo.ogImage);
+  patched = replaceMetaContent(patched, "property", "og:image:alt", seo.ogImageAlt);
+
+  patched = replaceMetaContent(patched, "property", "twitter:card", seo.twitterCard);
+  patched = replaceMetaContent(patched, "property", "twitter:url", seo.ogUrl);
+  patched = replaceMetaContent(patched, "property", "twitter:title", seo.twitterTitle);
+  patched = replaceMetaContent(patched, "property", "twitter:description", seo.twitterDescription);
+  patched = replaceMetaContent(patched, "property", "twitter:image", seo.twitterImage);
+  patched = replaceMetaContent(patched, "property", "twitter:image:alt", seo.ogImageAlt);
+
+  if (structuredData.length > 0) {
+    const scripts = structuredData
+      .map(
+        (schema) =>
+          `<script type="application/ld+json" data-route-seo="true">${JSON.stringify(schema)}</script>`,
+      )
+      .join("\n    ");
+    patched = patched.replace("</head>", `    ${scripts}\n  </head>`);
+  }
+
+  return patched;
 }
 
 /**

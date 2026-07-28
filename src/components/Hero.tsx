@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import WavyHeroBackground from "@/components/WavyHeroBackground";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -364,9 +365,10 @@ const Hero = () => {
       `}</style>
       <section 
         id="home" 
-        className="relative pt-16 pb-8 lg:pt-20 lg:pb-10 bg-background overflow-hidden min-h-screen flex flex-col snap-start" 
+        className="relative pt-16 pb-8 lg:pt-20 lg:pb-10 bg-background overflow-hidden min-h-screen flex flex-col snap-start"
         role="banner"
       >
+      <WavyHeroBackground />
       <div className="container mx-auto px-4 lg:px-8 relative z-10 flex-1 flex flex-col justify-center">
         <div className="max-w-5xl mx-auto text-center flex-1 flex flex-col justify-center">
           {/* Main Headline */}

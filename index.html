@@ -48,10 +48,10 @@
     <meta property="og:url" content="https://www.helllo.ai/" />
     <meta property="og:title" content="RevEngg — AI Revenue Engineering Platform for D2C Brands | Helllo.ai" />
     <meta property="og:description" content="Engineer every customer interaction into measurable revenue. AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web." />
-    <meta property="og:image" content="https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto" />
+    <meta property="og:image" content="https://ik.imagekit.io/ise7sbyg9/Screenshot%202026-07-28%20at%2021.30.12.png?tr=f-webp,q-auto" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="AI Voice Technology for Business" />
+    <meta property="og:image:alt" content="RevEngg — AI Revenue Engineering Platform dashboard" />
     <meta property="og:site_name" content="Helllo.ai" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="en_IN" />
@@ -62,8 +62,8 @@
     <meta property="twitter:url" content="https://www.helllo.ai/" />
     <meta property="twitter:title" content="RevEngg — AI Revenue Engineering Platform for D2C Brands | Helllo.ai" />
     <meta property="twitter:description" content="Engineer every customer interaction into measurable revenue. AI agents across Voice, WhatsApp, Email and Web." />
-    <meta property="twitter:image" content="https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto" />
-    <meta property="twitter:image:alt" content="AI Voice Technology for Business" />
+    <meta property="twitter:image" content="https://ik.imagekit.io/ise7sbyg9/Screenshot%202026-07-28%20at%2021.30.12.png?tr=f-webp,q-auto" />
+    <meta property="twitter:image:alt" content="RevEngg — AI Revenue Engineering Platform dashboard" />
     <meta property="twitter:creator" content="@helllo_ai" />
     <meta property="twitter:site" content="@helllo_ai" />
     
@@ -106,7 +106,9 @@
     <link rel="manifest" href="/manifest.json" />
     
     <!-- Preload critical resources -->
-    <link rel="preload" href="https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto" as="image" />
+    <!-- Note: the OG/Twitter preview image is never rendered as a visible
+         <img> on any page, so it is not a preload candidate — preloading
+         an unused resource only wastes bandwidth on the critical path. -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//ik.imagekit.io" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -139,7 +141,12 @@
         "https://twitter.com/helllo_ai",
         "https://linkedin.com/company/helllo-ai"
       ],
-      "description": "Supercharge customer experience with AI voice agents and agentic flows. Production-ready voice automation platform powered by agentic orchestration.",
+      "description": "Helllo.ai builds AI products for customer experience and revenue growth: RevEngg, an autonomous revenue engineering platform for D2C e-commerce brands; Helllo Voice, production-ready AI voice agents; and Spark, an AI website assistant for SMBs.",
+      "brand": [
+        { "@type": "Brand", "name": "RevEngg", "url": "https://www.helllo.ai/" },
+        { "@type": "Brand", "name": "Helllo.ai Voice Agents", "url": "https://www.helllo.ai/helllo" },
+        { "@type": "Brand", "name": "Spark", "url": "https://www.helllo.ai/spark" }
+      ],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Bengaluru",
@@ -177,7 +184,7 @@
       "@type": "WebSite",
       "name": "Helllo.ai",
       "url": "https://www.helllo.ai",
-      "description": "Deploy and scale production-ready AI voice agents powered by agentic orchestration. Supercharge customer experience with intelligent voice automation.",
+      "description": "RevEngg — the autonomous revenue engineering platform for D2C e-commerce brands by Helllo.ai. Continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across every channel to maximise revenue.",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://www.helllo.ai/search?q={search_term_string}",
@@ -186,35 +193,35 @@
     }
     </script>
     
+    <!-- Note: this default SoftwareApplication block describes RevEngg,
+         the product served at this URL (/). It is overridden client-side
+         by setSEO() (src/lib/revengg-seo.ts) on every route, and rewritten
+         server-side for non-JS bots hitting /helllo or /spark by the
+         Cloudflare Worker (src/index.ts) using helllo-seo.ts / spark-seo.ts
+         respectively — so each product's crawlers see its own schema. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Helllo.ai Voice Agents",
+      "name": "RevEngg",
+      "alternateName": "RevEngg by Helllo.ai",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "Web",
-      "description": "Production-ready AI voice agents powered by agentic orchestration. Supercharge customer experience with intelligent voice automation, CRM integration, and multi-language support",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "description": "Free trial with 30 minutes monthly"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "127",
-        "bestRating": "5",
-        "worstRating": "1"
+      "description": "Autonomous Revenue Engineering Platform that continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across every channel to maximise revenue for D2C e-commerce brands.",
+      "url": "https://www.helllo.ai/",
+      "brand": {
+        "@type": "Brand",
+        "name": "Helllo.ai",
+        "url": "https://www.helllo.ai"
       },
       "featureList": [
-        "Agentic flows and orchestration",
-        "Production-ready AI voice agents",
-        "Customer experience automation",
-        "CRM integration",
-        "Multi-language support", 
-        "Enterprise-grade security",
-        "Real-time analytics"
+        "Lead discovery across every acquisition channel",
+        "AI creative intelligence for ad variants",
+        "Automatic lead enrichment with firmographic and behavioral data",
+        "AI qualification with buying-intent scoring",
+        "Contextual decision engine for next-best-action planning",
+        "Voice, WhatsApp, Email and Website conversation agents",
+        "Automatic CRM intelligence sync (HubSpot, Salesforce, Zoho, Freshsales, Pipedrive)"
       ]
     }
     </script>
@@ -240,7 +247,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      "serviceType": "AI Voice Agent Platform",
+      "serviceType": "Autonomous Revenue Engineering Platform",
       "provider": {
         "@type": "Organization",
         "name": "Helllo.ai",
@@ -250,32 +257,36 @@
         "@type": "Country",
         "name": "Worldwide"
       },
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "D2C e-commerce brands"
+      },
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "AI Voice Agent Services",
+        "name": "RevEngg Platform Services",
         "itemListElement": [
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "AI Voice Assistant",
-              "description": "Natural conversation handling with advanced AI"
+              "name": "Lead Discovery & Qualification",
+              "description": "AI-driven discovery, enrichment and buying-intent scoring across every acquisition channel"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "CRM Integration",
-              "description": "Seamless integration with popular CRM systems"
+              "name": "Conversation Agents",
+              "description": "Voice, WhatsApp, Email and Website AI agents that engage customers autonomously"
             }
           },
           {
             "@type": "Offer",
             "itemOffered": {
               "@type": "Service",
-              "name": "Multi-language Support",
-              "description": "Support for 25+ languages"
+              "name": "CRM Intelligence Sync",
+              "description": "Automatic structured updates to HubSpot, Salesforce, Zoho, Freshsales and Pipedrive"
             }
           }
         ]

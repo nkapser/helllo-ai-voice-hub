@@ -4,7 +4,7 @@
    RevEngg — Helllo Design Language (shared with /spark, /helllo)
    Neutrals: cool slate on hsl(210 40% 98%)
    Type: Geist (display) · Inter (body) · Geist Mono (labels)
-   Accent: RevEngg gothic green #9FEA28 (wordmark: Satoshi Black)
+   Accent: blue flavor #60A5FA→#3B82F6 (wordmark: Satoshi Black)
    Note: Geist/Inter/Geist Mono are loaded globally in index.html.
 ═══════════════════════════════════════════════════════════════ */
 
@@ -18,11 +18,12 @@
   --rev-ink-30: hsl(215 16% 47% / 0.45);
   --rev-hairline: hsl(214 32% 84%);
 
-  /* RevEngg accent */
-  --rev-green: #9fea28;
-  --rev-green-ember: #65a30d;
-  --rev-green-soft: rgba(159, 234, 40, 0.14);
-  --rev-green-deep: #4d7c0f; /* accessible green for small text on light */
+  /* RevEngg accent — BLUE FLAVOR (design-language-system blue, under review).
+     Legacy gothic-green values: #9fea28 / #65a30d / rgba(159,234,40,.14) / #4d7c0f */
+  --rev-green: #60a5fa;
+  --rev-green-ember: #3b82f6;
+  --rev-green-soft: rgba(96, 165, 250, 0.14);
+  --rev-green-deep: #1d4ed8; /* accessible blue for small text on light */
 
   /* type */
   --rev-font-display: "Geist", "Inter", system-ui, sans-serif;
@@ -43,11 +44,11 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.45;
   background:
-    radial-gradient(80% 50% at 50% -20%, rgba(159, 234, 40, 0.16), transparent),
-    radial-gradient(60% 40% at 100% 100%, rgba(147, 197, 253, 0.1), transparent),
-    radial-gradient(50% 35% at 0% 80%, rgba(224, 242, 254, 0.35), transparent);
+    radial-gradient(80% 50% at 50% -20%, rgba(147, 197, 253, 0.35), transparent),
+    radial-gradient(60% 40% at 100% 100%, rgba(96, 165, 250, 0.12), transparent),
+    radial-gradient(50% 35% at 0% 80%, rgba(224, 242, 254, 0.4), transparent);
 }
 
 .rev-grid {
@@ -151,20 +152,20 @@
   box-shadow: 0 12px 40px -8px rgba(15, 23, 42, 0.5);
 }
 
-/* accent CTA — the "spark gradient" pattern in RevEngg green */
+/* accent CTA — the spark gradient pattern (blue flavor) */
 .rev-btn-green {
-  background: linear-gradient(135deg, var(--rev-green) 0%, #86d616 100%);
-  color: #111111;
+  background: linear-gradient(135deg, var(--rev-green) 0%, var(--rev-green-ember) 100%);
+  color: #ffffff;
   box-shadow:
-    0 8px 32px -8px rgba(132, 204, 22, 0.45),
-    0 0 0 1px rgba(159, 234, 40, 0.4);
+    0 8px 32px -8px rgba(96, 165, 250, 0.35),
+    0 0 0 1px rgba(147, 197, 253, 0.4);
 }
 .rev-btn-green:hover {
   transform: translateY(-1px);
-  filter: brightness(1.04);
+  filter: brightness(1.05);
   box-shadow:
-    0 12px 40px -8px rgba(101, 163, 13, 0.5),
-    0 0 0 1px rgba(159, 234, 40, 0.5);
+    0 12px 40px -8px rgba(59, 130, 246, 0.45),
+    0 0 0 1px rgba(96, 165, 250, 0.5);
 }
 
 /* secondary */
@@ -211,8 +212,8 @@
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(159, 234, 40, 0.45) 30%,
-    rgba(101, 163, 13, 0.45) 70%,
+    rgba(96, 165, 250, 0.35) 30%,
+    rgba(59, 130, 246, 0.35) 70%,
     transparent 100%
   );
 }

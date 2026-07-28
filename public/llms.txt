@@ -1,11 +1,53 @@
 # Helllo.ai
 
-> Helllo.ai builds AI products for customer experience. Spark is our AI website assistant for SMBs — paste your URL, train on your site in ~30 seconds, embed with one script tag.
+> Helllo.ai builds AI products for customer experience and revenue growth. RevEngg is our autonomous revenue engineering platform for D2C e-commerce brands (the flagship product at helllo.ai). Spark is our AI website assistant for SMBs. Helllo Voice is our AI voice agent platform for enterprise customer experience.
 
 ## Products
 
+- [RevEngg — Autonomous Revenue Engineering Platform](https://www.helllo.ai/): Continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across Voice, WhatsApp, Email and Web to maximise revenue for D2C e-commerce brands.
 - [Spark — AI Website Assistant](https://www.helllo.ai/spark): Paste your URL, get an AI assistant trained on your site in 30 seconds, embed with one script tag. Answers questions by chat or voice, navigates visitors to the right page mid-conversation, and books meetings on Google Calendar, Calendly, or Cal.com. Free forever plan available.
-- [Helllo.ai Voice Agents](https://www.helllo.ai/): Production-ready AI voice agents with agentic orchestration for phone and customer experience automation.
+- [Helllo Voice — AI Voice Agents](https://www.helllo.ai/helllo): Production-ready AI voice agents with agentic orchestration for phone and customer experience automation. Enterprise-grade, CRM-integrated, multi-language.
+
+---
+
+## RevEngg — What It Is
+
+RevEngg is an AI Revenue Engineering platform built for D2C e-commerce brands. It runs the full customer lifecycle — Acquire, Qualify, Convert, Retain, Grow — as one continuous, autonomous loop, rather than a set of disconnected marketing and support tools.
+
+## RevEngg — How It Works
+
+1. **Lead Discovery** — finds high-intent customers across every acquisition channel: Facebook Ads, Google Ads, website visitors, organic search, WhatsApp leads, and marketplaces.
+2. **Creative Intelligence** — generates and tests ad creatives and campaign variations with AI, promoting winning variants automatically.
+3. **Lead Enrichment** — automatically appends firmographic and behavioral intelligence (company, revenue, industry, buying intent, location, social) to every lead.
+4. **Qualification** — scores every lead on context and buying intent, routing the hottest leads into a priority queue.
+5. **Planning** — a contextual decision engine (observe → reason → recommend → execute) picks the next best action per customer, using memory of past orders, conversations and browsing.
+6. **Conversation Agents** — Voice, WhatsApp, Email and Website AI agents engage customers autonomously, sharing one contextual memory across channels.
+7. **CRM Intelligence** — every interaction automatically updates the customer's CRM record with structured data.
+
+## RevEngg — Platform Features
+
+- Unified lead pipeline across 6+ acquisition channels
+- AI-generated ad creative variants with automatic winner promotion
+- Automatic lead enrichment (company, revenue, industry, intent, location, social)
+- AI lead scoring and priority-queue routing
+- Contextual decision engine for next-best-action planning
+- Voice, WhatsApp, Email, Website and SMS conversation agents sharing one memory
+- Automatic CRM sync: HubSpot, Salesforce, Zoho, Freshsales, Pipedrive
+
+## RevEngg — Key Facts
+
+- **Who it's for:** D2C e-commerce brands and the marketing/growth/CX teams that run them.
+- **Category:** Autonomous revenue engineering / AI-driven RevOps platform.
+- **Differentiators vs Klaviyo, Gorgias, HubSpot, and traditional marketing automation:** RevEngg runs the full lifecycle autonomously (discovery through retention) rather than automating a single channel; conversation agents share one contextual memory across Voice, WhatsApp, Email and Web; CRM updates are fully automatic and structured.
+- **Reported outcomes:** up to 45% more qualified leads, 60% faster lead response, 35% higher customer retention, 3x revenue growth, 90% automation rate, 24×7 always-on engagement.
+
+## RevEngg — Canonical URLs
+
+- Product page: https://www.helllo.ai/
+- Platform (feature deep-dive): https://www.helllo.ai/#platform
+- Outcomes: https://www.helllo.ai/#outcomes
+
+---
 
 ## Spark — What It Is
 
@@ -77,6 +119,34 @@ Yes. Fully responsive and touch-optimised — tap to chat, tap to talk, swipe to
 
 ### What happens when my free credits run out?
 The assistant stops responding until you upgrade or add credits. We email you before they run out.
+
+---
+
+## Helllo Voice — What It Is
+
+Helllo Voice is Helllo.ai's production-ready AI voice agent platform, powered by agentic orchestration, for enterprise customer experience automation over the phone and other voice channels.
+
+## Helllo Voice — Platform Features
+
+- Agentic flows and orchestration
+- Production-ready AI voice agents
+- Customer experience automation
+- CRM integration
+- Multi-language support
+- Enterprise-grade security
+- Real-time analytics
+
+## Helllo Voice — Key Facts
+
+- **Who it's for:** Businesses of all sizes needing voice-based customer experience automation.
+- **Setup:** Easy setup with CRM integration and multi-language support.
+- **Free trial:** 30 minutes monthly.
+
+## Helllo Voice — Canonical URLs
+
+- Product page: https://www.helllo.ai/helllo
+
+---
 
 ## Company
 

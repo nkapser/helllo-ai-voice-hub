@@ -115,7 +115,7 @@ const SignalField = () => {
         const alpha = Math.min(edge * 6, 1);
         ctx.beginPath();
         ctx.fillStyle = p.green
-          ? `rgba(120, 180, 30, ${0.28 * alpha})`
+          ? `rgba(59, 130, 246, ${0.28 * alpha})`
           : `rgba(30, 41, 59, ${0.14 * alpha})`;
         ctx.arc(x, y, p.size, 0, Math.PI * 2);
         ctx.fill();

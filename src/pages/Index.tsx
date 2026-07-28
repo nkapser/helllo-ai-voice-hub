@@ -14,6 +14,7 @@ import RecognitionShowcase from "@/components/RecognitionShowcase";
 import AgentChatWidget from "@/components/AgentChatWidget";
 import StartupRecognitionWidget from "@/components/StartupRecognitionWidget";
 import { setSEO } from "@/lib/seo";
+import { HELLLO_SEO, getHellloStructuredData } from "@/lib/helllo-seo";
 import { scrollToHash } from "@/lib/scroll";
 
 const Index = () => {
@@ -22,10 +23,8 @@ const Index = () => {
   // Update SEO meta tags for better search engine optimization
   useEffect(() => {
     setSEO({
-      title: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
-      description: "Enterprise-grade AI voice agents for businesses of all sizes. Deploy and scale production-ready voice automation powered by agentic orchestration. Easy setup, CRM integration, and multi-language support. Start your free trial today.",
-      canonical: "https://www.helllo.ai/helllo",
-      ogUrl: "https://www.helllo.ai/helllo",
+      ...HELLLO_SEO,
+      structuredData: getHellloStructuredData(),
     });
     
     // Ensure lang attribute is set

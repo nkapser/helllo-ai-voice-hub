@@ -1,7 +1,7 @@
 {
-  "name": "Helllo.ai - AI Voice Agents for Small Business",
-  "short_name": "Helllo.ai",
-  "description": "Transform your business with intelligent AI voice agents. Easy setup, seamless CRM integration, and multi-language support.",
+  "name": "RevEngg by Helllo.ai - AI Revenue Engineering Platform",
+  "short_name": "RevEngg",
+  "description": "Engineer every customer interaction into measurable revenue. AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
   "theme_color": "#3B82F6",
   "background_color": "#ffffff",
   "display": "standalone",
@@ -27,7 +27,7 @@
       "purpose": "any"
     }
   ],
-  "categories": ["business", "productivity", "communication"],
+  "categories": ["business", "productivity", "shopping"],
   "lang": "en",
   "dir": "ltr"
 } 

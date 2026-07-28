@@ -119,7 +119,7 @@ const DLS = () => {
               ["Light & luminous", "Cool slate neutrals on a near-white canvas. Aurora glows and dot grids stay under 5% prominence."],
               ["Product is the hero", "Custom SVG dashboards, diagrams and mockups — never stock imagery, robots or floating brains."],
               ["Motion means something", "Animation only narrates the product story: signals flow, numbers count, cards reveal. Nothing decorative."],
-              ["One accent per product", "Shared neutrals everywhere; Spark and Helllo speak blue, RevEngg speaks gothic green."],
+              ["One accent per product", "Shared neutrals everywhere; the family speaks blue. RevEngg is trialing the blue flavor — gothic green #9FEA28 is its legacy accent."],
             ].map(([t, b], i) => (
               <div key={t} className={`magic-card reveal rd${i + 1}`}>
                 <div className="magic-card-accent" />
@@ -143,8 +143,9 @@ const DLS = () => {
               </div>
               <p className="mt-4 text-sm font-medium spark-text-primary">RevEngg — route /</p>
               <p className="mt-1 text-[13px] leading-relaxed spark-text-muted">
-                Satoshi Black. "Rev" in near-black #111111, "Engg" in gothic green
-                #9FEA28, bold italic. The only place Satoshi appears.
+                Satoshi Black. "Rev" in near-black #111111, "Engg" in the product
+                accent, bold italic — currently the blue flavor under review
+                (legacy: gothic green #9FEA28). The only place Satoshi appears.
               </p>
             </div>
             <div className="glass reveal rd2 rounded-2xl p-7">
@@ -202,15 +203,16 @@ const DLS = () => {
               </p>
             </div>
             <div className="reveal rd2">
-              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] spark-text-muted">Green — RevEngg</p>
+              <p className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] spark-text-muted">Green — RevEngg legacy accent (page currently trialing blue)</p>
               <div className="grid grid-cols-3 gap-4">
                 <Swatch hex="#9fea28" name="Gothic green" value="#9FEA28" text="#111" />
                 <Swatch hex="#65a30d" name="Green ember" value="#65A30D" text="#fff" />
                 <Swatch hex="#4d7c0f" name="Green deep" value="#4D7C0F" text="#fff" />
               </div>
               <p className="mt-3 text-[13px] spark-text-muted">
-                CTA gradient: <code className="font-mono text-[11px]">135deg, #9FEA28 → #86D616</code> with
-                ink text. Small text on light always uses green deep (AA-safe).
+                Held in reserve while the blue flavor is reviewed. To restore: swap the
+                accent tokens in <code className="font-mono text-[11px]">revengg.css</code> back
+                to these values. Small green text on light always uses green deep (AA-safe).
               </p>
             </div>
           </div>
