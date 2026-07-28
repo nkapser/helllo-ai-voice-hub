@@ -1,0 +1,328 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900,901&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap");
+
+/* ------------------------------------------------------------------ */
+/*  RevEngg — design tokens (scoped to .rev-page)                      */
+/* ------------------------------------------------------------------ */
+
+.rev-page {
+  --rev-paper: #fbfbf9;
+  --rev-surface: #ffffff;
+  --rev-ink: #111111;
+  --rev-ink-70: rgba(17, 17, 17, 0.7);
+  --rev-ink-50: rgba(17, 17, 17, 0.5);
+  --rev-ink-30: rgba(17, 17, 17, 0.3);
+  --rev-green: #9fea28;
+  --rev-green-soft: rgba(159, 234, 40, 0.14);
+  --rev-green-deep: #4e7d0e; /* accessible green for small text on light */
+  --rev-hairline: #e7e7e0;
+  --rev-font-display: "Satoshi", "Inter", system-ui, sans-serif;
+  --rev-font-body: "Inter", system-ui, sans-serif;
+  --rev-font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
+
+  font-family: var(--rev-font-body);
+  background-color: var(--rev-paper);
+  color: var(--rev-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.rev-display {
+  font-family: var(--rev-font-display);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.rev-mono {
+  font-family: var(--rev-font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Eyebrow label */
+.rev-eyebrow {
+  font-family: var(--rev-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rev-ink-70);
+}
+
+/* Wordmark */
+.rev-wordmark {
+  font-family: var(--rev-font-display);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.rev-wordmark .rev-wm-rev {
+  color: var(--rev-ink);
+}
+.rev-wordmark .rev-wm-engg {
+  color: var(--rev-green);
+  font-style: italic;
+  padding-right: 0.06em; /* italic overhang */
+}
+.rev-wordmark .rev-wm-dot {
+  color: var(--rev-ink);
+}
+
+/* Buttons */
+.rev-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--rev-font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  border-radius: 9999px;
+  padding: 0.875rem 1.75rem;
+  min-height: 48px;
+  cursor: pointer;
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+  will-change: transform;
+}
+.rev-btn:focus-visible {
+  outline: 2px solid var(--rev-ink);
+  outline-offset: 3px;
+}
+.rev-btn-primary {
+  background: var(--rev-ink);
+  color: #ffffff;
+}
+.rev-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -12px rgba(17, 17, 17, 0.5);
+}
+.rev-btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+.rev-btn-green {
+  background: var(--rev-green);
+  color: var(--rev-ink);
+}
+.rev-btn-green:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -14px rgba(159, 234, 40, 0.9);
+}
+.rev-btn-green:active {
+  transform: translateY(0) scale(0.98);
+}
+.rev-btn-ghost {
+  background: transparent;
+  color: var(--rev-ink);
+  border: 1px solid var(--rev-hairline);
+}
+.rev-btn-ghost:hover {
+  border-color: var(--rev-ink-30);
+  background: var(--rev-surface);
+  transform: translateY(-2px);
+}
+.rev-btn-ghost-light {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+.rev-btn-ghost-light:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Cards */
+.rev-card {
+  background: var(--rev-surface);
+  border: 1px solid var(--rev-hairline);
+  border-radius: 1.25rem;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reveal-on-scroll                                                   */
+/* ------------------------------------------------------------------ */
+.rev-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms cubic-bezier(0.2, 0.65, 0.25, 1), transform 700ms cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.rev-reveal.rev-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Keyframes (product-story motion only)                              */
+/* ------------------------------------------------------------------ */
+
+/* signal travelling along a dashed path */
+@keyframes rev-dash-flow {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+.rev-flow {
+  stroke-dasharray: 6 8;
+  animation: rev-dash-flow 4s linear infinite;
+}
+.rev-flow-slow {
+  stroke-dasharray: 4 10;
+  animation: rev-dash-flow 7s linear infinite;
+}
+
+/* line draw-in */
+@keyframes rev-draw {
+  from {
+    stroke-dashoffset: var(--rev-draw-len, 600);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.rev-draw {
+  stroke-dasharray: var(--rev-draw-len, 600);
+  stroke-dashoffset: var(--rev-draw-len, 600);
+}
+.rev-in .rev-draw,
+.rev-active .rev-draw {
+  animation: rev-draw 1.6s cubic-bezier(0.3, 0, 0.2, 1) forwards;
+}
+
+/* soft pulse for nodes */
+@keyframes rev-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.35);
+  }
+}
+.rev-pulse {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: rev-pulse 3s ease-in-out infinite;
+}
+
+/* staggered pop-in for illustration elements */
+@keyframes rev-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rev-in .rev-pop,
+.rev-active .rev-pop,
+.rev-active.rev-pop {
+  opacity: 0;
+  animation: rev-pop 500ms cubic-bezier(0.2, 0.65, 0.25, 1) forwards;
+  animation-delay: var(--rev-d, 0ms);
+}
+
+/* blinking cursor / live tick */
+@keyframes rev-blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    opacity: 0.15;
+  }
+}
+.rev-blink {
+  animation: rev-blink 1.6s ease-in-out infinite;
+}
+
+/* bar grow */
+@keyframes rev-grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.rev-in .rev-grow-x,
+.rev-active .rev-grow-x,
+.rev-active.rev-grow-x {
+  transform-origin: left center;
+  transform-box: fill-box;
+  animation: rev-grow-x 900ms cubic-bezier(0.2, 0.65, 0.25, 1) forwards;
+  animation-delay: var(--rev-d, 0ms);
+  transform: scaleX(0);
+}
+
+/* platform right-panel crossfade */
+.rev-panel {
+  opacity: 0;
+  transform: translateY(18px) scale(0.99);
+  pointer-events: none;
+  transition: opacity 450ms cubic-bezier(0.2, 0.65, 0.25, 1), transform 450ms cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.rev-panel.rev-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* feature nav card */
+.rev-feature-card {
+  transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+}
+.rev-feature-card .rev-feature-sub {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 380ms cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.rev-feature-card .rev-feature-sub > div {
+  overflow: hidden;
+}
+.rev-feature-card[data-active="true"] .rev-feature-sub {
+  grid-template-rows: 1fr;
+}
+.rev-feature-card .rev-feature-bar {
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 380ms cubic-bezier(0.2, 0.65, 0.25, 1);
+}
+.rev-feature-card[data-active="true"] .rev-feature-bar {
+  transform: scaleY(1);
+}
+
+/* marquee-free trust strip divider */
+.rev-vline {
+  width: 1px;
+  align-self: stretch;
+  background: var(--rev-hairline);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion: keep the story readable, kill the motion           */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .rev-page *,
+  .rev-page *::before,
+  .rev-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .rev-reveal,
+  .rev-panel {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .rev-active .rev-pop,
+  .rev-draw {
+    opacity: 1 !important;
+    stroke-dashoffset: 0 !important;
+  }
+}

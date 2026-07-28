@@ -24,8 +24,8 @@ const Index = () => {
     setSEO({
       title: "Supercharge Customer Experience with AI Voice Agents + Agentic Flows | Helllo.ai",
       description: "Enterprise-grade AI voice agents for businesses of all sizes. Deploy and scale production-ready voice automation powered by agentic orchestration. Easy setup, CRM integration, and multi-language support. Start your free trial today.",
-      canonical: "https://www.helllo.ai/",
-      ogUrl: "https://www.helllo.ai/",
+      canonical: "https://www.helllo.ai/helllo",
+      ogUrl: "https://www.helllo.ai/helllo",
     });
     
     // Ensure lang attribute is set

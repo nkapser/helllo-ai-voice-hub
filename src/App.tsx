@@ -14,8 +14,19 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const Spark = lazy(() => import("./pages/spark"));
+const RevEngg = lazy(() => import("./pages/revengg"));
 
 const queryClient = new QueryClient();
+
+function RevEnggRouteFallback() {
+  return (
+    <div
+      className="min-h-screen bg-[#FBFBF9]"
+      aria-busy="true"
+      aria-label="Loading RevEngg"
+    />
+  );
+}
 
 function SparkRouteFallback() {
   return (
@@ -35,7 +46,15 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<RevEnggRouteFallback />}>
+                  <RevEngg />
+                </Suspense>
+              }
+            />
+            <Route path="/helllo" element={<Index />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/cancellation-refund" element={<CancellationRefundPolicy />} />
