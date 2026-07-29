@@ -27,9 +27,9 @@ const Hero = () => {
           </span>
 
           <h1 className="rev-wordmark mt-6 text-[clamp(3.5rem,9vw,6rem)] leading-[0.95]">
-            <span className="rev-wm-rev">Rev</span>
-            <span className="rev-wm-engg">Engg</span>
-            <span className="rev-wm-dot">.</span>
+            <span className="rev-wm-rev">Revenue</span><br/>
+            <span className="rev-wm-engg">Engineering</span>
+            {/* <span className="rev-wm-dot">.</span> */}
           </h1>
 
           <p className="rev-display mt-5 max-w-md text-2xl leading-snug !font-bold md:text-[1.7rem]">

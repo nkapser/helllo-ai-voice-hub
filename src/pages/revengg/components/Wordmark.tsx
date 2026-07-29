@@ -9,9 +9,9 @@ interface WordmarkProps {
  */
 const Wordmark = ({ className = "text-2xl", withDot = false }: WordmarkProps) => (
   <span className={`rev-wordmark ${className}`}>
-    <span className="rev-wm-rev">Rev</span>
-    <span className="rev-wm-engg">Engg</span>
-    {withDot && <span className="rev-wm-dot">.</span>}
+    <span className="rev-wm-rev">Revenue</span>
+    <span className="rev-wm-engg">Engineering</span>
+    {/* {withDot && <span className="rev-wm-dot">.</span>} */}
   </span>
 );
 
