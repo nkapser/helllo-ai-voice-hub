@@ -22,7 +22,7 @@ const Hero = () => {
           <span className="inline-flex items-center gap-2 rounded-full border border-[var(--rev-hairline)] bg-[var(--rev-surface)] px-3.5 py-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--rev-green)]" />
             <span className="rev-eyebrow !text-[10px]">
-              AI Revenue Engineering Platform for D2C Brands
+              AI Revenue Engineering Platform for B2C Brands
             </span>
           </span>
 

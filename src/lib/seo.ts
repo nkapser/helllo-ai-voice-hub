@@ -30,18 +30,18 @@ export const REVENGG_OG_IMAGE =
   "https://ik.imagekit.io/ise7sbyg9/Screenshot%202026-07-28%20at%2021.30.12.png?tr=f-webp,q-auto";
 
 const defaultSEO: SEOData = {
-  title: "RevEngg — AI Revenue Engineering Platform for D2C Brands | Helllo.ai",
+  title: "RevEngg — AI Revenue Engineering Platform for B2C Brands | Helllo.ai",
   description: "Engineer every customer interaction into measurable revenue. RevEngg's AI agents discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
-  keywords: "revenue engineering, AI revenue platform, D2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation",
+  keywords: "revenue engineering, AI revenue platform, B2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation",
   canonical: "https://www.helllo.ai/",
-  ogTitle: "RevEngg — AI Revenue Engineering Platform for D2C Brands",
+  ogTitle: "RevEngg — AI Revenue Engineering Platform for B2C Brands",
   ogDescription: "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
   ogImage: REVENGG_OG_IMAGE,
   ogImageAlt: "RevEngg — AI Revenue Engineering Platform dashboard",
   ogType: "website",
   ogUrl: "https://www.helllo.ai/",
   twitterCard: "summary_large_image",
-  twitterTitle: "RevEngg — AI Revenue Engineering Platform for D2C Brands",
+  twitterTitle: "RevEngg — AI Revenue Engineering Platform for B2C Brands",
   twitterDescription: "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
   twitterImage: REVENGG_OG_IMAGE,
   noindex: false,

@@ -182,7 +182,7 @@ export const EnrichmentVisual = () => {
   const rows = [
     ["Company", "Glowory Naturals"],
     ["Revenue", "$2.1M ARR"],
-    ["Industry", "Beauty · D2C"],
+    ["Industry", "Beauty · B2C"],
     ["Buying Intent", "High"],
     ["Location", "Mumbai, IN"],
     ["Social", "@glowory · 48k"],

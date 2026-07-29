@@ -25,20 +25,20 @@ export const REVENGG_PLATFORM_FEATURES = [
 ] as const;
 
 export const REVENGG_SEO: SEOData = {
-  title: "RevEngg — AI Revenue Engineering Platform for D2C Brands | Helllo.ai",
+  title: "RevEngg — AI Revenue Engineering Platform for B2C Brands | Helllo.ai",
   description: REVENGG_META_DESCRIPTION,
   keywords:
-    "revenue engineering, AI revenue platform, D2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation, revenue operations AI, agentic commerce",
+    "revenue engineering, AI revenue platform, B2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation, revenue operations AI, agentic commerce",
   canonical: REVENGG_CANONICAL,
   ogType: "website",
-  ogTitle: "RevEngg — AI Revenue Engineering Platform for D2C Brands",
+  ogTitle: "RevEngg — AI Revenue Engineering Platform for B2C Brands",
   ogDescription:
     "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
   ogUrl: REVENGG_CANONICAL,
   ogImage: REVENGG_OG_IMAGE,
   ogImageAlt: "RevEngg — AI Revenue Engineering Platform revenue dashboard",
   twitterCard: "summary_large_image",
-  twitterTitle: "RevEngg — AI Revenue Engineering Platform for D2C Brands",
+  twitterTitle: "RevEngg — AI Revenue Engineering Platform for B2C Brands",
   twitterDescription:
     "Engineer every customer interaction into measurable revenue — Voice, WhatsApp, Email and Web, one platform.",
   twitterImage: REVENGG_OG_IMAGE,
@@ -57,7 +57,7 @@ export function getRevEnggStructuredData(): Record<string, unknown>[] {
       name: "RevEngg",
       alternateName: "RevEngg by Helllo.ai",
       description:
-        "Autonomous Revenue Engineering Platform that continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across every channel to maximise revenue for D2C e-commerce brands.",
+        "Autonomous Revenue Engineering Platform that continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across every channel to maximise revenue for B2C e-commerce brands.",
       url: REVENGG_CANONICAL,
       image: REVENGG_OG_IMAGE,
       applicationCategory: "BusinessApplication",

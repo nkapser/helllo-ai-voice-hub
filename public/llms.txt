@@ -1,10 +1,10 @@
 # Helllo.ai
 
-> Helllo.ai builds AI products for customer experience and revenue growth. RevEngg is our autonomous revenue engineering platform for D2C e-commerce brands (the flagship product at helllo.ai). Spark is our AI website assistant for SMBs. Helllo Voice is our AI voice agent platform for enterprise customer experience.
+> Helllo.ai builds AI products for customer experience and revenue growth. RevEngg is our autonomous revenue engineering platform for B2C e-commerce brands (the flagship product at helllo.ai). Spark is our AI website assistant for SMBs. Helllo Voice is our AI voice agent platform for enterprise customer experience.
 
 ## Products
 
-- [RevEngg — Autonomous Revenue Engineering Platform](https://www.helllo.ai/): Continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across Voice, WhatsApp, Email and Web to maximise revenue for D2C e-commerce brands.
+- [RevEngg — Autonomous Revenue Engineering Platform](https://www.helllo.ai/): Continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across Voice, WhatsApp, Email and Web to maximise revenue for B2C e-commerce brands.
 - [Spark — AI Website Assistant](https://www.helllo.ai/spark): Paste your URL, get an AI assistant trained on your site in 30 seconds, embed with one script tag. Answers questions by chat or voice, navigates visitors to the right page mid-conversation, and books meetings on Google Calendar, Calendly, or Cal.com. Free forever plan available.
 - [Helllo Voice — AI Voice Agents](https://www.helllo.ai/helllo): Production-ready AI voice agents with agentic orchestration for phone and customer experience automation. Enterprise-grade, CRM-integrated, multi-language.
 
@@ -12,7 +12,7 @@
 
 ## RevEngg — What It Is
 
-RevEngg is an AI Revenue Engineering platform built for D2C e-commerce brands. It runs the full customer lifecycle — Acquire, Qualify, Convert, Retain, Grow — as one continuous, autonomous loop, rather than a set of disconnected marketing and support tools.
+RevEngg is an AI Revenue Engineering platform built for B2C e-commerce brands. It runs the full customer lifecycle — Acquire, Qualify, Convert, Retain, Grow — as one continuous, autonomous loop, rather than a set of disconnected marketing and support tools.
 
 ## RevEngg — How It Works
 
@@ -36,7 +36,7 @@ RevEngg is an AI Revenue Engineering platform built for D2C e-commerce brands. I
 
 ## RevEngg — Key Facts
 
-- **Who it's for:** D2C e-commerce brands and the marketing/growth/CX teams that run them.
+- **Who it's for:** B2C e-commerce brands and the marketing/growth/CX teams that run them.
 - **Category:** Autonomous revenue engineering / AI-driven RevOps platform.
 - **Differentiators vs Klaviyo, Gorgias, HubSpot, and traditional marketing automation:** RevEngg runs the full lifecycle autonomously (discovery through retention) rather than automating a single channel; conversation agents share one contextual memory across Voice, WhatsApp, Email and Web; CRM updates are fully automatic and structured.
 - **Reported outcomes:** up to 45% more qualified leads, 60% faster lead response, 35% higher customer retention, 3x revenue growth, 90% automation rate, 24×7 always-on engagement.
