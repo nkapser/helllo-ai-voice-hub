@@ -19,7 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
-import { getDashboardUrl } from "@/lib/dashboard";
+import { getDashboardUrl, getDashboardAuthSignInUrl } from "@/lib/dashboard";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -27,7 +27,9 @@ const Header = () => {
   const { user, loading } = useAuth();
 
   const handleAuthAction = () => {
-    window.location.replace(getDashboardUrl("/console"));
+    window.location.replace(
+      user ? getDashboardUrl("/console") : getDashboardAuthSignInUrl("/console")
+    );
   };
 
   const featuresMenu = [

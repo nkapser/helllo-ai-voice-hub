@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import Wordmark from "./Wordmark";
+import { useAuth } from "@/contexts/AuthContext";
+import { getDashboardUrl, getDashboardAuthSignInUrl } from "@/lib/dashboard";
 
 const links = [
   { label: "Platform", href: "#platform" },
@@ -12,6 +14,7 @@ const links = [
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { user, loading } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -19,6 +22,12 @@ const Nav = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const handleAuthAction = () => {
+    window.location.replace(
+      user ? getDashboardUrl("/console") : getDashboardAuthSignInUrl("/console")
+    );
+  };
 
   return (
     <header
@@ -41,6 +50,15 @@ const Nav = () => {
               {l.label}
             </a>
           ))}
+          <button
+            type="button"
+            onClick={handleAuthAction}
+            disabled={loading}
+            aria-label={loading ? "Loading user data" : user ? "Go to console dashboard" : "Sign in to your account"}
+            className="rev-btn rev-btn-ghost !min-h-0 !px-5 !py-2.5 text-sm"
+          >
+            {loading ? "Loading..." : user ? "Console" : "Sign In"}
+          </button>
           <a href="/helllo#contact" className="rev-btn rev-btn-primary !min-h-0 !px-5 !py-2.5 text-sm">
             Book a Demo
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -71,6 +89,18 @@ const Nav = () => {
                 {l.label}
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                handleAuthAction();
+              }}
+              disabled={loading}
+              aria-label={loading ? "Loading user data" : user ? "Go to console dashboard" : "Sign in to your account"}
+              className="rev-btn rev-btn-ghost mt-3"
+            >
+              {loading ? "Loading..." : user ? "Console" : "Sign In"}
+            </button>
             <a
               href="/helllo#contact"
               onClick={() => setOpen(false)}
