@@ -36,8 +36,11 @@ const Nav = () => {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
-        <a href="/" aria-label="RevEngg home" className="flex items-center">
+        <a href="/" aria-label="RevEngg home" className="flex items-center gap-2.5">
           <Wordmark className="text-[1.4rem]" />
+          <span className="hidden items-center rounded-full border border-[var(--rev-hairline)] bg-[var(--rev-surface)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--rev-ink-70)] sm:inline-flex">
+            Private Alpha
+          </span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
