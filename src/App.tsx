@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import Index from "./pages/Index";
 import TermsOfService from "./pages/TermsOfService";
@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 
 const Spark = lazy(() => import("./pages/spark"));
 const RevEngg = lazy(() => import("./pages/revengg"));
-const DesignLanguageSystem = lazy(() => import("./pages/design-language-system"));
+const Brand = lazy(() => import("./pages/brand"));
 
 const queryClient = new QueryClient();
 
@@ -57,13 +57,15 @@ const App = () => (
             />
             <Route path="/helllo" element={<Index />} />
             <Route
-              path="/design-language-system"
+              path="/brand"
               element={
                 <Suspense fallback={<RevEnggRouteFallback />}>
-                  <DesignLanguageSystem />
+                  <Brand />
                 </Suspense>
               }
             />
+            {/* Old name for /brand — keep so existing links don't 404 */}
+            <Route path="/design-language-system" element={<Navigate to="/brand" replace />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/cancellation-refund" element={<CancellationRefundPolicy />} />
