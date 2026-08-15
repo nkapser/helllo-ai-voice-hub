@@ -124,7 +124,7 @@ const Platform = () => {
     <section id="platform" className="relative z-10 mt-16 scroll-mt-24 lg:mt-24">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <p className="rev-eyebrow">
-          <span className="rev-eyebrow-idx">[01]</span>
+          <span className="rev-eyebrow-idx">[02]</span>
           <span>The Platform</span>
         </p>
         <h2 className="rev-display mt-3 max-w-2xl text-4xl md:text-5xl">

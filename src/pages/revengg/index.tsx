@@ -6,6 +6,7 @@ import SignalField from "./components/SignalField";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Lifecycle from "./components/Lifecycle";
+import Problems from "./components/Problems";
 import Platform from "./components/Platform";
 import Outcomes from "./components/Outcomes";
 import RevFooter from "./components/RevFooter";
@@ -28,6 +29,7 @@ const RevEnggPage = () => {
       <main>
         <Hero />
         <Lifecycle />
+        <Problems />
         <Platform />
         <Outcomes />
       </main>

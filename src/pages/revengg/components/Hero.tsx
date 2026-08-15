@@ -42,8 +42,8 @@ const Hero = () => {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="/#contact" className="rev-btn rev-btn-green">
-              Book a Demo
+            <a href="#waitlist" className="rev-btn rev-btn-green">
+              Join the waitlist
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>
             <a href="#platform" className="rev-btn rev-btn-ghost">

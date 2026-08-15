@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getDashboardUrl, getDashboardAuthSignInUrl } from "@/lib/dashboard";
 
 const links = [
+  { label: "The leaks", href: "#waitlist" },
   { label: "Platform", href: "#platform" },
   { label: "Outcomes", href: "#outcomes" },
   { label: "Helllo Voice", href: "/" },
@@ -62,8 +63,8 @@ const Nav = () => {
           >
             {loading ? "Loading..." : user ? "Console" : "Sign In"}
           </button>
-          <a href="/#contact" className="rev-btn rev-btn-primary !min-h-0 !px-5 !py-2.5 text-sm">
-            Book a Demo
+          <a href="#waitlist" className="rev-btn rev-btn-primary !min-h-0 !px-5 !py-2.5 text-sm">
+            Join the waitlist
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </a>
         </nav>
@@ -105,11 +106,11 @@ const Nav = () => {
               {loading ? "Loading..." : user ? "Console" : "Sign In"}
             </button>
             <a
-              href="/#contact"
+              href="#waitlist"
               onClick={() => setOpen(false)}
               className="rev-btn rev-btn-primary mt-3"
             >
-              Book a Demo
+              Join the waitlist
             </a>
           </nav>
         </div>

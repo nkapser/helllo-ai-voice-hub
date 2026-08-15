@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { getDashboardUrl, getDashboardAuthSignInUrl } from "@/lib/dashboard";
 
-const Header = () => {
+const Header = ({ showOrevvBanner = false }: { showOrevvBanner?: boolean }) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, loading } = useAuth();
@@ -151,6 +151,21 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border" role="banner">
+      {showOrevvBanner && (
+        <a
+          href="/orevv-ai#waitlist"
+          className="flex items-center justify-center gap-2 bg-slate-900 px-4 py-2 text-center text-xs font-medium text-white transition-colors hover:bg-slate-800 sm:text-sm"
+        >
+          <span className="inline-flex items-center rounded-full bg-sky-400/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-sky-300">
+            New
+          </span>
+          <span>
+            Revenue Engineering is in private alpha
+            <span className="hidden sm:inline"> — join the waitlist</span>
+          </span>
+          <ArrowRight className="h-3.5 w-3.5 shrink-0 text-sky-300" aria-hidden="true" />
+        </a>
+      )}
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}

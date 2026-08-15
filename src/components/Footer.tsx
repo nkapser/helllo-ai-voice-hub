@@ -17,43 +17,40 @@ import {
 } from "lucide-react";
 import { RecognitionLogoStrip } from "@/components/RecognitionShowcase";
 import { openCookiePreferences } from "@/lib/cookiebot";
+import { subscribeToBrevo } from "@/lib/brevo";
 
 const Footer = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [lastSubscribeTime, setLastSubscribeTime] = useState<number | null>(null);
-  
-  // Rate limiting: 10 seconds between subscription attempts
-  const SUBSCRIBE_RATE_LIMIT_SECONDS = 10;
-
-  // Brevo API configuration
-  const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY || "";
-  const BREVO_LIST_ID = import.meta.env.VITE_BREVO_LIST_ID || "";
-  const BREVO_API_URL = "https://api.brevo.com/v3/contacts";
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubscribing(true);
 
-    // Rate limiting check
-    const now = Date.now();
-    if (lastSubscribeTime) {
-      const timeSinceLastSubscribe = (now - lastSubscribeTime) / 1000;
-      if (timeSinceLastSubscribe < SUBSCRIBE_RATE_LIMIT_SECONDS) {
-        const remainingSeconds = Math.ceil(SUBSCRIBE_RATE_LIMIT_SECONDS - timeSinceLastSubscribe);
-        toast({
-          title: "Please wait",
-          description: `Please wait ${remainingSeconds} second${remainingSeconds !== 1 ? 's' : ''} before subscribing again.`,
-          variant: "destructive"
-        });
-        return;
-      }
+    const result = await subscribeToBrevo(email);
+    setIsSubscribing(false);
+
+    if (result.status === "ok") {
+      setShowSuccess(true);
+      setEmail("");
+      toast({
+        title: "Successfully subscribed!",
+        description: "Thank you for subscribing to our newsletter.",
+      });
+      return;
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (result.status === "already") {
+      toast({
+        title: "Already subscribed",
+        description: "This email is already on our mailing list.",
+      });
+      return;
+    }
+
+    if (result.status === "invalid_email") {
       toast({
         title: "Invalid email address",
         description: "Please enter a valid email address.",
@@ -62,11 +59,19 @@ const Footer = () => {
       return;
     }
 
-    // Check if API is configured
-    if (!BREVO_API_KEY || !BREVO_LIST_ID) {
+    if (result.status === "rate_limited") {
+      toast({
+        title: "Please wait",
+        description: `Please wait ${result.remainingSeconds} second${result.remainingSeconds !== 1 ? 's' : ''} before subscribing again.`,
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (result.status === "not_configured") {
       toast({
         title: "Subscription service not configured",
-        description: import.meta.env.DEV 
+        description: import.meta.env.DEV
           ? "Please configure VITE_BREVO_API_KEY and VITE_BREVO_LIST_ID in .env.local"
           : "Subscription service is temporarily unavailable. Please try again later.",
         variant: "destructive"
@@ -74,55 +79,11 @@ const Footer = () => {
       return;
     }
 
-    setIsSubscribing(true);
-
-    try {
-      // Add contact to Brevo list
-      const response = await fetch(BREVO_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": BREVO_API_KEY,
-        },
-        body: JSON.stringify({
-          email: email,
-          listIds: [parseInt(BREVO_LIST_ID)],
-          updateEnabled: true, // Update if contact already exists
-        }),
-      });
-
-      if (response.ok || response.status === 204) {
-        setLastSubscribeTime(Date.now());
-        setShowSuccess(true);
-        setEmail("");
-        toast({
-          title: "Successfully subscribed!",
-          description: "Thank you for subscribing to our newsletter.",
-        });
-      } else if (response.status === 400) {
-        const error = await response.json();
-        // Handle duplicate email (already subscribed)
-        if (error.message?.includes("already exists") || error.code === "duplicate_parameter") {
-          toast({
-            title: "Already subscribed",
-            description: "This email is already on our mailing list.",
-          });
-        } else {
-          throw new Error(error.message || "Failed to subscribe");
-        }
-      } else {
-        throw new Error("Failed to subscribe");
-      }
-    } catch (error) {
-      console.error("Newsletter subscription error:", error);
-      toast({
-        title: "Subscription failed",
-        description: "There was an error subscribing. Please try again later.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsSubscribing(false);
-    }
+    toast({
+      title: "Subscription failed",
+      description: result.message || "There was an error subscribing. Please try again later.",
+      variant: "destructive"
+    });
   };
 
   const footerSections = [

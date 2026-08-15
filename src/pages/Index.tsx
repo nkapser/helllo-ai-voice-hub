@@ -82,7 +82,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      <Header showOrevvBanner />
       <main role="main" id="main-content">
         <Hero />
         <RecognitionShowcase />

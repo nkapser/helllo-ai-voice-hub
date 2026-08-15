@@ -371,7 +371,7 @@ const Hero = () => {
       `}</style>
       <section 
         id="home" 
-        className="relative pt-16 pb-8 lg:pt-20 lg:pb-10 bg-background overflow-hidden min-h-screen flex flex-col snap-start"
+        className="relative pt-28 pb-8 lg:pt-32 lg:pb-10 bg-background overflow-hidden min-h-screen flex flex-col snap-start"
         role="banner"
       >
       <WavyHeroBackground />

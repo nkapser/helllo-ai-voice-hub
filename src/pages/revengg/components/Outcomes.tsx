@@ -1,6 +1,6 @@
-import { ArrowUpRight } from "lucide-react";
 import { useCountUp, useInView } from "../lib/hooks";
 import Wordmark from "./Wordmark";
+import WaitlistForm from "./WaitlistForm";
 
 type Metric = {
   value: number | null; // null → static display
@@ -42,7 +42,7 @@ const Outcomes = () => {
         className={`rev-reveal ${inView ? "rev-in" : ""} mx-auto max-w-7xl`}
       >
         <p className="rev-eyebrow">
-          <span className="rev-eyebrow-idx">[02]</span>
+          <span className="rev-eyebrow-idx">[03]</span>
           <span>Outcomes</span>
         </p>
         <h2 className="rev-display mt-3 text-4xl leading-[1.05] md:text-6xl">
@@ -89,17 +89,11 @@ const Outcomes = () => {
               your <span className="italic text-[var(--rev-green)]">revenue?</span>
             </h3>
             <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-white/60">
-              See RevEngg run your full customer lifecycle — live, on your own
-              catalog and channels.
+              Private alpha is opening in cohorts. Join the waitlist to run the
+              full lifecycle — live, on your catalog and channels.
             </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <a href="/#contact" className="rev-btn rev-btn-green">
-                Book Demo
-                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-              <a href="mailto:hi@helllo.ai" className="rev-btn rev-btn-ghost-light">
-                Talk to Sales
-              </a>
+            <div className="mt-9">
+              <WaitlistForm variant="dark" id="outcomes-waitlist" />
             </div>
           </div>
         </div>
