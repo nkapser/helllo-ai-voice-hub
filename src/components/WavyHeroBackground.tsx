@@ -3,10 +3,9 @@ import { useEffect, useRef, useState } from "react";
 /**
  * WavyHeroBackground — Vecteezy ripple loop behind the homepage hero.
  *
- * Served through ImageKit so the 14.8 MB original is resized/compressed
- * on the fly. 1280px / q-50 is sharp enough for a decorative background
- * (~300 KB) without pulling 1080p. Mobile uses 768px / q-40 (~95 KB).
- * Credit: Saruepee Chengoh / Vecteezy (free license, attribution required).
+ * Served through ImageKit so the 14.8 MB original is compressed on the fly.
+ * Desktop: 1920px / q-70 (~1.9 MB) so the fine ripple lines stay sharp.
+ * Mobile: 1280px / q-60. Credit: Saruepee Chengoh / Vecteezy.
  */
 
 const VIDEO_ID = "ise7sbyg9";
@@ -14,9 +13,9 @@ const VIDEO_FILE =
   "vecteezy_smooth-ripple-animation-with-elegant-background-for-digital_71193341.mp4";
 const VIDEO_BASE = `https://ik.imagekit.io/${VIDEO_ID}/${VIDEO_FILE}`;
 
-const VIDEO_DESKTOP = `${VIDEO_BASE}?tr=w-1280,q-50,f-mp4`;
-const VIDEO_MOBILE = `${VIDEO_BASE}?tr=w-768,q-40,f-mp4`;
-const POSTER = `${VIDEO_BASE}/ik-thumbnail.jpg?tr=w-1280,q-70,f-jpg`;
+const VIDEO_DESKTOP = `${VIDEO_BASE}?tr=w-1920,q-70,f-mp4`;
+const VIDEO_MOBILE = `${VIDEO_BASE}?tr=w-1280,q-60,f-mp4`;
+const POSTER = `${VIDEO_BASE}/ik-thumbnail.jpg?tr=w-1920,q-80,f-jpg`;
 
 const WavyHeroBackground = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
