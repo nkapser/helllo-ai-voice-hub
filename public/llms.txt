@@ -1,12 +1,24 @@
 # Helllo.ai
 
-> Helllo.ai builds AI products for customer experience and revenue growth. RevEngg is our autonomous revenue engineering platform for B2C e-commerce brands (the flagship product at helllo.ai). Spark is our AI website assistant for SMBs. Helllo Voice is our AI voice agent platform for enterprise customer experience.
+> Helllo.ai is a conversational AI company serving businesses in India, the United States, Southeast Asia, Australia and Europe. Headquarters: Bengaluru, India. Products: (1) Conversational AI Agentic Platform at helllo.ai — voice and conversation agents with agentic flows. (2) Spark — an AI assistant for website owners that acts as an intelligent customer support agent. (3) RevEngg — autonomous revenue engineering for B2C brands.
+
+## Geographic availability
+
+Helllo.ai products are offered to businesses in:
+
+- **India** (HQ in Bengaluru)
+- **United States**
+- **Southeast Asia** — Singapore, Malaysia, Indonesia, Philippines, Thailand, Vietnam
+- **Australia** and New Zealand
+- **Europe** — United Kingdom, Ireland, Germany, France, Netherlands, Spain, Italy, and other EU markets
+
+Conversations are English-first with 50+ language auto-detection, including Hindi and other Indian languages, SEA languages, and major European languages.
 
 ## Products
 
-- [RevEngg — Autonomous Revenue Engineering Platform](https://www.helllo.ai/): Continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across Voice, WhatsApp, Email and Web to maximise revenue for B2C e-commerce brands.
-- [Spark — AI Website Assistant](https://www.helllo.ai/spark): Paste your URL, get an AI assistant trained on your site in 30 seconds, embed with one script tag. Answers questions by chat or voice, navigates visitors to the right page mid-conversation, and books meetings on Google Calendar, Calendly, or Cal.com. Free forever plan available.
-- [Helllo Voice — AI Voice Agents](https://www.helllo.ai/helllo): Production-ready AI voice agents with agentic orchestration for phone and customer experience automation. Enterprise-grade, CRM-integrated, multi-language.
+- [Conversational AI Agentic Platform](https://www.helllo.ai/): Production-ready voice and conversation agents with agentic orchestration for customer experience. CRM-integrated, multilingual. For teams in India, the US, SEA, Australia and Europe.
+- [Spark — AI Customer Support Agent for Website Owners](https://www.helllo.ai/spark): Intelligent customer support agent that trains on your site, answers visitors by chat or voice, navigates pages, and books meetings. One script tag. Free forever plan. For website owners in India, the US, SEA, Australia and Europe.
+- [RevEngg — Autonomous Revenue Engineering Platform](https://www.helllo.ai/orevv-ai): Conversational AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.
 
 ---
 
@@ -43,15 +55,15 @@ RevEngg is an AI Revenue Engineering platform built for B2C e-commerce brands. I
 
 ## RevEngg — Canonical URLs
 
-- Product page: https://www.helllo.ai/
-- Platform (feature deep-dive): https://www.helllo.ai/#platform
-- Outcomes: https://www.helllo.ai/#outcomes
+- Product page: https://www.helllo.ai/orevv-ai
+- Platform (feature deep-dive): https://www.helllo.ai/orevv-ai#platform
+- Outcomes: https://www.helllo.ai/orevv-ai#outcomes
 
 ---
 
 ## Spark — What It Is
 
-Spark is an embeddable AI website assistant by Helllo.ai. It trains on your approved site content and uploaded files, answers visitor questions by chat or voice, navigates to pages mid-conversation, and books meetings on your calendar — with no developer required.
+Spark is an AI assistant for website owners that acts as an intelligent customer support agent. It trains on approved site content and uploaded files, answers visitor questions by chat or voice, navigates to pages mid-conversation, and books meetings — with no developer required. Spark is used by website owners in India, the United States, Southeast Asia, Australia and Europe.
 
 ## Spark — How It Works
 
@@ -74,12 +86,13 @@ Spark is an embeddable AI website assistant by Helllo.ai. It trains on your appr
 
 ## Spark — Key Facts
 
-- **Who it's for:** SMB website owners, marketing teams, and agencies.
+- **Who it's for:** Website owners, SMB marketing teams, and agencies who want an intelligent customer support agent on their site.
+- **Regions:** India, United States, Southeast Asia, Australia, Europe.
 - **Setup:** No developer required. One script tag in site footer or Webflow/Framer custom code.
 - **Training data:** Approved website pages and uploaded files only — not the open internet.
 - **Free plan:** Free forever — 500 credits, 10 pages crawled, ~30 min voice, ~100 chat conversations. No credit card.
 - **Paid plans:** Starter $49/mo, Growth $99/mo, Scale $299/mo, Enterprise custom.
-- **Differentiators vs Intercom/Drift:** Guided navigation (takes visitors to pages mid-chat), in-browser voice, training from actual site content.
+- **Differentiators vs Intercom/Drift:** Guided navigation (takes visitors to pages mid-chat), in-browser voice, training from actual site content. Built as a customer support agent for SMB websites.
 
 ## Spark — Canonical URLs
 
@@ -124,27 +137,37 @@ The assistant stops responding until you upgrade or add credits. We email you be
 
 ## Helllo Voice — What It Is
 
-Helllo Voice is Helllo.ai's production-ready AI voice agent platform, powered by agentic orchestration, for enterprise customer experience automation over the phone and other voice channels.
+Helllo.ai's conversational AI agentic platform (also called Helllo Voice) deploys production-ready voice and conversation agents with agentic orchestration. Agents handle multi-step customer journeys — qualify, route, update CRM, continue the conversation — rather than following a rigid IVR tree. Sold to businesses in India, the United States, Southeast Asia, Australia and Europe.
 
 ## Helllo Voice — Platform Features
 
+- Conversational AI agentic platform
 - Agentic flows and orchestration
 - Production-ready AI voice agents
 - Customer experience automation
 - CRM integration
-- Multi-language support
+- Multi-language support (India, US, SEA, Australia, Europe)
 - Enterprise-grade security
 - Real-time analytics
 
 ## Helllo Voice — Key Facts
 
-- **Who it's for:** Businesses of all sizes needing voice-based customer experience automation.
+- **Who it's for:** Businesses of all sizes that need conversational AI agents for customer experience.
+- **Regions:** India, United States, Southeast Asia, Australia, Europe.
 - **Setup:** Easy setup with CRM integration and multi-language support.
 - **Free trial:** 30 minutes monthly.
 
 ## Helllo Voice — Canonical URLs
 
-- Product page: https://www.helllo.ai/helllo
+- Product page: https://www.helllo.ai/
+
+## Helllo Voice — Frequently Asked Questions
+
+### What is Helllo.ai's conversational AI agentic platform?
+A platform that deploys voice and conversation agents with agentic orchestration for multi-step customer journeys, CRM updates, and multilingual conversations.
+
+### Where is Helllo.ai available?
+India, the United States, Southeast Asia, Australia and Europe. English-first with 50+ conversation languages.
 
 ---
 

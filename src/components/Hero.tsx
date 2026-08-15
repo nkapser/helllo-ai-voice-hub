@@ -26,19 +26,25 @@ import { useAuth } from "@/contexts/AuthContext";
 
 const countries = [
   { code: "+1", flag: "🇺🇸", name: "United States" },
-  { code: "+44", flag: "🇬🇧", name: "United Kingdom" },
   { code: "+91", flag: "🇮🇳", name: "India" },
+  { code: "+44", flag: "🇬🇧", name: "United Kingdom" },
   { code: "+61", flag: "🇦🇺", name: "Australia" },
-  { code: "+86", flag: "🇨🇳", name: "China" },
-  { code: "+81", flag: "🇯🇵", name: "Japan" },
+  { code: "+65", flag: "🇸🇬", name: "Singapore" },
+  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
+  { code: "+62", flag: "🇮🇩", name: "Indonesia" },
+  { code: "+63", flag: "🇵🇭", name: "Philippines" },
+  { code: "+66", flag: "🇹🇭", name: "Thailand" },
+  { code: "+84", flag: "🇻🇳", name: "Vietnam" },
+  { code: "+64", flag: "🇳🇿", name: "New Zealand" },
+  { code: "+353", flag: "🇮🇪", name: "Ireland" },
   { code: "+49", flag: "🇩🇪", name: "Germany" },
   { code: "+33", flag: "🇫🇷", name: "France" },
+  { code: "+31", flag: "🇳🇱", name: "Netherlands" },
   { code: "+34", flag: "🇪🇸", name: "Spain" },
   { code: "+39", flag: "🇮🇹", name: "Italy" },
   { code: "+971", flag: "🇦🇪", name: "UAE" },
-  { code: "+65", flag: "🇸🇬", name: "Singapore" },
-  { code: "+60", flag: "🇲🇾", name: "Malaysia" },
-  { code: "+66", flag: "🇹🇭", name: "Thailand" },
+  { code: "+86", flag: "🇨🇳", name: "China" },
+  { code: "+81", flag: "🇯🇵", name: "Japan" },
 ];
 
 const DEMO_OUTBOUND_AGENT_ID_PRODUCTION = "73ff84c6-f4dd-4c9b-8e71-f8d08c150a6e";

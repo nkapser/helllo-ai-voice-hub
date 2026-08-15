@@ -42,7 +42,7 @@ const Hero = () => {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="/helllo#contact" className="rev-btn rev-btn-green">
+            <a href="/#contact" className="rev-btn rev-btn-green">
               Book a Demo
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </a>

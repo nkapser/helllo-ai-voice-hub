@@ -10,7 +10,7 @@ import { BRAND_BRIEF, BRAND_BRIEF_VERSION } from "./brand-brief";
 
 /* ════════════════════════════════════════════════════════════════
    Helllo Brand Guide — /brand
-   The single source of truth for how /, /helllo and /spark look,
+   The single source of truth for how /, /orevv-ai and /spark look,
    move and speak. Written in the language it documents.
 ═══════════════════════════════════════════════════════════════ */
 
@@ -182,8 +182,8 @@ const Brand = () => {
             </span>
           </a>
           <nav className="flex items-center gap-4 text-sm spark-text-muted">
-            <a href="/" className="transition-colors hover:text-[hsl(215_28%_17%)]">RevEngg</a>
-            <a href="/helllo" className="transition-colors hover:text-[hsl(215_28%_17%)]">Helllo Voice</a>
+            <a href="/orevv-ai" className="transition-colors hover:text-[hsl(215_28%_17%)]">RevEngg</a>
+            <a href="/" className="transition-colors hover:text-[hsl(215_28%_17%)]">Helllo Voice</a>
             <a href="/spark" className="transition-colors hover:text-[hsl(215_28%_17%)]">Spark</a>
           </nav>
         </header>
@@ -203,8 +203,8 @@ const Brand = () => {
               <p className="mt-5 max-w-2xl text-lg leading-relaxed spark-text-muted">
                 Everything you need to make a poster, a deck, a document, a webpage or a
                 post that looks like it came from us. One shared foundation behind{" "}
-                <a href="/" className="font-medium text-[var(--spark-ember)]">RevEngg</a>,{" "}
-                <a href="/helllo" className="font-medium text-[var(--spark-ember)]">Helllo Voice</a> and{" "}
+                <a href="/orevv-ai" className="font-medium text-[var(--spark-ember)]">RevEngg</a>,{" "}
+                <a href="/" className="font-medium text-[var(--spark-ember)]">Helllo Voice</a> and{" "}
                 <a href="/spark" className="font-medium text-[var(--spark-ember)]">Spark</a> —
                 with one accent per product doing all the talking.
               </p>
@@ -257,8 +257,8 @@ const Brand = () => {
 
           <div className="mt-4 grid gap-4 lg:grid-cols-3">
             {[
-              ["RevEngg", "/", "AI Revenue Engineering for B2C brands. Agents that discover, enrich, qualify, engage and retain across Voice, WhatsApp, Email and Web.", "Private Alpha"],
-              ["Helllo Voice", "/helllo", "AI voice agents and agentic flows for customer experience. The shipping product.", "Live"],
+              ["RevEngg", "/orevv-ai", "AI Revenue Engineering for B2C brands. Agents that discover, enrich, qualify, engage and retain across Voice, WhatsApp, Email and Web.", "Private Alpha"],
+              ["Helllo Voice", "/", "AI voice agents and agentic flows for customer experience. The shipping product.", "Live"],
               ["Spark", "/spark", "Web agent for SMB website owners.", "Live"],
             ].map(([name, href, desc, status], i) => (
               <div key={name} className={`glass reveal rd${i + 1} rounded-2xl p-6`}>
@@ -328,7 +328,7 @@ const Brand = () => {
               <div className="rev-page rounded-xl bg-transparent">
                 <Wordmark className="text-3xl" withDot />
               </div>
-              <p className="mt-4 text-sm font-medium spark-text-primary">RevEngg — route /</p>
+              <p className="mt-4 text-sm font-medium spark-text-primary">RevEngg — route /orevv-ai</p>
               <p className="mt-1 text-[13px] leading-relaxed spark-text-muted">
                 Satoshi Black. "Revenue" in near-black #111111, "Engineering" in the product
                 accent, bold italic — currently the blue flavor under review
@@ -339,7 +339,7 @@ const Brand = () => {
               <span className="font-display text-3xl font-semibold tracking-tight spark-text-primary">
                 helllo<span className="text-[var(--spark-ember)]">.ai</span>
               </span>
-              <p className="mt-4 text-sm font-medium spark-text-primary">Helllo Voice — route /helllo</p>
+              <p className="mt-4 text-sm font-medium spark-text-primary">Helllo Voice — route /</p>
               <p className="mt-1 text-[13px] leading-relaxed spark-text-muted">
                 Geist Semibold wordmark with the Spark-blue accent. AI voice agents +
                 agentic flows for customer experience.
@@ -783,7 +783,7 @@ const Brand = () => {
             <div className="glass reveal rd1 rounded-2xl p-6">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] spark-text-muted">Token sources</p>
               <ul className="space-y-2.5 font-mono text-[12px] spark-text-primary">
-                <li><span className="text-[var(--spark-ember)]">src/index.css</span> — global :root tokens (Tailwind semantic colors, shadows, fonts) → /helllo + app-wide</li>
+                <li><span className="text-[var(--spark-ember)]">src/index.css</span> — global :root tokens (Tailwind semantic colors, shadows, fonts) → / + app-wide</li>
                 <li><span className="text-[var(--spark-ember)]">src/pages/spark/spark.css</span> — .spark-page scope → /spark</li>
                 <li><span className="text-[var(--spark-ember)]">src/pages/revengg/revengg.css</span> — .rev-page scope → /</li>
                 <li><span className="text-[var(--spark-ember)]">src/pages/brand/brand-brief.ts</span> — the plain-text brief this page copies</li>

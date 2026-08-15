@@ -13,7 +13,7 @@ const HERO_NAV_LINKS = [
 
 const rotatingPhrases = ['that talks to', 'that guides', 'that converts']
 const HERO_SEO_HEADLINE =
-  'Give your website an assistant that talks to, guides, and converts visitors'
+  'Spark — AI customer support agent for website owners. Give your website an assistant that talks to, guides, and converts visitors in India, the US, Southeast Asia, Australia and Europe.'
 const TYPE_SPEED = 80
 const DELETE_SPEED = 40
 const PAUSE_AT_FULL = 1500
@@ -175,7 +175,7 @@ export default function Hero() {
               Live in 30 seconds. &nbsp; Start Free. &nbsp; Trained on your data
             </p>
             <p className="mt-6 text-sm text-black/80">
-              The AI Assistant is trained on your website data, answers questions, navigates between pages & books meetings on your calendar.
+              An intelligent customer support agent trained on your website. Answers questions, navigates pages, and books meetings — for website owners in India, the US, Southeast Asia, Australia and Europe.
             </p>
           </div>
 

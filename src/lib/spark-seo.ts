@@ -3,11 +3,19 @@ import {
   generateFAQSchema,
   generateHowToSchema,
   generateOfferCatalogSchema,
+  generateServiceSchema,
   generateSoftwareApplicationSchema,
   generateWebPageSchema,
   patchIndexHtmlSEO,
   type SEOData,
 } from "@/lib/seo";
+import {
+  AVAILABLE_LANGUAGES,
+  COUNTRIES_SUPPORTED,
+  getAreaServedSchema,
+  getEligibleRegionsSchema,
+  TARGET_REGIONS_PHRASE,
+} from "@/lib/geo-seo";
 
 export const SPARK_OG_IMAGE =
   "https://ik.imagekit.io/ise7sbyg9/spark-image-banner.png?tr=f-webp,q-auto";
@@ -15,7 +23,7 @@ export const SPARK_OG_IMAGE =
 export const SPARK_CANONICAL = "https://www.helllo.ai/spark";
 
 export const SPARK_META_DESCRIPTION =
-  "Paste your URL and get an AI assistant trained on your site in 30 seconds. Answers questions, navigates pages, and books meetings — embed with one script tag, free forever.";
+  `AI assistant for website owners that acts as an intelligent customer support agent. Answers visitors, navigates pages and books meetings — available in ${TARGET_REGIONS_PHRASE}. Embed with one script tag. Free forever.`;
 
 export const SPARK_HOW_IT_WORKS_STEPS = [
   {
@@ -118,37 +126,49 @@ export const SPARK_FAQS = [
     a: "Yes. The widget is fully responsive and touch-optimised — tap to chat, tap to talk, swipe to close.",
   },
   {
+    q: "Is Spark available in India, the US, Southeast Asia, Australia and Europe?",
+    a: `Yes. Spark is an AI customer support agent for website owners in ${TARGET_REGIONS_PHRASE}. It auto-detects 50+ languages, so visitors can get help in English, Hindi, SEA languages, and major European languages.`,
+  },
+  {
+    q: "Can Spark replace a customer support agent on my website?",
+    a: "Spark acts as an intelligent customer support agent on your site: it answers questions from your approved content, navigates visitors to the right page, captures leads, and books meetings — 24/7, by chat or voice. Human teams stay in control with answer guardrails and conversation logs.",
+  },
+  {
     q: "What happens when my free credits run out?",
     a: "The assistant stops responding until you upgrade or add credits. We'll email you before they run out so you're never caught off guard.",
   },
 ] as const;
 
 export const SPARK_SEO: SEOData = {
-  title: "Spark — Give Your Website an AI Assistant | Helllo.ai",
+  title: "Spark — AI Customer Support Agent for Your Website | Helllo.ai",
   description: SPARK_META_DESCRIPTION,
   keywords:
-    "Spark, AI website assistant, paste URL chatbot, website chatbot, voice AI for websites, Helllo.ai, no-code chatbot, one script tag embed, guided navigation chatbot, calendar booking assistant, SMB website AI",
+    "AI customer support agent, AI assistant for website owners, website AI support, Spark Helllo.ai, intelligent customer support chatbot, website voice assistant, no-code website AI, AI support agent India, website chatbot USA, AI assistant Singapore, website AI Australia, customer support AI Europe, SMB website AI",
   canonical: SPARK_CANONICAL,
   ogType: "website",
-  ogTitle: "Spark — Give Your Website an AI Assistant",
+  ogTitle: "Spark — AI Customer Support Agent for Website Owners",
   ogDescription: SPARK_META_DESCRIPTION,
   ogUrl: SPARK_CANONICAL,
   ogImage: SPARK_OG_IMAGE,
-  ogImageAlt: "Spark by Helllo.ai — AI assistant for your website",
+  ogImageAlt: "Spark by Helllo.ai — AI customer support agent for website owners",
   twitterCard: "summary_large_image",
-  twitterTitle: "Spark — Give Your Website an AI Assistant",
+  twitterTitle: "Spark — AI Customer Support Agent for Your Website",
   twitterDescription:
-    "Paste your URL → AI assistant in 30 seconds → answers, navigates, books meetings → one script tag, free forever.",
+    `Intelligent AI assistant for website owners in ${TARGET_REGIONS_PHRASE}. Answers, navigates, books meetings — one script tag, free forever.`,
   twitterImage: SPARK_OG_IMAGE,
 };
 
 export function getSparkStructuredData(): Record<string, unknown>[] {
+  const areaServed = getAreaServedSchema();
+  const eligibleRegion = getEligibleRegionsSchema();
+
   return [
     generateWebPageSchema({
-      name: "Spark — AI Website Assistant",
+      name: "Spark — AI Customer Support Agent for Website Owners",
       description: SPARK_SEO.description!,
       url: SPARK_CANONICAL,
       image: SPARK_OG_IMAGE,
+      about: "AI customer support agent for websites",
     }),
     generateBreadcrumbSchema([
       { name: "Home", url: "https://www.helllo.ai/" },
@@ -156,16 +176,26 @@ export function getSparkStructuredData(): Record<string, unknown>[] {
     ]),
     generateSoftwareApplicationSchema({
       name: "Spark",
-      alternateName: "Spark by Helllo.ai",
+      alternateName: [
+        "Spark by Helllo.ai",
+        "Spark AI Website Assistant",
+        "Spark AI Customer Support Agent",
+      ],
       description:
-        "AI website assistant that trains on your site content, answers visitor questions by chat or voice, navigates pages mid-conversation, and books meetings on your calendar.",
+        `AI assistant for website owners that acts as an intelligent customer support agent. Trains on your site, answers by chat or voice, navigates pages, and books meetings. Available in ${TARGET_REGIONS_PHRASE}.`,
       url: SPARK_CANONICAL,
       image: SPARK_OG_IMAGE,
       applicationCategory: "BusinessApplication",
+      applicationSubCategory: "Customer Support / Website AI Assistant",
       operatingSystem: "Web",
       brandName: "Helllo.ai",
       brandUrl: "https://www.helllo.ai",
       featureList: [...SPARK_PLATFORM_FEATURES],
+      countriesSupported: [...COUNTRIES_SUPPORTED],
+      inLanguage: [...AVAILABLE_LANGUAGES],
+      audienceType: "Website owners, SMB marketing teams, and agencies",
+      areaServed,
+      eligibleRegion,
       offers: [
         {
           price: "0",
@@ -174,10 +204,33 @@ export function getSparkStructuredData(): Record<string, unknown>[] {
         },
       ],
     }),
+    generateServiceSchema({
+      name: "Spark AI Customer Support Agent",
+      serviceType: "Website AI Assistant / Intelligent Customer Support",
+      description:
+        `Embeddable AI customer support agent for website owners in ${TARGET_REGIONS_PHRASE}. Answers questions, navigates visitors, and books meetings from your approved content.`,
+      url: SPARK_CANONICAL,
+      areaServed,
+      audienceType: "Website owners and SMB customer support teams",
+      offers: [
+        {
+          name: "Intelligent Customer Support",
+          description: "24/7 chat and voice answers grounded in your website and files",
+        },
+        {
+          name: "Guided Navigation",
+          description: "Takes visitors to the right page mid-conversation",
+        },
+        {
+          name: "Meeting Booking",
+          description: "Books meetings on Google Calendar, Calendly, or Cal.com",
+        },
+      ],
+    }),
     generateHowToSchema({
       name: "How to add Spark to your website",
       description:
-        "Paste your URL, train an AI assistant on your site, and embed it with one script tag in about 30 seconds.",
+        "Paste your URL, train an AI customer support agent on your site, and embed it with one script tag in about 30 seconds.",
       url: `${SPARK_CANONICAL}#how-it-works`,
       steps: SPARK_HOW_IT_WORKS_STEPS.map(({ name, text }) => ({ name, text })),
     }),

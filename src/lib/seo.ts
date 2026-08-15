@@ -3,6 +3,12 @@
  * Handles meta tags, Open Graph, Twitter Cards, and structured data
  */
 
+import {
+  HREFLANG_VALUES,
+  OG_LOCALE_ALTERNATES,
+  OG_LOCALE_PRIMARY,
+} from "@/lib/geo-seo";
+
 export interface SEOData {
   title?: string;
   description?: string;
@@ -22,28 +28,35 @@ export interface SEOData {
   structuredData?: Record<string, any>[];
 }
 
-// RevEngg now lives at the root domain — this is the fallback baseline
-// used whenever a page doesn't fully override SEO data. Helllo Voice and
-// Spark always pass their own complete SEOData (see helllo-seo.ts /
+// Helllo Voice lives at the root domain — this is the fallback baseline
+// used whenever a page doesn't fully override SEO data. RevEngg (/orevv-ai)
+// and Spark always pass their own complete SEOData (see revengg-seo.ts /
 // spark-seo.ts) so they never fall through to these values.
 export const REVENGG_OG_IMAGE =
   "https://ik.imagekit.io/ise7sbyg9/Screenshot%202026-07-28%20at%2021.30.12.png?tr=f-webp,q-auto";
 
+const HELLLO_OG_IMAGE =
+  "https://ik.imagekit.io/ise7sbyg9/helllo-ai-voice-agentic-agentic-flows?tr=f-webp,q-auto";
+
 const defaultSEO: SEOData = {
-  title: "RevEngg — AI Revenue Engineering Platform for B2C Brands | Helllo.ai",
-  description: "Engineer every customer interaction into measurable revenue. RevEngg's AI agents discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
-  keywords: "revenue engineering, AI revenue platform, B2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation",
+  title: "Conversational AI Agentic Platform | Voice Agents — Helllo.ai",
+  description:
+    "Conversational AI agentic platform for customer experience. Deploy voice and conversation agents with agentic flows across India, the US, Southeast Asia, Australia and Europe. CRM-ready, multilingual. Start free.",
+  keywords:
+    "conversational AI agentic platform, conversational AI agents, AI voice agents, agentic flows, customer experience AI, voice automation India, AI agents USA, conversational AI Southeast Asia, AI voice Australia, conversational AI Europe, CRM integration, multi-language voice AI",
   canonical: "https://www.helllo.ai/",
-  ogTitle: "RevEngg — AI Revenue Engineering Platform for B2C Brands",
-  ogDescription: "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
-  ogImage: REVENGG_OG_IMAGE,
-  ogImageAlt: "RevEngg — AI Revenue Engineering Platform dashboard",
+  ogTitle: "Conversational AI Agentic Platform | Helllo.ai",
+  ogDescription:
+    "Voice and conversation agents with agentic orchestration for businesses in India, the US, Southeast Asia, Australia and Europe.",
+  ogImage: HELLLO_OG_IMAGE,
+  ogImageAlt: "Helllo.ai conversational AI agentic platform — voice agents and agentic flows",
   ogType: "website",
   ogUrl: "https://www.helllo.ai/",
   twitterCard: "summary_large_image",
-  twitterTitle: "RevEngg — AI Revenue Engineering Platform for B2C Brands",
-  twitterDescription: "AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.",
-  twitterImage: REVENGG_OG_IMAGE,
+  twitterTitle: "Conversational AI Agentic Platform | Helllo.ai",
+  twitterDescription:
+    "Deploy production-ready conversational AI agents across India, the US, SEA, Australia and Europe.",
+  twitterImage: HELLLO_OG_IMAGE,
   noindex: false,
 };
 
@@ -76,6 +89,28 @@ function updateLinkTag(rel: string, href: string, attributes?: Record<string, st
       link.setAttribute(key, value);
     });
   }
+}
+
+function setHreflangLinks(canonical: string): void {
+  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
+  HREFLANG_VALUES.forEach((hreflang) => {
+    const link = document.createElement("link");
+    link.setAttribute("rel", "alternate");
+    link.setAttribute("hreflang", hreflang);
+    link.setAttribute("href", canonical);
+    document.head.appendChild(link);
+  });
+}
+
+function setOgLocales(): void {
+  updateMetaTag("og:locale", OG_LOCALE_PRIMARY, "property");
+  document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((el) => el.remove());
+  OG_LOCALE_ALTERNATES.forEach((locale) => {
+    const meta = document.createElement("meta");
+    meta.setAttribute("property", "og:locale:alternate");
+    meta.setAttribute("content", locale);
+    document.head.appendChild(meta);
+  });
 }
 
 /**
@@ -129,10 +164,12 @@ export function setSEO(data: SEOData): void {
     updateMetaTag("robots", "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1");
   }
 
-  // Canonical URL
+  // Canonical URL + regional hreflang (same English URL, declared markets)
   if (seo.canonical) {
     updateLinkTag("canonical", seo.canonical);
+    setHreflangLinks(seo.canonical);
   }
+  setOgLocales();
 
   // Open Graph tags
   if (seo.ogTitle) {
@@ -201,6 +238,8 @@ export function generateWebPageSchema(data: {
   description: string;
   url: string;
   image?: string;
+  about?: string;
+  inLanguage?: string;
 }): Record<string, any> {
   return {
     "@context": "https://schema.org",
@@ -209,6 +248,10 @@ export function generateWebPageSchema(data: {
     description: data.description,
     url: data.url,
     image: data.image,
+    inLanguage: data.inLanguage ?? "en",
+    ...(data.about
+      ? { about: { "@type": "Thing", name: data.about } }
+      : {}),
     isPartOf: {
       "@type": "WebSite",
       name: "Helllo.ai",
@@ -227,16 +270,22 @@ export function generateWebPageSchema(data: {
  */
 export function generateSoftwareApplicationSchema(data: {
   name: string;
-  alternateName?: string;
+  alternateName?: string | string[];
   description: string;
   url: string;
   image?: string;
   applicationCategory?: string;
+  applicationSubCategory?: string;
   operatingSystem?: string;
   brandName?: string;
   brandUrl?: string;
   featureList?: string[];
   offers?: Array<{ price: string; priceCurrency: string; description: string }>;
+  countriesSupported?: string[];
+  inLanguage?: string[];
+  audienceType?: string;
+  areaServed?: Array<Record<string, string>>;
+  eligibleRegion?: Array<Record<string, string>>;
 }): Record<string, any> {
   return {
     "@context": "https://schema.org",
@@ -244,6 +293,9 @@ export function generateSoftwareApplicationSchema(data: {
     name: data.name,
     ...(data.alternateName ? { alternateName: data.alternateName } : {}),
     applicationCategory: data.applicationCategory ?? "BusinessApplication",
+    ...(data.applicationSubCategory
+      ? { applicationSubCategory: data.applicationSubCategory }
+      : {}),
     operatingSystem: data.operatingSystem ?? "Web",
     description: data.description,
     url: data.url,
@@ -253,6 +305,19 @@ export function generateSoftwareApplicationSchema(data: {
       name: data.brandName ?? "Helllo.ai",
       url: data.brandUrl ?? "https://www.helllo.ai",
     },
+    ...(data.countriesSupported?.length
+      ? { countriesSupported: data.countriesSupported }
+      : {}),
+    ...(data.inLanguage?.length ? { inLanguage: data.inLanguage } : {}),
+    ...(data.audienceType
+      ? {
+          audience: {
+            "@type": "BusinessAudience",
+            audienceType: data.audienceType,
+          },
+        }
+      : {}),
+    ...(data.areaServed?.length ? { areaServed: data.areaServed } : {}),
     ...(data.featureList?.length
       ? { featureList: data.featureList }
       : {}),
@@ -263,7 +328,60 @@ export function generateSoftwareApplicationSchema(data: {
             price: offer.price,
             priceCurrency: offer.priceCurrency,
             description: offer.description,
+            availability: "https://schema.org/InStock",
+            ...(data.eligibleRegion?.length
+              ? { eligibleRegion: data.eligibleRegion }
+              : {}),
           })),
+        }
+      : {}),
+  };
+}
+
+export function generateServiceSchema(data: {
+  name: string;
+  serviceType: string;
+  description: string;
+  url: string;
+  areaServed?: Array<Record<string, string>>;
+  audienceType?: string;
+  offers?: Array<{ name: string; description: string }>;
+}): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: data.name,
+    serviceType: data.serviceType,
+    description: data.description,
+    url: data.url,
+    provider: {
+      "@type": "Organization",
+      name: "Helllo.ai",
+      url: "https://www.helllo.ai",
+    },
+    ...(data.areaServed?.length ? { areaServed: data.areaServed } : {}),
+    ...(data.audienceType
+      ? {
+          audience: {
+            "@type": "BusinessAudience",
+            audienceType: data.audienceType,
+          },
+        }
+      : {}),
+    ...(data.offers?.length
+      ? {
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: data.name,
+            itemListElement: data.offers.map((offer) => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: offer.name,
+                description: offer.description,
+              },
+            })),
+          },
         }
       : {}),
   };
@@ -408,10 +526,21 @@ export function replaceLinkHref(html: string, rel: string, href: string): string
   return html;
 }
 
+export function replaceAllHreflangHref(html: string, href: string): string {
+  return html.replace(
+    /(<link\s+rel="alternate"\s+hreflang="[^"]*"\s+href=")[^"]*(")/gi,
+    `$1${escapeHtml(href)}$2`,
+  );
+}
+
 /**
  * Patches every crawler-relevant tag in index.html for one route, then
  * appends the route's JSON-LD (tagged `data-route-seo` so it's easy to
  * spot in a view-source diff). Shared by every product's *-seo.ts module.
+ *
+ * Scripts tagged `data-home-seo` (the default Helllo Voice blocks baked
+ * into index.html) are stripped first so Spark / RevEngg crawlers do not
+ * also inherit Voice SoftwareApplication + Service schema.
  */
 export function patchIndexHtmlSEO(
   html: string,
@@ -445,6 +574,7 @@ export function patchIndexHtmlSEO(
   patched = replaceMetaContent(patched, "name", "description", seo.description);
   patched = replaceMetaContent(patched, "name", "keywords", seo.keywords);
   patched = replaceLinkHref(patched, "canonical", seo.canonical);
+  patched = replaceAllHreflangHref(patched, seo.canonical);
 
   patched = replaceMetaContent(patched, "property", "og:type", seo.ogType);
   patched = replaceMetaContent(patched, "property", "og:url", seo.ogUrl);
@@ -459,6 +589,11 @@ export function patchIndexHtmlSEO(
   patched = replaceMetaContent(patched, "property", "twitter:description", seo.twitterDescription);
   patched = replaceMetaContent(patched, "property", "twitter:image", seo.twitterImage);
   patched = replaceMetaContent(patched, "property", "twitter:image:alt", seo.ogImageAlt);
+
+  patched = patched.replace(
+    /<script type="application\/ld\+json"[^>]*(?:data-home-seo|data-route-seo)[^>]*>[\s\S]*?<\/script>\s*/gi,
+    "",
+  );
 
   if (structuredData.length > 0) {
     const scripts = structuredData

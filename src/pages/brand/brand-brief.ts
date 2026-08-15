@@ -19,10 +19,10 @@ Source of truth: https://www.helllo.ai/brand
 helllo.ai builds AI agents for customer conversations. Three surfaces share one
 design language:
 
-- RevEngg (route /) — AI Revenue Engineering platform for B2C brands. Agents that
+- RevEngg (route /orevv-ai) — AI Revenue Engineering platform for B2C brands. Agents that
   discover, enrich, qualify, engage and retain customers across Voice, WhatsApp,
   Email and Web. Currently PRIVATE ALPHA.
-- Helllo Voice (route /helllo) — AI voice agents and agentic flows for customer
+- Helllo Voice (route /) — AI voice agents and agentic flows for customer
   experience. The shipping product.
 - Spark (route /spark) — web agent for SMB website owners.
 
@@ -211,9 +211,9 @@ Atmosphere stays below 5% perceived prominence.
 
 ## 15. TOKENS & GOVERNANCE
 
-- src/index.css .............. global :root tokens → /helllo and app-wide
+- src/index.css .............. global :root tokens → / and app-wide
 - src/pages/spark/spark.css .. .spark-page scope → /spark
-- src/pages/revengg/revengg.css .rev-page scope → /
+- src/pages/revengg/revengg.css .rev-page scope → /orevv-ai
 - index.html ................. global font loading
 
 Rules: use semantic tokens, never raw hex in components (custom SVG

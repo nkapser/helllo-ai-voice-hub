@@ -14,8 +14,9 @@ import { patchHellloIndexHtml } from "@/lib/helllo-seo";
 // with the correct per-route SEO before returning it — one patcher per
 // product route, matched by path.
 const ROUTE_PATCHERS: Record<string, (html: string) => string> = {
-  "/": patchRevEnggIndexHtml,
+  "/": patchHellloIndexHtml,
   "/helllo": patchHellloIndexHtml,
+  "/orevv-ai": patchRevEnggIndexHtml,
   "/spark": patchSparkIndexHtml,
 };
 

@@ -47,15 +47,17 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<Index />} />
+            {/* Legacy path — same Helllo Voice page as / */}
+            <Route path="/helllo" element={<Index />} />
             <Route
-              path="/"
+              path="/orevv-ai"
               element={
                 <Suspense fallback={<RevEnggRouteFallback />}>
                   <RevEngg />
                 </Suspense>
               }
             />
-            <Route path="/helllo" element={<Index />} />
             <Route
               path="/brand"
               element={

@@ -1,18 +1,25 @@
 import {
   generateBreadcrumbSchema,
+  generateServiceSchema,
   generateSoftwareApplicationSchema,
   generateWebPageSchema,
   patchIndexHtmlSEO,
   REVENGG_OG_IMAGE,
   type SEOData,
 } from "@/lib/seo";
+import {
+  AVAILABLE_LANGUAGES,
+  COUNTRIES_SUPPORTED,
+  getAreaServedSchema,
+  TARGET_REGIONS_PHRASE,
+} from "@/lib/geo-seo";
 
 export { REVENGG_OG_IMAGE };
 
-export const REVENGG_CANONICAL = "https://www.helllo.ai/";
+export const REVENGG_CANONICAL = "https://www.helllo.ai/orevv-ai";
 
 export const REVENGG_META_DESCRIPTION =
-  "Engineer every customer interaction into measurable revenue. RevEngg's AI agents discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web.";
+  `Conversational AI agents that discover, enrich, qualify, engage and retain customers across Voice, WhatsApp, Email and Web. Available in ${TARGET_REGIONS_PHRASE}.`;
 
 export const REVENGG_PLATFORM_FEATURES = [
   "Lead discovery across every acquisition channel",
@@ -28,7 +35,7 @@ export const REVENGG_SEO: SEOData = {
   title: "RevEngg — AI Revenue Engineering Platform for B2C Brands | Helllo.ai",
   description: REVENGG_META_DESCRIPTION,
   keywords:
-    "revenue engineering, AI revenue platform, B2C AI agents, autonomous customer engagement, WhatsApp AI agent, voice AI agent, lead qualification AI, CRM automation, revenue operations AI, agentic commerce",
+    "revenue engineering, conversational AI agents, AI revenue platform, B2C AI agents, autonomous customer engagement, WhatsApp AI agent India, voice AI agent USA, conversational AI Southeast Asia, AI agents Australia, AI agents Europe, CRM automation, agentic commerce",
   canonical: REVENGG_CANONICAL,
   ogType: "website",
   ogTitle: "RevEngg — AI Revenue Engineering Platform for B2C Brands",
@@ -52,19 +59,36 @@ export function getRevEnggStructuredData(): Record<string, unknown>[] {
       url: REVENGG_CANONICAL,
       image: REVENGG_OG_IMAGE,
     }),
-    generateBreadcrumbSchema([{ name: "Home", url: REVENGG_CANONICAL }]),
+    generateBreadcrumbSchema([
+      { name: "Home", url: "https://www.helllo.ai/" },
+      { name: "RevEngg", url: REVENGG_CANONICAL },
+    ]),
     generateSoftwareApplicationSchema({
       name: "RevEngg",
       alternateName: "RevEngg by Helllo.ai",
       description:
-        "Autonomous Revenue Engineering Platform that continuously observes customer signals, builds customer intelligence, decides the next best action, and autonomously engages customers across every channel to maximise revenue for B2C e-commerce brands.",
+        `Autonomous revenue engineering with conversational AI agents across Voice, WhatsApp, Email and Web. Serves B2C brands in ${TARGET_REGIONS_PHRASE}.`,
       url: REVENGG_CANONICAL,
       image: REVENGG_OG_IMAGE,
       applicationCategory: "BusinessApplication",
+      applicationSubCategory: "Conversational AI / Revenue Engineering",
       operatingSystem: "Web",
       brandName: "Helllo.ai",
       brandUrl: "https://www.helllo.ai",
       featureList: [...REVENGG_PLATFORM_FEATURES],
+      countriesSupported: [...COUNTRIES_SUPPORTED],
+      inLanguage: [...AVAILABLE_LANGUAGES],
+      audienceType: "B2C e-commerce brands",
+      areaServed: getAreaServedSchema(),
+    }),
+    generateServiceSchema({
+      name: "RevEngg Conversational AI Agents",
+      serviceType: "Conversational AI / Autonomous Revenue Engineering",
+      description:
+        `AI agents that discover, qualify and engage customers across Voice, WhatsApp, Email and Web in ${TARGET_REGIONS_PHRASE}.`,
+      url: REVENGG_CANONICAL,
+      areaServed: getAreaServedSchema(),
+      audienceType: "B2C e-commerce brands in India, US, SEA, Australia and Europe",
     }),
   ];
 }

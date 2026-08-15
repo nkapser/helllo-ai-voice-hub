@@ -93,7 +93,7 @@ const Outcomes = () => {
               catalog and channels.
             </p>
             <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-              <a href="/helllo#contact" className="rev-btn rev-btn-green">
+              <a href="/#contact" className="rev-btn rev-btn-green">
                 Book Demo
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </a>

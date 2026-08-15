@@ -7,7 +7,7 @@ import { getDashboardUrl, getDashboardAuthSignInUrl } from "@/lib/dashboard";
 const links = [
   { label: "Platform", href: "#platform" },
   { label: "Outcomes", href: "#outcomes" },
-  { label: "Helllo Voice", href: "/helllo" },
+  { label: "Helllo Voice", href: "/" },
   { label: "Spark", href: "/spark" },
 ];
 
@@ -36,7 +36,7 @@ const Nav = () => {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:px-8">
-        <a href="/" aria-label="RevEngg home" className="flex items-center gap-2.5">
+        <a href="/orevv-ai" aria-label="RevEngg home" className="flex items-center gap-2.5">
           <Wordmark className="text-[1.4rem]" />
           <span className="hidden items-center rounded-full border border-[var(--rev-hairline)] bg-[var(--rev-surface)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-[var(--rev-ink-70)] sm:inline-flex">
             Private Alpha
@@ -62,7 +62,7 @@ const Nav = () => {
           >
             {loading ? "Loading..." : user ? "Console" : "Sign In"}
           </button>
-          <a href="/helllo#contact" className="rev-btn rev-btn-primary !min-h-0 !px-5 !py-2.5 text-sm">
+          <a href="/#contact" className="rev-btn rev-btn-primary !min-h-0 !px-5 !py-2.5 text-sm">
             Book a Demo
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </a>
@@ -105,7 +105,7 @@ const Nav = () => {
               {loading ? "Loading..." : user ? "Console" : "Sign In"}
             </button>
             <a
-              href="/helllo#contact"
+              href="/#contact"
               onClick={() => setOpen(false)}
               className="rev-btn rev-btn-primary mt-3"
             >
